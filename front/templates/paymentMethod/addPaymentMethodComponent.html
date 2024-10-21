@@ -1,0 +1,20 @@
+<div class="">
+    <div class="">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                <h4 class="card-title mb-4">Añadir método de pago</h4>
+                <form>
+                    <div class="mb-3">
+                        <label for="card-holder-name" class="form-label">Titular de la tarjeta</label>
+                        <input type="text" class="form-control" id="card-holder-name" v-model="cardHolderName" placeholder="Introduce el nombre del titular">
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label">Información de la tarjeta</label>
+                        <div id="card-element" class="form-control"></div>
+                    </div>
+                    <button type="button" class="btn btn-primary w-100" @click="updatePaymentMethod">Añadir método de pago</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
