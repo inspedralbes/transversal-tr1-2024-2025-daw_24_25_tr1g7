@@ -4,7 +4,7 @@ import * as comm from "../communicationManager/communicationManager.js";
 
 export const ProductesPage = defineAsyncComponent(() =>
    Promise.all([
-       fetch('./front/home/ProductesPage.html').then(response => response.text()),
+       fetch('./templates/home/ProductesPage.html').then(response => response.text()),
        Promise.resolve(defineComponent({
            emits: ['updatePage'],
            setup(props, { emit }) {

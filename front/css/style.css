@@ -1,3 +1,7 @@
+/**
+INICI CSS PRODCUTES
+*/
+
 .gradient-custom-2 {
     /* fallback for old browsers */
     background: #fccb90;
@@ -20,3 +24,129 @@
         border-bottom-right-radius: .3rem;
     }
 }
+
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Breadcrumb */
+.breadcrumb {
+    background-color: transparent;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.breadcrumb-item a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+    text-decoration: underline;
+}
+
+
+.col-md-4 h3 {
+    font-size: 22px;
+    color: red;
+}
+
+.col-md-4 img {
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+button.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.my-4 h4 {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+
+.card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    border-bottom: 1px solid #ddd;
+}
+
+.card-title {
+    font-size: 16px;
+    color: black;
+}
+
+.card-text {
+    color: red;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+/* Progress Bar */
+.progress {
+    height: 20px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background-color: #007bff;
+    line-height: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+}
+
+.list-group-item {
+    background-color: #f8f9fa;
+    border: none;
+    margin-bottom: 5px;
+    border-left: 4px solid #007bff;
+    padding-left: 15px;
+}
+
+.list-group-item:hover {
+    background-color: #e9ecef;
+}
+
+/**
+FI CSS PRODCUTES
+*/
+
+
