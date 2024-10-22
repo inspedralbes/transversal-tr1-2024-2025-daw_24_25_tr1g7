@@ -27,6 +27,9 @@
         <add-payment-method-component :page="page" @update-page="page = $event"></add-payment-method-component>
     </div>
 
+    <div v-if="page === 'navbar'">
+        <nav-bar-component @update-page="page = $event"></nav-bar-component>
+    </div>
 
 </div>
 
@@ -36,13 +39,14 @@
     import { LoginPage } from "./components/LoginPage.js";
     import { RegisterPage } from "./components/RegisterPage.js";
     import { AddPaymentMethodComponent } from "./components/addPaymentMethodComponent.js";
+    import { NavBarComponent} from "./components/NavBarComponent.js";
     // Crear la aplicación y registrar el componente
     createApp({
         components: {
-            LoginPage, RegisterPage, AddPaymentMethodComponent
+            LoginPage, RegisterPage, AddPaymentMethodComponent, NavBarComponent
         },
         setup(){
-            let page = ref("home");
+            let page = ref("navbar");
 
             return {
                 page
