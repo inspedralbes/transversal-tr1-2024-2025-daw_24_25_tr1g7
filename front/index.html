@@ -23,9 +23,9 @@
         <register-page :page="page" @update-page="page = $event"></register-page>
     </div>
 
-    <div v-if="page === 'productes'"></div>
+    <div v-if="page === 'productes'">
         <productes-page @update-page="page = $event"></productes-page>
-    </div>    
+    </div>
     
     <div v-if="page === 'home'">
         <home-page @update-page="page = $event"></home-page>
