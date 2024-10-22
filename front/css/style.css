@@ -20,3 +20,98 @@
         border-bottom-right-radius: .3rem;
     }
 }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+section {
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 20px 10px; 
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.carousel .row {
+    justify-content: center; 
+}
+
+.carousel-item .card {
+    margin: 10px; 
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 30px; 
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%; 
+    top: 50%; 
+    transform: translateY(-50%);
+}
+
+.carousel-control-prev-icon, 
+.carousel-control-next-icon {
+    width: 15px; 
+    height: 15px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    z-index: 1;
+    pointer-events: auto;
+}
+
+section .row .col-2 {
+    margin-bottom: 20px; 
+}
+
+.card {
+    text-align: center; 
+}
+
+.card img {
+    margin-bottom: 15px;
+}
+
+.price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ff5733;
+}
+
+.valoracion {
+    font-size: 1em;
+    color: #ffa500;
+}
+
+.Marcas .card {
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    height: 150px;           
+    border: none;            
+    padding: 10px;          
+    box-shadow: none;     
+}
+
+.Marcas .card img {
+    max-height: 100px;  
+    max-width: 100px;  
+    width: 100%;      
+    object-fit: contain; 
+    margin: 0 auto;     
+    display: block;   
+}
+
+
+
+
