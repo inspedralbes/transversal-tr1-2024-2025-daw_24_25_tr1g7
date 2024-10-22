@@ -23,6 +23,10 @@
         <register-page :page="page" @update-page="page = $event"></register-page>
     </div>
 
+    <div v-if="page === 'productes'"></div>
+        <productes-page @update-page="page = $event"></productes-page>
+    </div>    
+    
     <div v-if="page === 'home'">
         <home-page @update-page="page = $event"></home-page>
     </div>
@@ -38,13 +42,14 @@
     import { createApp, ref, reactive } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
     import { LoginPage } from "./components/LoginPage.js";
     import { RegisterPage } from "./components/RegisterPage.js";
+    import { ProductesPage } from "./components/ProductesPage.js";
     import { HomePage } from "./components/HomePage.js";
     import { AddPaymentMethodComponent } from "./components/addPaymentMethodComponent.js";
     import { NavBarComponent} from "./components/NavBarComponent.js";
     // Crear la aplicación y registrar el componente
     createApp({
         components: {
-            LoginPage, RegisterPage,HomePage, AddPaymentMethodComponent, NavBarComponent
+            LoginPage, RegisterPage, ProductesPage,HomePage, AddPaymentMethodComponent, NavBarComponent
         },
         setup(){
             let page = ref("home");
