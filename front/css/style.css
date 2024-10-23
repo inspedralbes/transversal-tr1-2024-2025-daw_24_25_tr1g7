@@ -1002,7 +1002,7 @@ p {
 .text-opacity-25 { color: rgba(255, 255, 255, 0.25); }
 .text-opacity-50 { color: rgba(255, 255, 255, 0.5); }
 .text-opacity-75 { color: rgba(255, 255, 255, 0.75); }
-
+.text-decoration-none{ text-decoration: none;}
 .badge {
     display: inline-block;
     padding: 0.5em 0.75em;
