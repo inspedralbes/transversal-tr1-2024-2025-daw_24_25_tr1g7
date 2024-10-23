@@ -76,7 +76,7 @@ class CategoriaController extends Controller
         return response()->json([
             'categories' => $category,
             'status'=> 'successful',
-            'message'=> 'Categoria modificada'
+            'message'=> 'Categoria llistada'
         ]);
     }
 }
