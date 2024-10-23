@@ -55,7 +55,7 @@ export const LoginPage = defineAsyncComponent(() =>
                             localStorage.setItem('user', JSON.stringify(result.user));
                             localStorage.setItem('token', result.token);
 
-                            // emit('updatePage', 'home')
+                            emit('updatePage', 'home')
                         }
                         // Aquí puedes añadir la lógica para enviar los datos al servidor
                     } else {
