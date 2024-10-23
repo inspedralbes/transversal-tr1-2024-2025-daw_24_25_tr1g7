@@ -30,21 +30,23 @@
         <register-page :page="page" @update-page="page = $event"></register-page>
     </div>
 
-    <div v-if="page === 'productes'">
-        <productes-page @update-page="page = $event"></productes-page>
-    </div>
-    
-    <div v-if="page === 'home'">
-        <home-page @update-page="page = $event"></home-page>
-    </div>
+<!--    <div v-if="page === 'productes'">-->
+<!--        <productes-page @update-page="page = $event"></productes-page>-->
+<!--    </div>-->
+<!--    -->
+<!--    <div v-if="page === 'home'">-->
+<!--        <home-page @update-page="page = $event"></home-page>-->
+<!--    </div>-->
 
-    <div v-if="page === 'navbar'">
+    <div v-if="page !== 'login' && page !== 'register'">
         <nav-bar-component @update-page="page = $event"></nav-bar-component>
+        <div v-if="page === 'test'">
+            <div style="margin-top: 90px"></div>
+            <test-component></test-component>
+        </div>
     </div>
 
-    <div v-if="page === 'test'">
-        <test-component>></test-component>
-    </div>
+
 
 </div>
 

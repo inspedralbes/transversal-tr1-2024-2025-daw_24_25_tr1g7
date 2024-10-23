@@ -12,6 +12,10 @@ export const NavBarComponent = defineAsyncComponent(() =>
             emits: ['updatePage'],
             setup(props, { emit }) {
 
+                const categoryMenu = ref(false);
+                const categoryCarrito = ref(false);
+
+                console.log(categoryCarrito)
                 onMounted(() => {
                 });
 
@@ -22,6 +26,8 @@ export const NavBarComponent = defineAsyncComponent(() =>
 
                 return {
                     goToRegister,
+                    categoryMenu,
+                    categoryCarrito
                 };
             }
         }))

@@ -61,7 +61,7 @@ p {
     background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 }
 
-.bg-primary {
+.bg-custom-gradient {
     /* fallback for old browsers */
     background: #16cfe5;
 
@@ -72,20 +72,73 @@ p {
     background: linear-gradient(to right, #16cfe5, #9716e5);
 }
 
+.bg-opacity {
+    background-color: rgba(0, 0, 0, 0.3); /* Fondo negro con 70% de opacidad */
+}
+
+.bg-secondary {
+    background-color: #6c757d !important; /* Gris */
+}
+
+.bg-success {
+    background-color: #198754 !important; /* Verde */
+}
+
+.bg-danger {
+    background-color: #dc3545 !important; /* Rojo */
+}
+
+.bg-warning {
+    background-color: #ffc107 !important; /* Amarillo */
+}
+
+.bg-info {
+    background-color: #0dcaf0 !important; /* Cian */
+}
+
+.bg-light {
+    background-color: #f8f9fa !important; /* Gris claro */
+}
+
+.bg-dark {
+    background-color: #212529 !important; /* Gris oscuro */
+}
+
+.bg-white {
+    background-color: #fff !important; /* Blanco */
+}
+
+.bg-transparent {
+    background-color: transparent !important; /* Transparente */
+}
+
+/* Para versiones de Bootstrap con opacidad (ejemplo) */
+.bg-opacity-25 {
+    background-color: rgba(0, 0, 0, 0.25) !important;
+}
+
+.bg-opacity-50 {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.bg-opacity-75 {
+    background-color: rgba(0, 0, 0, 0.75) !important;
+}
+
 .w-100 {
     width: 100%;
 }
 
 .w-75 {
-    width: 100%;
+    width: 75%;
 }
 
 .w-50 {
-    width: 100%;
+    width: 50%;
 }
 
 .w-25 {
-    width: 100%;
+    width: 25%;
 }
 
 .section {
@@ -97,6 +150,86 @@ p {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 20px; /* This adds space between columns, similar to Bootstrap's gutters */
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    height: 90px; /* Ajusta esta altura según tu navbar */
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.justify-content-start {
+    justify-content: flex-start !important;
+}
+
+.justify-content-end {
+    justify-content: flex-end !important;
+}
+
+.justify-content-center {
+    justify-content: center !important;
+}
+
+.justify-content-between {
+    justify-content: space-between !important;
+}
+
+.justify-content-around {
+    justify-content: space-around !important;
+}
+
+.justify-content-evenly {
+    justify-content: space-evenly !important;
+}
+
+.align-items-start {
+    align-items: flex-start !important;
+}
+
+.align-items-end {
+    align-items: flex-end !important;
+}
+
+.align-items-center {
+    align-items: center !important;
+}
+
+.align-items-baseline {
+    align-items: baseline !important;
+}
+
+.align-items-stretch {
+    align-items: stretch !important;
+}
+
+.align-self-auto {
+    align-self: auto !important;
+}
+
+.align-self-start {
+    align-self: flex-start !important;
+}
+
+.align-self-end {
+    align-self: flex-end !important;
+}
+
+.align-self-center {
+    align-self: center !important;
+}
+
+.align-self-baseline {
+    align-self: baseline !important;
+}
+
+.align-self-stretch {
+    align-self: stretch !important;
 }
 
 /* Estilos generales (aplicados en todos los dispositivos) */
@@ -124,7 +257,6 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 230px;
 }
 
 .img-fluid {
@@ -145,15 +277,302 @@ p {
     padding: 1.5rem; /* Espaciado interno */
 }
 
-/* Estilos para botones */
+/* Estilo base de los botones */
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.15rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+.btn-lg {
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+}
+
+.btn:hover {
+    background-color: #F2F2F2;
+    color: black;
+}
+
+.btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.btn:disabled, .btn.disabled {
+    pointer-events: none;
+    opacity: 0.65;
+}
+
+/* Botón .btn-primary */
 .btn-primary {
-    background-color: #16cfe5; /* Color primario */
-    border-color: #16cfe5; /* Color de borde */
+    color: #fff;
+    background-color: #16cfe5;
+    border-color: #16cfe5;
 }
 
 .btn-primary:hover {
-    background-color: #9716e5; /* Color secundario al pasar el cursor */
-    border-color: #9716e5; /* Color de borde al pasar el cursor */
+    color: #fff;
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+.btn-primary:focus {
+    color: #fff;
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+    box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
+}
+
+.btn-primary:disabled, .btn-primary.disabled {
+    color: #fff;
+    background-color: #16cfe5;
+    border-color: #16cfe5;
+}
+
+/* Botón .btn-secondary */
+.btn-secondary {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    color: #fff;
+    background-color: #5c636a;
+    border-color: #565e64;
+}
+
+.btn-secondary:focus {
+    color: #fff;
+    background-color: #5c636a;
+    border-color: #565e64;
+    box-shadow: 0 0 0 0.25rem rgba(130, 138, 145, 0.5);
+}
+
+.btn-secondary:disabled, .btn-secondary.disabled {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+/* Botón .btn-success */
+.btn-success {
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
+}
+
+.btn-success:hover {
+    color: #fff;
+    background-color: #157347;
+    border-color: #146c43;
+}
+
+.btn-success:focus {
+    color: #fff;
+    background-color: #157347;
+    border-color: #146c43;
+    box-shadow: 0 0 0 0.25rem rgba(60, 186, 84, 0.5);
+}
+
+.btn-success:disabled, .btn-success.disabled {
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
+}
+
+/* Botón .btn-danger */
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #bb2d3b;
+    border-color: #b02a37;
+}
+
+.btn-danger:focus {
+    color: #fff;
+    background-color: #bb2d3b;
+    border-color: #b02a37;
+    box-shadow: 0 0 0 0.25rem rgba(225, 83, 97, 0.5);
+}
+
+.btn-danger:disabled, .btn-danger.disabled {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Botón .btn-warning */
+.btn-warning {
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-warning:hover {
+    color: #212529;
+    background-color: #ffca2c;
+    border-color: #ffc720;
+}
+
+.btn-warning:focus {
+    color: #212529;
+    background-color: #ffca2c;
+    border-color: #ffc720;
+    box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.5);
+}
+
+.btn-warning:disabled, .btn-warning.disabled {
+    color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+/* Botón .btn-info */
+.btn-info {
+    color: #fff;
+    background-color: #0dcaf0;
+    border-color: #0dcaf0;
+}
+
+.btn-info:hover {
+    color: #fff;
+    background-color: #31d2f2;
+    border-color: #25cff2;
+}
+
+.btn-info:focus {
+    color: #fff;
+    background-color: #31d2f2;
+    border-color: #25cff2;
+    box-shadow: 0 0 0 0.25rem rgba(11, 172, 204, 0.5);
+}
+
+.btn-info:disabled, .btn-info.disabled {
+    color: #fff;
+    background-color: #0dcaf0;
+    border-color: #0dcaf0;
+}
+
+/* Botón .btn-light */
+.btn-light {
+    color: #212529;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+.btn-light:hover {
+    color: #212529;
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+}
+
+.btn-light:focus {
+    color: #212529;
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+    box-shadow: 0 0 0 0.25rem rgba(216, 217, 219, 0.5);
+}
+
+.btn-light:disabled, .btn-light.disabled {
+    color: #212529;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+/* Botón .btn-dark */
+.btn-dark {
+    color: #fff;
+    background-color: #212529;
+    border-color: #212529;
+}
+
+.btn-dark:hover {
+    color: #fff;
+    background-color: #1c1f23;
+    border-color: #1a1e21;
+}
+
+.btn-dark:focus {
+    color: #fff;
+    background-color: #1c1f23;
+    border-color: #1a1e21;
+    box-shadow: 0 0 0 0.25rem rgba(60, 62, 64, 0.5);
+}
+
+.btn-dark:disabled, .btn-dark.disabled {
+    color: #fff;
+    background-color: #212529;
+    border-color: #212529;
+}
+
+/* Botón .btn-link */
+.btn-link {
+    font-weight: 400;
+    color: #0d6efd;
+    text-decoration: underline;
+}
+
+.btn-link:hover {
+    color: #0a58ca;
+}
+
+.btn-link:disabled, .btn-link.disabled {
+    color: #6c757d;
+    text-decoration: none;
+}
+/* Botón .btn-outline-success */
+.btn-outline-success {
+    color: #198754;
+    border-color: #198754;
+    background-color: transparent;
+}
+
+.btn-outline-success:hover {
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
+}
+
+.btn-outline-success:focus {
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.5);
+}
+
+.btn-outline-success:disabled, .btn-outline-success.disabled {
+    color: #198754;
+    background-color: transparent;
+    border-color: #198754;
+    opacity: 0.65;
 }
 
 .shadow-none {
@@ -195,6 +614,7 @@ p {
 .border-5 {
     border: 5px solid #ddd; /* Borde de 5px */
 }
+
 
 /* Márgenes  */
 .m-0 { margin: 0; }
@@ -450,6 +870,121 @@ p {
 
 .fw-bold {
     font-weight: bold; /* 700 */
+}
+
+/* Clases de posición en Bootstrap */
+
+/* Position Fixed */
+.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+.fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+/* Position Sticky */
+.sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+}
+
+/* Position Relative */
+.position-relative {
+    position: relative !important;
+}
+
+/* Position Absolute */
+.position-absolute {
+    position: absolute !important;
+}
+
+/* Position Fixed */
+.position-fixed {
+    position: fixed !important;
+}
+
+/* Position Sticky */
+.position-sticky {
+    position: sticky !important;
+}
+
+/* Position Static */
+.position-static {
+    position: static !important;
+}
+
+/* Ejemplos de utilidades de posicionamiento */
+
+/* Top, Right, Bottom, Left */
+.top-0 {
+    top: 0 !important;
+}
+
+.top-50 {
+    top: 50% !important;
+}
+
+.top-100 {
+    top: 100% !important;
+}
+
+.bottom-0 {
+    bottom: 0 !important;
+}
+
+.bottom-50 {
+    bottom: 50% !important;
+}
+
+.bottom-100 {
+    bottom: 100% !important;
+}
+
+.start-0 {
+    left: 0 !important;
+}
+
+.start-50 {
+    left: 50% !important;
+}
+
+.start-100 {
+    left: 100% !important;
+}
+
+.end-0 {
+    right: 0 !important;
+}
+
+.end-50 {
+    right: 50% !important;
+}
+
+.end-100 {
+    right: 100% !important;
+}
+
+/* Translate Middle */
+.translate-middle {
+    transform: translate(-50%, -50%) !important;
+}
+
+.translate-middle-x {
+    transform: translateX(-50%) !important;
+}
+
+.translate-middle-y {
+    transform: translateY(-50%) !important;
 }
 
 .text-primary{ color: #16cfe5 }
