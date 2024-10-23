@@ -29,13 +29,13 @@ Route::middleware('auth:sanctum')->group(function () {
 
 });
 
-Route::post('/categorystore', [CategoriaController::class,'store']);
+Route::post('/categorystore', [CategoriaController::class,'store'])->name("category.store");
 
-Route::get('/categorydelete/{id}', [CategoriaController::class,'delete']);
+Route::get('/categorydelete/{id}', [CategoriaController::class,'delete'])->name("category.delete");
 
-Route::post('/categoryupdate/{id}', [CategoriaController::class,'update']);
+Route::post('/categoryupdate/{id}', [CategoriaController::class,'update'])->name("category.update");
 
-Route::get('/categorylist', [CategoriaController::class,'list']);
+Route::get('/categorylist', [CategoriaController::class,'list'])->name("category.list");
 
 
 Route::post('/subcategorystore', [SubCategoriaController::class,'store']);
@@ -80,6 +80,6 @@ Route::get('/invoicedelete/{id}', [InvoiceController::class,'delete']);
 
 Route::post('/invoiceupdate/{id}', [InvoiceController::class,'update']);
 
-Route::get('/invoicelist', [InvoiceController::class,'list']);
+Route::get('/invoicelist', [InvoiceController::class,'list'])->name("invoice.list");
 
 

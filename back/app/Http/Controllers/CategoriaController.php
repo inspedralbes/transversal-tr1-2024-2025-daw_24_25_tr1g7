@@ -7,6 +7,12 @@ use App\Models\Categoria;
 
 class CategoriaController extends Controller
 {
+    public function index(){
+        $categories = Categoria::all();
+
+        return view("Categories.categories",compact("categories"));
+    }
+
     //Añadir categoria
     public function store(Request $request){
         $data = $request-> validate([
