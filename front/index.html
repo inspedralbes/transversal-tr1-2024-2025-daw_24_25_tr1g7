@@ -39,10 +39,10 @@
 <!--    </div>-->
 
     <div v-if="page !== 'login' && page !== 'register'">
-        <nav-bar-component @update-page="page = $event"></nav-bar-component>
+        <nav-bar-component @update-page="page = $event" v-bind:products-cart="productsCart.data" ></nav-bar-component>
         <div style="margin-top: 90px"></div>
         <div v-if="page === 'home'">
-            <home-page @update-page="page = $event"></home-page>
+            <home-page @add-product-to-cart="addProductToCart"></home-page>
         </div>
 
         <div v-if="page === 'producte'">
@@ -83,10 +83,17 @@
             FotterComponent
         },
         setup(){
-            let page = ref("producte");
+            let page = ref("home");
+            let productsCart = reactive({data:[]})
+
+            const addProductToCart = (product) => {
+                productsCart.data.push(product); // Añadir el producto al carrito
+            };
 
             return {
-                page
+                page,
+                productsCart,
+                addProductToCart
             }
         }
     })

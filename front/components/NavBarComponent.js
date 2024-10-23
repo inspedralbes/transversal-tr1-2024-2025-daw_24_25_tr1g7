@@ -6,16 +6,19 @@ export const NavBarComponent = defineAsyncComponent(() =>
     Promise.all([
         fetch('./templates/navBar/NavBarComponent.html').then(response => response.text()),
         Promise.resolve(defineComponent({
-            name: 'AddPaymentMethodComponent',
+            name: 'NavBarComponent',
+            props: {
+                productsCart: {
+                    type: Array,
+                    default: () => [] // Cambiar a función para asegurar el valor predeterminado
+                }
+            },
             emits: ['updatePage'],
             setup(props, { emit }) {
 
                 const categoryMenu = ref(false);
                 const categoryCarrito = ref(false);
 
-                console.log(categoryCarrito)
-                onMounted(() => {
-                });
 
                 const goToRegister = () => {
                     emit('updatePage', 'register');
@@ -25,7 +28,8 @@ export const NavBarComponent = defineAsyncComponent(() =>
                 return {
                     goToRegister,
                     categoryMenu,
-                    categoryCarrito
+                    categoryCarrito,
+                    productsCart: props.productsCart
                 };
             }
         }))
