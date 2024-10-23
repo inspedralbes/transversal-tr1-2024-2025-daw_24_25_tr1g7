@@ -1,0 +1,395 @@
+<!--<head>-->
+<!--    <link rel="stylesheet" href="../../css/style.css">-->
+<!--</head>-->
+<!--<style>-->
+<!--    section{-->
+<!--        margin: 20px;-->
+<!--    }-->
+
+<!--    .valoracions {-->
+<!--        padding: 20px 0;-->
+<!--        width: 200rem;-->
+<!--    }-->
+
+<!--    .valoracio-general, .recomanacio-general, .valoracions-detallades {-->
+<!--        background-color: #f8f9fa;-->
+<!--        padding: 20px;-->
+<!--        border-radius: 8px;-->
+<!--        text-align: center;-->
+<!--    }-->
+
+<!--    .caixa-valoracio h2, .caixa-recomanacio h2 {-->
+<!--        font-size: 2.5rem;-->
+<!--        margin: 0;-->
+<!--    }-->
+
+<!--    .caixa-valoracio p, .caixa-recomanacio p {-->
+<!--        margin: 5px 0;-->
+<!--        font-size: 0.9rem;-->
+<!--    }-->
+
+<!--    .estrelles {-->
+<!--        color: #FFD700;-->
+<!--    }-->
+
+<!--    .estrelles .estrella {-->
+<!--        font-size: 1.5rem;-->
+<!--    }-->
+
+<!--    .valoracions-detallades .fila-valoracio {-->
+<!--        display: flex;-->
+<!--        align-items: center;-->
+<!--        margin-bottom: 10px;-->
+<!--    }-->
+
+<!--    .valoracions-detallades .fila-valoracio span {-->
+<!--        text-align: right;-->
+<!--        margin-right: 10px;-->
+<!--    }-->
+
+<!--    .color-estrella .numero {-->
+<!--        color: black;-->
+<!--    }-->
+
+<!--    .color-estrella .estrella {-->
+<!--        color: #FFD700;-->
+<!--    }-->
+
+<!--    .barra-progres {-->
+<!--        flex-grow: 1;-->
+<!--        height: 10px;-->
+<!--        background-color: #e9ecef;-->
+<!--        border-radius: 5px;-->
+<!--        margin-right: 10px;-->
+<!--    }-->
+
+<!--    .barra-progres-omplerta {-->
+<!--        background-color: #007bff;-->
+<!--        height: 100%;-->
+<!--        border-radius: 5px;-->
+<!--    }-->
+
+<!--    .card-img-top {-->
+<!--        width: 175px;-->
+<!--        height: 175px;-->
+<!--    }-->
+
+<!--    .product-section {-->
+<!--        background-color: #f8f9fa;-->
+<!--        padding: 20px;-->
+<!--        border-radius: 10px;-->
+<!--        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);-->
+<!--    }-->
+
+<!--    .imag img {-->
+<!--        max-width: 100%;-->
+<!--        height: auto;-->
+<!--        border-radius: 8px;-->
+<!--        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);-->
+<!--    }-->
+
+<!--    .grid-container {-->
+<!--        display: grid;-->
+<!--        grid-template-areas:-->
+<!--            "imag info carret"-->
+<!--    }-->
+
+<!--    .grid-container {-->
+<!--        display: grid;-->
+<!--        grid-template-areas: "imag info carret";-->
+<!--        grid-template-columns: 1fr 2fr 1fr;-->
+<!--        gap: 20px;-->
+<!--        align-items: center;-->
+<!--    }-->
+
+<!--    .infoProducte {-->
+<!--        grid-area: info;-->
+<!--        padding-left: 20px;-->
+<!--    }-->
+
+<!--    .informacio {-->
+<!--        list-style: none;-->
+<!--        padding: 0;-->
+<!--    }-->
+
+<!--    .carret {-->
+<!--        grid-area: carret;-->
+<!--        background-color: #ffffff;-->
+<!--        padding: 20px;-->
+<!--        top: 0;-->
+<!--        border: 3px solid;-->
+<!--        border-image: linear-gradient(45deg, #800080, #0000FF) 1;-->
+<!--        border-radius: 8px;-->
+<!--        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);-->
+<!--        text-align: center;-->
+<!--    }-->
+
+<!--    .preu-producte h3 {-->
+<!--        font-size: 2rem;-->
+<!--        color: black;-->
+<!--        margin-bottom: 10px;-->
+<!--        font-weight: 600;-->
+<!--    }-->
+
+<!--    .btn-compra {-->
+<!--        background-color: #16cfe5;-->
+<!--        color: #fff;-->
+<!--        border: none;-->
+<!--        padding: 10px 20px;-->
+<!--        font-size: 1.2rem;-->
+<!--        cursor: pointer;-->
+<!--        border-radius: 5px;-->
+<!--    }-->
+
+<!--    .btn-compra:hover {-->
+<!--        background-color: #9716e5;;-->
+<!--    }-->
+
+<!--    h4, .valoracio{-->
+<!--        font-weight: bold;-->
+<!--    }-->
+
+<!--    .list-group {-->
+<!--        background-color: #f8f9fa;-->
+<!--        border-radius: 8px;-->
+<!--        padding: 1rem;-->
+<!--        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);-->
+<!--    }-->
+
+<!--    .list-group-item {-->
+<!--        background-color: #fff;-->
+<!--        border: 1px solid #dee2e6;-->
+<!--        border-radius: 4px;-->
+<!--        padding: 0.75rem 1.25rem;-->
+<!--        margin-bottom: 0.5rem;-->
+<!--        color: #333;-->
+<!--        transition: background-color 0.2s ease;-->
+<!--    }-->
+
+<!--    .list-group-item:hover {-->
+<!--        background-color: #e9ecef;-->
+<!--    }-->
+
+<!--</style>-->
+<section>
+    <!-- Producte -->
+    <div class="container my-4 product-section">
+        <div class="grid-container">
+            <!-- Imatge del producte -->
+            <div class="imag">
+                <img src="https://thumb.pccomponentes.com/w-530-530/articles/1066/10665103/1575-amd-ryzen-7-7800x3d-42-ghz-5-ghz.jpg"
+                    class="img-fluid" alt="Imatge producte">
+            </div>
+            <!-- Detalls del Producte -->
+            <div class="infoProducte">
+                <h2>Nom del Producte</h2>
+                
+                <p class="valoracio">Valoració: 4.7/5 ⭐⭐⭐⭐⭐</p>
+                <ul class="informacio">
+                    <li>Info</li>
+                    <li>Info</li>
+                    <li>Info</li>
+                    <li>Info</li>
+                </ul>
+            </div>
+            <!-- Carret -->
+            <div class="carret">
+                <div class="preu-producte">
+                    <h3>Preu: 499.99€</h3>
+                </div>
+                <button class="btn btn-danger btn-compra">Afegir al carret</button>
+                <p class="badge badge-success">Esta en stock</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Producte -->
+    <div class="my-4">
+        <h4>Informació/Descripció del producte</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+    </div>
+
+    <!-- Productes més venuts -->
+    <div class="my-4">
+        <h4>Productes més venuts/similars</h4>
+        <div class="row">
+
+            <!-- Producte 1 -->
+            <div class="col-md-2">
+                <div class="card">
+                    <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg"
+                        class="card-img-top" alt="Producte 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Nom producte</h5>
+                        <p class="card-text">Preu: 199.99€</p>
+                        <a href="#" class="btn btn-primary">Comprar</a>
+                        <p class="badge badge-success">Esta en stock</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Producte 2 -->
+            <div class="col-md-2">
+                <div class="card">
+                    <img src="https://thumb.pccomponentes.com/w-150-150/articles/35/351290/1441-corsair-vengeance-lpx-ddr4-3200mhz-pc4-25600-32gb-2x16gb-cl16.jpg"
+                        class="card-img-top" alt="Producte 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Nom producte</h5>
+                        <p class="card-text">Preu: 299.99€</p>
+                        <a href="#" class="btn btn-primary">Comprar</a>
+                        <p class="badge badge-success">Esta en stock</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Producte 3 -->
+            <div class="col-md-2">
+                <div class="card">
+                    <img src="https://thumb.pccomponentes.com/w-150-150/articles/1074/10740783/1872-msi-g24c4-e2-236-led-fullhd-180-hz-freesync-premium-curva-c8ce3664-afa7-4146-8917-e6ee95e29276.jpg"
+                        class="card-img-top" alt="Producte 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Nom producte</h5>                        <p class="card-text">Preu: 399.99€</p>
+                        <a href="#" class="btn btn-primary">Comprar</a>
+                        <p class="badge badge-success">Esta en stock</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Producte 4 -->
+            <div class="col-md-2">
+                <div class="card">
+                    <img src="https://thumb.pccomponentes.com/w-150-150/articles/1073/10738412/1860-msi-geforce-rtx-4060-ventus-2x-black-oc-8gb-gddr6-dlss3.jpg"
+                        class="card-img-top" alt="Producte 4">
+                    <div class="card-body">
+                        <h5 class="card-title">Nom producte</h5>
+                        <p class="card-text">Preu: 499.99€</p>
+                        <a href="#" class="btn btn-primary">Comprar</a>
+                        <p class="badge badge-success">Esta en stock</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Producte 5 -->
+            <div class="col-md-2">
+                <div class="card">
+                    <img src="https://thumb.pccomponentes.com/w-530-530/articles/1078/10789838/1861-pccom-ready-amd-ryzen-7-5800x-32gb-1tb-ssd-rtx-4060-ti-review.jpg"
+                        class="card-img-top" alt="Producte 5">
+                    <div class="card-body">
+                        <h5 class="card-title">Nom producte</h5>
+                        <p class="card-text">Preu: 1099.99€</p>
+                        <a href="#" class="btn btn-primary">Comprar</a>
+                        <p class="badge badge-success">Esta en stock</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Producte 6 -->
+            <div class="col-md-2">
+                <div class="card">
+                    <img src="https://thumb.pccomponentes.com/w-530-530/articles/1079/10797786/1581-lenovo-ideapad-slim-3-15iah8-intel-core-i5-12450h-16gb-512gb-ssd-156.jpg"
+                        class="card-img-top" alt="Producte 6">
+                    <div class="card-body">
+                        <h5 class="card-title">Nom producte</h5>
+                        <p class="card-text">Preu: 799.99€</p>
+                        <a href="#" class="btn btn-primary">Comprar</a>
+                        <p class="badge badge-success">Esta en stock</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="my-4 valoracions">
+        <h4>Opinions</h4>
+        <div class="row">
+            <!-- Valoració general -->
+            <div class="col-md-3 valoracio-general">
+                <div class="caixa-valoracio">
+                    <h2>4.7</h2>
+                    <div class="estrelles">
+                        <span class="estrella">&#9733;</span>
+                        <span class="estrella">&#9733;</span>
+                        <span class="estrella">&#9733;</span>
+                        <span class="estrella">&#9733;</span>
+                        <span class="estrella">&#9733;</span>
+                    </div>
+                    <p>2611 Opinions</p>
+                </div>
+            </div>
+
+            <!-- Recomanació general -->
+            <div class="col-md-3 recomanacio-general">
+                <div class="caixa-recomanacio">
+                    <h2>97%</h2>
+                    <p>Recomanen</p>
+                    <p>1563 Recomanacions</p>
+                </div>
+            </div>
+
+            <!-- Valoracions detallades -->
+            <div class="col-md-6 valoracions-detallades">
+                <div class="barra-valoracio">
+                    <div class="fila-valoracio">
+                        <span class="color-estrella">
+                            <span class="numero">5</span>
+                            <span class="estrella">&#9733;</span>
+                        </span>
+                        <div class="barra-progres">
+                            <div class="barra-progres-omplerta" style="width: 85%;"></div>
+                        </div>
+                        <span>2191</span>
+                    </div>
+                    <div class="fila-valoracio">
+                        <span class="color-estrella">
+                            <span class="numero">4</span>
+                            <span class="estrella">&#9733;</span>
+                        </span>
+                        <div class="barra-progres">
+                            <div class="barra-progres-omplerta" style="width: 13%;"></div>
+                        </div>
+                        <span>336</span>
+                    </div>
+                    <div class="fila-valoracio">
+                        <span class="color-estrella">
+                            <span class="numero">3</span>
+                            <span class="estrella">&#9733;</span>
+                        </span>
+                        <div class="barra-progres">
+                            <div class="barra-progres-omplerta" style="width: 2%;"></div>
+                        </div>
+                        <span>39</span>
+                    </div>
+                    <div class="fila-valoracio">
+                        <span class="color-estrella">
+                            <span class="numero">2</span>
+                            <span class="estrella">&#9733;</span>
+                        </span>
+                        <div class="barra-progres">
+                            <div class="barra-progres-omplerta" style="width: 0.5%;"></div>
+                        </div>
+                        <span>10</span>
+                    </div>
+                    <div class="fila-valoracio">
+                        <span class="color-estrella">
+                            <span class="numero">1</span>
+                            <span class="estrella">&#9733;</span>
+                        </span>
+                        <div class="barra-progres">
+                            <div class="barra-progres-omplerta" style="width: 1%;"></div>
+                        </div>
+                        <span>30</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Opinions/Comentaris -->
+    <div class="my-4">
+        <h4>Opinions i Comentaris</h4>
+        <div class="list-group">
+            <div class="list-group-item">Paco:<br>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus
+                placeat expedita, eum quasi nemo architecto commodi, deleniti consequuntur dolore aperiam suscipit est
+                tempora odio quis sapiente ipsam explicabo mollitia ab!</div>
+            <div class="list-group-item">Manlo:<br>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus,
+                saepe enim. Accusantium optio quia velit nemo molestiae repudiandae libero itaque, quas consectetur
+                ratione voluptates blanditiis praesentium cumque vel consequatur laborum?</div>
+        </div>
+    </div>
+</div>
+</section>

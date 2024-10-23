@@ -2,18 +2,14 @@ import { defineComponent, defineAsyncComponent, ref, onMounted } from 'https://u
 import * as comm from "../communicationManager/communicationManager.js";
 
 
-export const NavBarComponent = defineAsyncComponent(() =>
+export const FotterComponent = defineAsyncComponent(() =>
     Promise.all([
-        fetch('./templates/navBar/NavBarComponent.html').then(response => response.text()),
+        fetch('./templates/footer/footerComponent.html').then(response => response.text()),
         Promise.resolve(defineComponent({
-            name: 'AddPaymentMethodComponent',
+            name: 'FotterComponent',
             emits: ['updatePage'],
             setup(props, { emit }) {
 
-                const categoryMenu = ref(false);
-                const categoryCarrito = ref(false);
-
-                console.log(categoryCarrito)
                 onMounted(() => {
                 });
 
@@ -24,8 +20,6 @@ export const NavBarComponent = defineAsyncComponent(() =>
 
                 return {
                     goToRegister,
-                    categoryMenu,
-                    categoryCarrito
                 };
             }
         }))

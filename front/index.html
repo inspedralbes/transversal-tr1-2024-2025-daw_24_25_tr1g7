@@ -40,10 +40,17 @@
 
     <div v-if="page !== 'login' && page !== 'register'">
         <nav-bar-component @update-page="page = $event"></nav-bar-component>
-        <div v-if="page === 'test'">
-            <div style="margin-top: 90px"></div>
-            <test-component></test-component>
+        <div style="margin-top: 90px"></div>
+        <div v-if="page === 'home'">
+            <home-page @update-page="page = $event"></home-page>
         </div>
+
+        <div v-if="page === 'producte'">
+            <productes-page @update-page="page = $event"></productes-page>
+        </div>
+
+        <fotter-component></fotter-component>
+
     </div>
 
 
@@ -61,6 +68,7 @@
     import { AddPaymentMethodComponent } from "./components/addPaymentMethodComponent.js";
     import { NavBarComponent} from "./components/NavBarComponent.js";
     import { TestComponent} from "./components/TestComponent.js";
+    import { FotterComponent} from "./components/FotterComponent.js";
 
     // Crear la aplicación y registrar el componente
     createApp({
@@ -72,9 +80,10 @@
             AddPaymentMethodComponent,
             NavBarComponent,
             TestComponent,
+            FotterComponent
         },
         setup(){
-            let page = ref("register");
+            let page = ref("producte");
 
             return {
                 page
