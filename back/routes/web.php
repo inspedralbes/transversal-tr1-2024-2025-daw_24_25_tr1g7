@@ -32,11 +32,13 @@ Route::get('/subcategorylist', [SubCategoriaController::class,'list']);
 
 Route::post('/productestore', [ProducteController::class,'store']);
 
-Route::get('/productedelete/{id}', [ProducteController::class,'delete']);
+Route::delete('/productedelete/{id}', [ProducteController::class,'delete']);
 
 Route::post('/producteupdate/{id}', [ProducteController::class,'update']);
 
 Route::get('/productelist', [ProducteController::class,'list']);
+
+Route::get('/productelist', [ProducteController::class,'index']);
 
 
 Route::post('/comandastore', [ComandaController::class,'store']);
