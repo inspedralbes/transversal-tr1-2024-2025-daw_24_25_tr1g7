@@ -29,13 +29,13 @@ Route::middleware('auth:sanctum')->group(function () {
 
 });
 
-Route::post('/categorystore', [CategoriaController::class,'store'])->name("category.store");
+Route::post('/categorystore', [CategoriaController::class,'store_js'])->name("category.store");
 
-Route::get('/categorydelete/{id}', [CategoriaController::class,'delete'])->name("category.delete");
+Route::get('/categorydelete/{id}', [CategoriaController::class,'delete_js'])->name("category.delete");
 
-Route::post('/categoryupdate/{id}', [CategoriaController::class,'update'])->name("category.update");
+Route::post('/categoryupdate/{id}', [CategoriaController::class,'update_js'])->name("category.update");
 
-Route::get('/categorylist', [CategoriaController::class,'list'])->name("category.list");
+Route::get('/categorylist', [CategoriaController::class,'list_js'])->name("category.list");
 
 
 Route::post('/subcategorystore', [SubCategoriaController::class,'store']);
