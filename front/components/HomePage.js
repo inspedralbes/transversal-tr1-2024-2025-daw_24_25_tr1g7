@@ -1,21 +1,23 @@
 import { defineComponent, defineAsyncComponent, reactive, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 import * as comm from "../communicationManager/communicationManager.js";
+import {getHomeData} from "../communicationManager/communicationManager.js";
 
 export const HomePage = defineAsyncComponent(() =>
     Promise.all([
         fetch('./templates/home/homePage.html').then(response => response.text()),
         Promise.resolve(defineComponent({
             name: 'HomePage',
-            emits: ['addProductToCart'],
+            emits: ['addProductToCart', 'showProduct'],
             setup(props, { emit }) {
                 const productes = reactive({ data: [] });
 
                 onMounted(async () => {
-                    productes.data = await comm.jsonProductes();
+                    productes.data = await comm.getHomeData();
                 });
 
-                const printProduct = (producte) => {
+                const showToProduct = (producte) => {
                     console.log("Producto seleccionado:", producte);
+                    emit('showProduct', producte);
                 };
 
                 const addToCart = (producte) => {
@@ -25,8 +27,8 @@ export const HomePage = defineAsyncComponent(() =>
 
                 return {
                     productes,
-                    printProduct,
-                    addToCart // Asegúrate de retornar ambas funciones
+                    addToCart, // Asegúrate de retornar ambas funciones
+                    showToProduct
                 };
             }
         }))

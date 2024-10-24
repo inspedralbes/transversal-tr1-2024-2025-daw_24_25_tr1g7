@@ -3,36 +3,36 @@
         <div class="row">
             <div class="col-lg-5">
                 <div class="w-100 container-img" style="height: 500px;">
-                    <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg"/>
+                    <img class="img-fluid" :src="productSelected.image_path"/>
                 </div>
-                <div class="w-100">
-                    <div class="row px-2 justify-content-center">
-                        <div class="col-lg-3 d-flex justify-content-center">
-                            <div class="w-100 container-img" style="height: 100px;">
-                                <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg" class="img-fluid"/>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 d-flex justify-content-center">
-                            <div class="w-100 container-img" style="height: 100px;">
-                                <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg" class="img-fluid"/>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 d-flex justify-content-center">
-                            <div class="w-100 container-img" style="height: 100px;">
-                                <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg" class="img-fluid"/>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 d-flex justify-content-center">
-                            <div class="w-100 container-img" style="height: 100px;">
-                                <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg" class="img-fluid"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="w-100">-->
+<!--                    <div class="row px-2 justify-content-center">-->
+<!--                        <div class="col-lg-3 d-flex justify-content-center">-->
+<!--                            <div class="w-100 container-img" style="height: 100px;">-->
+<!--                                <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg" class="img-fluid"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-lg-3 d-flex justify-content-center">-->
+<!--                            <div class="w-100 container-img" style="height: 100px;">-->
+<!--                                <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg" class="img-fluid"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-lg-3 d-flex justify-content-center">-->
+<!--                            <div class="w-100 container-img" style="height: 100px;">-->
+<!--                                <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg" class="img-fluid"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-lg-3 d-flex justify-content-center">-->
+<!--                            <div class="w-100 container-img" style="height: 100px;">-->
+<!--                                <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg" class="img-fluid"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
             <div class="col-lg-4" >
                 <div class="py-4 w-100">
-                    <p class="m-0 mb-2 fs-4 fw-bold">Alurin Go Start N24 Intel Celeron N4020/8GB/256GB SSD/15.6"</p>
+                    <p class="m-0 mb-2 fs-4 fw-bold">{{productSelected.name}}</p>
                     <p class="fs-7 m-0 mb-2 ">4,8/5 <span><i
                             class="bi bi-star-fill text-warning"></i></span> 166 Opiniones</p>
                     <p class="fs-7 m-0 ">Cod. Artículo: 10803904</p>
@@ -48,7 +48,8 @@
                     <div class="card-body">
                         <div class="py-4 w-100">
                             <p class="m-0 fs-3">
-                                <span class="text-primary-2 fw-bold">239<sup>99€</sup></span> <del class="fs-5"> 309,99€</del>
+                                <span class="text-primary-2 fw-bold">{{productSelected.price}}<sup>99€</sup></span> <del class="fs-5">
+                                {{productSelected.price*2}}€</del>
                             </p>
                         </div>
 
@@ -59,7 +60,7 @@
                         </div>
 
                         <div class="w-100 pt-4">
-                            <button class="btn btn-lg btn-primary w-100">Añadir a la cesta</button>
+                            <button class="btn btn-lg btn-primary w-100" @click="addToCart(productSelected)">Añadir a la cesta</button>
                         </div>
                     </div>
                 </div>

@@ -24,7 +24,9 @@
                             <button class="btn text-white">
                                 nombre user
                             </button>
-                            <button @click="categoryCarrito = !categoryCarrito" class="btn text-white"><i class="bi bi-cart"></i> <sup class="bg-danger py-1 px-2 m-0 rounded-full">{{productsCart.length}}</sup></button>
+                            <button @click="categoryCarrito = !categoryCarrito" class="btn text-white"><i class="bi bi-cart"></i>
+                                <sup class="bg-danger py-1 px-2 m-0 rounded-full">{{ productsCart.reduce((total, product) => total + (product.num_product), 0) }}</sup>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -33,10 +35,23 @@
     </nav>
 
     <!--lateral izquierdo-->
-    <div class="w-100 position-fixed top-0 start-0 bg-opacity" style="height: 100vh;" v-if="categoryMenu">
-        <div class="w-25 bg-white" style="z-index: 1000; height: 100%;">
-            <div style="margin-top: 90px"></div>
-            lateral izquierdo
+    <div class="w-100 position-fixed top-0 start-0 bg-opacity" style="z-index: 1000;height: 100vh;"
+         v-if="categoryMenu" @click="categoryMenu = !categoryMenu">
+        <div class="w-25 bg-white px-4 py-3" @click.stop style="height: 100%;">
+            <div class="d-flex justify-content-between mb-4">
+                <p class="m-0 fs-4 fw-bold">Todas las categorías</p>
+                <button class=" btn btn-sm m-0 fs-5 " @click="categoryMenu = !categoryMenu"><i class="bi bi-x fw-bold"></i></button>
+            </div>
+            <div class="h-100 d-grid gap-2" style="max-height:93vh;">
+                <a href="javascript:;" class="text-decoration-none text-black fs-5 d-flex justify-content-between mb-3 link-primary">
+                    <div>
+                        <i class="bi bi-cpu"></i> Componentes
+                    </div>
+                    <div>
+                        <i class="bi bi-chevron-right"></i>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -54,7 +69,7 @@
                         <div class="card-body p-0">
                             <div class="row">
                                 <div class="col-lg-3 container-img">
-                                    <img class="img-fluid" :src="product.img_path"/>
+                                    <img class="img-fluid" :src="product.image_path"/>
                                 </div>
                                 <div class="col-lg-7">
                                     <div class="row">
@@ -88,14 +103,14 @@
             <div class="w-100 border-top pt-2" style="margin-bottom: 40px">
                 <div class="d-flex justify-content-between mb-3">
                     <p class="m-0 fs-6">Unidades</p>
-                    <p class="fs-6 fw-bold m-0"></p>
+                    <p class="fs-6 fw-bold m-0">{{ productsCart.reduce((total, product) => total + (product.num_product), 0) }}</p>
                 </div>
 
                 <div class="d-flex justify-content-between mb-3">
                     <p class="m-0 fs-6">Total (IVA incluido)</p>
-                    <p class="fs-6 fw-bold m-0">634.99 €</p>
+                    <p class="fs-6 fw-bold m-0">{{ productsCart.reduce((total, product) => total + (product.price * product.num_product), 0).toFixed(2) }}  €</p>
                 </div>
-                <button class="btn btn-primary w-100 btn-lg">Ver artículos en tu cesta</button>
+                <button class="btn btn-primary w-100 btn-lg" @click="goToCart">Ver artículos en tu cesta</button>
             </div>
         </div>
     </div>

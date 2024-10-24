@@ -39,21 +39,23 @@
 <!--    </div>-->
 
     <div v-if="page !== 'login' && page !== 'register'">
-        <nav-bar-component v-bind:products-cart="productsCart.data" ></nav-bar-component>
+        <nav-bar-component v-bind:products-cart="productsCart.data" @update-page="page = $event"></nav-bar-component>
         <div style="margin-top: 90px"></div>
         <div v-if="page === 'home'">
-            <home-page @add-product-to-cart="addProductToCart"></home-page>
+            <home-page @add-product-to-cart="addProductToCart"  @show-product="showProduct"></home-page>
         </div>
 
         <div v-if="page === 'producte'">
-            <productes-page @update-page="page = $event"></productes-page>
+            <productes-page v-bind:product-selected="productSelected.data" @add-product-to-cart="addProductToCart"></productes-page>
+        </div>
+
+        <div v-if="page === 'cart'">
+            <cart-page v-bind:products-cart="productsCart.data"></cart-page>
         </div>
 
         <fotter-component></fotter-component>
 
     </div>
-
-
 
 </div>
 
@@ -69,6 +71,7 @@
     import { NavBarComponent} from "./components/NavBarComponent.js";
     import { TestComponent} from "./components/TestComponent.js";
     import { FotterComponent} from "./components/FotterComponent.js";
+    import { CartPage} from "./components/CartPage.js";
 
     // Crear la aplicación y registrar el componente
     createApp({
@@ -80,12 +83,13 @@
             //AddPaymentMethodComponent,
             NavBarComponent,
             TestComponent,
-            FotterComponent
+            FotterComponent,
+            CartPage
         },
         setup(){
-            let page = ref("producte");
+            let page = ref("home");
             let productsCart = reactive({data:[]})
-
+            let productSelected = reactive({data:{}})
             const addProductToCart = (product) => {
                 // Buscar si el producto ya está en el carrito
                 let found = false;
@@ -102,13 +106,22 @@
                     product.num_product = 1;
                     productsCart.data.push(product);
                 }
+
             };
+
+            const showProduct = (product) => {
+                console.log(product);
+                productSelected.data = product; // Asigna el producto seleccionado a productSelected
+                page.value = 'producte';
+            }
 
 
             return {
                 page,
                 productsCart,
-                addProductToCart
+                addProductToCart,
+                showProduct,
+                productSelected
             }
         }
     })

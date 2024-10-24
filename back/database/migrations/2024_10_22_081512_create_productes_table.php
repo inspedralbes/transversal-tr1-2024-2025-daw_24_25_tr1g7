@@ -18,9 +18,9 @@ return new class extends Migration
             $table-> string('description');
             $table-> integer('stock')->nullable();
             $table-> float('price');
-            $table-> string('brand');
+//            $table-> string('brand');
             $table-> string('color');
-            $table->string('image_path');
+            $table->text('image_path');
             $table->timestamps();
 
             $table->foreign('idSubCategory')->references('id')->on('sub_categorias');

@@ -2,11 +2,11 @@ import { defineComponent, defineAsyncComponent, ref, onMounted } from 'https://u
 import * as comm from "../communicationManager/communicationManager.js";
 
 
-export const NavBarComponent = defineAsyncComponent(() =>
+export const CartPage = defineAsyncComponent(() =>
     Promise.all([
-        fetch('./templates/navBar/navBarComponent.html').then(response => response.text()),
+        fetch('./templates/cart/cartPage.html').then(response => response.text()),
         Promise.resolve(defineComponent({
-            name: 'NavBarComponent',
+            name: 'CartPage',
             props: {
                 productsCart: {
                     type: Array,
@@ -16,25 +16,12 @@ export const NavBarComponent = defineAsyncComponent(() =>
             emits: ['updatePage'],
             setup(props, { emit }) {
 
-                const categoryMenu = ref(false);
-                const categoryCarrito = ref(false);
-
-
                 const goToRegister = () => {
                     emit('updatePage', 'register');
                 };
 
-                const goToCart = () => {
-                    categoryCarrito.value = false
-                    emit('updatePage', 'cart');
-                };
-
-
                 return {
                     goToRegister,
-                    goToCart,
-                    categoryMenu,
-                    categoryCarrito,
                     productsCart: props.productsCart
                 };
             }
