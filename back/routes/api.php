@@ -38,13 +38,19 @@ Route::post('/categoryupdate/{id}', [CategoriaController::class,'update'])->name
 Route::get('/categorylist', [CategoriaController::class,'list'])->name("category.list");
 
 
-Route::post('/subcategorystore', [SubCategoriaController::class,'store']);
+Route::post('/subcategorystore', [SubCategoriaController::class,'store'])->name('subcategory.store');
 
-Route::get('/subcategorydelete/{id}', [SubCategoriaController::class,'delete']);
+Route::get('/subcategorycreate', [SubCategoriaController::class, 'create'])->name('subcategory.create');
 
-Route::post('/subcategoryupdate/{id}', [SubCategoriaController::class,'update']);
+Route::delete('/subcategorydelete/{id}', [SubCategoriaController::class, 'delete'])->name('subcategory.delete');
+
+Route::put('/subcategoryupdate/{id}', [SubCategoriaController::class, 'update'])->name('subcategory.update');
+
+Route::get('/subcategorias/edit/{id}', [SubCategoriaController::class, 'edit'])->name('subcategory.edit');
 
 Route::get('/subcategorylist', [SubCategoriaController::class,'list']);
+
+Route::get('/subcategoryindex', [SubCategoriaController::class,'index'])->name('subcategory.index');
 
 
 Route::post('/productestore', [ProducteController::class,'store']);

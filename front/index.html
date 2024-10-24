@@ -39,7 +39,7 @@
 <!--    </div>-->
 
     <div v-if="page !== 'login' && page !== 'register'">
-        <nav-bar-component @update-page="page = $event" v-bind:products-cart="productsCart.data" ></nav-bar-component>
+        <nav-bar-component v-bind:products-cart="productsCart.data" ></nav-bar-component>
         <div style="margin-top: 90px"></div>
         <div v-if="page === 'home'">
             <home-page @add-product-to-cart="addProductToCart"></home-page>
