@@ -7,6 +7,13 @@ use App\Models\Producte;
 
 class ProducteController extends Controller
 {
+    public function index(){
+        $producte = Producte::all();
+
+        return view("Products.index",compact("producte"));
+    }
+
+
      //Añadir producto
      public function store(Request $request){
         $data = $request-> validate([
@@ -41,10 +48,7 @@ class ProducteController extends Controller
         $producte->color = $data['color'];
         $producte->save();
 
-        return response()->json([
-            'status'=> 'successful',
-            'message'=> 'Producto creado'
-        ]);
+         return redirect()->route('producte.index')->with('status', 'Producte modificado con exito');
     }
 
     // Eliminar producto
