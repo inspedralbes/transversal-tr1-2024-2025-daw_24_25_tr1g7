@@ -67,11 +67,14 @@ class SubCategoriaController extends Controller
         $sub_category->idCategory = $data['idCategory'];
         $sub_category->save();
 
-        return response()->json([
-            'status'=> 'successful',
-            'message'=> 'Sub categoria modificada'
-        ]);
+        return redirect()->route('subcategory.index')->with('status', 'Subcategoría actualizada con éxito.');
     }
+
+    public function edit($id) {
+        $subcategoria = SubCategoria::findOrFail($id);
+        return view('subcategory.edit', compact('subcategoria'));
+    }
+    
 
     //Listar sub categories
     public function list(){

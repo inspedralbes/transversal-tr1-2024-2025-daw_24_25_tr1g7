@@ -115,7 +115,11 @@
                     </form>
 
                     <!-- Link para editar -->
-                    <a href="/subcategorias/edit/{{ $sub->id }}" class="btn btn-primary">Editar</a>
+                    <form action="{{ route('subcategory.update', $sub->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="btn btn-danger">Editar</button>
+                    </form>
                 </td>
             </tr>
             @endforeach

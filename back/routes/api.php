@@ -44,7 +44,9 @@ Route::get('/subcategorycreate', [SubCategoriaController::class, 'create'])->nam
 
 Route::delete('/subcategorydelete/{id}', [SubCategoriaController::class, 'delete'])->name('subcategory.delete');
 
-Route::post('/subcategoryupdate/{id}', [SubCategoriaController::class,'update']);
+Route::put('/subcategoryupdate/{id}', [SubCategoriaController::class, 'update'])->name('subcategory.update');
+
+Route::get('/subcategorias/edit/{id}', [SubCategoriaController::class, 'edit'])->name('subcategory.edit');
 
 Route::get('/subcategorylist', [SubCategoriaController::class,'list']);
 
