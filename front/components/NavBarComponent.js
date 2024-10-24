@@ -17,7 +17,7 @@ export const NavBarComponent = defineAsyncComponent(() =>
             setup(props, { emit }) {
 
                 const categoryMenu = ref(false);
-                const categoryCarrito = ref(false);
+                const categoryCarrito = ref(true);
 
 
                 const goToRegister = () => {

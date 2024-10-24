@@ -169,6 +169,30 @@ p {
     display: flex !important;
 }
 
+/* Estilo del contenedor con overflow-auto */
+.overflow-auto {
+    overflow: auto;
+}
+
+/* Ocultar el scrollbar en navegadores basados en WebKit (Chrome, Safari, Edge) */
+.overflow-auto::-webkit-scrollbar {
+    display: none; /* Oculta el scrollbar */
+}
+
+/* Para Firefox */
+.overflow-auto {
+    scrollbar-width: none; /* Oculta el scrollbar en Firefox */
+}
+
+/* Para Internet Explorer y Edge antiguos */
+.overflow-auto {
+    -ms-overflow-style: none; /* Oculta el scrollbar en IE y Edge */
+}
+
+.flex-column {
+    flex-direction: column !important;
+}
+
 .justify-content-start {
     justify-content: flex-start !important;
 }
