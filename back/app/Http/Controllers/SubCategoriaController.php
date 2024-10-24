@@ -7,6 +7,12 @@ use App\Models\SubCategoria;
 
 class SubCategoriaController extends Controller
 {
+    public function index(){
+        $subcategoria = SubCategoria::all();
+
+        return view("SubCategorias.index",compact("subcategoria"));
+    }
+
     //Añadir una sub categoria
     public function store(Request $request){
         $data = $request-> validate([
@@ -21,13 +27,13 @@ class SubCategoriaController extends Controller
         $sub_category = new SubCategoria ();
         $sub_category->name = $data['name'];
         $sub_category->idCategory = $data['idCategory'];
-
         $sub_category->save();
 
-        return response()->json([
-            'status'=> 'successful',
-            'message'=> 'Sub categoria creada'
-        ]);
+        return redirect()->route('subcategory.index')->with('status', 'Subcategoría creada exitosamente.');
+    }
+
+    public function create() {
+        return view('SubCategorias.create'); 
     }
 
     // Eliminar sub categoria
@@ -36,22 +42,14 @@ class SubCategoriaController extends Controller
             $sub_category = SubCategoria::findOrFail($id);
             $sub_category->delete();
 
-            return response()->json([
-                'status' => 'successful',
-                'message' => 'Sub categoría eliminada'
-            ], 200);
+            return redirect()->route('subcategory.index')->with('status', 'Subcategoría eliminada con éxito.');
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Sub categoría no encontrada'
-            ], 404);
+            return redirect()->route('subcategory.index')->with('status', 'Subcategoría no encontrada.');
         } catch (\Exception $e) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Ocurrió un error al eliminar la categoría'
-            ], 500);
+            return redirect()->route('subcategory.index')->with('status', 'Ocurrió un error al eliminar la subcategoría.');
         }
     }
+    
 
     //Modificar sub categoria
     public function update($id, Request $request){

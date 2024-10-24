@@ -39,7 +39,7 @@
 <!--    </div>-->
 
     <div v-if="page !== 'login' && page !== 'register'">
-        <nav-bar-component @update-page="page = $event" v-bind:products-cart="productsCart.data" ></nav-bar-component>
+        <nav-bar-component v-bind:products-cart="productsCart.data" ></nav-bar-component>
         <div style="margin-top: 90px"></div>
         <div v-if="page === 'home'">
             <home-page @add-product-to-cart="addProductToCart"></home-page>
@@ -65,7 +65,7 @@
     import { RegisterPage } from "./components/RegisterPage.js";
     import { ProductesPage } from "./components/ProductesPage.js";
     import { HomePage } from "./components/HomePage.js";
-    import { AddPaymentMethodComponent } from "./components/addPaymentMethodComponent.js";
+   // import { AddPaymentMethodComponent } from "./components/addPaymentMethodComponent.js";
     import { NavBarComponent} from "./components/NavBarComponent.js";
     import { TestComponent} from "./components/TestComponent.js";
     import { FotterComponent} from "./components/FotterComponent.js";
@@ -77,7 +77,6 @@
             RegisterPage,
             ProductesPage,
             HomePage,
-            AddPaymentMethodComponent,
             NavBarComponent,
             TestComponent,
             FotterComponent
