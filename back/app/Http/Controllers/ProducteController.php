@@ -48,7 +48,7 @@ class ProducteController extends Controller
         $producte->color = $data['color'];
         $producte->save();
 
-        return redirect()->route('producte.index')->with('status', 'Producte modificado con exito');
+         return redirect()->route('producte.index')->with('status', 'Producte modificado con exito');
     }
 
     // Eliminar producto
