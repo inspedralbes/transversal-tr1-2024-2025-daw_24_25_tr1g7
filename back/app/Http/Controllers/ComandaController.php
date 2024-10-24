@@ -11,18 +11,18 @@ class ComandaController extends Controller
      public function store(Request $request){
         $data = $request-> validate([
             'idUser'=> 'required',
-            'estado' => 'required',
+            'status' => 'required',
             'price' => 'required'
         ],
         [
             'idUser.required' => 'The id filed is required',
-            'estado.required' => 'The name filed is required',
-            'price.required' => 'The name filed is required'
+            'status.required' => 'The status filed is required',
+            'price.required' => 'The price filed is required'
         ]);
 
         $comanda = new Comanda ();
         $comanda->idUser = $data['idUser'];
-        $comanda->estado = $data['estado'];
+        $comanda->status = $data['status'];
         $comanda->price = $data['price'];
         $comanda->save();
 
@@ -59,18 +59,18 @@ class ComandaController extends Controller
     public function update($id, Request $request){
         $data = $request-> validate([
             'idUser'=> 'required',
-            'estado' => 'required',
+            'status' => 'required',
             'price' => 'required'
         ],
         [
             'idUser.required' => 'The id filed is required',
-            'estado.required' => 'The name filed is required',
+            'status.required' => 'The name filed is required',
             'price.required' => 'The name filed is required'
         ]);
 
         $comanda = Comanda::findOrFail($id);
         $comanda->idUser = $data['idUser'];
-        $comanda->estado = $data['estado'];
+        $comanda->status = $data['status'];
         $comanda->price = $data['price'];
         $comanda->save();
 

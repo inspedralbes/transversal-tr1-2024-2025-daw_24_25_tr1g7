@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('comandas', function (Blueprint $table) {
             $table->id();
             $table-> unsignedBigInteger('idUser');
-            $table->enum('estado', ['pendint', 'in_prgress', 'complete', 'cancelled']);
+            $table->enum('status', ['pending', 'in_progress', 'complete', 'cancelled']);
             $table-> float('price');
             $table->timestamps();
 
