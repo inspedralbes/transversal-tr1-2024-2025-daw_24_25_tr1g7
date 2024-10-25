@@ -35,15 +35,19 @@ Route::delete('/subcategorydelete/{id}', [SubCategoriaController::class,'delete'
 
 
 
-Route::post('/productestore', [ProducteController::class,'store']);
+Route::get('/productelist', [ProducteController::class,'index'])->name('producte.index');
 
-Route::delete('/productedelete/{id}', [ProducteController::class,'delete']);
+Route::post('/productestore', [ProducteController::class,'store'])->name('producte.store');
 
-Route::post('/producteupdate/{id}', [ProducteController::class,'update']);
+Route::get('/productedit/{id}', [ProducteController::class,'edit'])->name('producte.edit');
 
-Route::get('/productelist', [ProducteController::class,'list']);
+Route::get('/producte/crear', [ProducteController::class, 'crear'])->name('producte.crear');
 
-Route::get('/productelist', [ProducteController::class,'index']);
+Route::put('/producteupdate/{id}', [ProducteController::class, 'update'])->name('producte.update');
+
+Route::delete('/productedelete/{id}', [ProducteController::class,'delete'])->name('producte.delete');
+
+//Route::get('/productelist', [ProducteController::class,'list']);
 
 
 Route::post('/comandastore', [ComandaController::class,'store']);
