@@ -35,6 +35,7 @@ Route::get('/subcategorylist', [SubCategoriaController::class,'list']);
 
 Route::get('/subcategoryindex', [SubCategoriaController::class,'index'])->name('subcategory.index');
 
+
 Route::post('/productestore', [ProducteController::class,'store']);
 
 Route::delete('/productedelete/{id}', [ProducteController::class,'delete']);
