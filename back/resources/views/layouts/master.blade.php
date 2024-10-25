@@ -16,6 +16,8 @@
     <body class="">
         @yield('content')
         
+        
+
         @yield('page-script')
         
     </body>
