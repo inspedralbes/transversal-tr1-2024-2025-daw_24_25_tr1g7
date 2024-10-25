@@ -83,6 +83,30 @@ export async function addPaymentMethod(token, paymentMethod) {
     }
 }
 
+export async function retrievePaymentMethod(token){
+// retrieve-payment-method
+    try {
+        const response = await fetch(URL + '/stripe/retrieve-payment-method', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: null
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
+    }
+}
+
 export async function getHomeData()
 {
     // /product/get-home-data

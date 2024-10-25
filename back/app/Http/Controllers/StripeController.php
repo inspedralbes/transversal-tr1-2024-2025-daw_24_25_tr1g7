@@ -48,5 +48,14 @@ class StripeController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Failed to add payment method'], 500);
         }
     }
-    
+
+    public function retrievePaymentMethod()
+    {
+        $user = Auth::user();
+
+        $paymentMethods = $user->paymentMethods();
+
+        return $paymentMethods;
+    }
+
 }

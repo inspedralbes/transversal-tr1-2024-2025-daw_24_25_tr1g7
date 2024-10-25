@@ -54,8 +54,13 @@ export const LoginPage = defineAsyncComponent(() =>
                         if(result.status === 'success'){
                             localStorage.setItem('user', JSON.stringify(result.user));
                             localStorage.setItem('token', result.token);
-
-                            emit('updatePage', 'home')
+                            let actualPage = '';
+                            if(localStorage.getItem('buyProducts')){
+                                actualPage = 'cart';
+                            }else{
+                                actualPage = 'home';
+                            }
+                            emit('updatePage', actualPage)
                         }
                         // Aquí puedes añadir la lógica para enviar los datos al servidor
                     } else {

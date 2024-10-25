@@ -23,11 +23,11 @@
 <div id="app">
 
     <div v-if="page === 'login'">
-        <login-page :page="page" @update-page="page = $event"></login-page>
+        <login-page :page="page" @update-page="changePage"></login-page>
     </div>
 
     <div v-if="page === 'register'">
-        <register-page :page="page" @update-page="page = $event"></register-page>
+        <register-page :page="page" @update-page="changePage"></register-page>
     </div>
 
 <!--    <div v-if="page === 'productes'">-->
@@ -39,7 +39,7 @@
 <!--    </div>-->
 
     <div v-if="page !== 'login' && page !== 'register'">
-        <nav-bar-component v-bind:products-cart="productsCart.data" @update-page="page = $event"></nav-bar-component>
+        <nav-bar-component v-bind:products-cart="productsCart.data" @update-page="changePage"></nav-bar-component>
         <div style="margin-top: 90px"></div>
         <div v-if="page === 'home'">
             <home-page @add-product-to-cart="addProductToCart"  @show-product="showProduct"></home-page>
@@ -50,7 +50,7 @@
         </div>
 
         <div v-if="page === 'cart'">
-            <cart-page v-bind:products-cart="productsCart.data"></cart-page>
+            <cart-page v-bind:products-cart="productsCart.data" @update-page="changePage"></cart-page>
         </div>
 
         <fotter-component></fotter-component>
@@ -87,9 +87,13 @@
             CartPage
         },
         setup(){
-            let page = ref("home");
-            let productsCart = reactive({data:[]})
-            let productSelected = reactive({data:{}})
+            let page = ref(localStorage.getItem('actualPage') || 'home');
+            let productsCart = reactive({
+                data: JSON.parse(localStorage.getItem('productsCart')) || []
+            });
+            let productSelected = reactive({
+                data:JSON.parse(localStorage.getItem('productSelected')) || {}
+            })
             const addProductToCart = (product) => {
                 // Buscar si el producto ya está en el carrito
                 let found = false;
@@ -106,21 +110,29 @@
                     product.num_product = 1;
                     productsCart.data.push(product);
                 }
-
+                // Corregir el almacenamiento en localStorage
+                localStorage.setItem('productsCart', JSON.stringify(productsCart.data));
             };
 
             const showProduct = (product) => {
                 console.log(product);
                 productSelected.data = product; // Asigna el producto seleccionado a productSelected
-                page.value = 'producte';
+                localStorage.setItem('productSelected', JSON.stringify(product));
+                // page.value = 'producte';
+                changePage('producte')
             }
 
+            const changePage = (newPage) => {
+                page.value = newPage;
+                localStorage.setItem('actualPage', newPage)
+            }
 
             return {
                 page,
                 productsCart,
                 addProductToCart,
                 showProduct,
+                changePage,
                 productSelected
             }
         }

@@ -1,25 +1,25 @@
-<div class="w-100 py-3">
+<div v-if="steps == 'summaryTotal'" class="w-100 py-3">
     <div class="section">
         <h1>Mi cesta</h1>
         <p class="m-0 mb-2 fs-6">2 artículos</p>
         <div class="row">
             <div class="col-lg-9">
-                <div class="card mb-3">
+                <div v-for="(product, index) in productsCart" :key="index" class="card mb-3">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-3 container-img" style="height: 150px">
                                 <img class="img-fluid"
-                                     src="https://img.pccomponentes.com/articles/23/232005/razer-kraken-x-lite-2019-render-v02.jpg"/>
+                                     :src="product.image_path"/>
                             </div>
                             <div class="col-lg-7">
                                 <div class="row">
                                     <div class="col-lg-12 col-12">
-                                        <p class="m-0 fs-4 fw-normal">Razer Kraken X</p>
+                                        <p class="m-0 fs-4 fw-normal">{{product.name}}</p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 col-12">
-                                        <p class="m-0 fs-3 fw-bold">199.99€</p>
+                                        <p class="m-0 fs-3 fw-bold">{{product.price}}€</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -34,53 +34,19 @@
                                     <button class="btn border-full"><i class="bi bi-trash3"></i></button>
                                 </div>
                                 <div class="d-flex align-items-center w-100" style="max-height: 40px;">
-                                    <button class="btn border-full" style="height: 100%;">+</button>
-                                    <input class="custom-input" type="text" value="1"/>
-                                    <button class="btn border-full" style="height: 100%;">-</button>
+                                    <button class="btn border-full" style="height: 100%;"
+                                            @click="product.num_product++">+
+                                    </button>
+                                    <input class="custom-input" type="text" :value="product.num_product"/>
+                                    <button class="btn border-full" style="height: 100%;"
+                                            @click="product.num_product--">-
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-3 container-img" style="height: 150px">
-                                <img class="img-fluid"
-                                     src="https://img.pccomponentes.com/articles/23/232005/razer-kraken-x-lite-2019-render-v02.jpg"/>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="row">
-                                    <div class="col-lg-12 col-12">
-                                        <p class="m-0 fs-4 fw-normal">Razer Kraken X</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12 col-12">
-                                        <p class="m-0 fs-3 fw-bold">199.99€</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12 col-12">
-                                        <p class="m-0 fs-7 fw-normal">Lo recibiras lo <span
-                                                class="text-primary fw-bold">antes</span> posible</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 d-flex">
-                                <div class="me-2">
-                                    <button class="btn border-full"><i class="bi bi-trash3"></i></button>
-                                </div>
-                                <div class="d-flex align-items-center w-100" style="max-height: 40px;">
-                                    <button class="btn border-full" style="height: 100%;">+</button>
-                                    <input class="custom-input" type="text" value="1"/>
-                                    <button class="btn border-full" style="height: 100%;">-</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="col-lg-3">
                 <div class="card">
@@ -88,19 +54,56 @@
                         <p class="m-0 mb-3 fs-4">Resumen</p>
                         <div class="d-flex border-bottom pb-4 mb-3 fs-6 justify-content-between">
                             <p class="m-0">Subtotal artículos</p>
-                            <p class="m-0 fw-bold">654.65€</p>
+                            <p class="m-0 fw-bold">{{priceTotal}}€</p>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
                             <p class="m-0 fs-6">Total (Impuestos incluidos)</p>
-                            <p class="m-0 fw-bold fs-4">654.65€</p>
+                            <p class="m-0 fw-bold fs-4">{{priceTotalWithIVA}}€</p>
                         </div>
 
                         <div class="w-100">
-                            <button class="btn btn-primary btn-lg w-100">Realizar pedido</button>
+                            <button class="btn btn-primary btn-lg w-100" @click="buyProducts">Realizar pedido</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+
+<div v-if="steps == 'selectCreditCard'" class="w-100 py-3">
+    <div class="section">
+        <h1>Selecciona la tarjeta de credito</h1>
+        <div v-if="paymentMethods.data.length <= 0">
+            <p class="m-0 fs-7">No tienes tarjetas de credito vinculadas</p>
+            <button @click="showAddCreditCardComponent = !showAddCreditCardComponent">Añadir tarjeta de credito</button>
+            <add-payment-method-component></add-payment-method-component>
+        </div>
+        <div v-if="paymentMethods.data.length > 0">
+            Tienes tarjetas de credito vinculadas
+
+            <div v-for="(creditCard, index) in paymentMethods.data" :key="index" class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex">
+                            <div class="me-2">
+                                <i class="bi bi-credit-card"></i>
+                            </div>
+                            <div class="">
+                                <p class="m-0 fs-6 fw-bold">{{creditCard.billing_details.name}}</p>
+                                <p class="m-0 fs-7">{{creditCard.card.exp_month}}/{{creditCard.card.exp_year}}</p>
+                                <p class="m-0 fs-8">*{{creditCard.card.last4}}</p>
+                            </div>
+                        </div>
+                        <div class="">
+                            <button class="btn"><i class="bi bi-trash3 text-primary"></i></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

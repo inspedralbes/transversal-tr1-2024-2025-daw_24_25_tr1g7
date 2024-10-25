@@ -28,7 +28,7 @@ class AuthenticatorController extends Controller
             return response()->json(['status' => 'success', 'message' => 'Credentials validated', 'token' => $token, 'user' => $user]);
         }
 
-        return response()->json(['status' => 'success', 'message' => 'Invalid credentials']);
+        return response()->json(['status' => 'error', 'message' => 'Invalid credentials']);
     }
 
     public function logout()

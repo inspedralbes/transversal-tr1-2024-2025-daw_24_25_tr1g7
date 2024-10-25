@@ -67,6 +67,8 @@ export const RegisterPage = defineAsyncComponent(() =>
                         console.log('correcto');
                         let result = await comm.insertUser(formData);
                         console.log(result);
+                        // localStorage.setItem('user', JSON.stringify(result.user));
+                        // localStorage.setItem('token', result.token);
                         // Aquí puedes añadir la lógica para enviar los datos al servidor
                     } else {
                         console.log('Please correct the errors in the form');

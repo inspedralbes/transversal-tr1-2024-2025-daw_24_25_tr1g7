@@ -24,6 +24,10 @@ export const NavBarComponent = defineAsyncComponent(() =>
                     emit('updatePage', 'register');
                 };
 
+                const goToHome = () => {
+                    emit('updatePage', 'home');
+                };
+
                 const goToCart = () => {
                     categoryCarrito.value = false
                     emit('updatePage', 'cart');
@@ -33,6 +37,7 @@ export const NavBarComponent = defineAsyncComponent(() =>
                 return {
                     goToRegister,
                     goToCart,
+                    goToHome,
                     categoryMenu,
                     categoryCarrito,
                     productsCart: props.productsCart

@@ -1,9 +1,9 @@
 /* Fuente base */
 body {
     margin: 0;
-    font-family: 'Roboto', 'Open Sans', 'Lato', sans-serif; /* Fuentes alternativas */
-    color: #333; /* Color del texto principal */
-    line-height: 1.5; /* Espaciado entre líneas */
+    font-family: 'Roboto', 'Open Sans', 'Lato', sans-serif;
+    color: #333;
+    line-height: 1.5;
 }
 
 /* Títulos */
@@ -13,75 +13,69 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 2.5rem; /* 40px */
+    font-size: 2.5rem;
     font-weight: 700;
-    color: #16cfe5; /* Color principal */
+    color: #16cfe5;
 }
 
 h2 {
-    font-size: 2rem; /* 32px */
+    font-size: 2rem;
     font-weight: 600;
-    color: #212529; /* Color de texto secundario */
+    color: #212529;
 }
 
 h3 {
-    font-size: 1.75rem; /* 28px */
+    font-size: 1.75rem;
     font-weight: 500;
 }
 
 h4 {
-    font-size: 1.5rem; /* 24px */
+    font-size: 1.5rem;
     font-weight: 500;
 }
 
 h5 {
-    font-size: 1.25rem; /* 20px */
+    font-size: 1.25rem;
     font-weight: 500;
 }
 
 h6 {
-    font-size: 1rem; /* 16px */
+    font-size: 1rem;
     font-weight: 500;
 }
 
-/* Texto de párrafo */
+
 p {
-    font-size: 1rem; /* 16px */
-    margin-bottom: 1rem; /* Espacio inferior */
+    font-size: 1rem;
+    margin-bottom: 1rem;
 }
 
 .gradient-custom-2 {
-    /* fallback for old browsers */
     background: #fccb90;
 
-    /* Chrome 10-25, Safari 5.1-6 */
     background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
 }
 
 .bg-custom-gradient {
-    /* fallback for old browsers */
     background: #16cfe5;
 
-    /* Chrome 10-25, Safari 5.1-6 */
     background: -webkit-linear-gradient(to right, #16cfe5, #9716e5);
 
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, #16cfe5, #9716e5);
 }
 
 .bg-opacity {
-    background-color: rgba(0, 0, 0, 0.3); /* Fondo negro con 70% de opacidad */
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .bg-secondary {
-    background-color: #6c757d !important; /* Gris */
+    background-color: #6c757d !important;
 }
 
 .bg-success {
-    background-color: #198754 !important; /* Verde */
+    background-color: #198754 !important;
 }
 
 .bg-danger {
@@ -112,7 +106,6 @@ p {
     background-color: transparent !important; /* Transparente */
 }
 
-/* Para versiones de Bootstrap con opacidad (ejemplo) */
 .bg-opacity-25 {
     background-color: rgba(0, 0, 0, 0.25) !important;
 }
@@ -154,15 +147,15 @@ p {
 .row {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    gap: 20px; /* This adds space between columns, similar to Bootstrap's gutters */
+    gap: 20px;
 }
 
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000; /* Asegura que esté por encima de otros elementos */
-    height: 90px; /* Ajusta esta altura según tu navbar */
+    z-index: 1000;
+    height: 90px;
 }
 
 .link-primary{
@@ -188,24 +181,22 @@ p {
     display: flex !important;
 }
 
-/* Estilo del contenedor con overflow-auto */
+
 .overflow-auto {
     overflow: auto;
 }
 
-/* Ocultar el scrollbar en navegadores basados en WebKit (Chrome, Safari, Edge) */
 .overflow-auto::-webkit-scrollbar {
-    display: none; /* Oculta el scrollbar */
+    display: none;
 }
 
 /* Para Firefox */
 .overflow-auto {
-    scrollbar-width: none; /* Oculta el scrollbar en Firefox */
+    scrollbar-width: none;
 }
 
-/* Para Internet Explorer y Edge antiguos */
 .overflow-auto {
-    -ms-overflow-style: none; /* Oculta el scrollbar en IE y Edge */
+    -ms-overflow-style: none;
 }
 
 .flex-column {
@@ -280,7 +271,6 @@ p {
     align-self: stretch !important;
 }
 
-/* Estilos generales (aplicados en todos los dispositivos) */
 .col-1 { grid-column: span 1; width: 100% }
 .col-2 { grid-column: span 2; width: 100% }
 .col-3 { grid-column: span 3; width: 100% }
@@ -296,10 +286,9 @@ p {
 .card {
     border: 1px solid #ddd;
     border-radius: .5rem;
-    background-color: #fff; /* Fondo blanco para la tarjeta */
+    background-color: #fff;
 }
 
-/* Clase para el contenedor */
 .container-img {
     overflow: hidden;
     display: flex;
@@ -315,17 +304,17 @@ p {
 }
 
 .card-header {
-    background-color: #16cfe5; /* Color primario para el encabezado */
-    color: #fff; /* Texto blanco */
-    padding: 1rem; /* Espaciado */
-    font-size: 1.25rem; /* Tamaño de fuente */
+    background-color: #16cfe5;
+    color: #fff;
+    padding: 1rem;
+    font-size: 1.25rem;
 }
 
 .card-body {
-    padding: 1.5rem; /* Espaciado interno */
+    padding: 1.5rem;
 }
 
-/* Estilo base de los botones */
+
 .btn {
     display: inline-block;
     font-weight: 400;
@@ -399,7 +388,6 @@ p {
     border-color: #16cfe5;
 }
 
-/* Botón .btn-secondary */
 .btn-secondary {
     color: #fff;
     background-color: #6c757d;
@@ -425,7 +413,6 @@ p {
     border-color: #6c757d;
 }
 
-/* Botón .btn-success */
 .btn-success {
     color: #fff;
     background-color: #198754;
@@ -451,7 +438,6 @@ p {
     border-color: #198754;
 }
 
-/* Botón .btn-danger */
 .btn-danger {
     color: #fff;
     background-color: #dc3545;
@@ -477,7 +463,6 @@ p {
     border-color: #dc3545;
 }
 
-/* Botón .btn-warning */
 .btn-warning {
     color: #212529;
     background-color: #ffc107;
@@ -503,7 +488,7 @@ p {
     border-color: #ffc107;
 }
 
-/* Botón .btn-info */
+
 .btn-info {
     color: #fff;
     background-color: #0dcaf0;
@@ -529,7 +514,6 @@ p {
     border-color: #0dcaf0;
 }
 
-/* Botón .btn-light */
 .btn-light {
     color: #212529;
     background-color: #f8f9fa;
@@ -555,7 +539,6 @@ p {
     border-color: #f8f9fa;
 }
 
-/* Botón .btn-dark */
 .btn-dark {
     color: #fff;
     background-color: #212529;
@@ -581,7 +564,7 @@ p {
     border-color: #212529;
 }
 
-/* Botón .btn-link */
+
 .btn-link {
     font-weight: 400;
     color: #0d6efd;
@@ -596,7 +579,7 @@ p {
     color: #6c757d;
     text-decoration: none;
 }
-/* Botón .btn-outline-success */
+
 .btn-outline-success {
     color: #198754;
     border-color: #198754;
@@ -624,7 +607,7 @@ p {
 }
 
 .shadow-none {
-    box-shadow: none; /* Sin sombra */
+    box-shadow: none;
 }
 
 .shadow-sm {
@@ -1087,7 +1070,6 @@ p {
     font-weight: bold; /* 700 */
 }
 
-/* Clases de posición en Bootstrap */
 
 /* Position Fixed */
 .fixed-top {
@@ -1138,8 +1120,6 @@ p {
     position: static !important;
 }
 
-/* Ejemplos de utilidades de posicionamiento */
-
 /* Top, Right, Bottom, Left */
 .top-0 {
     top: 0 !important;
@@ -1189,7 +1169,6 @@ p {
     right: 100% !important;
 }
 
-/* Translate Middle */
 .translate-middle {
     transform: translate(-50%, -50%) !important;
 }
@@ -1280,16 +1259,6 @@ p {
     background-color: #212529;
 }
 
-/* Estilos para dispositivos móviles (pantallas de hasta 767px de ancho) */
-@media (max-width: 767px) {
-    /* Aquí puedes añadir estilos específicos para móviles si es necesario */
-}
-
-@media (min-width: 768px) {
-    .gradient-form {
-        height: 100vh !important;
-    }
-}
 
 /* Estilos para pantallas más grandes (desktop: pantallas de 768px en adelante) */
 @media (min-width: 768px) {
