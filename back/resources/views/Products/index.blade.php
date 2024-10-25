@@ -27,6 +27,7 @@
 @section('content')
     <div class="container">
         <h1>Lista de Productos</h1>
+        <a href="{{ route('producte.crear') }}" class="btn btn-success">Agregar Producto</a><br><br>
         <table>
             <thead>
                 <tr>
@@ -50,7 +51,7 @@
                         <td>{{ $producto->price }}</td>
                         <td>
                             <div class="action-buttons">
-                            <a href="{{ route('producte.edit', $producto->id) }}" class="btn btn-edit">Editar</a>
+                                <a href="{{ route('producte.edit', $producto->id) }}" class="btn btn-edit">Editar</a>
                                 <button onclick="deleteProduct({{ $producto->id }})" class="btn btn-danger">Eliminar</button>
                             </div>
                         </td>
@@ -64,7 +65,7 @@
 @section('page-script')
 <script>
     function deleteProduct(id) {
-        if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+        if (confirm('¿Estas segur de que vols eliminar aquest producte?')) {
             fetch(`/productedelete/${id}`, {
                 method: 'DELETE',
                 headers: {
