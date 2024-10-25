@@ -34,6 +34,15 @@ Route::get('/subcategorylist', [SubCategoriaController::class,'list']);
 Route::get('/subcategoryindex', [SubCategoriaController::class,'index'])->name('subcategory.index');
 
 
+Route::get('/marcaindex', [MarcasController::class, 'index'])->name('marcas.index');
+Route::get('/marca/create', [MarcasController::class, 'create'])->name('marcas.create');
+Route::delete('/marca/{id}', [MarcasController::class, 'delete'])->name('marcas.delete');
+Route::post('/marca/store', [MarcasController::class, 'store'])->name('marcas.store');
+Route::get('/marca/{id}/edit', [MarcasController::class, 'edit'])->name('marcas.edit');
+Route::put('/marca/{id}', [MarcasController::class, 'update'])->name('marcas.update');
+
+
+
 Route::post('/productestore', [ProducteController::class,'store']);
 
 Route::delete('/productedelete/{id}', [ProducteController::class,'delete']);
