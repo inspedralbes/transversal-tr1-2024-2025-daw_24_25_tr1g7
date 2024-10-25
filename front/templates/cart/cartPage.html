@@ -77,33 +77,51 @@
         <h1>Selecciona la tarjeta de credito</h1>
         <div v-if="paymentMethods.data.length <= 0">
             <p class="m-0 fs-7">No tienes tarjetas de credito vinculadas</p>
-            <button @click="showAddCreditCardComponent = !showAddCreditCardComponent">Añadir tarjeta de credito</button>
-            <add-payment-method-component></add-payment-method-component>
         </div>
         <div v-if="paymentMethods.data.length > 0">
             Tienes tarjetas de credito vinculadas
 
-            <div v-for="(creditCard, index) in paymentMethods.data" :key="index" class="card">
+            <div
+                    v-for="(creditCard, index) in paymentMethods.data"
+                    :key="index"
+                    @click="selectPaymentMethod(creditCard.id)"
+                    class="card mb-2"
+                    :class="{ 'bg-primary-opacity text-white': creditCard.id === (defaultPaymentMethods.data?.id || '') }"
+                    style="cursor: pointer;"
+            >
                 <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex">
-                            <div class="me-2">
-                                <i class="bi bi-credit-card"></i>
-                            </div>
-                            <div class="">
-                                <p class="m-0 fs-6 fw-bold">{{creditCard.billing_details.name}}</p>
-                                <p class="m-0 fs-7">{{creditCard.card.exp_month}}/{{creditCard.card.exp_year}}</p>
-                                <p class="m-0 fs-8">*{{creditCard.card.last4}}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-credit-card me-3 fs-4"></i>
+                            <div>
+                                <p class="m-0 fs-6 fw-bold">{{ creditCard.billing_details.name }}</p>
+                                <p class="m-0 fs-7">{{ creditCard.card.exp_month }}/{{ creditCard.card.exp_year }}</p>
+                                <p class="m-0 fs-8">**** {{ creditCard.card.last4 }}</p>
                             </div>
                         </div>
-                        <div class="">
-                            <button class="btn"><i class="bi bi-trash3 text-primary"></i></button>
-                        </div>
+                        <button
+                                class="btn btn-sm p-0"
+                                @click.stop="deletePaymentMethod(creditCard)"
+                                aria-label="Delete"
+                        >
+                            <i class="bi bi-trash3" :class="creditCard.id === (defaultPaymentMethods.data?.id || '') ? 'text-white' : 'text-primary'"></i>
+                        </button>
                     </div>
-
                 </div>
             </div>
         </div>
+
+        <button @click="finishBuying" class="btn btn-primary me-2">Seguir con la compra</button>
+        <button @click="showAddCreditCardComponent = !showAddCreditCardComponent" class="btn btn-secondary">Añadir tarjeta de credito</button>
+        <add-payment-method-component v-if="showAddCreditCardComponent"
+                                      @payment-methods="paymentMethods.data = $event"
+                                      @default-payment-method="defaultPaymentMethods.data = $event"></add-payment-method-component>
     </div>
 
+</div>
+
+<div v-if="steps == 'finishBuy'" class="w-100 py-3">
+    <div>
+        Terminaste la compra
+    </div>
 </div>

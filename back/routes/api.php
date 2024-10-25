@@ -30,6 +30,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('create-setup-intent', [StripeController::class, 'createSetupIntent'])->name('stripe.createSetupIntent');
         Route::post('add-payment-method', [StripeController::class, 'addPaymentMethod'])->name('stripe.addPaymentMethod');
         Route::post('retrieve-payment-method', [StripeController::class, 'retrievePaymentMethod'])->name('stripe.retrievePaymentMethod');
+        Route::post('set-default-payment-method', [StripeController::class, 'setDefaultPaymentMethod'])->name('stripe.setDefaultPaymentMethod');
+        Route::post('purchase', [StripeController::class, 'purchase'])->name('stripe.purchase');
     });
 });
 

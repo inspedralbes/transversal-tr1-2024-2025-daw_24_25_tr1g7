@@ -1,6 +1,5 @@
 import { defineComponent, defineAsyncComponent, ref, onMounted, computed, reactive } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 import * as comm from "../communicationManager/communicationManager.js";
-import {retrievePaymentMethod} from "../communicationManager/communicationManager.js";
 
 import {AddPaymentMethodComponent} from "./AddPaymentMethodComponent.js";
 
@@ -22,6 +21,7 @@ export const CartPage = defineAsyncComponent(() =>
             setup(props, { emit }) {
                 const showAddCreditCardComponent = ref(false);
                 const paymentMethods = reactive({data: []})
+                const defaultPaymentMethods = reactive({data: []})
                 const steps = ref('summaryTotal');
 
                 const priceTotal = computed(() => {
@@ -35,6 +35,18 @@ export const CartPage = defineAsyncComponent(() =>
                     return (basePrice + (basePrice * 0.21)).toFixed(2);
                 });
 
+                const selectPaymentMethod = async (paymentMethodId) =>{
+                    console.log(paymentMethodId)
+                    let response = await comm.setDefaultPaymentMethod(localStorage.getItem('token'), paymentMethodId);
+                    paymentMethods.data = response.paymentMethods;
+                    defaultPaymentMethods.data = response.defaultPaymentMethod;
+                    console.log(response)
+                }
+
+                const deletePaymentMethod = (paymentMethodId) => {
+                    // Lógica para borrar el método de pago
+                };
+
                 const buyProducts = async() =>{
                     if(localStorage.getItem('user') === null){
                         console.log("Tienes que registrarte")
@@ -45,9 +57,16 @@ export const CartPage = defineAsyncComponent(() =>
                         console.log("Puedes ver tus tarjetas de credito");
                         console.log(JSON.parse(localStorage.getItem('user')));
                         console.log(localStorage.getItem('token'));
-                        paymentMethods.data = await retrievePaymentMethod(localStorage.getItem('token'));
+                        let response = await comm.retrievePaymentMethod(localStorage.getItem('token'));
+                        paymentMethods.data = response.paymentMethods;
+                        defaultPaymentMethods.data = response.defaultPaymentMethod;
                         console.log(paymentMethods.data)
+                        console.log(defaultPaymentMethods.data)
                     }
+                }
+
+                const finishBuying = () => {
+                    steps.value = 'finishBuy'
                 }
                 const goToRegister = () => {
                     emit('updatePage', 'register');
@@ -60,7 +79,11 @@ export const CartPage = defineAsyncComponent(() =>
                     buyProducts,
                     steps,
                     priceTotalWithIVA,
-                    paymentMethods
+                    paymentMethods,
+                    defaultPaymentMethods,
+                    showAddCreditCardComponent,
+                    selectPaymentMethod,
+                    finishBuying
                 };
             }
         }))

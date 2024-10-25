@@ -40,4 +40,33 @@ class ApiProductsController extends Controller
         ]);
     }
 
+//    public function checkLogin($id)
+//    {
+//        try {
+//            $user = auth()->user();
+//
+//            if (!$user) {
+//                return response()->json([
+//                    'status' => false,
+//                    'message' => 'No hay usuario autenticado'
+//                ], 401);
+//            }
+//
+//            $isMatchingUser = $user->id == $id;
+//
+//            return response()->json([
+//                'status' => true,
+//                'isMatch' => $isMatchingUser,
+//                'userData' => $isMatchingUser ? $user : null
+//            ]);
+//
+//        } catch (\Exception $e) {
+//            return response()->json([
+//                'status' => false,
+//                'message' => 'Error al verificar el usuario',
+//                'error' => $e->getMessage()
+//            ], 500);
+//        }
+//    }
+
 }

@@ -21,8 +21,11 @@
                                        style="height: 100%;"
                                        type="text">
                             </div>
-                            <button class="btn text-white">
-                                nombre user
+                            <button v-if="!isLogin" class="btn text-white">
+                                Mi Cuenta
+                            </button>
+                            <button v-if="isLogin" class="btn text-white">
+                                {{userData.email}}
                             </button>
                             <button @click="categoryCarrito = !categoryCarrito" class="btn text-white"><i class="bi bi-cart"></i>
                                 <sup class="bg-danger py-1 px-2 m-0 rounded-full">{{ productsCart.reduce((total, product) => total + (product.num_product), 0) }}</sup>

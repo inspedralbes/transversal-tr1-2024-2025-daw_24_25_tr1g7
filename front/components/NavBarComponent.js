@@ -16,9 +16,11 @@ export const NavBarComponent = defineAsyncComponent(() =>
             emits: ['updatePage'],
             setup(props, { emit }) {
 
+                const userData = ref(JSON.parse(localStorage.getItem('user') || '{}'));
+                const isLogin = ref(!!localStorage.getItem('user'));
+
                 const categoryMenu = ref(false);
                 const categoryCarrito = ref(false);
-
 
                 const goToRegister = () => {
                     emit('updatePage', 'register');
@@ -40,7 +42,9 @@ export const NavBarComponent = defineAsyncComponent(() =>
                     goToHome,
                     categoryMenu,
                     categoryCarrito,
-                    productsCart: props.productsCart
+                    productsCart: props.productsCart,
+                    isLogin,
+                    userData
                 };
             }
         }))

@@ -70,6 +70,15 @@ p {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
+.bg-primary{
+    background-color: #16cfe5 !important;
+}
+
+.bg-primary-opacity {
+    background-color: rgba(22, 207, 229, 0.8) !important; /* Cambia 0.8 a cualquier valor entre 0 y 1 para ajustar la opacidad */
+}
+
+
 .bg-secondary {
     background-color: #6c757d !important;
 }
