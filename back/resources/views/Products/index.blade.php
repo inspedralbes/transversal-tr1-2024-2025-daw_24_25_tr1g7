@@ -27,7 +27,14 @@
 @section('content')
     <div class="container">
         <h1>Lista de Productos</h1>
-        <a href="{{ route('producte.crear') }}" class="btn btn-success">Agregar Producto</a><br><br>
+
+        <form method="GET" action="{{ route('producte.index') }}">
+            <div class="input-group mb-3">
+                <input type="text" name="query" class="form-control" placeholder="Nom del producte" value="{{ request()->input('query') }}">
+                <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+            </div>
+        </form>
+        <a href="{{ route('producte.crear') }}" class="btn btn-success">Afegir Producte</a><br><br>
         <table>
             <thead>
                 <tr>

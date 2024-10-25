@@ -8,10 +8,16 @@ use App\Models\Producte;
 class ProducteController extends Controller
 {
     // Listar productos
-    public function index(){
-        $producte = Producte::all();
-        return view("Products.index", compact("producte"));
-    }
+    public function index(Request $request)
+{
+    $query = $request->input('query'); 
+
+    $producte = Producte::when($query, function ($queryBuilder) use ($query) {
+        return $queryBuilder->where('name', 'LIKE', '%' . $query . '%');
+    })->get();
+
+    return view('Products.index', compact('producte'));
+}
 
     public function crear()
     {
