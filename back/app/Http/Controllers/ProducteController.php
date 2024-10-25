@@ -21,7 +21,7 @@ class ProducteController extends Controller
             'idSubCategory'=> 'required',
             'description'=> 'required',
             'stock'=> 'required',
-            'brand'=> 'required',
+            'idBrand'=> 'required',
             'image_path'=> 'required',
             'price'=> 'required',
             'color'=> 'required'
@@ -31,7 +31,7 @@ class ProducteController extends Controller
             'idSubCategory.required' => 'The id filed is required',
             'description.required' => 'The id filed is required',
             'stock.required' => 'The id filed is required',
-            'brand.required' => 'The id filed is required',
+            'idBrand.required' => 'The id filed is required',
             'image_path.required' => 'The id filed is required',
             'price.required' => 'The id filed is required',
             'color.required' => 'The id filed is required'
@@ -42,7 +42,7 @@ class ProducteController extends Controller
         $producte->description = $data['description'];
         $producte->idSubCategory = $data['idSubCategory'];
         $producte->stock = $data['stock'];
-        $producte->brand = $data['brand'];
+        $producte->idBrand = $data['idBrand'];
         $producte->image_path = $data['image_path'];
         $producte->price = $data['price'];
         $producte->color = $data['color'];
@@ -75,44 +75,40 @@ class ProducteController extends Controller
     }
 
     //Modificar categoria
-    public function update($id, Request $request){
-            $data = $request-> validate([
-                'name' => 'required',
-                'idSubCategory'=> 'required',
-                'description'=> 'required',
-                'stock'=> 'required',
-                'brand'=> 'required',
-                'image_path'=> 'required',
-                'price'=> 'required',
-                'color'=> 'required'
-            ],
-            [
-                'name.required' => 'The name filed is required',
-                'idSubCategory.required' => 'The id filed is required',
-                'description.required' => 'The id filed is required',
-                'stock.required' => 'The id filed is required',
-                'brand.required' => 'The id filed is required',
-                'image_path.required' => 'The id filed is required',
-                'price.required' => 'The id filed is required',
-                'color.required' => 'The id filed is required'
-            ]);
-
+    public function update($id, Request $request) {
+        $data = $request->validate([
+            'name' => 'required',
+            'idSubCategory'=> 'required',
+            'description'=> 'required',
+            'stock'=> 'required',
+            'idBrand'=> 'required',
+            'image_path'=> 'required',
+            'price'=> 'required|numeric', // Asegúrate de que sea numérico
+            'color'=> 'required'
+        ]);
+    
+        // Actualiza el producto
         $producte = Producte::findOrFail($id);
         $producte->name = $data['name'];
         $producte->description = $data['description'];
         $producte->idSubCategory = $data['idSubCategory'];
         $producte->stock = $data['stock'];
-        $producte->brand = $data['brand'];
+        $producte->idBrand = $data['idBrand'];
         $producte->image_path = $data['image_path'];
         $producte->price = $data['price'];
         $producte->color = $data['color'];
         $producte->save();
-
-        return response()->json([
-            'status'=> 'successful',
-            'message'=> 'Producte modificat'
-        ]);
+    
+        // Redirige a la lista de productos con un mensaje de éxito
+        return redirect()->route('producte.index')->with('status', 'Producto actualizado con éxito');
     }
+    
+    public function edit($id)
+    {
+        $producto = Producte::findOrFail($id); // Busca el producto por ID
+        return view('Products.edit', compact('producto')); // Devuelve la vista de edición
+    }
+
 
     //Listar Productes
     public function list(){

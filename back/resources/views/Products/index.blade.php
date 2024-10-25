@@ -13,22 +13,13 @@
         th {
             background-color: #f2f2f2;
         }
-        #editModal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
+        .btn-edit {
+            color:white;
+            background-color:#e0a800;
         }
-        .modal-content {
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
+        .action-buttons {
+            display: flex; 
+            gap: 10px; 
         }
     </style>
 @endsection
@@ -55,82 +46,51 @@
                         <td>{{ $producto->name }}</td>
                         <td>{{ $producto->description }}</td>
                         <td>{{ $producto->stock }}</td>
-                        <td>{{ $producto->brand }}</td>
+                        <td>{{ $producto->brand->name ?? 'Sin Marca' }}</td>
                         <td>{{ $producto->price }}</td>
                         <td>
-                            <button onclick="deleteProduct({{ $producto->id }})">Eliminar</button>
-                            <button onclick="openEditModal({{ $producto }})">Editar</button>
+                            <div class="action-buttons">
+                            <a href="{{ route('producte.edit', $producto->id) }}" class="btn btn-edit">Editar</a>
+                                <button onclick="deleteProduct({{ $producto->id }})" class="btn btn-danger">Eliminar</button>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-
-    <div id="editModal">
-        <div class="modal-content">
-            <h2>Editar Producto</h2>
-            <form id="editForm" method="POST" action="{{ url('/producteupdate') }}">
-                @csrf
-                @method('PUT')
-                <input type="hidden" name="id" id="productId">
-                <div>
-                    <label>Nombre:</label>
-                    <input type="text" name="name" id="productName" required>
-                </div>
-                <div>
-                    <label>Descripción:</label>
-                    <textarea name="description" id="productDescription" required></textarea>
-                </div>
-                <div>
-                    <label>Stock:</label>
-                    <input type="number" name="stock" id="productStock" required>
-                </div>
-                <div>
-                    <label>Marca:</label>
-                    <input type="text" name="brand" id="productBrand" required>
-                </div>
-                <div>
-                    <label>Precio:</label>
-                    <input type="number" name="price" id="productPrice" required>
-                </div>
-                <button type="submit">Guardar Cambios</button>
-                <button type="button" onclick="closeModal()">Cerrar</button>
-            </form>
-        </div>
-    </div>
 @endsection
 
 @section('page-script')
-    <script>
-        function openEditModal(producto) {
-            document.getElementById('productId').value = producto.id;
-            document.getElementById('productName').value = producto.name;
-            document.getElementById('productDescription').value = producto.description;
-            document.getElementById('productStock').value = producto.stock;
-            document.getElementById('productBrand').value = producto.brand;
-            document.getElementById('productPrice').value = producto.price;
-            document.getElementById('editModal').style.display = 'flex';
+<script>
+    function deleteProduct(id) {
+        if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+            fetch(`/productedelete/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.status === 'successful') {
+                    const row = document.querySelector(`tr[data-id="${id}"]`);
+                    row.remove();
+                } else {
+                    alert('Error al eliminar el producto: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Hubo un problema con la petición fetch:', error);
+                alert('Ocurrió un error al intentar eliminar el producto.');
+            });
         }
-
-        function closeModal() {
-            document.getElementById('editModal').style.display = 'none';
-        }
-
-        function deleteProduct(id) {
-            if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
-                fetch(`/productedelete/${id}`, {
-                    method: 'DELETE',
-                    headers: { 'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'successful') {
-                        const row = document.querySelector(`tr[data-id="${id}"]`);
-                        row.remove();
-                    }
-                })
-            }
-        }
-    </script>
+    }
+</script>
 @endsection
