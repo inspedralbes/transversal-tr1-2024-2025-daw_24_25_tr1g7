@@ -44,24 +44,30 @@
 
     <!-- Formulario para editar una subcategoría -->
     <form action="{{ route('subcategory.update', $subcategoria->id) }}" method="POST">
-        @csrf
-        @method('PUT')  <!-- Asegúrate de especificar el método -->
+    @csrf
+    @method('PUT')
 
-        <!-- Campo para el nombre de la subcategoría -->
-        <div class="form-group">
-            <label for="name">Nombre de la Subcategoría</label>
-            <input type="text" id="name" name="name" class="form-control" value="{{ old('name', $subcategoria->name) }}" required>
-        </div>
+    <!-- Campo para el nombre de la subcategoría -->
+    <div class="form-group">
+        <label for="name">Nombre de la Subcategoría</label>
+        <input type="text" id="name" name="name" class="form-control" value="{{ old('name', $subcategoria->name) }}" required>
+    </div>
 
-        <!-- Campo para el ID de la categoría -->
-        <div class="form-group">
-            <label for="idCategory">ID de la Categoría</label>
-            <input type="number" id="idCategory" name="idCategory" class="form-control" value="{{ old('idCategory', $subcategoria->idCategory) }}" required>
-        </div>
+    <!-- Campo para el ID de la categoría -->
+    <div class="form-group">
+        <label for="idCategory">ID de la Categoría</label>
+        <input type="number" id="idCategory" name="idCategory" class="form-control" value="{{ old('idCategory', $subcategoria->idCategory) }}" required>
+    </div>
 
-        <!-- Botón para enviar el formulario -->
-        <button type="submit" class="btn btn-success">Guardar Cambios</button>
-        <a href="{{ route('subcategory.index') }}" class="btn btn-secondary">Cancelar</a>
-    </form>
+    <!-- Botón para enviar el formulario -->
+    <form action="{{ route('subcategory.update', $subcategoria->id) }}" method="POST">
+    @csrf
+    @method('PUT')
+    <button type="submit" class="btn btn-success">Guardar Cambios</button>
+    <a href="{{ route('subcategory.index') }}" class="btn btn-secondary">Cancelar</a>
+</form>
+
+</form>
+
 </div>
 @endsection

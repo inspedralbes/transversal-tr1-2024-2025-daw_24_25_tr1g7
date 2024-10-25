@@ -70,10 +70,12 @@ class SubCategoriaController extends Controller
         return redirect()->route('subcategory.index')->with('status', 'Subcategoría actualizada con éxito.');
     }
 
-    public function edit($id) {
-        $subcategoria = SubCategoria::findOrFail($id);
-        return view('subcategory.edit', compact('subcategoria'));
-    }
+    public function edit($id)
+{
+    $subcategoria = Subcategoria::findOrFail($id); 
+    return view('SubCategorias.edit', compact('subcategoria'));
+}
+
     
 
     //Listar sub categories
