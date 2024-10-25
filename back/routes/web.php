@@ -7,6 +7,7 @@ use App\Http\Controllers\ProducteController;
 use App\Http\Controllers\ComandaController;
 use App\Http\Controllers\ArticuloComandaController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\BrandController;
 
 
 Route::get('/categoryindex', [CategoriaController::class,'index'])->name("category.index");
@@ -34,13 +35,17 @@ Route::get('/subcategorylist', [SubCategoriaController::class,'list']);
 Route::get('/subcategoryindex', [SubCategoriaController::class,'index'])->name('subcategory.index');
 
 
-Route::get('/marcaindex', [MarcasController::class, 'index'])->name('marcas.index');
-Route::get('/marca/create', [MarcasController::class, 'create'])->name('marcas.create');
-Route::delete('/marca/{id}', [MarcasController::class, 'delete'])->name('marcas.delete');
-Route::post('/marca/store', [MarcasController::class, 'store'])->name('marcas.store');
-Route::get('/marca/{id}/edit', [MarcasController::class, 'edit'])->name('marcas.edit');
-Route::put('/marca/{id}', [MarcasController::class, 'update'])->name('marcas.update');
+Route::get('/brandindex', [BrandController::class, 'index'])->name('brand.index');
 
+Route::get('/brand/create', [BrandController::class, 'create'])->name('brand.create');
+
+Route::post('/brand/store', [BrandController::class, 'store'])->name('brand.store');
+
+Route::get('/brand/{id}/edit', [BrandController::class, 'edit'])->name('brand.edit');
+
+Route::put('/brand/{id}', [BrandController::class, 'update'])->name('brand.update');
+
+Route::delete('/brand/{id}', [BrandController::class, 'delete'])->name('brand.delete');
 
 
 Route::post('/productestore', [ProducteController::class,'store']);
@@ -79,5 +84,3 @@ Route::get('/invoicedelete/{id}', [InvoiceController::class,'delete']);
 Route::post('/invoiceupdate/{id}', [InvoiceController::class,'update']);
 
 Route::get('/invoicelist', [InvoiceController::class,'list'])->name("invoice.list");
-
-
