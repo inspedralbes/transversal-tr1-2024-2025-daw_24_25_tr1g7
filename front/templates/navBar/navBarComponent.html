@@ -15,24 +15,18 @@
                                 <i class="bi bi-list text-white me-2 "></i>
                                 <span class="text-white ">Categorias</span>
                             </button>
-                            <!--                            <div class="" style="width: 70%; height: 33px;">-->
-                            <!--                                <input aria-describedby="basic-addon1" aria-label="Buscar" class="form-control w-100"-->
-                            <!--                                       placeholder="Buscar"-->
-                            <!--                                       style="height: 100%;"-->
-                            <!--                                       type="text">-->
-                            <!--                            </div>-->
                             <div style="width: 70%;">
                                 <div class="form-floating">
                                     <input class="form-control w-100" id="floatingInputGrid" placeholder="name@example.com"
                                            type="email" value="">
-                                    <label for="floatingInputGrid">Email address</label>
+                                    <label for="floatingInputGrid">Buscar</label>
                                 </div>
                             </div>
 
-                            <button class="btn text-white" v-if="!isLogin">
-                                Mi Cuenta
+                            <button class="btn text-white" @click="goToLogin" v-if="!isLogin">
+                                <i class="bi bi-person-fill"></i> Mi Cuenta
                             </button>
-                            <button class="btn text-white" v-if="isLogin">
+                            <button class="btn text-white" @click="profileMenu = !profileMenu" v-if="isLogin">
                                 {{userData.email}}
                             </button>
                             <button @click="categoryCarrito = !categoryCarrito" class="btn text-white"><i
@@ -135,6 +129,23 @@
             </div>
         </div>
     </div>
+
+    <div @click="profileMenu = !profileMenu" class="w-100 position-fixed top-0 d-flex justify-content-end bg-opacity"
+         style="z-index: 1000;height: 100vh;" v-if="profileMenu">
+        <div @click.stop class="bg-white px-4 py-3"
+             style=" height: 100%; width: 30%;">
+            <div class="d-flex justify-content-between mb-4">
+                <p class="m-0 fs-5 fw-bold">Mi cuenta</p>
+                <button @click="profileMenu = !profileMenu" class=" btn btn-sm m-0 fs-5 "><i
+                        class="bi bi-x fw-bold"></i></button>
+            </div>
+
+            <div>
+                <button class="m-0 fs-6 btn w-100 text-start fw-bold"><i class="bi bi-person-fill me-2"></i>Mi cuenta</button>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -153,8 +164,8 @@
                 </div>
             </div>
             <div class="h-100 d-flex align-items-center justify-content-end">
-                <button class="btn text-white" v-if="!isLogin">
-                    Mi Cuenta
+                <button class="btn text-white" @click="goToLogin" v-if="!isLogin">
+                    <i class="bi bi-person-fill"></i> Mi Cuenta
                 </button>
                 <button class="btn text-white" v-if="isLogin">
                     {{userData.email}}
@@ -166,4 +177,90 @@
             </div>
         </div>
     </nav>
+
+    <div @click="categoryMenu = !categoryMenu" class="w-100 position-fixed top-0 start-0 bg-opacity"
+         style="z-index: 1000;height: 100vh;" v-if="categoryMenu">
+        <div @click.stop class="bg-white px-4 py-3" style="height: 100%;">
+            <div class="d-flex justify-content-between mb-4">
+                <p class="m-0 fs-4 fw-bold">Todas las categorías</p>
+                <button @click="categoryMenu = !categoryMenu" class=" btn btn-sm m-0 fs-5 "><i
+                        class="bi bi-x fw-bold"></i></button>
+            </div>
+            <div class="h-100 d-grid gap-2" style="max-height:93vh;">
+                <div :key="index" class="text-decoration-none text-black fs-5 d-flex justify-content-between mb-3 link-primary" style="cursor: pointer"
+                     v-for="(category, index) in menuCategories.data">
+                    <div>
+                        <i class="bi bi-cpu"></i> {{category.name}}
+                    </div>
+                    <div>
+                        <i class="bi bi-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--lateral derecho-->
+    <div @click="categoryCarrito = !categoryCarrito" class="w-100 position-fixed top-0 start-0 d-flex justify-content-end bg-opacity"
+         style="z-index: 1000;height: 100vh;" v-if="categoryCarrito">
+        <div @click.stop class="bg-white w-100 px-4 py-3 d-flex flex-column justify-content-between"
+             style="border: 2px solid;height: 100%;">
+            <div class="d-flex w-100 justify-content-between mb-4">
+                <p class="m-0 fs-5 fw-bold">Mi cesta</p>
+                <button @click="categoryCarrito = !categoryCarrito" class=" btn btn-sm m-0 fs-5 "><i
+                        class="bi bi-x fw-bold"></i></button>
+            </div>
+            <div class="overflow-auto h-100 w-100" style="max-height: 70vh;" v-if="productsCart.length > 0">
+                <div class=" w-100">
+                    <div :key="index" class="card border-none border-bottom mb-4 w-100"
+                         v-for="(product, index) in productsCart">
+                        <div class="card-body w-100 p-0 d-flex">
+                            <div class="w-25 container-img me-3">
+                                <img :src="product.image_path" class="img-fluid"/>
+                            </div>
+                            <div class="" style="width: 65%;">
+                                <div class="row">
+                                    <div class="col-lg-12 col-12">
+                                        <p class="m-0 fs-6 fw-normal">{{product.name}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-12">
+                                        <p class="m-0 fs-5 fw-bold">{{product.price}} €</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-12">
+                                        <p class="m-0 fs-7 fw-normal">Unidades: <span class="fw-semibold">{{product.num_product}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width: 10%;">
+                                <button class="btn btn-sm"><i class="bi bi-trash3 text-danger"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overflow-auto h-100" style="max-height: 70vh;" v-if="productsCart.length == 0">
+                <p class="m-0 fs-7">No hay articulos en la cesta</p>
+            </div>
+
+            <div class="w-100 border-top pt-2" style="margin-bottom: 40px">
+                <div class="d-flex justify-content-between mb-3">
+                    <p class="m-0 fs-6">Unidades</p>
+                    <p class="fs-6 fw-bold m-0">{{ productsCart.reduce((total, product) => total +
+                        (product.num_product), 0) }}</p>
+                </div>
+
+                <div class="d-flex justify-content-between mb-3">
+                    <p class="m-0 fs-6">Total (IVA incluido)</p>
+                    <p class="fs-6 fw-bold m-0">{{ productsCart.reduce((total, product) => total + (product.price *
+                        product.num_product), 0).toFixed(2) }} €</p>
+                </div>
+                <button @click="goToCart" class="btn btn-primary w-100 btn-lg">Ver artículos en tu cesta</button>
+            </div>
+        </div>
+    </div>
 </div>

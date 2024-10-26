@@ -59,12 +59,20 @@
                             </p>
                         </div>
 
-                        <div class="w-100 pt-4">
+                        <div class="w-100 d-none d-lg-block pt-4">
                             <button class="btn btn-lg btn-primary w-100" @click="addToCart(productSelected)">Añadir a la cesta</button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-lg-none d-block">
+    <div class="card position-fixed bottom-0 w-100">
+        <div class="card-body py-3 px-2">
+            <button class="btn btn-lg btn-primary w-100" @click="addToCart(productSelected)">Añadir a la cesta</button>
         </div>
     </div>
 </div>

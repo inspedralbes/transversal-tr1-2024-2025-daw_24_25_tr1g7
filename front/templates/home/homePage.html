@@ -34,7 +34,7 @@
         <h2 class="fs-4 mb-4">Descubre las mejores ofertas</h2>
         <div class="row w-100">
             <div v-for="(producte, index) in productes.data.productsBestOffers" :key="index" class="col-lg-2 col-12">
-                <a class="text-decoration-none" href="javascript:;" style="color: black;" @click="showToProduct(producte)">
+                <div class="text-decoration-none" style="color: black; cursor: pointer" @click="showToProduct(producte)">
                     <div class="card p-0 border-none">
                         <div class="card-body p-0">
                             <div class="w-100 container-img p-1" style="height: 200px;">
@@ -47,13 +47,13 @@
                                         class="bi bi-star-fill text-warning"></i></span> 166 Opiniones</p>
                                 <p v-if="producte.stock > 0" class="badge badge-success">Esta en stock</p>
                                 <p v-if="producte.stock <= 0" class="badge badge-danger">No esta en stock</p>
-                                <button @click.stop="addToCart(producte)" class="btn btn-primary btn-sm ms-2">
-                                    <i class="bi bi-cart-fill"></i>
-                                </button>
+<!--                                <button @click.stop="addToCart(producte)" class="btn btn-primary btn-sm ms-2">-->
+<!--                                    <i class="bi bi-cart-fill"></i>-->
+<!--                                </button>-->
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
         </div>
     </div>
@@ -86,7 +86,7 @@
         <h2 class="mb-4 fs-4">Productos mas vendidos</h2>
         <div class="row">
             <div v-for="(product, index) in productes.data.productsBestSellers" :key="index" class="col-lg-2 col-12">
-                <a class="text-decoration-none" href="link-a-producto" style="color: black;">
+                <div class="text-decoration-none" @click="showToProduct(product)" style="color: black; cursor: pointer;">
                     <div class="card p-0 border-none">
                         <div class="card-body p-0">
                             <div class="w-100 container-img p-1" style="height: 200px;">
@@ -104,7 +104,7 @@
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
         </div>
     </div>
