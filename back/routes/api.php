@@ -21,8 +21,9 @@ Route::post('/register', [AuthenticatorController::class, 'register'])->name('re
 Route::post('/login', [AuthenticatorController::class, 'authenticate'])->name('login');
 Route::get('/logout', [AuthenticatorController::class, 'logout'])->name('logout');
 
-Route::prefix('product')->group(function () {
+Route::prefix('home')->group(function () {
     Route::get('get-home-data', [ApiProductsController::class, 'getHome'])->name('home.data');
+    Route::get('get-menu-categories', [ApiProductsController::class, 'menuCategories'])->name('home.menuCategories');
 });
 
 Route::middleware('auth:sanctum')->group(function () {

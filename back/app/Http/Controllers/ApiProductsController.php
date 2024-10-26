@@ -23,6 +23,7 @@ class ApiProductsController extends Controller
             ->limit(6)
             ->get();
 
+
         $productsBestSellers = Producte::with(['brand', 'sub_category.category',])
             ->inRandomOrder()
             ->limit(6)
@@ -38,6 +39,13 @@ class ApiProductsController extends Controller
             'productsBestSellers' => $productsBestSellers,
             'brandRandom' => $brandRandom
         ]);
+    }
+
+    public function menuCategories()
+    {
+        $categories = Categoria::all();
+
+        return $categories;
     }
 
 //    public function checkLogin($id)

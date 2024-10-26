@@ -138,7 +138,26 @@ export async function getHomeData()
     // /product/get-home-data
 
     try {
-        const response = await fetch(URL + '/product/get-home-data');
+        const response = await fetch(URL + '/home/get-home-data');
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
+    }
+}
+
+export async function getMenuCategories()
+{
+    // /product/get-home-data
+
+    try {
+        const response = await fetch(URL + '/home/get-menu-categories');
 
         if (!response.ok) {
             throw new Error(`Error: ${response.status} - ${response.statusText}`);

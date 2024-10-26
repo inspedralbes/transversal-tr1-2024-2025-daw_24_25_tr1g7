@@ -1,4 +1,4 @@
-import { defineComponent, defineAsyncComponent, ref, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+import { defineComponent, defineAsyncComponent, ref, onMounted, reactive } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 import * as comm from "../communicationManager/communicationManager.js";
 
 
@@ -18,6 +18,7 @@ export const NavBarComponent = defineAsyncComponent(() =>
 
                 const userData = ref(JSON.parse(localStorage.getItem('user') || '{}'));
                 const isLogin = ref(!!localStorage.getItem('user'));
+                const menuCategories = reactive({data:[]});
 
                 const categoryMenu = ref(false);
                 const categoryCarrito = ref(false);
@@ -35,6 +36,9 @@ export const NavBarComponent = defineAsyncComponent(() =>
                     emit('updatePage', 'cart');
                 };
 
+                onMounted(async () => {
+                    menuCategories.data = await comm.getMenuCategories();
+                });
 
                 return {
                     goToRegister,
@@ -44,7 +48,8 @@ export const NavBarComponent = defineAsyncComponent(() =>
                     categoryCarrito,
                     productsCart: props.productsCart,
                     isLogin,
-                    userData
+                    userData,
+                    menuCategories
                 };
             }
         }))

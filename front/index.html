@@ -30,14 +30,6 @@
         <register-page :page="page" @update-page="changePage"></register-page>
     </div>
 
-<!--    <div v-if="page === 'productes'">-->
-<!--        <productes-page @update-page="page = $event"></productes-page>-->
-<!--    </div>-->
-<!--    -->
-<!--    <div v-if="page === 'home'">-->
-<!--        <home-page @update-page="page = $event"></home-page>-->
-<!--    </div>-->
-
     <div v-if="page !== 'login' && page !== 'register'">
         <nav-bar-component v-bind:products-cart="productsCart.data" @update-page="changePage"></nav-bar-component>
         <div style="margin-top: 90px"></div>
