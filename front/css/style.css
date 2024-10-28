@@ -615,6 +615,19 @@ p {
     opacity: 0.65;
 }
 
+.btn-outline-error {
+    color: #dc3545; /* Color de texto de error */
+    background-color: transparent;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.btn-outline-error:hover {
+    color: #fff;
+    background-color: #dc3545; /* Color de fondo al hacer hover */
+    border-color: #dc3545;
+}
+
+
 .shadow-none {
     box-shadow: none;
 }

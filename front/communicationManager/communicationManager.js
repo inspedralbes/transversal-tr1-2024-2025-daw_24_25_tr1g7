@@ -83,6 +83,22 @@ export async function addPaymentMethod(token, paymentMethod) {
     }
 }
 
+export async function logout() {
+    try {
+        const response = await fetch(URL + '/logout');
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
+    }
+}
+
 export async function setDefaultPaymentMethod(token, paymentMethodId) {
     // set-default-payment-method
     try {

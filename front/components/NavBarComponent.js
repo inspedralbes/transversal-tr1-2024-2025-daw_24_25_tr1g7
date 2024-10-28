@@ -40,6 +40,9 @@ export const NavBarComponent = defineAsyncComponent(() =>
                     categoryCarrito.value = false
                     emit('updatePage', 'cart');
                 };
+                const goToProfilePage = () => {
+                    emit('updatePage', 'profile');
+                };
 
                 onMounted(async () => {
                     menuCategories.data = await comm.getMenuCategories();
@@ -50,6 +53,7 @@ export const NavBarComponent = defineAsyncComponent(() =>
                     goToCart,
                     goToHome,
                     goToLogin,
+                    goToProfilePage,
                     categoryMenu,
                     categoryCarrito,
                     profileMenu,

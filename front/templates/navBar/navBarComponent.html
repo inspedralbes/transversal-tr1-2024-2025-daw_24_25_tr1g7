@@ -141,8 +141,34 @@
             </div>
 
             <div>
-                <button class="m-0 fs-6 btn w-100 text-start fw-bold"><i class="bi bi-person-fill me-2"></i>Mi cuenta</button>
+                <button @click="goToProfilePage" class="m-0 fs-6 btn w-100 text-start fw-bold d-flex justify-content-between">
+                    <div><i class="bi bi-person-fill me-2"></i>Mi cuenta</div>
+                    <i class="bi bi-caret-down-fill"></i>
+                </button>
+                <div class="">
+                    <button class="m-0 fs-6 btn w-100 text-start">Mis datos</button>
+                    <button class="m-0 fs-6 btn w-100 text-start">Mis direcciones</button>
+                    <button class="m-0 fs-6 btn w-100 text-start">Mensajes</button>
+                    <button class="m-0 fs-6 btn w-100 text-start">Opiniones</button>
+                </div>
 
+                <button class="m-0 fs-6 btn w-100 text-start fw-bold d-flex justify-content-between">
+                    <div><i class="bi bi-box-seam-fill me-2"></i>Pedidos y devoluciones</div>
+                    <i class="bi bi-caret-down-fill"></i>
+                </button>
+                <div class="">
+                    <button class="m-0 fs-6 btn w-100 text-start">Mis Pedidos</button>
+                    <button class="m-0 fs-6 btn w-100 text-start">Devoluciones y facturas</button>
+                    <button class="m-0 fs-6 btn w-100 text-start">Historial de pedidos</button>
+                </div>
+
+                <button class="m-0 fs-6 btn w-100 text-start fw-bold d-flex justify-content-between">
+                    <div><i class="bi bi-credit-card-2-back-fill me-2"></i>Pago</div>
+                    <i class="bi bi-caret-down-fill"></i>
+                </button>
+                <div class="">
+                    <button class="m-0 fs-6 btn w-100 text-start">Tarjetas vinculadas</button>
+                </div>
             </div>
         </div>
     </div>

@@ -45,6 +45,10 @@
             <cart-page v-bind:products-cart="productsCart.data" @update-page="changePage"></cart-page>
         </div>
 
+        <div v-if="page === 'profile'">
+            <profile-page @update-page="changePage"></profile-page>
+        </div>
+
         <fotter-component></fotter-component>
 
     </div>
@@ -64,6 +68,7 @@
     import { TestComponent} from "./components/TestComponent.js";
     import { FotterComponent} from "./components/FotterComponent.js";
     import { CartPage} from "./components/CartPage.js";
+    import { ProfilePage} from "./components/ProfilePage.js";
 
     // Crear la aplicación y registrar el componente
     createApp({
@@ -76,7 +81,8 @@
             NavBarComponent,
             TestComponent,
             FotterComponent,
-            CartPage
+            CartPage,
+            ProfilePage
         },
         setup(){
             let page = ref(localStorage.getItem('actualPage') || 'home');
