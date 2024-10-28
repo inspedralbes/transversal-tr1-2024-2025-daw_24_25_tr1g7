@@ -56,6 +56,10 @@ export const RegisterPage = defineAsyncComponent(() =>
                     emit('updatePage', 'login');
                 };
 
+                const goToHome = () => {
+                    emit('updatePage', 'home');
+                };
+
                 const register = async () => {
                     validateUsername();
                     validateEmail();
@@ -67,6 +71,14 @@ export const RegisterPage = defineAsyncComponent(() =>
                         console.log('correcto');
                         let result = await comm.insertUser(formData);
                         console.log(result);
+                        if(result.status === 'success'){
+                            localStorage.setItem('user', JSON.stringify(result.user));
+                            localStorage.setItem('token', result.token);
+                            goToHome();
+                        }
+                        else{
+                            console.log("error")
+                        }
                         // localStorage.setItem('user', JSON.stringify(result.user));
                         // localStorage.setItem('token', result.token);
                         // Aquí puedes añadir la lógica para enviar los datos al servidor

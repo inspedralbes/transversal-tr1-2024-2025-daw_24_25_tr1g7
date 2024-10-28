@@ -1336,6 +1336,7 @@ p {
 }
 
 .form-control{
+    width: 93%!important;
     height: 20px!important;
     border: 1px solid #ddd;
     border-radius: 0.2rem;

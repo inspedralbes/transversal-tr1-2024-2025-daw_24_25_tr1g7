@@ -1,30 +1,30 @@
-<section class="h-100 gradient-form">
-    <div class="container py-5 h-100">
+<div class="h-100">
+    <div class="py-lg-8 py-5 h-100 px-lg-20 px-3">
         <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-xl-10">
+            <div class="col-xl-10 col-12">
                 <div class="card rounded-3 text-black">
                     <div class="row g-0">
-                        <div class="col-lg-6">
-                            <div class="card-body p-md-5 mx-md-4">
+                        <div class="col-lg-6 col-12">
+                            <div class="card-body">
 
                                 <div class="text-center">
                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
                                          style="width: 185px;" alt="logo">
                                     <h4 class="mt-1 mb-5 pb-1">Lorem lorem lorem</h4>
                                 </div>
-                                <form>
+                                <div class=" px-lg-4 px-1">
                                     <p>Please register your account</p>
 
-                                    <div class="row">
-                                        <div class="col-lg-6 col-12 mb-3">
-                                            <div class="form-floating">
+                                    <div class="row ">
+                                        <div class="col-lg-6  col-12 ">
+                                            <div class="form-floating ">
                                                 <input type="text" class="form-control" id="username" name="username" placeholder="Juan" v-model="formData.username" @blur="validateUsername">
                                                 <label for="floatingInput">Username</label>
                                             </div>
                                             <p class="text-danger fs-7" id="validator-username">{{ errors.username }}</p>
                                         </div>
-                                        <div class="col-lg-6 col-12 mb-3">
-                                            <div class="form-floating">
+                                        <div class="col-lg-6 col-12  ">
+                                            <div class="form-floating ">
                                                 <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" v-model="formData.email" @blur="validateEmail">
                                                 <label for="floatingInput">Email address</label>
                                             </div>
@@ -52,7 +52,7 @@
 
 
                                     <div class="text-center pt-1 mb-5 pb-1 d-flex flex-column">
-                                        <button class="btn btn-primary fa-lg gradient-custom-2 mb-3" id="btn-submit" type="button" @click="register" :disabled="!isFormValid">Sign in</button>
+                                        <button class="btn btn-primary bg-custom-gradient btn-lg mb-3" id="btn-submit" type="button" @click="register" :disabled="!isFormValid">Sign in</button>
                                     </div>
 
                                     <div class="d-flex align-items-center justify-content-center pb-4">
@@ -60,11 +60,11 @@
                                         <button @click="goToLogin"  class="btn btn-outline-danger">Log in</button>
                                     </div>
 
-                                </form>
+                                </div>
 
                             </div>
                         </div>
-                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                        <div class="col-lg-6 col-12 d-flex align-items-center bg-custom-gradient">
                             <div class="text-white px-3 py-4 p-md-5 mx-md-4">
                                 <h4 class="mb-4">We are more than just a company</h4>
                                 <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -77,4 +77,4 @@
             </div>
         </div>
     </div>
-</section>
+</div>
