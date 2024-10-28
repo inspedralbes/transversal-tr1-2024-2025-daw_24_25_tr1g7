@@ -11,6 +11,7 @@ use App\Http\Controllers\ProducteController;
 use App\Http\Controllers\ComandaController;
 use App\Http\Controllers\ArticuloComandaController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ShippingAddresses;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -27,6 +28,10 @@ Route::prefix('home')->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::prefix('addresses')->group(function () {
+        Route::post('create-addresses', [ShippingAddresses::class, 'creatAddresses'])->name('addresses.creatAddresses');
+
+    });
     Route::prefix('stripe')->group(function () {
         Route::post('create-setup-intent', [StripeController::class, 'createSetupIntent'])->name('stripe.createSetupIntent');
         Route::post('add-payment-method', [StripeController::class, 'addPaymentMethod'])->name('stripe.addPaymentMethod');
