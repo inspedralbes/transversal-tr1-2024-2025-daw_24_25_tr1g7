@@ -1,271 +1,233 @@
-<head>
-    <link rel="stylesheet" href="/front/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-
-        h3{
-            color: black;
-        }
-        .container {
-            display: grid;
-            grid-template-columns: 1fr 4fr;
-            gap: 80px;
-            padding: 20px;
-        }
-
-        .filter-column {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .product-column {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        .product-card {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            overflow: hidden;
-            text-align: center;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: auto;
-        }
-
-        .search-container {
-            margin: 20px 0;
-        }
-
-        .search-container h3 {
-            font-size: 1.1em;
-            font-weight: bold;
-        }
-
-        .search-box {
-            display: flex;
-            align-items: center;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 5px 10px;
-            width: 250px; 
-        }
-
-        .search-box input {
-            border: none;
-            outline: none;
-            font-size: 1em;
-            flex: 1;
-        }
-
-        .search-box i {
-            font-size: 1.2em;
-            color: #555;
-        }
-
-        .search-box input::placeholder {
-            color: #aaa;
-        }
-
-    </style>
-</head>
+<link rel="stylesheet" href="style.css">
 <div class="container">
-    <div class="filter-column">
-        <div>
-            <h3>Filtros populares</h3>
-            <label><input type="checkbox"> MSI</label><br>
-            <label><input type="checkbox"> Asus</label><br>
-            <label><input type="checkbox"> ATX</label><br>
-            <label><input type="checkbox"> Socket 1700</label><br>
-        </div>
-        <div class="search-container">
-            <h3>Búsqueda de filtros</h3>
-            <div class="search-box">
-                <input type="text" placeholder="Buscar ...">
-                <i class="fas fa-search"></i> <!-- Icono de lupa -->
+    <div class="row">
+        <!-- Filtro Lateral -->
+        <div class="filter-column col-2">
+            <div><br>
+                <h5>Filtros populares</h5>
+                <label><input type="checkbox"> MSI</label><br>
+                <label><input type="checkbox"> Asus</label><br>
+                <label><input type="checkbox"> ATX</label><br>
+                <label><input type="checkbox"> Socket 1700</label><br>
             </div>
-        </div>
-        <hr>
-        <div>
-            <h3>Categories</h3>
-            <label><input type="checkbox"> Procesadores</label><br>
-            <label><input type="checkbox"> Tarjetas Gráficas</label><br>
-            <label><input type="checkbox"> Placas Base</label><br>
-            <label><input type="checkbox"> Memoria RAM</label><br>
-        </div>
-        <hr>
-        <div>
-            <h3>Precio</h3>
-            <label><input type="range" min="0" max="1000" value="500"> 0€ - 1000€</label><br>
-        </div>
-        <hr>
-        <div>
-            <h3>Marcas</h3>
-            <label><input type="checkbox"> HP</label><br>
-            <label><input type="checkbox"> Samsung</label><br>
-            <label><input type="checkbox"> Intel</label><br>
-            <label><input type="checkbox"> Apple</label><br>
-            <label><input type="checkbox"> windows11</label><br>
-            <label><input type="checkbox"> Chromebook</label><br>
-            <label><input type="checkbox"> Corsair</label><br>
-            <label><input type="checkbox"> Asus</label><br>
-        </div>
-        <hr>
-        <div>
-            <h3>Valoración</h3>
-            <label><input type="checkbox"> ⭐⭐⭐⭐ y mas</label><br>
-            <label><input type="checkbox"> Todas las valoraciones</label><br>
-        </div>
-        <hr>
-    </div>
-    <div class="product-column">
-        <div class="card p-0 border-none">
-            <a href="link-a-producto" class="text-decoration-none" style="color: black;">
-                <div class="card-body p-0">
-                    <div class="w-100 container-img p-1" style="height: 200px;">
-                        <img class="img-fluid"
-                            src="https://m.media-amazon.com/images/I/81b75EQJrgL._AC_UF894,1000_QL80_.jpg" />
-                    </div>
-
-                    <div class="p-2">
-                        <p class="m-0 mb-2"> AMD Ryzen 5 3600 - Procesador con disipador de calor Wraith Stealth</p>
-                        <p class="fs-4 fw-bold mb-2 m-0 text-primary">470€</p>
-                        <p class="fs-7 m-0 fw-semibold ">4,8/5 <span><i class="bi bi-star-fill text-warning"></i></span>
-                            166 Opiniones</p>
-                        <p class="badge badge-danger">No esta en stock</p>
+            <hr>
+            <div class="search-container">
+                <h5>Búsqueda de filtros</h5>
+                <div class="search-box">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="search-input" placeholder="Buscar ..." />
+                        <label for="search-input">Buscar ...</label>
+                        <i class="fas fa-search"></i>
                     </div>
                 </div>
-            </a>
+            </div>
+            <hr>
+            <div>
+                <h5>Categorías</h5>
+                <label><input type="checkbox"> Procesadores</label><br>
+                <label><input type="checkbox"> Tarjetas Gráficas</label><br>
+                <label><input type="checkbox"> Placas Base</label><br>
+                <label><input type="checkbox"> Memoria RAM</label><br>
+            </div>
+            <hr>
+            <div>
+                <h5>Precio</h5>
+                <label><input type="range" min="0" max="1000" value="500"><br>0€ - 1000€</label>
+            </div>
+            <hr>
+            <div>
+                <h5>Marcas</h5>
+                <label><input type="checkbox"> HP</label><br>
+                <label><input type="checkbox"> Samsung</label><br>
+                <label><input type="checkbox"> Intel</label><br>
+                <label><input type="checkbox"> Apple</label><br>
+                <label><input type="checkbox"> Windows11</label><br>
+                <label><input type="checkbox"> Chromebook</label><br>
+                <label><input type="checkbox"> Corsair</label><br>
+                <label><input type="checkbox"> Asus</label><br>
+            </div>
+            <hr>
+            <div>
+                <h5>Entrega</h5>
+                <label><input type="checkbox"> Envio Gratis</label><br>
+                <label><input type="checkbox"> Recibelo mañana</label><br>
+            </div>
+            <hr>
+            <div>
+                <h5>Valoración</h5>
+                <label><input type="checkbox"> ⭐⭐⭐⭐ y más</label><br>
+                <label><input type="checkbox"> Todas las valoraciones</label><br>
+            </div>
+            <hr>
         </div>
-        <div class="card p-0 border-none">
-            <a href="link-a-producto" class="text-decoration-none" style="color: black;">
-                <div class="card-body p-0">
-                    <div class="w-100 container-img p-1" style="height: 200px;">
-                        <img class="img-fluid"
-                            src="https://m.media-amazon.com/images/I/81b75EQJrgL._AC_UF894,1000_QL80_.jpg" />
-                    </div>
 
-                    <div class="p-2">
-                        <p class="m-0 mb-2"> AMD Ryzen 5 3600 - Procesador con disipador de calor Wraith Stealth</p>
-                        <p class="fs-4 fw-bold mb-2 m-0 text-primary">470€</p>
-                        <p class="fs-7 m-0 fw-semibold ">4,8/5 <span><i class="bi bi-star-fill text-warning"></i></span>
-                            166 Opiniones</p>
-                        <p class="badge badge-danger">No esta en stock</p>
+        <!-- Productos -->
+        <div class="product-column col-8">
+            <div class="row">
+                <div class="col-3 d-flex justify-content-center">
+                    <div class="card" style="margin: 10px; margin-bottom: 20px;"> <!-- Ajuste de margen aquí -->
+                        <a href="link-a-producto" class="text-decoration-none" style="color: black;">
+                            <div class="card-body">
+                                <div class="container-img">
+                                    <img src="https://m.media-amazon.com/images/I/81b75EQJrgL._AC_UF894,1000_QL80_.jpg"
+                                        width="200px" />
+                                </div>
+                                <div class="p-2">
+                                    <p class="m-0 mb-2">AMD Ryzen 5 3600 - Procesador con disipador de calor Wraith
+                                        Stealth</p>
+                                    <p class="fs-4 fw-bold text-primary">470€</p>
+                                    <p class="fs-7 fw-semibold">4,8/5 <i class="bi bi-star-fill text-warning"></i> 166
+                                        Opiniones</p>
+                                    <p class="badge badge-danger">No está en stock</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
-            </a>
-        </div>
-        <div class="card p-0 border-none">
-            <a href="link-a-producto" class="text-decoration-none" style="color: black;">
-                <div class="card-body p-0">
-                    <div class="w-100 container-img p-1" style="height: 200px;">
-                        <img class="img-fluid"
-                            src="https://m.media-amazon.com/images/I/81b75EQJrgL._AC_UF894,1000_QL80_.jpg" />
-                    </div>
-
-                    <div class="p-2">
-                        <p class="m-0 mb-2"> AMD Ryzen 5 3600 - Procesador con disipador de calor Wraith Stealth</p>
-                        <p class="fs-4 fw-bold mb-2 m-0 text-primary">470€</p>
-                        <p class="fs-7 m-0 fw-semibold ">4,8/5 <span><i class="bi bi-star-fill text-warning"></i></span>
-                            166 Opiniones</p>
-                        <p class="badge badge-danger">No esta en stock</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="card p-0 border-none">
-            <a href="link-a-producto" class="text-decoration-none" style="color: black;">
-                <div class="card-body p-0">
-                    <div class="w-100 container-img p-1" style="height: 200px;">
-                        <img class="img-fluid"
-                            src="https://m.media-amazon.com/images/I/81b75EQJrgL._AC_UF894,1000_QL80_.jpg" />
-                    </div>
-
-                    <div class="p-2">
-                        <p class="m-0 mb-2"> AMD Ryzen 5 3600 - Procesador con disipador de calor Wraith Stealth</p>
-                        <p class="fs-4 fw-bold mb-2 m-0 text-primary">470€</p>
-                        <p class="fs-7 m-0 fw-semibold ">4,8/5 <span><i class="bi bi-star-fill text-warning"></i></span>
-                            166 Opiniones</p>
-                        <p class="badge badge-danger">No esta en stock</p>
+                <div class="col-3 d-flex justify-content-center">
+                    <div class="card" style="margin: 10px; margin-bottom: 20px;">
+                        <a href="link-a-producto" class="text-decoration-none" style="color: black;">
+                            <div class="card-body">
+                                <div class="container-img">
+                                    <img src="https://m.media-amazon.com/images/I/81b75EQJrgL._AC_UF894,1000_QL80_.jpg"
+                                        width="200px" />
+                                </div>
+                                <div class="p-2">
+                                    <p class="m-0 mb-2">AMD Ryzen 5 3600 - Procesador con disipador de calor Wraith
+                                        Stealth</p>
+                                    <p class="fs-4 fw-bold text-primary">470€</p>
+                                    <p class="fs-7 fw-semibold">4,8/5 <i class="bi bi-star-fill text-warning"></i> 166
+                                        Opiniones</p>
+                                    <p class="badge badge-danger">No está en stock</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
-            </a>
-        </div>
-        <div class="card p-0 border-none">
-            <a href="link-a-producto" class="text-decoration-none" style="color: black;">
-                <div class="card-body p-0">
-                    <div class="w-100 container-img p-1" style="height: 200px;">
-                        <img class="img-fluid"
-                            src="https://m.media-amazon.com/images/I/81b75EQJrgL._AC_UF894,1000_QL80_.jpg" />
-                    </div>
-
-                    <div class="p-2">
-                        <p class="m-0 mb-2"> AMD Ryzen 5 3600 - Procesador con disipador de calor Wraith Stealth</p>
-                        <p class="fs-4 fw-bold mb-2 m-0 text-primary">470€</p>
-                        <p class="fs-7 m-0 fw-semibold ">4,8/5 <span><i class="bi bi-star-fill text-warning"></i></span>
-                            166 Opiniones</p>
-                        <p class="badge badge-danger">No esta en stock</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="card p-0 border-none">
-            <a href="link-a-producto" class="text-decoration-none" style="color: black;">
-                <div class="card-body p-0">
-                    <div class="w-100 container-img p-1" style="height: 200px;">
-                        <img class="img-fluid"
-                            src="https://m.media-amazon.com/images/I/81b75EQJrgL._AC_UF894,1000_QL80_.jpg" />
-                    </div>
-
-                    <div class="p-2">
-                        <p class="m-0 mb-2"> AMD Ryzen 5 3600 - Procesador con disipador de calor Wraith Stealth</p>
-                        <p class="fs-4 fw-bold mb-2 m-0 text-primary">470€</p>
-                        <p class="fs-7 m-0 fw-semibold ">4,8/5 <span><i class="bi bi-star-fill text-warning"></i></span>
-                            166 Opiniones</p>
-                        <p class="badge badge-danger">No esta en stock</p>
+                <div class="col-3 d-flex justify-content-center">
+                    <div class="card" style="margin: 10px; margin-bottom: 20px;">
+                        <a href="link-a-producto" class="text-decoration-none" style="color: black;">
+                            <div class="card-body">
+                                <div class="container-img">
+                                    <img src="https://m.media-amazon.com/images/I/81b75EQJrgL._AC_UF894,1000_QL80_.jpg"
+                                        width="200px" />
+                                </div>
+                                <div class="p-2">
+                                    <p class="m-0 mb-2">AMD Ryzen 5 3600 - Procesador con disipador de calor Wraith
+                                        Stealth</p>
+                                    <p class="fs-4 fw-bold text-primary">470€</p>
+                                    <p class="fs-7 fw-semibold">4,8/5 <i class="bi bi-star-fill text-warning"></i> 166
+                                        Opiniones</p>
+                                    <p class="badge badge-danger">No está en stock</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
-            </a>
-        </div>
-        <div class="card p-0 border-none">
-            <a href="link-a-producto" class="text-decoration-none" style="color: black;">
-                <div class="card-body p-0">
-                    <div class="w-100 container-img p-1" style="height: 200px;">
-                        <img class="img-fluid"
-                            src="https://m.media-amazon.com/images/I/81b75EQJrgL._AC_UF894,1000_QL80_.jpg" />
-                    </div>
-
-                    <div class="p-2">
-                        <p class="m-0 mb-2"> AMD Ryzen 5 3600 - Procesador con disipador de calor Wraith Stealth</p>
-                        <p class="fs-4 fw-bold mb-2 m-0 text-primary">470€</p>
-                        <p class="fs-7 m-0 fw-semibold ">4,8/5 <span><i class="bi bi-star-fill text-warning"></i></span>
-                            166 Opiniones</p>
-                        <p class="badge badge-danger">No esta en stock</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="card p-0 border-none">
-            <a href="link-a-producto" class="text-decoration-none" style="color: black;">
-                <div class="card-body p-0">
-                    <div class="w-100 container-img p-1" style="height: 200px;">
-                        <img class="img-fluid"
-                            src="https://m.media-amazon.com/images/I/81b75EQJrgL._AC_UF894,1000_QL80_.jpg" />
-                    </div>
-
-                    <div class="p-2">
-                        <p class="m-0 mb-2"> AMD Ryzen 5 3600 - Procesador con disipador de calor Wraith Stealth</p>
-                        <p class="fs-4 fw-bold mb-2 m-0 text-primary">470€</p>
-                        <p class="fs-7 m-0 fw-semibold ">4,8/5 <span><i class="bi bi-star-fill text-warning"></i></span>
-                            166 Opiniones</p>
-                        <p class="badge badge-danger">No esta en stock</p>
+                <div class="col-3 d-flex justify-content-center">
+                    <div class="card" style="margin: 10px; margin-bottom: 20px;">
+                        <a href="link-a-producto" class="text-decoration-none" style="color: black;">
+                            <div class="card-body">
+                                <div class="container-img">
+                                    <img src="https://m.media-amazon.com/images/I/81b75EQJrgL._AC_UF894,1000_QL80_.jpg"
+                                        width="200px" />
+                                </div>
+                                <div class="p-2">
+                                    <p class="m-0 mb-2">AMD Ryzen 5 3600 - Procesador con disipador de calor Wraith
+                                        Stealth</p>
+                                    <p class="fs-4 fw-bold text-primary">470€</p>
+                                    <p class="fs-7 fw-semibold">4,8/5 <i class="bi bi-star-fill text-warning"></i> 166
+                                        Opiniones</p>
+                                    <p class="badge badge-danger">No está en stock</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
-            </a>
+            </div>
+            <!-- Nueva fila para más productos -->
+            <div class="row">
+                <div class="col-3 d-flex justify-content-center">
+                    <div class="card" style="margin: 10px; margin-bottom: 20px;">
+                        <a href="link-a-producto" class="text-decoration-none" style="color: black;">
+                            <div class="card-body">
+                                <div class="container-img">
+                                    <img src="https://m.media-amazon.com/images/I/81b75EQJrgL._AC_UF894,1000_QL80_.jpg"
+                                        width="200px" />
+                                </div>
+                                <div class="p-2">
+                                    <p class="m-0 mb-2">AMD Ryzen 5 3600 - Procesador con disipador de calor Wraith
+                                        Stealth</p>
+                                    <p class="fs-4 fw-bold text-primary">470€</p>
+                                    <p class="fs-7 fw-semibold">4,8/5 <i class="bi bi-star-fill text-warning"></i> 166
+                                        Opiniones</p>
+                                    <p class="badge badge-danger">No está en stock</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-3 d-flex justify-content-center">
+                    <div class="card" style="margin-bottom: 20px;">
+                        <a href="link-a-producto" class="text-decoration-none" style="color: black;">
+                            <div class="card-body">
+                                <div class="container-img">
+                                    <img src="https://m.media-amazon.com/images/I/81b75EQJrgL._AC_UF894,1000_QL80_.jpg"
+                                        width="200px" />
+                                </div>
+                                <div class="p-2">
+                                    <p class="m-0 mb-2">AMD Ryzen 5 3600 - Procesador con disipador de calor Wraith
+                                        Stealth</p>
+                                    <p class="fs-4 fw-bold text-primary">470€</p>
+                                    <p class="fs-7 fw-semibold">4,8/5 <i class="bi bi-star-fill text-warning"></i> 166
+                                        Opiniones</p>
+                                    <p class="badge badge-danger">No está en stock</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-3 d-flex justify-content-center">
+                    <div class="card" style="margin: 10px; margin-bottom: 20px;">
+                        <a href="link-a-producto" class="text-decoration-none" style="color: black;">
+                            <div class="card-body">
+                                <div class="container-img">
+                                    <img src="https://m.media-amazon.com/images/I/81b75EQJrgL._AC_UF894,1000_QL80_.jpg"
+                                        width="200px" />
+                                </div>
+                                <div class="p-2">
+                                    <p class="m-0 mb-2">AMD Ryzen 5 3600 - Procesador con disipador de calor Wraith
+                                        Stealth</p>
+                                    <p class="fs-4 fw-bold text-primary">470€</p>
+                                    <p class="fs-7 fw-semibold">4,8/5 <i class="bi bi-star-fill text-warning"></i> 166
+                                        Opiniones</p>
+                                    <p class="badge badge-danger">No está en stock</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-3 d-flex justify-content-center">
+                    <div class="card" style="margin: 10px; margin-bottom: 20px;">
+                        <a href="link-a-producto" class="text-decoration-none" style="color: black;">
+                            <div class="card-body">
+                                <div class="container-img">
+                                    <img src="https://m.media-amazon.com/images/I/81b75EQJrgL._AC_UF894,1000_QL80_.jpg"
+                                        width="200px" />
+                                </div>
+                                <div class="p-2">
+                                    <p class="m-0 mb-2">AMD Ryzen 5 3600 - Procesador con disipador de calor Wraith
+                                        Stealth</p>
+                                    <p class="fs-4 fw-bold text-primary">470€</p>
+                                    <p class="fs-7 fw-semibold">4,8/5 <i class="bi bi-star-fill text-warning"></i> 166
+                                        Opiniones</p>
+                                    <p class="badge badge-danger">No está en stock</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

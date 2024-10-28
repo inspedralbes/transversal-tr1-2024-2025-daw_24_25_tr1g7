@@ -323,6 +323,10 @@ p {
     padding: 1.5rem;
 }
 
+.card-column{
+    margin: 10px;
+}
+
 
 .btn {
     display: inline-block;

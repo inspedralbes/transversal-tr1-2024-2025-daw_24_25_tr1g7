@@ -45,6 +45,10 @@
             <cart-page v-bind:products-cart="productsCart.data" @update-page="changePage"></cart-page>
         </div>
 
+        <div v-if="page === 'filtro'">
+            <filtros-page  @update-page="changePage"></filtros-page>
+        </div>
+
         <fotter-component></fotter-component>
 
     </div>
@@ -64,6 +68,7 @@
     import { TestComponent} from "./components/TestComponent.js";
     import { FotterComponent} from "./components/FotterComponent.js";
     import { CartPage} from "./components/CartPage.js";
+    import { FiltrosPage} from "./components/FiltrosPage.js";
 
     // Crear la aplicación y registrar el componente
     createApp({
@@ -76,10 +81,11 @@
             NavBarComponent,
             TestComponent,
             FotterComponent,
-            CartPage
+            CartPage,
+            FiltrosPage
         },
         setup(){
-            let page = ref(localStorage.getItem('actualPage') || 'home');
+            let page = ref(localStorage.getItem('actualPage') || 'filtro');
             let productsCart = reactive({
                 data: JSON.parse(localStorage.getItem('productsCart')) || []
             });
