@@ -167,7 +167,6 @@ export async function getHomeData()
         throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
     }
 }
-
 export async function getMenuCategories()
 {
     // /product/get-home-data
@@ -185,6 +184,32 @@ export async function getMenuCategories()
         console.error('Error:', error);
         throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
     }
+}
+
+// create-addresses
+// addresses
+export async function createShippingAddress(token, dataShippingAddress){
+    try {
+        const response = await fetch(URL + '/addresses/create-addresses', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(dataShippingAddress)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
+    }
+
 }
 
 export async function jsonProductes (){

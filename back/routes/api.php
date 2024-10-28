@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApiProductsController;
 use App\Http\Controllers\AuthenticatorController;
+use App\Http\Controllers\DireccionesEnvioController;
 use App\Http\Controllers\StripeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -11,7 +12,6 @@ use App\Http\Controllers\ProducteController;
 use App\Http\Controllers\ComandaController;
 use App\Http\Controllers\ArticuloComandaController;
 use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\ShippingAddresses;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -29,7 +29,7 @@ Route::prefix('home')->group(function () {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('addresses')->group(function () {
-        Route::post('create-addresses', [ShippingAddresses::class, 'creatAddresses'])->name('addresses.creatAddresses');
+        Route::post('create-addresses', [DireccionesEnvioController::class, 'store'])->name('addresses.creatAddresses');
 
     });
     Route::prefix('stripe')->group(function () {

@@ -1,5 +1,6 @@
 import { defineComponent, defineAsyncComponent, reactive, ref, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 import * as comm from "../communicationManager/communicationManager.js";
+import {createShippingAddress} from "../communicationManager/communicationManager.js";
 
 export const ProfilePage = defineAsyncComponent(() =>
     Promise.all([
@@ -9,6 +10,20 @@ export const ProfilePage = defineAsyncComponent(() =>
             emits: ['updatePage'],
             setup(props, { emit }) {
 
+                const getToken = () =>{
+                    return localStorage.getItem('token');
+                }
+
+                const formDataShippingAdress = reactive({
+                    'idUser': JSON.parse(localStorage.getItem('user')).id,
+                    'zip_code': null,
+                    'population': '',
+                    'city': '',
+                    'street':'',
+                    'number':'',
+                    'floor':'',
+                    'door':''
+                })
                 const tab = ref('myData');
                 const logout = async() => {
                     let response = await comm.logout();
@@ -21,6 +36,10 @@ export const ProfilePage = defineAsyncComponent(() =>
 
                 }
 
+                const createShippingAddress = async () =>{
+                    let response = await comm.createShippingAddress(getToken(), formDataShippingAdress);
+                    console.log(response);
+                }
                 const goToHome = () => {
                     emit('updatePage', 'home');
                 };
@@ -30,7 +49,9 @@ export const ProfilePage = defineAsyncComponent(() =>
 
                 return {
                     tab,
-                    logout
+                    logout,
+                    createShippingAddress,
+                    formDataShippingAdress
                 };
             }
         }))
