@@ -167,7 +167,7 @@
                 <button class="btn text-white" @click="goToLogin" v-if="!isLogin">
                     <i class="bi bi-person-fill"></i> Mi Cuenta
                 </button>
-                <button class="btn text-white" v-if="isLogin">
+                <button class="btn text-white" v-if="isLogin" @click="profileMenu = !profileMenu">
                     {{userData.email}}
                 </button>
                 <button @click="categoryCarrito = !categoryCarrito" class="btn text-white"><i class="bi bi-cart"></i>
@@ -260,6 +260,23 @@
                         product.num_product), 0).toFixed(2) }} €</p>
                 </div>
                 <button @click="goToCart" class="btn btn-primary w-100 btn-lg">Ver artículos en tu cesta</button>
+            </div>
+        </div>
+    </div>
+
+    <div @click="profileMenu = !profileMenu" class="w-100 position-fixed top-0 d-flex justify-content-end bg-opacity"
+         style="z-index: 1000;height: 100vh;" v-if="profileMenu">
+        <div @click.stop class="bg-white w-100 px-4 py-3"
+             style=" height: 100%;">
+            <div class="d-flex justify-content-between mb-4">
+                <p class="m-0 fs-5 fw-bold">Mi cuenta</p>
+                <button @click="profileMenu = !profileMenu" class=" btn btn-sm m-0 fs-5 "><i
+                        class="bi bi-x fw-bold"></i></button>
+            </div>
+
+            <div>
+                <button class="m-0 fs-6 btn w-100 text-start fw-bold"><i class="bi bi-person-fill me-2"></i>Mi cuenta</button>
+
             </div>
         </div>
     </div>
