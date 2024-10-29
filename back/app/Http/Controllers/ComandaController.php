@@ -6,7 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\Comanda;
 
 class ComandaController extends Controller
-{
+{   
+    public function index(){
+        $comanda = Comanda::all();
+
+        return view("Comandes.comandes",compact("comanda"));
+
+        $comandas = Comanda::with('user')->get();
+        return view('comanda', compact('comandas'));
+    }
+
      //Añadir una comanda
      public function store(Request $request){
         $data = $request-> validate([
@@ -19,7 +28,7 @@ class ComandaController extends Controller
             'status.required' => 'The status filed is required',
             'price.required' => 'The price filed is required'
         ]);
-
+        
         $comanda = new Comanda ();
         $comanda->idUser = $data['idUser'];
         $comanda->status = $data['status'];
@@ -58,6 +67,29 @@ class ComandaController extends Controller
     //Modificar sub categoria
     public function update($id, Request $request){
         $data = $request-> validate([
+            'status' => 'required|string|in:pending,in_progress,complete,cancelled'
+        ],
+        [
+            'status.required' => 'The name filed is required'
+        ]);
+
+        $comanda = Comanda::findOrFail($id);
+        $comanda->status = $data['status'];
+        $comanda->save();
+        
+        return redirect()->route('comanda.index')->with('success', 'Estado de la comanda actualizado correctamente.');
+    }
+
+    public function edit($id){
+
+    $comanda = Comanda::findOrFail($id); 
+    return view('Comandes.edit', compact('comanda'));
+
+    }
+
+    //Modificar sub categoria
+    public function update_js($id, Request $request){
+        $data = $request-> validate([
             'idUser'=> 'required',
             'status' => 'required',
             'price' => 'required'
@@ -73,7 +105,7 @@ class ComandaController extends Controller
         $comanda->status = $data['status'];
         $comanda->price = $data['price'];
         $comanda->save();
-
+        
         return response()->json([
             'status'=> 'successful',
             'message'=> 'Comanda modificada'

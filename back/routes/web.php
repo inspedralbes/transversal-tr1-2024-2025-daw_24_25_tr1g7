@@ -50,13 +50,18 @@ Route::delete('/productedelete/{id}', [ProducteController::class,'delete'])->nam
 //Route::get('/productelist', [ProducteController::class,'list']);
 
 
-Route::post('/comandastore', [ComandaController::class,'store']);
+Route::get('/comandasindex', [ComandaController::class,'index'])->name("comanda.index");
 
-Route::get('/comandadelete/{id}', [ComandaController::class,'delete']);
 
-Route::post('/comandaupdate/{id}', [ComandaController::class,'update']);
+Route::post('/comandastore', [ComandaController::class,'store'])->name("comanda.store");
 
-Route::get('/comandalist', [ComandaController::class,'list']);
+Route::get('/comandadelete/{id}', [ComandaController::class,'delete'])->name("comanda.delete");
+
+Route::get('/comandaedit/{id}', [ComandaController::class, 'edit'])->name('comanda.edit');
+
+Route::put('/comandaupdate/{id}', [ComandaController::class,'update'])->name("comanda.update");
+
+Route::get('/comandalist', [ComandaController::class,'list'])->name("comanda.list");
 
 
 Route::post('/articulocomandastore', [ArticuloComandaController::class,'store']);
