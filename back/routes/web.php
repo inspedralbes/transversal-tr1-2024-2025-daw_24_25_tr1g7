@@ -10,8 +10,16 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\AuthenticatorController;
 
 
-
 Route::get('/', [AuthenticatorController::class, 'showLoginForm'])->name('home');
+
+Route::get('/welcome', [AuthenticatorController::class, 'showWelcome'])->name('welcome');
+
+Route::post('/logout', [AuthenticatorController::class, 'logout'])->name('logout');
+
+Route::post('/login', [AuthenticatorController::class, 'authenticate'])->name('login');
+
+Route::post('/register', [AuthenticatorController::class, 'register'])->name('register');
+
 
 
 Route::get('/categoryindex', [CategoriaController::class,'index'])->name("category.index");
