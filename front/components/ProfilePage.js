@@ -25,6 +25,7 @@ export const ProfilePage = defineAsyncComponent(() =>
                     'door':''
                 })
                 const tab = ref('myData');
+                const showModalAddShippingAddress = ref(false)
                 const logout = async() => {
                     let response = await comm.logout();
                     console.log(response)
@@ -35,7 +36,6 @@ export const ProfilePage = defineAsyncComponent(() =>
                     }
 
                 }
-
                 const createShippingAddress = async () =>{
                     let response = await comm.createShippingAddress(getToken(), formDataShippingAdress);
                     console.log(response);
@@ -44,14 +44,19 @@ export const ProfilePage = defineAsyncComponent(() =>
                     emit('updatePage', 'home');
                 };
 
+                const shippingAddresses = reactive({data:[]})
                 onMounted(async () => {
+                    shippingAddresses.data = await comm.getShippingAddresses(getToken());
+                    console.log(shippingAddresses)
                 });
 
                 return {
                     tab,
                     logout,
                     createShippingAddress,
-                    formDataShippingAdress
+                    formDataShippingAdress,
+                    showModalAddShippingAddress,
+                    shippingAddresses
                 };
             }
         }))

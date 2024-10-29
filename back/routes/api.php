@@ -30,6 +30,7 @@ Route::prefix('home')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('addresses')->group(function () {
         Route::post('create-addresses', [DireccionesEnvioController::class, 'store'])->name('addresses.creatAddresses');
+        Route::post('get-addresses', [DireccionesEnvioController::class, 'getAddresses'])->name('addresses.getAddresses');
 
     });
     Route::prefix('stripe')->group(function () {

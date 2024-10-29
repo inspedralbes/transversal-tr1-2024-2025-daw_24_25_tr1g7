@@ -21,6 +21,7 @@ return new class extends Migration
             $table-> string('number');
             $table-> string('floor')->nullable();
             $table-> string('door')->nullable();
+            $table->boolean('default')->default(false);
             $table->timestamps();
 
             $table->foreign('idUser')->references('id')->on('users');

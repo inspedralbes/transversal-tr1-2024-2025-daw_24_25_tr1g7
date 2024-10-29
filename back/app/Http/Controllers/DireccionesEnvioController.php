@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ShippingAddresses;
+use Illuminate\Support\Facades\Auth;
 
 class DireccionesEnvioController extends Controller
 {
@@ -26,15 +27,18 @@ class DireccionesEnvioController extends Controller
             'number.required' => 'The number field is required'
         ]);
 
+        $checkShippingAddressess = ShippingAddresses::where('idUser', $data['idUser'])->get();
         $direccion = new ShippingAddresses();
+        if($checkShippingAddressess->isEmpty()) $direccion->default = true;
+
         $direccion->idUser = $data['idUser'];
         $direccion->zip_code = $data['zip_code'];
         $direccion->population = $data['population'];
         $direccion->city = $data['city'];
         $direccion->street = $data['street'];
         $direccion->number = $data['number'];
-        $direccion->floor = $data['floor'] ?? null;
-        $direccion->door = $data['door'] ?? null;
+        $direccion->floor = $request->floor ?? null;
+        $direccion->door = $request->door ?? null;
         $direccion->save();
 
         return response()->json([
@@ -122,5 +126,12 @@ class DireccionesEnvioController extends Controller
             'action' => 'Listed all available shipping addresses',
             'data' => $direcciones  // Devuelve todas las direcciones en JSON
         ]);
+    }
+
+    public function getAddresses()
+    {
+        $shippingAddresses = ShippingAddresses::where('idUser', Auth::user()->id)->get();
+
+        return $shippingAddresses;
     }
 }

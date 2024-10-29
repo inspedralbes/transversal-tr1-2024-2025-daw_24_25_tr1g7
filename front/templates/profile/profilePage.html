@@ -46,55 +46,43 @@
 
                 <!--TAB: mis Direcciones:init-->
                 <div v-if="tab === 'myAddresses'" class="">
-                    <h2 class="">Mis Direcciones</h2>
-                    <button class="btn btn-secondary">Añade una dirección</button>
+                    <h2 class="mb-4">Mis Direcciones</h2>
 
-                    <div>
-                        <div class="form-floating">
-                            <input class="form-control w-100" id="idUser" placeholder="Calle ..."
-                                   v-model="formDataShippingAdress.idUser"
-                                   type="text" value="">
-                            <label for="idUser">Id User</label>
-                        </div>
-                        <div class="form-floating">
-                            <input class="form-control w-100" id="street" placeholder="Calle ..."
-                                   v-model="formDataShippingAdress.street"
-                                   type="text" value="">
-                            <label for="street">Street</label>
-                        </div>
-                        <div class="form-floating">
-                            <input class="form-control w-100" id="number" placeholder="3r"
-                                   type="text" v-model="formDataShippingAdress.number">
-                            <label for="number">Number</label>
-                        </div>
-                        <div class="form-floating">
-                            <input class="form-control w-100" id="floor" placeholder="3r"
-                                   type="text" v-model="formDataShippingAdress.floor">
-                            <label for="floor">Floor</label>
-                        </div>
-                        <div class="form-floating">
-                            <input class="form-control w-100" id="door" placeholder="3"
-                                   type="text" v-model="formDataShippingAdress.door">
-                            <label for="door">Door</label>
-                        </div>
-                        <div class="form-floating">
-                            <input class="form-control w-100" id="population" placeholder="Terrasa"
-                                   type="text" v-model="formDataShippingAdress.population">
-                            <label for="population">Population</label>
-                        </div>
-                        <div class="form-floating">
-                            <input class="form-control w-100" id="city" placeholder="Barcelona"
-                                   type="text" v-model="formDataShippingAdress.city">
-                            <label for="city">City</label>
-                        </div>
-                        <div class="form-floating">
-                            <input class="form-control w-100" id="zip_code" placeholder="08906"
-                                   type="text" v-model="formDataShippingAdress.zip_code">
-                            <label for="zip_code">Postal Code</label>
-                        </div>
+                    <p class="fs-5 fw-bold m-0 mb-2">Direcciones de envío</p>
 
-                        <button @click="createShippingAddress" class="btn btn-primary">Añadir dirección</button>
+                    <div v-if="shippingAddresses.data.length > 0" v-for="(shippingAddress, index) in shippingAddresses.data" :key="index" class="card mb-2">
+                        <div class="card-body py-2 px-3">
+                            <div class="mb-2"
+                                 v-if="shippingAddress.default"
+                            >
+                                <span class="badge badge-primary">Predeterminado</span>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-12">
+                                    <p class="m-0 mb-1 fs-6 ">{{shippingAddress.street}}
+                                        <span class="fs-7 "> {{shippingAddress.number}}</span>
+                                        <span class="fs-7 ">, {{shippingAddress.zip_code}}, </span>
+                                        <span class="fs-7 "> {{shippingAddress.population}}, </span>
+                                        <span class="fs-7 "> {{shippingAddress.city}}</span>
+                                    </p>
+                                    <p class="m-0 fs-7">{{shippingAddress.floor}}-{{shippingAddress.door}}</p>
+                                </div>
+                                <div class="text-lg-end col-lg-6 col-12">
+                                    <button
+                                            class="btn btn-sm me-2 border-1">Eliminar</button>
+                                    <button
+                                            class="btn btn-sm  border-1">Editar</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <button @click="showModalAddShippingAddress = !showModalAddShippingAddress"
+                            class="btn btn-secondary mb-2">Añade una dirección
+                    </button>
+                    <div v-if="shippingAddresses.data.length <= 0">
+                        <p class="m-0 fs-6">No tienes direcciones registradas.</p>
+                    </div>
+
                 </div>
                 <!--TAB: mis Direcciones:finish-->
 
@@ -113,3 +101,102 @@
         </div>
     </div>
 </div>
+
+
+<!--MODAL ADD SHIPPING ADDRESS-->
+<div v-if="showModalAddShippingAddress"
+     @click="showModalAddShippingAddress = !showModalAddShippingAddress"
+     style="z-index: 1000;height: 100vh;"
+     class="w-100 position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity">
+    <div @click.stop class="w-lg-50 w-90 card bg-white">
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-2">
+                <div>
+                    <p class="m-0 fs-4 fw-bold">Añadir Dirección</p>
+                </div>
+                <div>
+                    <button @click="showModalAddShippingAddress = !showModalAddShippingAddress" class="btn btn-sm"><i
+                            class="bi bi-x fs-5"></i></button>
+                </div>
+            </div>
+
+            <div class="form-floating d-none">
+                <input class="form-control w-100" id="idUser" placeholder="Calle ..."
+                       v-model="formDataShippingAdress.idUser"
+                       type="text" value="">
+                <label for="idUser">Id User</label>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-lg-6 col-12">
+                    <div class="form-floating">
+                        <input class="form-control w-100" id="street" placeholder="Calle ..."
+                               v-model="formDataShippingAdress.street"
+                               type="text" value="">
+                        <label for="street">Street</label>
+                    </div>
+
+                </div>
+                <div class="col-lg-2 col-12">
+                    <div class="form-floating w-lg-75">
+                        <input class="form-control " id="number" placeholder="3r"
+                               type="text" v-model="formDataShippingAdress.number">
+                        <label for="number">Number</label>
+                    </div>
+
+                </div>
+                <div class="col-lg-2 col-12">
+                    <div class="form-floating w-lg-75">
+                        <input class="form-control " id="floor" placeholder="3r"
+                               type="text" v-model="formDataShippingAdress.floor">
+                        <label for="floor">Floor</label>
+                    </div>
+
+                </div>
+                <div class="col-lg-2 col-12">
+                    <div class="form-floating w-lg-75">
+                        <input class="form-control " id="door" placeholder="3"
+                               type="text" v-model="formDataShippingAdress.door">
+                        <label for="door">Door</label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-lg-12 col-12">
+                    <div class="form-floating w-100">
+                        <input class="form-control w-lg-96" style="" id="population" placeholder="Terrasa"
+                               type="text" v-model="formDataShippingAdress.population">
+                        <label for="population">Population</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-lg-12 col-12">
+                    <div class="form-floating ">
+                        <input class="form-control w-lg-96" style="" id="city" placeholder="Barcelona"
+                               type="text" v-model="formDataShippingAdress.city">
+                        <label for="city">City</label>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-lg-12 col-12">
+                    <div class="form-floating">
+                        <input class="form-control w-lg-96" style="" id="zip_code" placeholder="08906"
+                               type="text" v-model="formDataShippingAdress.zip_code">
+                        <label for="zip_code">Postal Code</label>
+                    </div>
+
+                </div>
+            </div>
+
+            <button @click="createShippingAddress" class="btn btn-primary">Añadir dirección</button>
+        </div>
+    </div>
+</div>
+<!--MODAL ADD SHIPPING ADDRESS-->
+

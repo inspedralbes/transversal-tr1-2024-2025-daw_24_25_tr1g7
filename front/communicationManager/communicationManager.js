@@ -212,6 +212,30 @@ export async function createShippingAddress(token, dataShippingAddress){
 
 }
 
+export async function getShippingAddresses(token){
+    try {
+        const response = await fetch(URL + '/addresses/get-addresses', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: null
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
+    }
+
+}
+
 export async function jsonProductes (){
     return [
         {
