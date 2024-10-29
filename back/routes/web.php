@@ -7,10 +7,14 @@ use App\Http\Controllers\ProducteController;
 use App\Http\Controllers\ComandaController;
 use App\Http\Controllers\ArticuloComandaController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\AuthenticatorController;
+
+
+
+Route::get('/', [AuthenticatorController::class, 'showLoginForm'])->name('home');
 
 
 Route::get('/categoryindex', [CategoriaController::class,'index'])->name("category.index");
-
 
 Route::post('/categorystore', [CategoriaController::class,'store'])->name("category.store");
 
