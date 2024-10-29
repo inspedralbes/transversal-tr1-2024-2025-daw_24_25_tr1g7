@@ -171,6 +171,22 @@ export async function getMenuCategories()
     }
 }
 
+export async function getProducts() {
+    try {
+        const response = await fetch(URL + '/get-products');
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; 
+    }
+}
+
 export async function jsonProductes (){
     return [
         {
