@@ -49,47 +49,92 @@
                 <div v-if="tab === 'myAddresses'" class="">
                     <h2 class="mb-4">Mis Direcciones</h2>
 
-                    <p class="fs-5 fw-bold m-0 mb-2">Direcciones de envío</p>
+                    <div class="mb-3">
+                        <p class="fs-5 fw-bold m-0 mb-2">Direcciones de envío</p>
 
-                    <div v-if="shippingAddresses.data.length > 0"
-                         v-for="(shippingAddress, index) in shippingAddresses.data" :key="index"
-                         @click="updateDefault(shippingAddress)"
-                         style="cursor: pointer;"
-                         class="card mb-2">
-                        <div class="card-body py-2 px-3">
-                            <div class="mb-2"
-                                 v-if="shippingAddress.default"
-                            >
-                                <span class="badge badge-primary">Predeterminado</span>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6 col-12">
-                                    <p class="m-0 mb-1 fs-6 ">{{shippingAddress.street}}
-                                        <span class="fs-7 "> {{shippingAddress.number}}</span>
-                                        <span class="fs-7 ">, {{shippingAddress.zip_code}}, </span>
-                                        <span class="fs-7 "> {{shippingAddress.population}}, </span>
-                                        <span class="fs-7 "> {{shippingAddress.city}}</span>
-                                    </p>
-                                    <p class="m-0 fs-7">{{shippingAddress.floor}}-{{shippingAddress.door}}</p>
+                        <div v-if="shippingAddresses.data.length > 0"
+                             v-for="(shippingAddress, index) in shippingAddresses.data" :key="index"
+                             @click="updateDefault(shippingAddress)"
+                             style="cursor: pointer;"
+                             class="card mb-2">
+                            <div class="card-body py-2 px-3">
+                                <div class="mb-2"
+                                     v-if="shippingAddress.default"
+                                >
+                                    <span class="badge badge-primary">Predeterminado</span>
                                 </div>
-                                <div class="text-lg-end col-lg-6 col-12">
-                                    <button @click="deleteShippingAddress(shippingAddress, index)"
-                                            class="btn btn-sm me-2 border-1">Eliminar
-                                    </button>
-                                    <button @click="showOpenEditShippingAddress(shippingAddress, index)"
-                                            class="btn btn-sm  border-1">Editar
-                                    </button>
+                                <div class="row">
+                                    <div class="col-lg-6 col-12">
+                                        <p class="m-0 mb-1 fs-6 ">{{shippingAddress.street}}
+                                            <span class="fs-7 "> {{shippingAddress.number}}</span>
+                                            <span class="fs-7 ">, {{shippingAddress.zip_code}}, </span>
+                                            <span class="fs-7 "> {{shippingAddress.population}}, </span>
+                                            <span class="fs-7 "> {{shippingAddress.city}}</span>
+                                        </p>
+                                        <p class="m-0 fs-7">{{shippingAddress.floor}}-{{shippingAddress.door}}</p>
+                                    </div>
+                                    <div class="text-lg-end col-lg-6 col-12">
+                                        <button @click="deleteShippingAddress(shippingAddress, index)"
+                                                class="btn btn-sm me-2 border-1">Eliminar
+                                        </button>
+                                        <button @click="showOpenEditShippingAddress(shippingAddress, index)"
+                                                class="btn btn-sm  border-1">Editar
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <button @click="showOpenAddShippingAddress"
-                            class="btn btn-secondary mb-2">Añade una dirección
-                    </button>
-                    <div v-if="shippingAddresses.data.length <= 0">
-                        <p class="m-0 fs-6">No tienes direcciones registradas.</p>
+                        <button @click="showOpenAddShippingAddress"
+                                class="btn border-1 mb-2 mt-4"><i class="bi bi-plus me-1"></i>Añade una dirección
+                        </button>
+                        <div v-if="shippingAddresses.data.length <= 0">
+                            <p class="m-0 fs-6">No tienes direcciones registradas.</p>
+                        </div>
                     </div>
 
+
+                    <div class="mb-3">
+                        <p class="fs-5 fw-bold m-0 mb-2">Direcciones de facturación</p>
+
+                        <div v-if="shippingAddresses.data.length > 0"
+                             v-for="(shippingAddress, index) in shippingAddresses.data" :key="index"
+                             @click="updateDefault(shippingAddress)"
+                             style="cursor: pointer;"
+                             class="card mb-2">
+                            <div class="card-body py-2 px-3">
+                                <div class="mb-2"
+                                     v-if="shippingAddress.default"
+                                >
+                                    <span class="badge badge-primary">Predeterminado</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-12">
+                                        <p class="m-0 mb-1 fs-6 ">{{shippingAddress.street}}
+                                            <span class="fs-7 "> {{shippingAddress.number}}</span>
+                                            <span class="fs-7 ">, {{shippingAddress.zip_code}}, </span>
+                                            <span class="fs-7 "> {{shippingAddress.population}}, </span>
+                                            <span class="fs-7 "> {{shippingAddress.city}}</span>
+                                        </p>
+                                        <p class="m-0 fs-7">{{shippingAddress.floor}}-{{shippingAddress.door}}</p>
+                                    </div>
+                                    <div class="text-lg-end col-lg-6 col-12">
+                                        <button @click="deleteShippingAddress(shippingAddress, index)"
+                                                class="btn btn-sm me-2 border-1">Eliminar
+                                        </button>
+                                        <button @click="showOpenEditShippingAddress(shippingAddress, index)"
+                                                class="btn btn-sm  border-1">Editar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button @click="showOpenAddShippingAddress"
+                                class="btn border-1 mb-2 mt-4"><i class="bi bi-plus me-1"></i>Añade datos de facturación
+                        </button>
+                        <div v-if="shippingAddresses.data.length <= 0">
+                            <p class="m-0 fs-6">No tienes direcciones registradas.</p>
+                        </div>
+                    </div>
                 </div>
                 <!--TAB: mis Direcciones:finish-->
 
@@ -148,7 +193,9 @@
                             </div>
                         </div>
 
-                        <button @click="showAddCreditCardComponent = !showAddCreditCardComponent" class="btn btn-secondary">Añadir tarjeta de credito</button>
+                        <button @click="showAddCreditCardComponent = !showAddCreditCardComponent"
+                                class="btn btn-secondary">Añadir tarjeta de credito
+                        </button>
 
 
                     </div>
@@ -264,16 +311,16 @@
 <!--MODAL ADD SHIPPING ADDRESS-->
 
 <!--MODAL ADD CARDS INIT-->
-<div  v-if="showAddCreditCardComponent"
-      @click="showAddCreditCardComponent = !showAddCreditCardComponent"
-      style="z-index: 1000;height: 100vh;"
-      class="w-100 position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity">
-   <div @click.stop class="w-lg-50 w-90 card border-none bg-white">
-       <add-payment-method-component
-               @payment-methods="handleDefaultPaymentMethod"
-               @default-payment-method="defaultPaymentMethods.data = $event"
+<div v-if="showAddCreditCardComponent"
+     @click="showAddCreditCardComponent = !showAddCreditCardComponent"
+     style="z-index: 1000;height: 100vh;"
+     class="w-100 position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity">
+    <div @click.stop class="w-lg-50 w-90 card border-none bg-white">
+        <add-payment-method-component
+                @payment-methods="handleDefaultPaymentMethod"
+                @default-payment-method="defaultPaymentMethods.data = $event"
 
-       ></add-payment-method-component>
-   </div>
+        ></add-payment-method-component>
+    </div>
 </div>
 <!--MODAL ADD CARDS FINISH-->
