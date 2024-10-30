@@ -18,24 +18,22 @@ class AuthenticatorController extends Controller
         ]);
     
         if (Auth::attempt($credentials)) {
-            // Regenerar la sesión para evitar fijación de sesión
+
             $request->session()->regenerate();
     
-            // Redirigir a la página de bienvenida después de iniciar sesión
             return redirect()->route('welcome');
         }
     
-        return response()->json(['status' => 'error', 'message' => 'Invalid credentials']);
+        return redirect()->back()->withErrors(['email' => 'Credencials incorrectes'])->withInput();
+    
     }
-
 
     public function showWelcome()
     {
-        // Verifica si el usuario está autenticado
         if (Auth::check()) {
-            return view('welcome'); // Muestra la vista de bienvenida si el usuario está autenticado
+            return view('welcome'); 
         } else {
-            return redirect()->route('login'); // Redirige a la página de login si no está autenticado
+            return redirect()->route('login');
         }
     }
     
@@ -73,15 +71,12 @@ class AuthenticatorController extends Controller
             $user = new User();
             $user->name = $data['username'];
             $user->email = $data['email'];
-            // Asegúrate de encriptar la contraseña antes de guardarla
             $user->password = bcrypt($data['password']);
             $user->save();
 
-            // Iniciar sesión después de registrarse
             Auth::login($user);
             
-            // Redirigir a la ruta de inicio
-            return redirect()->route('home')->with('success', 'Usuario registrado e iniciado sesión exitosamente');
+            return view('welcome'); 
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Hubo un problema al registrar el usuario: ' . $e->getMessage()])->withInput();
         }

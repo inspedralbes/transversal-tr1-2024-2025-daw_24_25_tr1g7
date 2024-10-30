@@ -16,6 +16,9 @@
     <style>
         .navbar {
             font-family: 'Roboto', 'Open Sans', 'Lato', sans-serif;
+            position: sticky;
+            z-index: 1000;
+            top: 0;
         }
 
         .navbar .nav-link, .navbar .navbar-brand {
@@ -41,16 +44,16 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('producte.index') }}">Productos</a>
+                            <a class="nav-link" href="{{ route('producte.index') }}">Productes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('category.index') }}">Categorías</a>
+                            <a class="nav-link" href="{{ route('category.index') }}">Categories</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('subcategory.index') }}">Subcategorías</a>
+                            <a class="nav-link" href="{{ route('subcategory.index') }}">Subcategories</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Cerrar Sesión</a>
+                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Tancar Sessió</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
