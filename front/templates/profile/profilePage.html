@@ -50,7 +50,11 @@
 
                     <p class="fs-5 fw-bold m-0 mb-2">Direcciones de envío</p>
 
-                    <div v-if="shippingAddresses.data.length > 0" v-for="(shippingAddress, index) in shippingAddresses.data" :key="index" class="card mb-2">
+                    <div v-if="shippingAddresses.data.length > 0"
+                         v-for="(shippingAddress, index) in shippingAddresses.data" :key="index"
+                         @click="updateDefault(shippingAddress)"
+                         style="cursor: pointer;"
+                         class="card mb-2">
                         <div class="card-body py-2 px-3">
                             <div class="mb-2"
                                  v-if="shippingAddress.default"
@@ -68,15 +72,15 @@
                                     <p class="m-0 fs-7">{{shippingAddress.floor}}-{{shippingAddress.door}}</p>
                                 </div>
                                 <div class="text-lg-end col-lg-6 col-12">
-                                    <button
+                                    <button @click="deleteShippingAddress(shippingAddress, index)"
                                             class="btn btn-sm me-2 border-1">Eliminar</button>
-                                    <button
+                                    <button @click="showOpenEditShippingAddress(shippingAddress, index)"
                                             class="btn btn-sm  border-1">Editar</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button @click="showModalAddShippingAddress = !showModalAddShippingAddress"
+                    <button @click="showOpenAddShippingAddress"
                             class="btn btn-secondary mb-2">Añade una dirección
                     </button>
                     <div v-if="shippingAddresses.data.length <= 0">
@@ -194,7 +198,8 @@
                 </div>
             </div>
 
-            <button @click="createShippingAddress" class="btn btn-primary">Añadir dirección</button>
+            <button v-if="typeModal === 'store'" @click="createShippingAddress" class="btn btn-primary">Añadir dirección</button>
+            <button v-if="typeModal === 'edit'" @click="updateShippingAddress" class="btn btn-primary">Actualizar dirección</button>
         </div>
     </div>
 </div>

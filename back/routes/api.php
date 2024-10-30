@@ -31,6 +31,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('addresses')->group(function () {
         Route::post('create-addresses', [DireccionesEnvioController::class, 'store'])->name('addresses.creatAddresses');
         Route::post('get-addresses', [DireccionesEnvioController::class, 'getAddresses'])->name('addresses.getAddresses');
+        Route::post('delete-address/{id}', [DireccionesEnvioController::class, 'delete'])->name('addresses.delete');
+        Route::post('update-address/{id}', [DireccionesEnvioController::class, 'update'])->name('addresses.update');
+        Route::post('update-default-address', [DireccionesEnvioController::class, 'updateDefault'])->name('addresses.updateDefault');
 
     });
     Route::prefix('stripe')->group(function () {

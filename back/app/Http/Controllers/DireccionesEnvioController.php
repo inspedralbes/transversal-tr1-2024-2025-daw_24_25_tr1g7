@@ -42,7 +42,7 @@ class DireccionesEnvioController extends Controller
         $direccion->save();
 
         return response()->json([
-            'status' => 'successful',
+            'status' => 'success',
             'message' => 'Address created successfully',
             'action' => 'Added a new shipping address for the user',
             'data' => $direccion  // Devuelve el objeto creado en JSON
@@ -56,7 +56,7 @@ class DireccionesEnvioController extends Controller
             $direccion->delete();
 
             return response()->json([
-                'status' => 'successful',
+                'status' => 'success',
                 'message' => 'Address deleted successfully',
                 'action' => 'Deleted the specified shipping address',
                 'data' => $direccion  // Devuelve el objeto eliminado en JSON
@@ -104,16 +104,60 @@ class DireccionesEnvioController extends Controller
         $direccion->city = $data['city'];
         $direccion->street = $data['street'];
         $direccion->number = $data['number'];
-        $direccion->floor = $data['floor'] ?? null;
-        $direccion->door = $data['door'] ?? null;
+        $direccion->floor = $request->floor ?? null;
+        $direccion->door = $request->door ?? null;
         $direccion->save();
 
         return response()->json([
-            'status' => 'successful',
+            'status' => 'success',
             'message' => 'Address updated successfully',
             'action' => 'Updated the details of an existing shipping address',
             'data' => $direccion  // Devuelve el objeto actualizado en JSON
         ]);
+    }
+
+    public function updateDefault(Request $request)
+    {
+        try {
+            $data = $request->validate([
+                'idUser' => 'required',
+                'id' => 'required'
+            ], [
+                'idUser.required' => 'The idUser field is required',
+                'id.required' => 'The id field is required'
+            ]);
+
+            // Buscar la dirección de envío actual por defecto y actualizarla
+            $oldDefaultShippingAddres = ShippingAddresses::where('idUser', $data['idUser'])
+                ->where('default', true)
+                ->first();
+
+            if ($oldDefaultShippingAddres) {
+                $oldDefaultShippingAddres->default = false;
+                $oldDefaultShippingAddres->save();
+            }
+
+            // Establecer la nueva dirección como predeterminada
+            $shippingAddress = ShippingAddresses::findOrFail($data['id']);
+            $shippingAddress->default = true;
+            $shippingAddress->save();
+
+            $shippingAddressess = ShippingAddresses::all();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Address default updated successfully',
+                'action' => 'Updated the default shipping address',
+                'shippingAddressess' => $shippingAddressess
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to update default address',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     // Listar direcciones

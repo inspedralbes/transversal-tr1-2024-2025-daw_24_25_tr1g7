@@ -236,6 +236,74 @@ export async function getShippingAddresses(token){
 
 }
 
+export async function deleteShippingAddress(token, id){
+    try {
+        const response = await fetch(URL + '/addresses/delete-address/'+id, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: null
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
+    }
+}
+
+export async function updateShippingAddress(token, id, shippingAddress){
+    try {
+        const response = await fetch(URL + '/addresses/update-address/'+id, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(shippingAddress)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
+    }
+}
+
+export async function updateDefaultShippingAddress(token, shippingAddress){
+    try {
+        const response = await fetch(URL + '/addresses/update-default-address', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(shippingAddress)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
+    }
+}
 export async function jsonProductes (){
     return [
         {
