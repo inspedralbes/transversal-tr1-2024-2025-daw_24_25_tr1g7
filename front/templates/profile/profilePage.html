@@ -23,11 +23,12 @@
                         <button class="m-0 fs-6 btn w-100 text-start">Historial de pedidos</button>
                     </div>
 
-                    <button class="m-0 fs-6 btn w-100 text-start fw-bold">
+                    <button @click="tab = 'cards'" class="m-0 fs-6 btn w-100 text-start fw-bold">
                         <div><i class="bi bi-credit-card-2-back-fill me-2"></i>Pago</div>
                     </button>
                     <div class="">
-                        <button class="m-0 fs-6 btn w-100 text-start">Tarjetas vinculadas</button>
+                        <button @click="tab = 'cards'" class="m-0 fs-6 btn w-100 text-start">Tarjetas vinculadas
+                        </button>
                     </div>
 
                     <button @click="logout" class="m-0 fs-6 btn btn-outline-error w-100 text-start">
@@ -73,9 +74,11 @@
                                 </div>
                                 <div class="text-lg-end col-lg-6 col-12">
                                     <button @click="deleteShippingAddress(shippingAddress, index)"
-                                            class="btn btn-sm me-2 border-1">Eliminar</button>
+                                            class="btn btn-sm me-2 border-1">Eliminar
+                                    </button>
                                     <button @click="showOpenEditShippingAddress(shippingAddress, index)"
-                                            class="btn btn-sm  border-1">Editar</button>
+                                            class="btn btn-sm  border-1">Editar
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -101,6 +104,56 @@
                     <h2 class="">Opiniones</h2>
                 </div>
                 <!--TAB: mis opiniones:finish-->
+
+
+                <!--TAB: mis tarjetas vinculadas:init-->
+                <div v-if="tab === 'cards'" class="">
+                    <h2 class="mb-4">Tarjetas vinculadas</h2>
+                    <div>
+                        <div v-if="paymentMethods.data.length <= 0">
+                            <p class="m-0 fs-7">No tienes tarjetas de credito vinculadas</p>
+                        </div>
+                        <div v-if="paymentMethods.data.length > 0">
+                            Tienes tarjetas de credito vinculadas
+
+                            <div
+                                    v-for="(creditCard, index) in paymentMethods.data"
+                                    :key="index"
+                                    @click="selectPaymentMethod(creditCard.id)"
+                                    class="card mb-2"
+                                    :class="{ 'bg-primary-opacity text-white': creditCard.id === (defaultPaymentMethods.data?.id || '') }"
+                                    style="cursor: pointer;"
+                            >
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-credit-card me-3 fs-4"></i>
+                                            <div>
+                                                <p class="m-0 fs-6 fw-bold">{{ creditCard.billing_details.name }}</p>
+                                                <p class="m-0 fs-7">{{ creditCard.card.exp_month }}/{{
+                                                    creditCard.card.exp_year }}</p>
+                                                <p class="m-0 fs-8">**** {{ creditCard.card.last4 }}</p>
+                                            </div>
+                                        </div>
+                                        <button
+                                                class="btn btn-sm p-0"
+                                                @click.stop="deletePaymentMethod(creditCard)"
+                                                aria-label="Delete"
+                                        >
+                                            <i class="bi bi-trash3"
+                                               :class="creditCard.id === (defaultPaymentMethods.data?.id || '') ? 'text-white' : 'text-primary'"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button @click="showAddCreditCardComponent = !showAddCreditCardComponent" class="btn btn-secondary">Añadir tarjeta de credito</button>
+
+
+                    </div>
+                </div>
+                <!--TAB: mis vinculadas:finish-->
             </div>
         </div>
     </div>
@@ -119,8 +172,9 @@
                     <p class="m-0 fs-4 fw-bold">Añadir Dirección</p>
                 </div>
                 <div>
-                    <button @click="showModalAddShippingAddress = !showModalAddShippingAddress" class="btn btn-sm"><i
-                            class="bi bi-x fs-5"></i></button>
+                    <button @click="showModalAddShippingAddress = !showModalAddShippingAddress" class="btn btn-sm">
+                        <i
+                                class="bi bi-x fs-5"></i></button>
                 </div>
             </div>
 
@@ -198,10 +252,28 @@
                 </div>
             </div>
 
-            <button v-if="typeModal === 'store'" @click="createShippingAddress" class="btn btn-primary">Añadir dirección</button>
-            <button v-if="typeModal === 'edit'" @click="updateShippingAddress" class="btn btn-primary">Actualizar dirección</button>
+            <button v-if="typeModal === 'store'" @click="createShippingAddress" class="btn btn-primary">Añadir
+                dirección
+            </button>
+            <button v-if="typeModal === 'edit'" @click="updateShippingAddress" class="btn btn-primary">Actualizar
+                dirección
+            </button>
         </div>
     </div>
 </div>
 <!--MODAL ADD SHIPPING ADDRESS-->
 
+<!--MODAL ADD CARDS INIT-->
+<div  v-if="showAddCreditCardComponent"
+      @click="showAddCreditCardComponent = !showAddCreditCardComponent"
+      style="z-index: 1000;height: 100vh;"
+      class="w-100 position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity">
+   <div @click.stop class="w-lg-50 w-90 card border-none bg-white">
+       <add-payment-method-component
+               @payment-methods="handleDefaultPaymentMethod"
+               @default-payment-method="defaultPaymentMethods.data = $event"
+
+       ></add-payment-method-component>
+   </div>
+</div>
+<!--MODAL ADD CARDS FINISH-->

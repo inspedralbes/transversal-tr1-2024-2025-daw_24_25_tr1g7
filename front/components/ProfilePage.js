@@ -5,18 +5,26 @@ import {
     updateDefaultShippingAddress,
     updateShippingAddress
 } from "../communicationManager/communicationManager.js";
+import {AddPaymentMethodComponent} from "./AddPaymentMethodComponent.js";
 
 export const ProfilePage = defineAsyncComponent(() =>
     Promise.all([
         fetch('./templates/profile/profilePage.html').then(response => response.text()),
         Promise.resolve(defineComponent({
             name: 'ProfilePage',
+            components:{
+                AddPaymentMethodComponent
+            },
             emits: ['updatePage'],
             setup(props, { emit }) {
 
                 const getToken = () =>{
                     return localStorage.getItem('token');
                 }
+
+                const paymentMethods = reactive({data: []})
+                const defaultPaymentMethods = reactive({data: []})
+                const showAddCreditCardComponent = ref(false);
 
                 const formDataShippingAdress = reactive({
                     'index': null,
@@ -51,6 +59,12 @@ export const ProfilePage = defineAsyncComponent(() =>
                 onMounted(async () => {
                     shippingAddresses.data = await comm.getShippingAddresses(getToken());
                     console.log(shippingAddresses)
+
+                    let response = await comm.retrievePaymentMethod(getToken());
+                    paymentMethods.data = response.paymentMethods;
+                    defaultPaymentMethods.data = response.defaultPaymentMethod;
+                    console.log(paymentMethods.data)
+                    console.log(defaultPaymentMethods.data)
 
                 });
 
@@ -126,6 +140,21 @@ export const ProfilePage = defineAsyncComponent(() =>
                     console.log(response);
                     shippingAddresses.data = response.shippingAddressess;
                 }
+
+
+
+                const selectPaymentMethod = async (paymentMethodId) =>{
+                    console.log(paymentMethodId)
+                    let response = await comm.setDefaultPaymentMethod(localStorage.getItem('token'), paymentMethodId);
+                    paymentMethods.data = response.paymentMethods;
+                    defaultPaymentMethods.data = response.defaultPaymentMethod;
+                    console.log(response)
+                }
+
+                const handleDefaultPaymentMethod = (data)=> {
+                    paymentMethods.data = data;
+                    showAddCreditCardComponent.value = false; // Cierra el modal
+                }
                 return {
                     tab,
                     logout,
@@ -138,7 +167,12 @@ export const ProfilePage = defineAsyncComponent(() =>
                     formDataShippingAdress,
                     showModalAddShippingAddress,
                     shippingAddresses,
-                    typeModal
+                    typeModal,
+                    paymentMethods,
+                    defaultPaymentMethods,
+                    selectPaymentMethod,
+                    showAddCreditCardComponent,
+                    handleDefaultPaymentMethod
                 };
             }
         }))
