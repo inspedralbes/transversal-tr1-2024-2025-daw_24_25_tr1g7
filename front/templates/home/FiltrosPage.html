@@ -1,91 +1,109 @@
 <link rel="stylesheet" href="style.css">
-<div class="container">
+<div id="app">
+  <div class="container">
     <div class="row">
-        <!-- Filtro Lateral -->
-        <div class="filter-column col-2">
-            <div><br>
-                <h5>Filtros populares</h5>
-                <label><input type="checkbox"> MSI</label><br>
-                <label><input type="checkbox"> Asus</label><br>
-                <label><input type="checkbox"> ATX</label><br>
-                <label><input type="checkbox"> Socket 1700</label><br>
-            </div>
-            <hr>
-            <div class="search-container">
-                <h5>Búsqueda de filtros</h5>
-                <div class="search-box">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="search-input" placeholder="Buscar ..." @input="filterProducts" />
-                        <label for="search-input">Buscar ...</label>
-                        <i class="fas fa-search"></i>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div>
-                <h5>Categorías</h5>
-                <label><input type="checkbox"> Procesadores</label><br>
-                <label><input type="checkbox"> Tarjetas Gráficas</label><br>
-                <label><input type="checkbox"> Placas Base</label><br>
-                <label><input type="checkbox"> Memoria RAM</label><br>
-            </div>
-            <hr>
-            <div>
-                <h5>Precio</h5>
-                <label><input type="range" min="0" max="1000" value="500"><br>0€ - 1000€</label>
-            </div>
-            <hr>
-            <div>
-                <h5>Marcas</h5>
-                <label><input type="checkbox"> HP</label><br>
-                <label><input type="checkbox"> Samsung</label><br>
-                <label><input type="checkbox"> Intel</label><br>
-                <label><input type="checkbox"> Apple</label><br>
-                <label><input type="checkbox"> Windows11</label><br>
-                <label><input type="checkbox"> Chromebook</label><br>
-                <label><input type="checkbox"> Corsair</label><br>
-                <label><input type="checkbox"> Asus</label><br>
-            </div>
-            <hr>
-            <div>
-                <h5>Entrega</h5>
-                <label><input type="checkbox"> Envio Gratis</label><br>
-                <label><input type="checkbox"> Recibelo mañana</label><br>
-            </div>
-            <hr>
-            <div>
-                <h5>Valoración</h5>
-                <label><input type="checkbox"> ⭐⭐⭐⭐ y más</label><br>
-                <label><input type="checkbox"> Todas las valoraciones</label><br>
-            </div>
-            <hr>
-        </div>
+      <!-- Filtro Lateral -->
+      <div class="filter-column col-2">
+        <div><br>
+            <h5>Filtros populares</h5>
+            <label><input type="checkbox" v-model="filters.popular.MSI"> MSI</label><br>
+            <label><input type="checkbox" v-model="filters.popular.Razer"> Razer</label><br>
+            <label><input type="checkbox" v-model="filters.popular.Micrófonos"> Micrófonos</label><br>
+            <label><input type="checkbox" v-model="filters.popular.Auriculares"> Auriculares</label><br>
+          </div>
+        <hr>
 
-        <!-- Productos -->
-            <div class="col-10">
-                <div class="row" v-if="products.data.length > 0"> 
-                    <div v-for="product in products.data" :key="product.id" class="col-4"> 
-                        <div class="card">
-                            <a :href="product.url" class="text-decoration-none" style="color: black;">
-                                <div class="card-body">
-                                    <div class="container-img">
-                                        <img :src="product.image_path" width="200px" alt="Imagen de {{ product.name }}" />
-                                    </div>
-                                    <div class="p-2">
-                                        <p class="m-0 mb-2">{{ product.name }}</p>
-                                        <p class="product-description">{{ product.description || 'Sin descripción disponible' }}</p> 
-                                        <p class="fs-4 fw-bold text-primary">{{ product.price }}€</p>
-                                        <p class="fs-7 fw-semibold">{{ product.valoraciones || 'No valoraciones' }} <i class="bi bi-star-fill text-warning"></i></p>                                        <p v-if="product.stock > 0" class="badge badge-success">En stock</p>
-                                        <p v-else class="badge badge-danger">No está en stock</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div v-else>
-                    <p>No hay productos disponibles.</p> 
-                </div>
+        <div class="search-container">
+            <h5>Búsqueda de filtros</h5>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="search-input" placeholder="Buscar..." v-model="searchQuery.text" @blur="validateSearchQuery">
+              <label for="search-input">Buscar...</label>
             </div>
+          </div>
+          
+        <hr>
+
+        <div>
+          <h5>Categorías</h5>
+          <label><input type="checkbox" v-model="filters.categories.Componentes"> Componentes</label><br>
+          <label><input type="checkbox" v-model="filters.categories.Portátiles"> Portátiles</label><br>
+          <label><input type="checkbox" v-model="filters.categories.Periféricos"> Periféricos</label><br>
+          <label><input type="checkbox" v-model="filters.categories.Monitores"> Monitores</label><br>
+          <label><input type="checkbox" v-model="filters.categories.Almacenamiento"> Almacenamiento</label><br>
+          <label><input type="checkbox" v-model="filters.categories.Accesorios"> Accesorios</label><br>
+          <label><input type="checkbox" v-model="filters.categories.Redes"> Redes</label><br>
+          <label><input type="checkbox" v-model="filters.categories.Smartphones"> Smartphones</label><br>
+          <label><input type="checkbox" v-model="filters.categories.Tablets"> Tablets</label><br>
+          <label><input type="checkbox" v-model="filters.categories.Consolas"> Consolas</label><br>
+          <label><input type="checkbox" v-model="filters.categories.Impresoras"> Impresoras</label><br>
+          <label><input type="checkbox" v-model="filters.categories.Software"> Software</label><br>
+
+        </div>
+        <hr>
+
+        <div>
+            <h5>Precio</h5>
+            <label>
+              <input type="range" min="0" max="1000" v-model="price.value">
+              <br>0€ - {{ price.value }}€
+            </label>
+          </div>
+        <hr>
+
+        <div>
+          <h5>Marcas</h5>
+          <label><input type="checkbox" v-model="filters.brands.HP"> HP</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Samsung"> Samsung</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Apple"> Apple</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Seagate"> Seagate</label><br>
+          <label><input type="checkbox" v-model="filters.brands.AMD"> AMD</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Dell"> Dell</label><br>
+          <label><input type="checkbox" v-model="filters.brands.NVIDIA"> NVIDIA</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Corsair"> Corsair</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Kingston"> Kingston</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Logitech"> Logitech</label><br>
+        </div>
+        <hr>
+
+        <div>
+          <h5>Valoración</h5>
+          <label><input type="checkbox"> ⭐⭐⭐⭐ y más</label><br>
+          <label><input type="checkbox"> Todas las valoraciones</label><br>
+        </div>
+        <hr>
+      </div>
+
+      <!-- Productos -->
+      <div class="col-10">
+        <div class="row" v-if="filteredProducts.length > 0">
+          <div v-for="product in filteredProducts" :key="product.id" class="col-4 mb-4">
+            <div class="card">
+              <a :href="product.url" class="text-decoration-none" style="color: black;">
+                <div class="card-body">
+                  <div class="container-img">
+                    <img :src="product.image_path" width="200px" alt="Imagen de {{ product.name }}" />
+                  </div>
+                  {{product.sub_category.category.name}}
+                  {{product.sub_category.name}}
+                  {{product.brand.name}}
+
+                  <div class="p-2">
+                    <p class="m-0 mb-2">{{ product.name }}</p>
+                    <p class="product-description">{{ product.description || 'Sin descripción disponible' }}</p>
+                    <p class="fs-4 fw-bold text-primary">{{ product.price }}€</p>
+                    <p class="fs-7 fw-semibold">{{ product.valoraciones || 'No valoraciones' }} <i class="bi bi-star-fill text-warning"></i></p>
+                    <p v-if="product.stock > 0" class="badge badge-success">En stock</p>
+                    <p v-else class="badge badge-danger">No está en stock</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div v-else>
+          <p>No hay productos disponibles.</p>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
