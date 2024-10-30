@@ -70,7 +70,9 @@
         </div>
     </div>
 </div>
+@endsection
 
+@section('page-script')
 <script>
     function toggleForms() {
         var loginForm = document.getElementById('loginForm');

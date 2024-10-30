@@ -36,7 +36,11 @@
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(to right, #16cfe5, #9716e5);">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{{ route('welcome') }}">Admin Panel</a>
+                <a class="navbar-brand d-flex align-items-center" href="{{ route('welcome') }}">
+                    <img src="https://i.postimg.cc/9QqqsCM3/file.png" alt="Admin Panel Logo" style="width: 30px; height: 30px; margin-right: 10px;">
+                    Admin Panel
+                </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
