@@ -7,14 +7,32 @@ use App\Models\Comanda;
 
 class ComandaController extends Controller
 {   
-    public function index(){
-        $comanda = Comanda::all();
 
-        return view("Comandes.comandes",compact("comanda"));
+    public function index(Request $request)
+{
+    $status = $request->input('status');
+    $id = $request->input('id');
+    $name = $request->input('name');
+    $price = $request->input('price');
 
-        $comandas = Comanda::with('user')->get();
-        return view('comanda', compact('comandas'));
-    }
+    $comanda = Comanda::when($status, function ($query, $status) {
+            return $query->where('status', $status);
+        })
+        ->when($id, function ($query, $id) {
+            return $query->where('id', $id);
+        })
+        ->when($name, function ($query, $name) {
+            return $query->whereHas('user', function ($q) use ($name) {
+                $q->where('name', 'like', '%' . $name . '%');
+            });
+        })
+        ->when($price, function ($query, $price) {
+            return $query->where('price', $price);
+        })
+        ->get();
+
+    return view('Comandes.comandes', compact('comanda'));
+}
 
      //Añadir una comanda
      public function store(Request $request){
