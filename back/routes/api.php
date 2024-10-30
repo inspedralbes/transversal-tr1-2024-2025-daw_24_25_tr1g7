@@ -12,6 +12,7 @@ use App\Http\Controllers\ProducteController;
 use App\Http\Controllers\ComandaController;
 use App\Http\Controllers\ArticuloComandaController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\DireccionesFacturacionController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -34,6 +35,14 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('delete-address/{id}', [DireccionesEnvioController::class, 'delete'])->name('addresses.delete');
         Route::post('update-address/{id}', [DireccionesEnvioController::class, 'update'])->name('addresses.update');
         Route::post('update-default-address', [DireccionesEnvioController::class, 'updateDefault'])->name('addresses.updateDefault');
+
+    });
+    Route::prefix('addresses')->group(function () {
+        Route::post('create-addresses-billing', [DireccionesFacturacionController::class, 'store'])->name('addresses.creatAddressesBilling');
+        Route::post('get-addresses-billing', [DireccionesFacturacionController::class, 'getAddresses'])->name('addresses.getAddressesBilling');
+        Route::post('delete-address-billing/{id}', [DireccionesFacturacionController::class, 'delete'])->name('addresses.deleteBilling');
+        Route::post('update-address-billing/{id}', [DireccionesFacturacionController::class, 'update'])->name('addresses.updateBilling');
+        Route::post('update-default-address-billing', [DireccionesFacturacionController::class, 'updateDefault'])->name('addresses.updateDefaultBilling');
 
     });
     Route::prefix('stripe')->group(function () {
