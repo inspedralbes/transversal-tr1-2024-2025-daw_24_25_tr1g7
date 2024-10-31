@@ -116,7 +116,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 6,
-                'idSubCategory' => 10, // Ratones
+                'idSubCategory' => 11, // Ratones
                 'name' => 'Logitech G502',
                 'description' => 'Ratón gaming ergonómico con iluminación RGB.',
                 'stock' => 100,

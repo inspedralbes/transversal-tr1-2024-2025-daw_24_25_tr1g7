@@ -199,6 +199,16 @@ export async function createShippingAddress(token, dataShippingAddress){
             body: JSON.stringify(dataShippingAddress)
         });
 
+    }catch (error) {
+        console.error('Error:', error);
+        throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
+    }
+
+}
+export async function getProducts() {
+    try {
+        const response = await fetch(URL + '/get-products');
+
         if (!response.ok) {
             throw new Error(`Error: ${response.status} - ${response.statusText}`);
         }
@@ -421,6 +431,8 @@ export async function updateDefaultBillingAddress(token, billingAddress){
         throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
     }
 }
+     
+
 export async function jsonProductes (){
     return [
         {

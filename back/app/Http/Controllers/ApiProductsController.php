@@ -48,6 +48,11 @@ class ApiProductsController extends Controller
         return $categories;
     }
 
+    public function getProducts(){
+        $products = Producte::with(['brand', 'sub_category.category',])
+            ->get();
+            return $products;
+    }
 //    public function checkLogin($id)
 //    {
 //        try {

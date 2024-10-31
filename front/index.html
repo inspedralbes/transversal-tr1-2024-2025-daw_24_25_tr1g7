@@ -48,6 +48,10 @@
         <div v-if="page === 'profile'">
             <profile-page @update-page="changePage"></profile-page>
         </div>
+        
+        <div v-if="page === 'filtro'">
+            <filtros-page  @update-page="changePage"></filtros-page>
+        </div>
 
         <fotter-component></fotter-component>
 
@@ -68,6 +72,7 @@
     import { FotterComponent} from "./components/FotterComponent.js";
     import { CartPage} from "./components/CartPage.js";
     import { ProfilePage} from "./components/ProfilePage.js";
+    import { FiltrosPage} from "./components/FiltrosPage.js";
 
     // Crear la aplicación y registrar el componente
     createApp({
@@ -80,10 +85,11 @@
             TestComponent,
             FotterComponent,
             CartPage,
-            ProfilePage
+            ProfilePage,
+            FiltrosPage
         },
         setup(){
-            let page = ref(localStorage.getItem('actualPage') || 'home');
+            let page = ref(localStorage.getItem('actualPage') || 'filtro');
             let productsCart = reactive({
                 data: JSON.parse(localStorage.getItem('productsCart')) || []
             });

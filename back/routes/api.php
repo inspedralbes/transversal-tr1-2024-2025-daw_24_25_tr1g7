@@ -28,6 +28,9 @@ Route::prefix('home')->group(function () {
     Route::get('get-menu-categories', [ApiProductsController::class, 'menuCategories'])->name('home.menuCategories');
 });
 
+Route::get('/get-products', [ApiProductsController::class, 'getProducts'])->name('getProducts');
+
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('addresses')->group(function () {
         Route::post('create-addresses', [DireccionesEnvioController::class, 'store'])->name('addresses.creatAddresses');
