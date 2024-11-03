@@ -63,8 +63,8 @@
     <div class="section-sm pt-4 pb-5">
         <h2 class="text-white mb-4 fs-3">Categorías en tendencia</h2>
         <div class="row w-100">
-            <div v-for="(category, index) in productes.data.categoryTrend" :key="index" class="col-lg-2 col-12">
-                <a class="text-decoration-none" href="link-a-categorias" style="color: black;">
+            <div v-for="(category, index) in productes.data.categoryTrend" :key="index" @click="goToFilter(category.name)" style="cursor: pointer" class="col-lg-2 col-12">
+                <div class="text-decoration-none" style="color: black;">
                     <div class="card w-100">
                         <div class="card-body">
                             <div class="container-img w-100" style="height: 280px;">
@@ -73,7 +73,7 @@
                             <p class="text-center fs-3 fw-bold m-0">{{category.name}}</p>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
 
         </div>

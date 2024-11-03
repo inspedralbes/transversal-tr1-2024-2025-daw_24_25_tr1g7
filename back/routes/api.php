@@ -55,6 +55,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('set-default-payment-method', [StripeController::class, 'setDefaultPaymentMethod'])->name('stripe.setDefaultPaymentMethod');
         Route::post('purchase', [StripeController::class, 'purchase'])->name('stripe.purchase');
     });
+
+    Route::get('/test-auth', function () {
+        return response()->json(['message' => 'Si ves esto, estás autenticado!', 'user' => auth()->user(), 'user2' => \Illuminate\Support\Facades\Auth::user()]);
+    });
 });
 
 /*//Route::post('/categorystore', [CategoriaController::class,'store'])->name("category.store");

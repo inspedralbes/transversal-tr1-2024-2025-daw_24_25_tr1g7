@@ -18,11 +18,14 @@ export async function insertUser(dataUser) {
 }
 
 export async function authenticate(dataUser) {
+
     return fetch(URL+'/login', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            // 'Accept': 'application/json'
         },
+        // credentials: 'include', // Incluye las cookies automáticamente
         body: JSON.stringify(dataUser)
     })
         .then(response => response.json())
@@ -194,11 +197,18 @@ export async function createShippingAddress(token, dataShippingAddress){
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                // 'Accept': 'application/json'
                 'Authorization': `Bearer ${token}`
             },
+            // credentials: 'include', // Incluye las cookies automáticamente
             body: JSON.stringify(dataShippingAddress)
         });
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
 
+        const data = await response.json();
+        return data;
     }catch (error) {
         console.error('Error:', error);
         throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
@@ -431,7 +441,26 @@ export async function updateDefaultBillingAddress(token, billingAddress){
         throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
     }
 }
-     
+
+export async function testAuth(token) {
+    try {
+        const response = await fetch(URL + '/test-auth', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            // credentials: 'include'
+        });
+
+        const data = await response.json();
+        console.log('Test auth result:', data)
+        return data;
+    } catch (error) {
+        console.error('Test auth error:', error);
+    }
+}
 
 export async function jsonProductes (){
     return [

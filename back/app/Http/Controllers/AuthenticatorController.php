@@ -22,10 +22,11 @@ class AuthenticatorController extends Controller
             $user = Auth::user();
 
             $token = $user->createToken('auth_token')->plainTextToken;
+            $cookie = cookie('auth_token', $token, 60 * 24, null, null, true, true);
 //            session(['auth_token' => $token]);
 //            return redirect('/category')->with('success', 'Usuario iniciado sesión exitosamente');
 
-            return response()->json(['status' => 'success', 'message' => 'Credentials validated', 'token' => $token, 'user' => $user]);
+            return response()->json(['status' => 'success', 'message' => 'Credentials validated', 'token' => $token, 'user' => $user])->cookie($cookie);
         }
 
         return response()->json(['status' => 'error', 'message' => 'Invalid credentials']);
@@ -61,11 +62,13 @@ class AuthenticatorController extends Controller
 
             $token = $user->createToken('auth_token')->plainTextToken;
             Auth::login($user);
+            $cookie = cookie('auth_token', $token, 60 * 24, null, null, true, true);
+
 //            session(['auth_token' => $token]);
 //            Mail::to($user->email)->send(new RegisterNewUserMail($user));
 
 //            return redirect('/category')->with('success', 'Usuario registrado e iniciado sesión exitosamente');
-            return response()->json(['status' => 'success', 'message' => 'User created', 'token' => $token, 'user' => $user]);
+            return response()->json(['status' => 'success', 'message' => 'User created', 'token' => $token, 'user' => $user])->cookie($cookie);
 
         } catch (\Exception $e) {
 //            return back()->withErrors(['error' => 'Hubo un problema al registrar el usuario: ' . $e->getMessage()])->withInput();

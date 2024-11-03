@@ -1,19 +1,19 @@
 <div class="d-lg-block d-none">
-    <nav class="bg-custom-gradient navbar shadow-lg">
+    <nav class="bg-white border-bottom navbar">
         <div class="d-flex w-100 align-items-center" style="height: 100%">
             <div class="w-100 mx-4 d-flex align-items-center" style="height: 100%">
                 <div class="row w-100" style="height: 80%">
-                    <div class="col-lg-1" style=" height: 70px">
+                    <div class="col-lg-1" style=" height: 65px">
                         <div class="container-img w-100" style="height: 100%">
-                            <img @click="goToHome" class="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_J64H9TeNc_w3Oo8fZ9vWpn8jLVG9bO9toQ&s"
+                            <img @click="goToHome" class="img-fluid" src="./img/logo.png"
                                  style="cursor: pointer;"/>
                         </div>
                     </div>
                     <div class="col-lg-11 d-flex align-items-center">
                         <div class="d-flex justify-content-between w-100" style="">
                             <button @click="categoryMenu = !categoryMenu" class="btn">
-                                <i class="bi bi-list text-white me-2 "></i>
-                                <span class="text-white ">Categorias</span>
+                                <i class="bi bi-list  me-2 fs-5"></i>
+                                <span class=" fs-5">Categorias</span>
                             </button>
                             <div style="width: 70%;">
                                 <div class="form-floating">
@@ -23,15 +23,15 @@
                                 </div>
                             </div>
 
-                            <button class="btn text-white" @click="goToLogin" v-if="!isLogin">
+                            <button class="btn " @click="goToLogin" v-if="!isLogin">
                                 <i class="bi bi-person-fill"></i> Mi Cuenta
                             </button>
-                            <button class="btn text-white" @click="profileMenu = !profileMenu" v-if="isLogin">
+                            <button class="btn " @click="profileMenu = !profileMenu" v-if="isLogin">
                                 {{userData.email}}
                             </button>
-                            <button @click="categoryCarrito = !categoryCarrito" class="btn text-white"><i
+                            <button @click="categoryCarrito = !categoryCarrito" class="btn "><i
                                     class="bi bi-cart"></i>
-                                <sup class="bg-danger py-1 px-2 m-0 rounded-full">{{ productsCart.reduce((total,
+                                <sup class="bg-danger text-white py-1 px-2 m-0 rounded-full">{{ productsCart.reduce((total,
                                     product) => total + (product.num_product), 0) }}</sup>
                             </button>
                         </div>
@@ -52,7 +52,7 @@
             </div>
             <div class="h-100 d-grid gap-2" style="max-height:93vh;">
                 <div :key="index" class="text-decoration-none text-black fs-5 d-flex justify-content-between mb-3 link-primary" style="cursor: pointer"
-                     v-for="(category, index) in menuCategories.data">
+                     v-for="(category, index) in menuCategories.data" @click="goToFilter(category.name)">
                     <div>
                         <i class="bi bi-cpu"></i> {{category.name}}
                     </div>
@@ -185,7 +185,7 @@
                     </button>
                 </div>
                 <div class="container-img my-2 justify-content-start" style="height: 78%;">
-                    <img @click="goToHome" class="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_J64H9TeNc_w3Oo8fZ9vWpn8jLVG9bO9toQ&s"
+                    <img @click="goToHome" class="img-fluid" src="./img/logo.png"
                          style="cursor: pointer;"/>
                 </div>
             </div>

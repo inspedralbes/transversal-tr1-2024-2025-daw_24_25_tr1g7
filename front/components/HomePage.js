@@ -7,7 +7,7 @@ export const HomePage = defineAsyncComponent(() =>
         fetch('./templates/home/homePage.html').then(response => response.text()),
         Promise.resolve(defineComponent({
             name: 'HomePage',
-            emits: ['addProductToCart', 'showProduct'],
+            emits: ['addProductToCart', 'showProduct', 'updatePage'],
             setup(props, { emit }) {
                 const productes = reactive({ data: [] });
 
@@ -25,10 +25,15 @@ export const HomePage = defineAsyncComponent(() =>
                     emit('addProductToCart', producte);
                 };
 
+                const goToFilter = (filterName) => {
+                    emit('updatePage', 'filtro');
+                }
+
                 return {
                     productes,
                     addToCart, // Asegúrate de retornar ambas funciones
-                    showToProduct
+                    showToProduct,
+                    goToFilter
                 };
             }
         }))

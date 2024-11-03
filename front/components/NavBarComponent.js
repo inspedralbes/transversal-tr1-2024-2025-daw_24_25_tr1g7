@@ -44,6 +44,10 @@ export const NavBarComponent = defineAsyncComponent(() =>
                     emit('updatePage', 'profile');
                 };
 
+                const goToFilter = (filterName) => {
+                    emit('updatePage', 'filtro');
+                }
+
                 onMounted(async () => {
                     menuCategories.data = await comm.getMenuCategories();
                 });
@@ -54,13 +58,14 @@ export const NavBarComponent = defineAsyncComponent(() =>
                     goToHome,
                     goToLogin,
                     goToProfilePage,
+                    goToFilter,
                     categoryMenu,
                     categoryCarrito,
                     profileMenu,
                     productsCart: props.productsCart,
                     isLogin,
                     userData,
-                    menuCategories
+                    menuCategories,
                 };
             }
         }))

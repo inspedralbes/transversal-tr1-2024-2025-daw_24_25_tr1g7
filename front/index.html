@@ -34,7 +34,7 @@
         <nav-bar-component v-bind:products-cart="productsCart.data" @update-page="changePage"></nav-bar-component>
         <div style="margin-top: 90px"></div>
         <div v-if="page === 'home'">
-            <home-page @add-product-to-cart="addProductToCart"  @show-product="showProduct"></home-page>
+            <home-page @add-product-to-cart="addProductToCart"  @show-product="showProduct" @update-page="changePage"></home-page>
         </div>
 
         <div v-if="page === 'producte'">
@@ -50,7 +50,7 @@
         </div>
         
         <div v-if="page === 'filtro'">
-            <filtros-page  @update-page="changePage"></filtros-page>
+            <filtros-page @add-product-to-cart="addProductToCart"  @show-product="showProduct" @update-page="changePage"></filtros-page>
         </div>
 
         <fotter-component></fotter-component>

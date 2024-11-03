@@ -7,7 +7,7 @@ export const FiltrosPage = defineAsyncComponent(() =>
         Promise.resolve(defineComponent({
             name: 'FiltrosPage',
 
-            emits: ['updatePage'],
+            emits: ['updatePage', 'addProductToCart','showProduct'],
             setup(props, { emit }) {
                 const goToRegister = () => {
                     emit('updatePage', 'register');
@@ -115,23 +115,20 @@ export const FiltrosPage = defineAsyncComponent(() =>
                     return result;
                 });
 
-                const fetchProducts = async (query = '') => {
-                    try {
-                        let response = await comm.getProducts(query);
-                        console.log('Respuesta de la API:', response);
-                        products.data = response;
-                    } catch (error) {
-                        console.error('Error al obtener productos:', error);
-                    }
+                const addToCart = (producte) => {
+                    console.log("Añadido al carrito:", producte);
+                    emit('addProductToCart', producte);
                 };
 
-                // Acción de búsqueda
-                const performSearch = () => {
-                    fetchProducts(searchQuery.text);
+                const showToProduct = (producte) => {
+                    console.log("Producto seleccionado:", producte);
+                    emit('showProduct', producte);
                 };
 
-                onMounted(() => {
-                    fetchProducts();
+                onMounted(async() => {
+                    let response = await comm.getProducts();
+                    console.log('Respuesta de la API:', response);
+                    products.data = response;
                 });
 
                 return {
@@ -140,8 +137,9 @@ export const FiltrosPage = defineAsyncComponent(() =>
                     searchQuery,
                     price,
                     filteredProducts,
-                    performSearch,
-                    filters
+                    filters,
+                    addToCart,
+                    showToProduct
                 };
             }
         }))

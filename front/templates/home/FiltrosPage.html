@@ -76,9 +76,9 @@
       <!-- Productos -->
       <div class="col-10">
         <div class="row" v-if="filteredProducts.length > 0">
-          <div v-for="product in filteredProducts" :key="product.id" class="col-4 mb-4">
+          <div v-for="product in filteredProducts" :key="product.id" @click="showToProduct(product)" style="cursor: pointer" class="col-4 mb-4">
             <div class="card">
-              <a :href="product.url" class="text-decoration-none" style="color: black;">
+              <div class="text-decoration-none" style="color: black;">
                 <div class="card-body">
                   <div class="container-img">
                     <img :src="product.image_path" width="200px" alt="Imagen de {{ product.name }}" />
@@ -94,9 +94,12 @@
                     <p class="fs-7 fw-semibold">{{ product.valoraciones || 'No valoraciones' }} <i class="bi bi-star-fill text-warning"></i></p>
                     <p v-if="product.stock > 0" class="badge badge-success">En stock</p>
                     <p v-else class="badge badge-danger">No está en stock</p>
+                    <button @click.stop="addToCart(product)" class="btn btn-primary btn-sm ms-2">
+                                                          <i class="bi bi-cart-fill"></i>
+                                                      </button>
                   </div>
                 </div>
-              </a>
+              </div>
             </div>
           </div>
         </div>

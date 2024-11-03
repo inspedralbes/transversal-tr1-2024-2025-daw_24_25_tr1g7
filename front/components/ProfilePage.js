@@ -66,6 +66,9 @@ export const ProfilePage = defineAsyncComponent(() =>
                     console.log(paymentMethods.data)
                     console.log(defaultPaymentMethods.data)
 
+                    let testauth = await comm.testAuth(getToken());
+                    console.log("testAuth")
+                    console.log(testauth)
                 });
 
                 const createShippingAddress = async () => {
