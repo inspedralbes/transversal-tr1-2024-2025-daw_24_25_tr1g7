@@ -127,7 +127,6 @@ export const FiltrosPage = defineAsyncComponent(() =>
 
                 onMounted(async() => {
                     let response = await comm.getProducts();
-                    console.log('Respuesta de la API:', response);
                     products.data = response;
                 });
 
