@@ -351,7 +351,7 @@ export async function createBillingAddress(token, dataBillingAddress){
 
 export async function getBillingAddresses(token){
     try {
-        const response = await fetch(URL + '/addresses/get-addresses-billing', {
+        const response = await fetch(URL + '/billing-addresses/get-addresses-billing', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -375,7 +375,7 @@ export async function getBillingAddresses(token){
 
 export async function deleteBillingAddress(token, id){
     try {
-        const response = await fetch(URL + '/addresses/delete-address-billing/'+id, {
+        const response = await fetch(URL + '/billing-addresses/delete-address-billing/'+id, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -398,7 +398,7 @@ export async function deleteBillingAddress(token, id){
 
 export async function updateBillingAddress(token, id, billingAddress){
     try {
-        const response = await fetch(URL + '/addresses/update-address-billing/'+id, {
+        const response = await fetch(URL + '/billing-addresses/update-address-billing/'+id, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -421,7 +421,7 @@ export async function updateBillingAddress(token, id, billingAddress){
 
 export async function updateDefaultBillingAddress(token, billingAddress){
     try {
-        const response = await fetch(URL + '/addresses/update-default-address-billing', {
+        const response = await fetch(URL + '/billing-addresses/update-default-address-billing', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

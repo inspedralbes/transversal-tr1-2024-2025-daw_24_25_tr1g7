@@ -37,10 +37,31 @@ export const ProfilePage = defineAsyncComponent(() =>
                     'number':'',
                     'floor':'',
                     'door':''
-                })
+                });
+                const formDataBillingAdress = reactive({
+                    'index': null,
+                    'id': null,
+                    'idUser': JSON.parse(localStorage.getItem('user')).id,
+                    'invoiceId':null,
+                    'name':'',
+                    'lastName':'',
+                    'companyName':'',
+                    'phoneNumber':null,
+                    'dniNie':'',
+                    'cif':'',
+                    'zip_code': null,
+                    'population': '',
+                    'city': '',
+                    'street':'',
+                    'number':'',
+                    'floor':'',
+                    'door':''
+                });
                 const tab = ref('myData');
                 const showModalAddShippingAddress = ref(false)
+                const showModalAddBillingAddress = ref(false)
                 const typeModal = ref('')
+                const typeModalBilling = ref('')
                 const logout = async() => {
                     let response = await comm.logout();
                     console.log(response)
@@ -55,10 +76,14 @@ export const ProfilePage = defineAsyncComponent(() =>
                     emit('updatePage', 'home');
                 };
 
-                const shippingAddresses = reactive({data:[]})
+                const shippingAddresses = reactive({data:[]});
+                const billingAddressess = reactive({data:[]});
+
                 onMounted(async () => {
                     shippingAddresses.data = await comm.getShippingAddresses(getToken());
-                    console.log(shippingAddresses)
+                    console.log(shippingAddresses);
+                    billingAddressess.data = await comm.getBillingAddresses(getToken());
+                    console.log(billingAddressess);
 
                     let response = await comm.retrievePaymentMethod(getToken());
                     paymentMethods.data = response.paymentMethods;
@@ -138,10 +163,83 @@ export const ProfilePage = defineAsyncComponent(() =>
                     }
                 };
 
-                const updateDefault = async(shippingAddress)=>{
+                const updateDefaultShippingAddress = async(shippingAddress)=>{
                     let response = await comm.updateDefaultShippingAddress(getToken(), shippingAddress);
                     console.log(response);
                     shippingAddresses.data = response.shippingAddressess;
+                }
+
+                const createBillingAddress = async () => {
+                    try {
+                        let response = await comm.createBillingAddress(getToken(), formDataShippingAdress);
+                        console.log(response);
+                        if (response && response.data) {
+                            billingAddressess.data.push(response.data);
+                            showModalAddBillingAddress.value = false; // Close modal after success
+                        }
+                    } catch (error) {
+                        console.error('Error creating shipping address:', error);
+                    }
+                }
+
+                const deleteBillingAddress = async (billingAddress, index) => {
+                    try {
+                        const response = await comm.deleteBillingAddress(getToken(), billingAddress.id);
+                        console.log(response);
+                        if (response.status === 'success') { // Assuming your API returns a status
+                            billingAddressess.data.splice(index, 1);
+                        }
+                    } catch (error) {
+                        console.error('Error deleting shipping address:', error);
+                    }
+                }
+
+                const showOpenEditBillingAddress = (billingAddress, index) =>{
+                    console.log(billingAddress)
+
+                    formDataBillingAdress.index = index;
+                    formDataBillingAdress.id = billingAddress.id;
+                    formDataBillingAdress.zip_code = billingAddress.zip_code;
+                    formDataBillingAdress.population = billingAddress.population;
+                    formDataBillingAdress.city = billingAddress.city;
+                    formDataBillingAdress.street = billingAddress.street;
+                    formDataBillingAdress.number = billingAddress.number;
+                    formDataBillingAdress.floor = billingAddress.floor;
+                    formDataBillingAdress.door = billingAddress.door;
+
+                    showModalAddBillingAddress.value = !showModalAddBillingAddress.value;
+                    typeModal.value = 'edit';
+                }
+
+                const showOpenAddBillingAddress = () => {
+                    Object.keys(formDataBillingAdress).forEach(key => {
+                        if (key === 'idUser') return;
+                        formDataBillingAdress[key] = key === 'index' || key === 'id' || key === 'zip_code' ? null : '';
+                    });
+
+                    showModalAddBillingAddress.value = !showModalAddBillingAddress.value;
+                    typeModal.value = 'store';
+                }
+
+                const updateBillingAddress = async() => {
+                    try {
+                        let response = await comm.updateBillingAddress(getToken(), formDataBillingAdress.id, formDataBillingAdress);
+                        console.log(response);
+
+                        if (response && response.data && response.status === 'success') {
+                            billingAddressess.data[formDataBillingAdress.index] = response.data;
+                            showModalAddBillingAddress.value = false; // Cerrar modal
+                        }
+                    } catch (error) {
+                        console.error('Error al actualizar la dirección:', error);
+                        alert('Error al actualizar la dirección');
+                    }
+                };
+
+                const updateDefaultBillingAddress = async(billingAddress)=>{
+                    let response = await comm.updateDefaultBillingAddress(getToken(), billingAddress);
+                    console.log(response);
+                    billingAddressess.data = response.billingAddressess;
                 }
 
 
@@ -166,11 +264,20 @@ export const ProfilePage = defineAsyncComponent(() =>
                     showOpenEditShippingAddress,
                     showOpenAddShippingAddress,
                     updateShippingAddress,
-                    updateDefault,
+                    updateDefaultShippingAddress,
+                    createBillingAddress,
+                    deleteBillingAddress,
+                    showOpenEditBillingAddress,
+                    showOpenAddBillingAddress,
+                    updateBillingAddress,
+                    updateDefaultBillingAddress,
                     formDataShippingAdress,
+                    formDataBillingAdress,
                     showModalAddShippingAddress,
+                    showModalAddBillingAddress,
                     shippingAddresses,
                     typeModal,
+                    typeModalBilling,
                     paymentMethods,
                     defaultPaymentMethods,
                     selectPaymentMethod,

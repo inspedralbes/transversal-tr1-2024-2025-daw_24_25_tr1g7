@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BillingAddress;
 use Illuminate\Http\Request;
-use App\Models\BillingAddresses;
 use Illuminate\Support\Facades\Auth;
 
 class DireccionesFacturacionController extends Controller
@@ -29,8 +29,8 @@ class DireccionesFacturacionController extends Controller
             'number.required' => 'The number field is required'
         ]);
 
-        $checkShippingAddressess = BillingAddresses::where('idUser', $data['idUser'])->get();
-        $direccion = new BillingAddresses();
+        $checkShippingAddressess = BillingAddress::where('idUser', $data['idUser'])->get();
+        $direccion = new BillingAddress();
         if($checkShippingAddressess->isEmpty()) $direccion->default = true;
 
         $direccion->idUser = $data['idUser'];
@@ -60,7 +60,7 @@ class DireccionesFacturacionController extends Controller
     // Eliminar dirección
     public function delete($id) {
         try {
-            $direccion = BillingAddresses::findOrFail($id);
+            $direccion = BillingAddress::findOrFail($id);
             $direccion->delete();
 
             return response()->json([
@@ -107,7 +107,7 @@ class DireccionesFacturacionController extends Controller
             'number.required' => 'The number field is required'
         ]);
 
-        $direccion = BillingAddresses::findOrFail($id);
+        $direccion = BillingAddress::findOrFail($id);
         $direccion->idUser = $data['idUser'];
         $direccion->name = $data['name'];
         $direccion->last_name = $data['last_name'];
@@ -144,7 +144,7 @@ class DireccionesFacturacionController extends Controller
             ]);
 
             // Buscar la dirección de envío actual por defecto y actualizarla
-            $oldDefaultBillingAddresses = BillingAddresses::where('idUser', $data['idUser'])
+            $oldDefaultBillingAddresses = BillingAddress::where('idUser', $data['idUser'])
                 ->where('default', true)
                 ->first();
 
@@ -154,11 +154,11 @@ class DireccionesFacturacionController extends Controller
             }
 
             // Establecer la nueva dirección como predeterminada
-            $billingAddresses = BillingAddresses::findOrFail($data['id']);
+            $billingAddresses = BillingAddress::findOrFail($data['id']);
             $billingAddresses->default = true;
             $billingAddresses->save();
 
-            $billingAddresses = BillingAddresses::all();
+            $billingAddresses = BillingAddress::all();
 
             return response()->json([
                 'status' => 'success',
@@ -178,7 +178,7 @@ class DireccionesFacturacionController extends Controller
 
     // Listar direcciones
     public function list() {
-        $direcciones = BillingAddresses::all();
+        $direcciones = BillingAddress::all();
 
         return response()->json([
             'status' => 'successful',
@@ -188,9 +188,9 @@ class DireccionesFacturacionController extends Controller
         ]);
     }
 
-    public function getAddressesBulling()
+    public function getAddresses()
     {
-        $billingAddresses = BillingAddresses::where('idUser', Auth::user()->id)->get();
+        $billingAddresses = BillingAddress::where('idUser', Auth::user()->id)->get();
 
         return $billingAddresses;
     }
