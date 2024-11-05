@@ -2596,7 +2596,7 @@ p {
 .form-select:focus {
     border-color: #16cfe5;
     outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25);
+    box-shadow: 0 0 0 0.25rem rgb(22, 207, 229, 0.3);
 }
 
 /* Estilos para pantallas más grandes (desktop: pantallas de 768px en adelante) */
