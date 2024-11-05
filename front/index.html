@@ -89,7 +89,7 @@
             FiltrosPage
         },
         setup(){
-            let page = ref(localStorage.getItem('actualPage') || 'filtro');
+            let page = ref(localStorage.getItem('actualPage') || 'home');
             let productsCart = reactive({
                 data: JSON.parse(localStorage.getItem('productsCart')) || []
             });
