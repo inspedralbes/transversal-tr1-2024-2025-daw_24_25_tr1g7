@@ -12,7 +12,6 @@ class DireccionesFacturacionController extends Controller
     public function store(Request $request) {
         $data = $request->validate([
             'idUser' => 'required',
-            'phone_number' => 'required',
             'zip_code' => 'required',
             'population' => 'required',
             'city' => 'required',
@@ -21,7 +20,6 @@ class DireccionesFacturacionController extends Controller
         ],
         [
             'idUser.required' => 'The idUser field is required',
-            'phone_number.required' => 'The idUser field is required',
             'zip_code.required' => 'The zip_code field is required',
             'population.required' => 'The population field is required',
             'city.required' => 'The city field is required',
@@ -34,12 +32,12 @@ class DireccionesFacturacionController extends Controller
         if($checkShippingAddressess->isEmpty()) $direccion->default = true;
 
         $direccion->idUser = $data['idUser'];
-        $direccion->name = $data['name'];
-        $direccion->last_name = $data['last_name'];
-        $direccion->company = $data['company'];
-        $direccion->phone_number = $data['phone_number'];
-        $direccion->dni_nie = $data['dni_nie'];
-        $direccion->cif = $data['cif'];
+        $direccion->name = $request->name ?? null;
+        $direccion->last_name = $request->lastName ?? null;
+        $direccion->company = $request->companyName ?? null;
+        $direccion->phone_number = $request->phoneNumber ?? null;
+        $direccion->dni_nie = $request->dniNie ?? null;
+        $direccion->cif = $request->cif ?? null;
         $direccion->zip_code = $data['zip_code'];
         $direccion->population = $data['population'];
         $direccion->city = $data['city'];
