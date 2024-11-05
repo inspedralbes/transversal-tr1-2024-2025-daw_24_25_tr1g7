@@ -19,7 +19,8 @@
                     </button>
                     <div class="">
                         <button @click="tab = 'myOrders'" class="m-0 fs-6 btn w-100 text-start">Mis Pedidos</button>
-                        <button @click="tab = 'myReturns'" class="m-0 fs-6 btn w-100 text-start">Mis Devoluciones</button>
+                        <button @click="tab = 'myReturns'" class="m-0 fs-6 btn w-100 text-start">Mis Devoluciones
+                        </button>
                         <button @click="tab = 'myInvoices'" class="m-0 fs-6 btn w-100 text-start">Mis Facturas</button>
                     </div>
 
@@ -40,31 +41,134 @@
             <div class="col-lg-9">
                 <!--                taps-->
                 <!--TAB: mis datos:init-->
-                <div v-if="tab === 'myData'" class="">
+                <div class="" v-if="tab === 'myData'">
                     <h2 class="">Mis Datos</h2>
                 </div>
                 <!--TAB: mis datos:finish-->
 
                 <!--TAB: mis pedidos:init-->
-                <div v-if="tab === 'myData'" class="">
+                <div class="" v-if="tab === 'myOrders'">
                     <h2 class="mb-4">Mis Pedidos</h2>
 
-                    <div></div>
+                    <div class="d-flex mb-5">
+                        <div class="me-2">
+                            <select class="form-select" style="height: 55px">
+                                <option selected>Selecciona una opció</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                            </select>
+                        </div>
+                        <div class="me-2">
+                            <select class="form-select" style="height: 55px">
+                                <option selected>Selecciona un mes</option>
+                                <option value="1">Enero</option>
+                                <option value="2">Febrero</option>
+                                <option value="3">Marzo</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Mayo</option>
+                                <option value="6">Junio</option>
+                                <option value="7">Julio</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Septiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Diciembre</option>
+                            </select>
+                        </div>
+                        <div class="me-2">
+                            <div class="row">
+                                <div class="col-lg-12 col-12">
+                                    <div class="form-floating ">
+                                        <input class="form-control w-lg-96" id="buscar" placeholder="Buscar" style=""
+                                               type="text">
+                                        <label for="buscar">City</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="border-bottom row pb-3">
+                                <div class="col-lg-12 col-12 d-flex justify-content-between">
+                                    <div class="d-flex ">
+                                        <div class="me-4">
+                                            <p class="m-0 fw-bold fs-7">Pedido</p>
+                                            <p class="m-0 fs-7">01/11/2024</p>
+                                        </div>
+                                        <div class="me-4">
+                                            <p class="m-0 fw-bold fs-7">Vendido por</p>
+                                            <p class="m-0 fs-7">NetCore</p>
+                                        </div>
+                                        <div class="me-4">
+                                            <p class="m-0 fw-bold fs-7">Nº pedido</p>
+                                            <p class="m-0 fs-7">6022024171671</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="btn border-1">Ver detalles y seguimiento<i
+                                                class="bi bi-caret-down-fill ms-2"></i></button>
+                                        <button class="btn border-1 d-none">Ocultar detalles y seguimiento<i
+                                                class="bi bi-caret-up-fill ms-2"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-12">
+                                    <button class="btn border-1 me-2">Facturas</button>
+                                    <button class="btn border-1">Detalles del pedido</button>
+                                </div>
+                            </div>
+
+
+                            <div class="border-bottom d-flex align-items-center mb-3 py-2 py-lg-2">
+                                <div class="me-4">
+                                    <p class="m-0 fs-6 fw-bold text-primary">Entregado</p>
+                                    <p class="m-0 fs-7">el 4 de noviembre de 2024</p>
+                                </div>
+                                <div>
+                                    <button class="btn border-1">Seguimiento del pedido</button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 col-12 d-flex justify-content-between">
+                                    <div class="d-flex ">
+                                        <div class="me-4 container-img" style="height: 100px">
+                                            <img src="https://m.media-amazon.com/images/I/81b75EQJrgL.jpg" class="img-fluid"/>
+                                        </div>
+                                        <div class="me-4">
+                                            <p class="m-0 fs-6">Nombre del producto</p>
+                                            <p class="m-0 fw-bold fs-6">162.99€</p>
+                                            <p class="m-0 fs-6">X1 Unidad/es</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <button class="btn border-1 mb-2">Valorar producto</button>
+                                        <button class="btn border-1 mb-2">Devolver</button>
+                                        <button class="btn border-1 mb-2">Tramitar garantia</button>
+                                        <button class="btn border-1 btn-primary mb-2">Comprar de nuevo</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!--TAB: mis pedidos:finish-->
 
                 <!--TAB: mis Direcciones:init-->
-                <div v-if="tab === 'myAddresses'" class="">
+                <div class="" v-if="tab === 'myAddresses'">
                     <h2 class="mb-4">Mis Direcciones</h2>
 
                     <div class="mb-3">
                         <p class="fs-5 fw-bold m-0 mb-2">Direcciones de envío</p>
 
-                        <div v-if="shippingAddresses.data.length > 0"
-                             v-for="(shippingAddress, index) in shippingAddresses.data" :key="index"
-                             @click="updateDefaultShippingAddress(shippingAddress)"
+                        <div :key="index"
+                             @click="updateDefaultShippingAddress(shippingAddress)" class="card mb-2"
                              style="cursor: pointer;"
-                             class="card mb-2">
+                             v-for="(shippingAddress, index) in shippingAddresses.data"
+                             v-if="shippingAddresses.data.length > 0">
                             <div class="card-body py-2 px-3">
                                 <div class="mb-2"
                                      v-if="shippingAddress.default"
@@ -95,19 +199,19 @@
                         <button @click="showOpenAddShippingAddress"
                                 class="btn border-1 mb-2 mt-4"><i class="bi bi-plus me-1"></i>Añade una dirección
                         </button>
-<!--                        <div v-if="shippingAddresses.data.length <= 0">-->
-<!--                            <p class="m-0 fs-6">No tienes direcciones registradas.</p>-->
-<!--                        </div>-->
+                        <!--                        <div v-if="shippingAddresses.data.length <= 0">-->
+                        <!--                            <p class="m-0 fs-6">No tienes direcciones registradas.</p>-->
+                        <!--                        </div>-->
                     </div>
 
                     <div class="mb-3">
                         <p class="fs-5 fw-bold m-0 mb-2">Direcciones de facturación</p>
 
-                        <div v-if="billingAddressess.data.length > 0"
-                             v-for="(billingAddress, index) in billingAddressess.data" :key="index"
-                             @click="updateDefaultBillingAddress(shippingAddress)"
+                        <div :key="index"
+                             @click="updateDefaultBillingAddress(shippingAddress)" class="card mb-2"
                              style="cursor: pointer;"
-                             class="card mb-2">
+                             v-for="(billingAddress, index) in billingAddressess.data"
+                             v-if="billingAddressess.data.length > 0">
                             <div class="card-body py-2 px-3">
                                 <div class="mb-2"
                                      v-if="billingAddress.default"
@@ -122,7 +226,7 @@
                                             <span class="fs-7 "> {{billingAddress.population}}, </span>
                                             <span class="fs-7 "> {{billingAddress.city}}</span>
                                         </p>
-<!--                                        <p class="m-0 fs-7">{{billingAddress.floor}}-{{billingAddress.door}}</p>-->
+                                        <!--                                        <p class="m-0 fs-7">{{billingAddress.floor}}-{{billingAddress.door}}</p>-->
                                     </div>
                                     <div class="text-lg-end col-lg-6 col-12">
                                         <button @click="deleteBillingAddress(billingAddress, index)"
@@ -138,28 +242,28 @@
                         <button @click="showOpenAddBillingAddress"
                                 class="btn border-1 mb-2 mt-4"><i class="bi bi-plus me-1"></i>Añade datos de facturación
                         </button>
-<!--                        <div v-if="billingAddressess.data.length <= 0">-->
-<!--                            <p class="m-0 fs-6">No tienes direcciones registradas.</p>-->
-<!--                        </div>-->
+                        <!--                        <div v-if="billingAddressess.data.length <= 0">-->
+                        <!--                            <p class="m-0 fs-6">No tienes direcciones registradas.</p>-->
+                        <!--                        </div>-->
                     </div>
                 </div>
                 <!--TAB: mis Direcciones:finish-->
 
                 <!--TAB: mis Mensajes:init-->
-                <div v-if="tab === 'messages'" class="">
+                <div class="" v-if="tab === 'messages'">
                     <h2 class="">Mensajes</h2>
                 </div>
                 <!--TAB: mis Mensajes:finish-->
 
                 <!--TAB: mis opiniones:init-->
-                <div v-if="tab === 'opinions'" class="">
+                <div class="" v-if="tab === 'opinions'">
                     <h2 class="">Opiniones</h2>
                 </div>
                 <!--TAB: mis opiniones:finish-->
 
 
                 <!--TAB: mis tarjetas vinculadas:init-->
-                <div v-if="tab === 'cards'" class="">
+                <div class="" v-if="tab === 'cards'">
                     <h2 class="mb-4">Tarjetas vinculadas</h2>
                     <div>
                         <div v-if="paymentMethods.data.length <= 0">
@@ -169,12 +273,12 @@
                             Tienes tarjetas de credito vinculadas
 
                             <div
-                                    v-for="(creditCard, index) in paymentMethods.data"
+                                    :class="{ 'bg-primary-opacity text-white': creditCard.id === (defaultPaymentMethods.data?.id || '') }"
                                     :key="index"
                                     @click="selectPaymentMethod(creditCard.id)"
                                     class="card mb-2"
-                                    :class="{ 'bg-primary-opacity text-white': creditCard.id === (defaultPaymentMethods.data?.id || '') }"
                                     style="cursor: pointer;"
+                                    v-for="(creditCard, index) in paymentMethods.data"
                             >
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between align-items-center">
@@ -188,12 +292,12 @@
                                             </div>
                                         </div>
                                         <button
-                                                class="btn btn-sm p-0"
                                                 @click.stop="deletePaymentMethod(creditCard)"
                                                 aria-label="Delete"
+                                                class="btn btn-sm p-0"
                                         >
-                                            <i class="bi bi-trash3"
-                                               :class="creditCard.id === (defaultPaymentMethods.data?.id || '') ? 'text-white' : 'text-primary'"></i>
+                                            <i :class="creditCard.id === (defaultPaymentMethods.data?.id || '') ? 'text-white' : 'text-primary'"
+                                               class="bi bi-trash3"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -215,10 +319,10 @@
 
 
 <!--MODAL ADD SHIPPING ADDRESS-->
-<div v-if="showModalAddShippingAddress"
-     @click="showModalAddShippingAddress = !showModalAddShippingAddress"
+<div @click="showModalAddShippingAddress = !showModalAddShippingAddress"
+     class="w-100 position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity"
      style="z-index: 1000;height: 100vh;"
-     class="w-100 position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity">
+     v-if="showModalAddShippingAddress">
     <div @click.stop class="w-lg-50 w-90 card bg-white">
         <div class="card-body">
             <div class="d-flex justify-content-between mb-2">
@@ -234,8 +338,8 @@
 
             <div class="form-floating d-none">
                 <input class="form-control w-100" id="idUser" placeholder="Calle ..."
-                       v-model="formDataShippingAdress.idUser"
-                       type="text" value="">
+                       type="text"
+                       v-model="formDataShippingAdress.idUser" value="">
                 <label for="idUser">Id User</label>
             </div>
 
@@ -243,8 +347,8 @@
                 <div class="col-lg-6 col-12">
                     <div class="form-floating">
                         <input class="form-control w-100" id="street" placeholder="Calle ..."
-                               v-model="formDataShippingAdress.street"
-                               type="text" value="">
+                               type="text"
+                               v-model="formDataShippingAdress.street" value="">
                         <label for="street">Street</label>
                     </div>
 
@@ -278,7 +382,7 @@
             <div class="row mb-2">
                 <div class="col-lg-12 col-12">
                     <div class="form-floating w-100">
-                        <input class="form-control w-lg-96" style="" id="population" placeholder="Terrasa"
+                        <input class="form-control w-lg-96" id="population" placeholder="Terrasa" style=""
                                type="text" v-model="formDataShippingAdress.population">
                         <label for="population">Population</label>
                     </div>
@@ -288,7 +392,7 @@
             <div class="row mb-2">
                 <div class="col-lg-12 col-12">
                     <div class="form-floating ">
-                        <input class="form-control w-lg-96" style="" id="city" placeholder="Barcelona"
+                        <input class="form-control w-lg-96" id="city" placeholder="Barcelona" style=""
                                type="text" v-model="formDataShippingAdress.city">
                         <label for="city">City</label>
                     </div>
@@ -298,7 +402,7 @@
             <div class="row mb-2">
                 <div class="col-lg-12 col-12">
                     <div class="form-floating">
-                        <input class="form-control w-lg-96" style="" id="zip_code" placeholder="08906"
+                        <input class="form-control w-lg-96" id="zip_code" placeholder="08906" style=""
                                type="text" v-model="formDataShippingAdress.zip_code">
                         <label for="zip_code">Postal Code</label>
                     </div>
@@ -306,10 +410,10 @@
                 </div>
             </div>
 
-            <button v-if="typeModal === 'store'" @click="createShippingAddress" class="btn btn-primary">Añadir
+            <button @click="createShippingAddress" class="btn btn-primary" v-if="typeModal === 'store'">Añadir
                 dirección
             </button>
-            <button v-if="typeModal === 'edit'" @click="updateShippingAddress" class="btn btn-primary">Actualizar
+            <button @click="updateShippingAddress" class="btn btn-primary" v-if="typeModal === 'edit'">Actualizar
                 dirección
             </button>
         </div>
@@ -318,10 +422,10 @@
 <!--MODAL ADD SHIPPING ADDRESS-->
 
 <!--MODAL ADD BILLING ADDRESS-->
-<div v-if="showModalAddBillingAddress"
-     @click="showModalAddBillingAddress = !showModalAddBillingAddress"
+<div @click="showModalAddBillingAddress = !showModalAddBillingAddress"
+     class="w-100 position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity"
      style="z-index: 1000;height: 100vh;"
-     class="w-100 position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity">
+     v-if="showModalAddBillingAddress">
     <div @click.stop class="w-lg-50 w-90 card bg-white">
         <div class="card-body">
 
@@ -337,22 +441,22 @@
             </div>
             <div class="d-flex mb-2">
                 <div class="form-check me-2">
-                    <input class="form-check-input" type="radio" name="flexRadio" id="flexRadio1"
-                           v-model="selectedType" value="particular" @change="handleTypeChange">
+                    <input @change="handleTypeChange" class="form-check-input" id="flexRadio1" name="flexRadio"
+                           type="radio" v-model="selectedType" value="particular">
                     <label class="form-check-label" for="flexRadio1">
                         Particular
                     </label>
                 </div>
                 <div class="form-check me-2">
-                    <input class="form-check-input" type="radio" name="flexRadio" id="flexRadio2"
-                           v-model="selectedType" value="autonomo" @change="handleTypeChange">
+                    <input @change="handleTypeChange" class="form-check-input" id="flexRadio2" name="flexRadio"
+                           type="radio" v-model="selectedType" value="autonomo">
                     <label class="form-check-label" for="flexRadio2">
                         Autónomo
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadio" id="flexRadio3"
-                           v-model="selectedType" value="empresa" @change="handleTypeChange">
+                    <input @change="handleTypeChange" class="form-check-input" id="flexRadio3" name="flexRadio"
+                           type="radio" v-model="selectedType" value="empresa">
                     <label class="form-check-label" for="flexRadio3">
                         Empresa
                     </label>
@@ -364,16 +468,16 @@
                     <div class="col-lg-6 col-12">
                         <div class="form-floating">
                             <input class="form-control w-100" placeholder="Nom..."
-                                   v-model="formDataBillingAdress.name"
-                                   type="text" value="">
+                                   type="text"
+                                   v-model="formDataBillingAdress.name" value="">
                             <label for="nombre">Nombre</label>
                         </div>
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="form-floating">
                             <input class="form-control w-100" placeholder="Cognoms..."
-                                   v-model="formDataBillingAdress.lastName"
-                                   type="text" value="">
+                                   type="text"
+                                   v-model="formDataBillingAdress.lastName" value="">
                             <label for="cognoms">Cognoms</label>
                         </div>
                     </div>
@@ -383,8 +487,8 @@
                     <div class="col-lg-12 col-12">
                         <div class="form-floating">
                             <input class="form-control w-lg-96" placeholder="Telefon ..."
-                                   v-model="formDataBillingAdress.phoneNumber"
-                                   type="text" value="">
+                                   type="text"
+                                   v-model="formDataBillingAdress.phoneNumber" value="">
                             <label for="telefon">Telefon</label>
                         </div>
                     </div>
@@ -397,8 +501,8 @@
                     <div class="col-lg-12 col-12">
                         <div class="form-floating">
                             <input class="form-control w-lg-96" placeholder="NIF/NIE ..."
-                                   v-model="formDataBillingAdress.dniNie"
-                                   type="text" value="">
+                                   type="text"
+                                   v-model="formDataBillingAdress.dniNie" value="">
                             <label for="nif-nie">NIF/NIE</label>
                         </div>
                     </div>
@@ -408,16 +512,16 @@
                     <div class="col-lg-6 col-12">
                         <div class="form-floating">
                             <input class="form-control w-100" placeholder="Nom..."
-                                   v-model="formDataBillingAdress.name"
-                                   type="text" value="">
+                                   type="text"
+                                   v-model="formDataBillingAdress.name" value="">
                             <label for="nombre">Nombre</label>
                         </div>
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="form-floating">
                             <input class="form-control w-100" placeholder="Cognoms..."
-                                   v-model="formDataBillingAdress.lastName"
-                                   type="text" value="">
+                                   type="text"
+                                   v-model="formDataBillingAdress.lastName" value="">
                             <label for="cognoms">Cognoms</label>
                         </div>
                     </div>
@@ -427,8 +531,8 @@
                     <div class="col-lg-12 col-12">
                         <div class="form-floating">
                             <input class="form-control w-lg-96" placeholder="Telefon ..."
-                                   v-model="formDataBillingAdress.phoneNumber"
-                                   type="text" value="">
+                                   type="text"
+                                   v-model="formDataBillingAdress.phoneNumber" value="">
                             <label for="telefon">Telefon</label>
                         </div>
                     </div>
@@ -441,8 +545,8 @@
                     <div class="col-lg-12 col-12">
                         <div class="form-floating">
                             <input class="form-control w-lg-96" placeholder="CIF/NIF ..."
-                                   v-model="formDataBillingAdress.cif"
-                                   type="text" value="">
+                                   type="text"
+                                   v-model="formDataBillingAdress.cif" value="">
                             <label for="cif-nif">CIF/NIF</label>
                         </div>
                     </div>
@@ -452,8 +556,8 @@
                     <div class="col-lg-12 col-12">
                         <div class="form-floating">
                             <input class="form-control w-lg-96" placeholder="Nombre empresa ..."
-                                   v-model="formDataBillingAdress.companyName"
-                                   type="text" value="">
+                                   type="text"
+                                   v-model="formDataBillingAdress.companyName" value="">
                             <label for="companyName">Nom d'empresa</label>
                         </div>
                     </div>
@@ -463,8 +567,8 @@
                     <div class="col-lg-12 col-12">
                         <div class="form-floating">
                             <input class="form-control w-lg-96" placeholder="Telefon ..."
-                                   v-model="formDataBillingAdress.phoneNumber"
-                                   type="text" value="">
+                                   type="text"
+                                   v-model="formDataBillingAdress.phoneNumber" value="">
                             <label for="telefon">Telefon</label>
                         </div>
                     </div>
@@ -473,8 +577,8 @@
 
             <div class="form-floating d-none">
                 <input class="form-control w-100" placeholder="Calle ..."
-                       v-model="formDataBillingAdress.idUser"
-                       type="text" value="">
+                       type="text"
+                       v-model="formDataBillingAdress.idUser" value="">
                 <label for="idUser">Id User</label>
             </div>
 
@@ -482,8 +586,8 @@
                 <div class="col-lg-6 col-12">
                     <div class="form-floating">
                         <input class="form-control w-100" placeholder="Calle ..."
-                               v-model="formDataBillingAdress.street"
-                               type="text" value="">
+                               type="text"
+                               v-model="formDataBillingAdress.street" value="">
                         <label for="street">Street</label>
                     </div>
 
@@ -517,7 +621,7 @@
             <div class="row mb-2">
                 <div class="col-lg-12 col-12">
                     <div class="form-floating w-100">
-                        <input class="form-control w-lg-96" style="" placeholder="Terrasa"
+                        <input class="form-control w-lg-96" placeholder="Terrasa" style=""
                                type="text" v-model="formDataBillingAdress.population">
                         <label for="population">Population</label>
                     </div>
@@ -527,7 +631,7 @@
             <div class="row mb-2">
                 <div class="col-lg-12 col-12">
                     <div class="form-floating ">
-                        <input class="form-control w-lg-96" style="" placeholder="Barcelona"
+                        <input class="form-control w-lg-96" placeholder="Barcelona" style=""
                                type="text" v-model="formDataBillingAdress.city">
                         <label for="city">City</label>
                     </div>
@@ -537,7 +641,7 @@
             <div class="row mb-2">
                 <div class="col-lg-12 col-12">
                     <div class="form-floating">
-                        <input class="form-control w-lg-96" style="" placeholder="08906"
+                        <input class="form-control w-lg-96" placeholder="08906" style=""
                                type="text" v-model="formDataBillingAdress.zip_code">
                         <label for="zip_code">Postal Code</label>
                     </div>
@@ -545,10 +649,10 @@
                 </div>
             </div>
 
-            <button v-if="typeModalBilling === 'store'" @click="createBillingAddress" class="btn btn-primary">Añadir
+            <button @click="createBillingAddress" class="btn btn-primary" v-if="typeModalBilling === 'store'">Añadir
                 dirección
             </button>
-            <button v-if="typeModalBilling === 'edit'" @click="updateBillingAddress" class="btn btn-primary">Actualizar
+            <button @click="updateBillingAddress" class="btn btn-primary" v-if="typeModalBilling === 'edit'">Actualizar
                 dirección
             </button>
         </div>
@@ -557,14 +661,14 @@
 <!--MODAL ADD BILLING ADDRESS-->
 
 <!--MODAL ADD CARDS INIT-->
-<div v-if="showAddCreditCardComponent"
-     @click="showAddCreditCardComponent = !showAddCreditCardComponent"
+<div @click="showAddCreditCardComponent = !showAddCreditCardComponent"
+     class="w-100 position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity"
      style="z-index: 1000;height: 100vh;"
-     class="w-100 position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity">
+     v-if="showAddCreditCardComponent">
     <div @click.stop class="w-lg-50 w-90 card border-none bg-white">
         <add-payment-method-component
-                @payment-methods="handleDefaultPaymentMethod"
                 @default-payment-method="defaultPaymentMethods.data = $event"
+                @payment-methods="handleDefaultPaymentMethod"
 
         ></add-payment-method-component>
     </div>
