@@ -117,7 +117,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 6, // HP
-                'idSubCategory' => 13, // Impresoras
+                'idSubCategory' => 36, // Impresoras
                 'name' => 'HP LaserJet Pro',
                 'description' => 'Impresora láser rápida y eficiente.',
                 'stock' => 12,
@@ -127,7 +127,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 19, // Acer
-                'idSubCategory' => 14, // Monitores Gaming
+                'idSubCategory' => 16, // Monitores Gaming
                 'name' => 'Acer Predator XB271HU',
                 'description' => 'Monitor gaming 27" con resolución 1440p.',
                 'stock' => 8,
@@ -137,7 +137,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 20, // LG
-                'idSubCategory' => 15, // Monitores Profesionales
+                'idSubCategory' => 17, // Monitores Profesionales
                 'name' => 'LG UltraFine 5K',
                 'description' => 'Monitor profesional 5K para diseño gráfico.',
                 'stock' => 5,
@@ -237,7 +237,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 11, // Razer
-                'idSubCategory' => 10, // Ratones
+                'idSubCategory' => 11, // Ratones
                 'name' => 'Razer DeathAdder V2',
                 'description' => 'Ratón gaming ergonómico con sensor óptico de alta precisión.',
                 'stock' => 60,
@@ -247,7 +247,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 7, // Logitech
-                'idSubCategory' => 11, // Teclados
+                'idSubCategory' => 12, // Teclados
                 'name' => 'Logitech G Pro X',
                 'description' => 'Teclado mecánico compacto para gaming.',
                 'stock' => 40,
@@ -257,7 +257,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 18, // SteelSeries
-                'idSubCategory' => 12, // Auriculares
+                'idSubCategory' => 13, // Auriculares
                 'name' => 'SteelSeries Arctis 7',
                 'description' => 'Auriculares inalámbricos con sonido envolvente y alta comodidad.',
                 'stock' => 50,
@@ -267,7 +267,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 25, // Epson
-                'idSubCategory' => 13, // Impresoras
+                'idSubCategory' => 37, // Impresoras
                 'name' => 'Epson EcoTank ET-2720',
                 'description' => 'Impresora de tinta con sistema de tanques de tinta para bajo coste por página.',
                 'stock' => 15,
@@ -277,7 +277,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 26, // BenQ
-                'idSubCategory' => 14, // Monitores Gaming
+                'idSubCategory' => 16, // Monitores Gaming
                 'name' => 'BenQ ZOWIE XL2411P',
                 'description' => 'Monitor gaming de 24" con tasa de refresco de 144Hz.',
                 'stock' => 10,
@@ -287,7 +287,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 5, // Dell
-                'idSubCategory' => 15, // Monitores Profesionales
+                'idSubCategory' => 17, // Monitores Profesionales
                 'name' => 'Dell UltraSharp U2720Q',
                 'description' => 'Monitor 4K de 27" ideal para profesionales del diseño.',
                 'stock' => 5,
@@ -390,7 +390,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 7,
-                'idSubCategory' => 10, // Ratones
+                'idSubCategory' => 11, // Ratones
                 'name' => 'Logitech MX Master 3',
                 'description' => 'Ratón inalámbrico ergonómico con múltiples funciones.',
                 'stock' => 25,
@@ -401,7 +401,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 18,
-                'idSubCategory' => 11, // Teclados
+                'idSubCategory' => 12, // Teclados
                 'name' => 'SteelSeries Apex Pro',
                 'description' => 'Teclado mecánico personalizable con retroiluminación RGB.',
                 'stock' => 20,
@@ -412,7 +412,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 11,
-                'idSubCategory' => 12, // Auriculares
+                'idSubCategory' => 13, // Auriculares
                 'name' => 'Razer Kraken X',
                 'description' => 'Auriculares ligeros y cómodos con sonido envolvente 7.1.',
                 'stock' => 45,
@@ -427,35 +427,35 @@ class ProductsSeeder extends Seeder
 
             [
                 'idBrand' => 28,
-                'idSubCategory' => 13, // Impresoras
+                'idSubCategory' => 37, // Impresoras
                 'name' => 'Brother MFC-J995DW',
                 'description' => 'Impresora multifunción con tecnología de tinta a bajo coste.',
                 'stock' => 10,
                 'price' => 199.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/brother-mfc-j995dw.png',
+                'image_path' => 'https://m.media-amazon.com/images/I/514Arf7sWlL._AC_SX679_.jpg',
                 // Brother
             ],
             [
                 'idBrand' => 19,
-                'idSubCategory' => 14, // Monitores Gaming
+                'idSubCategory' => 16, // Monitores Gaming
                 'name' => 'Acer Nitro VG271U',
                 'description' => 'Monitor gaming 1440p de 27" con 144Hz y FreeSync.',
                 'stock' => 8,
                 'price' => 349.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/acer-nitro-vg271u.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-530-530/articles/17/170832/1.jpg',
                 // Acer
             ],
             [
                 'idBrand' => 2,
-                'idSubCategory' => 15, // Monitores Profesionales
+                'idSubCategory' => 17, // Monitores Profesionales
                 'name' => 'Samsung Odyssey G9',
                 'description' => 'Monitor curvo ultra ancho de 49" para una experiencia envolvente.',
                 'stock' => 4,
                 'price' => 1399.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/samsung-odyssey-g9.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-530-530/articles/1084/10841386/1354-samsung-odyssey-g9-g95c-49-led-va-ultrawide-dual-qhd-240hz-freesync-premium-pro-curva.jpg',
                 // Samsung
             ],
             [
@@ -466,7 +466,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 25,
                 'price' => 299.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/ryzen5-5600x.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-530-530/articles/32/328475/1101-amd-ryzen-5-5600x-37ghz.jpg',
                 // AMD
             ],
             [
@@ -477,7 +477,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 15,
                 'price' => 479.99,
                 'color' => 'Negro/Rojo',
-                'image_path' => 'path/to/rx6700xt.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/51/514508/1203-sapphire-pulse-radeon-rx-6700-xt-gaming-oc-12gb-gddr6.jpg',
                 // Sapphire
             ],
             [
@@ -488,7 +488,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 10,
                 'price' => 189.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/msi-mag-b550-tomahawk.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/30/302202/1130-msi-mag-b550-tomahawk.jpg',
                 // MSI
             ],
             [
@@ -499,7 +499,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 30,
                 'price' => 99.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/kingston-fury-beast.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1082/10825568/1410-kingston-fury-beast-ddr5-6000mhz-32gb-2x16gb-cl30.jpg',
                 // Kingston
             ],
             [
@@ -510,7 +510,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 18,
                 'price' => 139.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/thermaltake-toughpower.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/20/202958/1.jpg',
                 // Thermaltake
             ],
             [
@@ -521,7 +521,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 20,
                 'price' => 89.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/bequiet-dark-rock4.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1084/10848326/1765-be-quiet-dark-rock-5-ventilador-cpu-6-pipes-120mm-negro.jpg',
                 // be quiet!
             ],
             [
@@ -532,7 +532,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 15,
                 'price' => 89.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/phanteks-eclipse-p400a.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/25/254484/phanteks-eclipse-p400a-cristal-templado-usb-30-rgb-blanca-a1b6515c-3806-452d-9ebc-37f0d492d58c.jpg',
                 // Phanteks
             ],
             [
@@ -543,7 +543,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 6,
                 'price' => 1399.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/acer-predator-helios300.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1065/10655558/1673-acer-predator-helios-300-ph315-55-7174-intel-core-i7-12700h-16gb-512gb-ssd-rtx-3060-156-opiniones.jpg',
                 // Acer
             ],
             [
@@ -554,73 +554,73 @@ class ProductsSeeder extends Seeder
                 'stock' => 5,
                 'price' => 1299.99,
                 'color' => 'Plata',
-                'image_path' => 'path/to/dell-xps-13.png',
+                'image_path' => 'https://m.media-amazon.com/images/I/71OzM2n+EqL._AC_SY300_SX300_.jpg',
                 // Dell
             ],
             [
                 'idBrand' => 9,
-                'idSubCategory' => 10, // Ratones
+                'idSubCategory' => 11, // Ratones
                 'name' => 'Corsair Scimitar RGB Elite',
                 'description' => 'Ratón gaming con 12 botones programables y retroiluminación RGB.',
                 'stock' => 30,
                 'price' => 89.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/corsair-scimitar.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-530-530/articles/26/264405/corsair-scimitar-rgb-elite-raton-gaming-optico-18000dpi.jpg',
                 // Corsair
             ],
             [
                 'idBrand' => 4,
-                'idSubCategory' => 11, // Teclados
+                'idSubCategory' => 12, // Teclados
                 'name' => 'Razer BlackWidow V3',
                 'description' => 'Teclado mecánico con retroiluminación RGB y interruptores mecánicos.',
                 'stock' => 20,
                 'price' => 159.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/razer-blackwidow-v3.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/36/361533/1456-razer-blackwidow-v3-pro-teclado-mecanico-inalambrico-gaming-switch-green-layout-usa.jpg',
                 // Razer
             ],
             [
                 'idBrand' => 4,
-                'idSubCategory' => 12, // Auriculares
+                'idSubCategory' => 13, // Auriculares
                 'name' => 'SteelSeries Arctis 7',
                 'description' => 'Auriculares inalámbricos con sonido envolvente y gran duración de batería.',
                 'stock' => 35,
                 'price' => 149.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/steelseries-arctis-7.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1063/10634057/1754-steelseries-arctis-7-auriculares-gaming-inalambricos.jpg',
                 // SteelSeries
             ],
             [
                 'idBrand' => 4,
-                'idSubCategory' => 13, // Impresoras
+                'idSubCategory' => 36, // Impresoras
                 'name' => 'Canon PIXMA TR8620',
                 'description' => 'Impresora multifuncional con escáner y soporte para impresión inalámbrica.',
                 'stock' => 12,
                 'price' => 179.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/canon-pixma-tr8620.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/24/243098/5.jpg',
                 // Canon
             ],
             [
                 'idBrand' => 8,
-                'idSubCategory' => 14, // Monitores Gaming
+                'idSubCategory' => 16, // Monitores Gaming
                 'name' => 'LG UltraGear 27GN950-B',
                 'description' => 'Monitor 4K de 27" con tasa de refresco de 144Hz, ideal para gamers.',
                 'stock' => 8,
                 'price' => 799.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/lg-ultragear-27gn950b.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/33/337505/1895-lg-27gn750-b-ultragear-27-led-ips-fullhd-240hz-g-sync-compatible.jpg',
                 // LG
             ],
             [
                 'idBrand' => 4,
-                'idSubCategory' => 15, // Monitores Profesionales
+                'idSubCategory' => 17, // Monitores Profesionales
                 'name' => 'ASUS ProArt PA32UCX',
                 'description' => 'Monitor 4K HDR para profesionales de la creación de contenido.',
                 'stock' => 4,
                 'price' => 2999.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/asus-proart-pa32ucx.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/37/378495/1434-asus-proart-display-pa32ucx-pk-32-led-ips-ultrahd-4k-142hz-usb-c.jpg',
                 // ASUS
             ],
             [
@@ -631,7 +631,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 20,
                 'price' => 279.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/i5-11600k.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/36/362356/1204-intel-core-i5-11600k-39-ghz.jpg',
                 // Intel
             ],
             [
@@ -642,7 +642,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 12,
                 'price' => 649.99,
                 'color' => 'Negro/Silver',
-                'image_path' => 'path/to/rtx3070.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/32/324701/1677-gigabyte-geforce-rtx-3070-gaming-oc-8gb-gddr6.jpg',
                 // NVIDIA
             ],
             [
@@ -653,7 +653,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 15,
                 'price' => 89.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/asrock-b450m.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/30/307137/1178-asrock-b550m-pro4.jpg',
                 // ASRock
             ],
             [
@@ -664,7 +664,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 28,
                 'price' => 79.99,
                 'color' => 'Rojo',
-                'image_path' => 'path/to/gskill-ripjaws-v.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/60/608186/1346-gskill-ripjaws-v-ddr4-3600mhz-16gb-2x8gb-cl18.jpg',
                 // G.Skill
             ],
             [
@@ -675,7 +675,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 14,
                 'price' => 129.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/corsair-rm750x.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1065/10658548/1493-corsair-rm750x-shift-750w-80-plus-gold-modular-mejor-precio.jpg',
                 // Corsair
             ],
             [
@@ -686,7 +686,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 8,
                 'price' => 89.99,
                 'color' => 'Marrón',
-                'image_path' => 'path/to/noctua-nh-d15.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/24/245205/1.jpg',
                 // Noctua
             ],
             [
@@ -697,7 +697,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 20,
                 'price' => 69.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/masterbox-q300l.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/15/157976/cooler-master-masterbox-q300p-usb-30-con-ventana-5c90da1d-dc4b-44f5-a9b4-195bcf3b32fc.jpg',
                 // Cooler Master
             ],
             [
@@ -708,7 +708,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 7,
                 'price' => 1399.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/msi-gf65-thin.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1002/10023603/1390-msi-gf63-thin-11ud-271xes-intel-core-i7-11800h-16-gb-512gb-ssd-rtx-3050ti-156.jpg',
                 // MSI
             ],
             [
@@ -719,73 +719,73 @@ class ProductsSeeder extends Seeder
                 'stock' => 5,
                 'price' => 1399.99,
                 'color' => 'Plata',
-                'image_path' => 'path/to/hp-spectre-x360.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1073/10733289/1187-hp-spectre-x360-14-ef2003ns-intel-evo-core-i7-1355u-16-gb-1tb-ssd-135-tactil-590e635b-0ec2-45bc-9af6-41b29d9cbec0.jpg',
                 // HP
             ],
             [
                 'idBrand' => 4,
-                'idSubCategory' => 10, // Ratones
+                'idSubCategory' => 11, // Ratones
                 'name' => 'Razer DeathAdder V2',
                 'description' => 'Ratón gaming con sensor óptico y diseño ergonómico.',
                 'stock' => 25,
                 'price' => 69.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/razer-deathadder-v2.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/25/257969/razer-deathadder-v2-raton-gaming-20000dpi-248c0ca1-8de0-4571-a85e-aa88d4e7b2d1.jpg',
                 // Razer
             ],
             [
                 'idBrand' => 6,
-                'idSubCategory' => 11, // Teclados
+                'idSubCategory' => 12, // Teclados
                 'name' => 'Logitech G Pro X',
                 'description' => 'Teclado mecánico compacto con interruptores intercambiables.',
                 'stock' => 18,
                 'price' => 149.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/logitech-g-pro-x.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1077/10772985/1393-logitech-g-pro-x-tkl-lightspeed-teclado-inalambrico-gaming-negro-rgb-lightsync-gx-brown.jpg',
                 // Logitech
             ],
             [
-                'idBrand' => 7,
-                'idSubCategory' => 12, // Auriculares
+                'idBrand' => 6,
+                'idSubCategory' => 13, // Auriculares
                 'name' => 'HyperX Cloud II',
                 'description' => 'Auriculares gaming con sonido envolvente y almohadillas de espuma.',
                 'stock' => 30,
                 'price' => 99.99,
                 'color' => 'Negro/Rojo',
-                'image_path' => 'path/to/hyperx-cloud-ii.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1074/10749670/1881-hyperx-cloud-ii-core-auriculares-gaming-inalambricos-dts-negro-rojo.jpg',
                 // HyperX
             ],
             [
                 'idBrand' => 4,
-                'idSubCategory' => 13, // Impresoras
+                'idSubCategory' => 37, // Impresoras
                 'name' => 'Epson EcoTank ET-2720',
                 'description' => 'Impresora de inyección de tinta con tanque de tinta recargable para bajo coste por impresión.',
                 'stock' => 10,
                 'price' => 249.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/epson-ecotank-et2720.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1081/10811900/1877-epson-ekotank-et-2870-impresora-multifuncion-color-wifi.jpg',
                 // Epson
             ],
             [
                 'idBrand' => 20,
-                'idSubCategory' => 14, // Monitores Gaming
+                'idSubCategory' => 16, // Monitores Gaming
                 'name' => 'Acer Predator XB273U',
                 'description' => 'Monitor gaming IPS 1440p de 27" con alta tasa de refresco.',
                 'stock' => 6,
                 'price' => 699.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/acer-predator-xb273u.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1082/10826572/1307-acer-gaming-predator-xb273uv3bmiiprzx-27-led-ips-qhd-180hz-05ms-freesync-premium-opiniones.jpg',
                 // Acer
             ],
             [
                 'idBrand' => 8,
-                'idSubCategory' => 15, // Monitores Profesionales
+                'idSubCategory' => 17, // Monitores Profesionales
                 'name' => 'BenQ PD3220U',
                 'description' => 'Monitor 4K de 32" para diseñadores y creadores de contenido.',
                 'stock' => 3,
                 'price' => 1199.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/benq-pd3220u.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/21/211997/1.jpg',
                 // BenQ
             ],
             [
@@ -796,7 +796,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 15,
                 'price' => 399.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/i7-11700k.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/36/362379/1371-intel-core-i7-11700f-25-ghz.jpg',
                 // Intel
             ],
             [
@@ -807,7 +807,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 8,
                 'price' => 899.99,
                 'color' => 'Negro/Silver',
-                'image_path' => 'path/to/evga-rtx3080.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1002/10026489/1329-evga-geforce-rtx-3080-ftw3-ultra-gaming-12gb-gddr6x.jpg',
                 // NVIDIA
             ],
             [
@@ -818,7 +818,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 10,
                 'price' => 299.99,
                 'color' => 'Negro/Rojo',
-                'image_path' => 'path/to/asus-rog-strix-z490e.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/28/287454/asus-rog-strix-z490-e-gaming.jpg',
                 // ASUS
             ],
             [
@@ -829,7 +829,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 40,
                 'price' => 74.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/corsair-vengeance-lpx.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/17/173466/1.jpg',
                 // Corsair
             ],
             [
@@ -840,7 +840,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 20,
                 'price' => 119.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/seasonic-focus-gx750.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1085/10858947/1737-seasonic-focus-gx-750-atx-3-pcie-51-750w-80-plus-gold-modular.jpg',
                 // Seasonic
             ],
             [
@@ -851,7 +851,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 25,
                 'price' => 59.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/coolermaster-hyper-212-rgb.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1017/10177102/1914-cooler-master-hyper-212-rgb-black-edition-ventilador-cpu.jpg',
                 // Cooler Master
             ],
             [
@@ -862,7 +862,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 22,
                 'price' => 89.99,
                 'color' => 'Blanco',
-                'image_path' => 'path/to/nzxt-h510.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/22/229796/1.jpg',
                 // NZXT
             ],
             [
@@ -873,7 +873,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 6,
                 'price' => 1299.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/lenovo-legion-5.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1018/10188907/1142-lenovo-legion-5-15ith6h-intel-core-i7-11800h-16gb-1tb-ssd-rtx3060-156.jpg',
                 // Lenovo
             ],
             [
@@ -884,62 +884,62 @@ class ProductsSeeder extends Seeder
                 'stock' => 4,
                 'price' => 1399.99,
                 'color' => 'Plata',
-                'image_path' => 'path/to/surface-laptop-4.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/41/410563/1421-microsoft-surface-laptop-4-platino-intel-core-i5-1145g7-16gb-512gb-ssd-135-tactil.jpg',
                 // Microsoft
             ],
             [
                 'idBrand' => 6,
-                'idSubCategory' => 10, // Ratones
+                'idSubCategory' => 11, // Ratones
                 'name' => 'Logitech MX Master 3',
                 'description' => 'Ratón ergonómico para productividad con múltiples dispositivos.',
                 'stock' => 30,
                 'price' => 99.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/logitech-mx-master-3.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/23/231260/2842-logitech-mx-master-3-raton-inalambrico-avanzado-4000dpi-grafito-b1848025-a7d5-465c-8c0d-cec90a5ec6ac.jpg',
                 // Logitech
             ],
             [
                 'idBrand' => 10,
-                'idSubCategory' => 11, // Teclados
+                'idSubCategory' => 12, // Teclados
                 'name' => 'Keychron K6',
                 'description' => 'Teclado mecánico compacto, compatible con múltiples dispositivos.',
                 'stock' => 20,
                 'price' => 79.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/keychron-k6.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1081/10817672/1175-keychron-k8-pro-qmk-via-teclado-mecanico-inalambrico-fully-assembled-hot-swappable-rgb-gateron-g-pro-red-e683390b-0f22-42c8-84c5-4ce1a8b25fa9.jpg',
                 // Keychron
             ],
             [
                 'idBrand' => 4,
-                'idSubCategory' => 13, // Impresoras
+                'idSubCategory' => 36, // Impresoras
                 'name' => 'Brother MFC-L3770CDW',
                 'description' => 'Impresora láser multifuncional color con conectividad inalámbrica.',
                 'stock' => 8,
                 'price' => 399.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/brother-mfc-l3770cdw.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/17/170188/60172239-0057568797.jpg',
                 // Brother
             ],
             [
                 'idBrand' => 20,
-                'idSubCategory' => 14, // Monitores Gaming
+                'idSubCategory' => 16, // Monitores Gaming
                 'name' => 'Acer Nitro VG271',
                 'description' => 'Monitor gaming IPS Full HD de 27" con tasa de refresco de 75Hz.',
                 'stock' => 10,
                 'price' => 299.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/acer-nitro-vg271.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1072/10722562/199-acer-nitro-vg271um3-27-led-ips-qhd-180hz-freesync-premium-c58eb17c-7a2d-4694-a341-1e590d65a51e.jpg',
                 // Acer
             ],
             [
                 'idBrand' => 21,
-                'idSubCategory' => 15, // Monitores Profesionales
+                'idSubCategory' => 17, // Monitores Profesionales
                 'name' => 'Dell UltraSharp U2720Q',
                 'description' => 'Monitor 4K de 27" con alta precisión de color para profesionales.',
                 'stock' => 5,
                 'price' => 799.99,
                 'color' => 'Negro',
-                'image_path' => 'path/to/dell-ultrasharp-u2720q.png',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1018/10189017/1960-dell-ultrasharp-u2723qe-27-led-ips-ultrahd-4k-usb-c.jpg',
                 // Dell
             ],
         ];
