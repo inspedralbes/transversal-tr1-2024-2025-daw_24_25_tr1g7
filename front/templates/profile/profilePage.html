@@ -208,7 +208,7 @@
                         <p class="fs-5 fw-bold m-0 mb-2">Direcciones de facturación</p>
 
                         <div :key="index"
-                             @click="updateDefaultBillingAddress(shippingAddress)" class="card mb-2"
+                             @click="updateDefaultBillingAddress(billingAddress)" class="card mb-2"
                              style="cursor: pointer;"
                              v-for="(billingAddress, index) in billingAddressess.data"
                              v-if="billingAddressess.data.length > 0">
