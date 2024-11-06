@@ -66,6 +66,43 @@
                 </div>
             </div>
         </div>
+
+        <!-- Nueva sección de Opiniones del Producto -->
+<div class="container mt-5">
+    <h3>Opiniones del Producto</h3>
+
+    <!-- Mostrar opiniones existentes -->
+    <div v-if="opinions.length > 0">
+        <div v-for="opinion in opinions" :key="opinion.id" class="card my-3">
+            <div class="card-body">
+                <p class="m-0"><strong>Puntuación:</strong> {{ opinion.opinion_number }} <span><i class="bi bi-star-fill text-warning"></i></span></p>
+                <p><strong>Opinión:</strong> {{ opinion.opinion }}</p>
+                <img v-if="opinion.image_path" :src="opinion.image_path" alt="Imagen de la opinión" class="img-fluid mt-2">
+            </div>
+        </div>
+    </div>
+    <div v-else>
+        <p>No hay opiniones para este producto.</p>
+    </div>
+
+    <!-- Formulario para agregar una nueva opinión -->
+    <h4 class="mt-4">Agregar una Opinión</h4>
+    <div class="card p-3">
+        <div class="mb-3">
+            <label class="form-label">Puntuación:</label>
+            <input v-model="newOpinion.opinion_number" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Opinión:</label>
+            <textarea v-model="newOpinion.opinion" class="form-control" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">URL de la Imagen:</label>
+            <input v-model="newOpinion.img" class="form-control" required>
+        </div>
+        <button @click="addOpinion" type="button" class="btn btn-primary">Enviar Opinión</button>
+    </div>
+</div>
     </div>
 </div>
 
@@ -76,3 +113,4 @@
         </div>
     </div>
 </div>
+

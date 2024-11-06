@@ -13,6 +13,7 @@ use App\Http\Controllers\ComandaController;
 use App\Http\Controllers\ArticuloComandaController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\DireccionesFacturacionController;
+use App\Http\Controllers\ProductOpinionController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -29,9 +30,14 @@ Route::prefix('home')->group(function () {
 });
 
 Route::get('/get-products', [ApiProductsController::class, 'getProducts'])->name('getProducts');
-
+Route::prefix('product')->group(function () {
+    Route::get('/{productId}/opinions', [ProductOpinionController::class, 'getProductOpinions']);
+});
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::prefix('product')->group(function () {
+        Route::post('opinion', [ProductOpinionController::class, 'store']);
+    });
     Route::prefix('addresses')->group(function () {
         Route::post('create-addresses', [DireccionesEnvioController::class, 'store'])->name('addresses.creatAddresses');
         Route::post('get-addresses', [DireccionesEnvioController::class, 'getAddresses'])->name('addresses.getAddresses');
