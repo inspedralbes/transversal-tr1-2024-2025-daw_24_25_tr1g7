@@ -16,9 +16,9 @@
 
                                     <div class="form-floating mb-3 w-100">
                                         <input type="email" class="form-control" id="email" name="email"
-                                               placeholder="name@example.com" v-model="formData.email"/>
+                                               placeholder="name@example.com" v-model="formData.email"
+                                               @blur="validateEmail">
                                         <label for="floatingInput">Correu electrònic</label>
-                                        @blur="validateEmail">
                                     </div>
 
                                     <div class="form-floating mb-3 w-100">

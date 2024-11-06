@@ -1,4 +1,4 @@
-import { defineComponent, defineAsyncComponent, reactive, ref, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+import { defineComponent, defineAsyncComponent, reactive, ref, onMounted, computed } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 import * as comm from "../communicationManager/communicationManager.js";
 import {
     createShippingAddress,
@@ -62,6 +62,9 @@ export const ProfilePage = defineAsyncComponent(() =>
                 const showModalAddBillingAddress = ref(false)
                 const typeModal = ref('')
                 const typeModalBilling = ref('')
+
+                const selectedType = ref('particular');
+
                 const logout = async() => {
                     let response = await comm.logout();
                     console.log(response)
@@ -171,7 +174,7 @@ export const ProfilePage = defineAsyncComponent(() =>
 
                 const createBillingAddress = async () => {
                     try {
-                        let response = await comm.createBillingAddress(getToken(), formDataShippingAdress);
+                        let response = await comm.createBillingAddress(getToken(), formDataBillingAdress);
                         console.log(response);
                         if (response && response.data) {
                             billingAddressess.data.push(response.data);
@@ -208,7 +211,7 @@ export const ProfilePage = defineAsyncComponent(() =>
                     formDataBillingAdress.door = billingAddress.door;
 
                     showModalAddBillingAddress.value = !showModalAddBillingAddress.value;
-                    typeModal.value = 'edit';
+                    typeModalBilling.value = 'edit';
                 }
 
                 const showOpenAddBillingAddress = () => {
@@ -218,7 +221,7 @@ export const ProfilePage = defineAsyncComponent(() =>
                     });
 
                     showModalAddBillingAddress.value = !showModalAddBillingAddress.value;
-                    typeModal.value = 'store';
+                    typeModalBilling.value = 'store';
                 }
 
                 const updateBillingAddress = async() => {
@@ -256,6 +259,14 @@ export const ProfilePage = defineAsyncComponent(() =>
                     paymentMethods.data = data;
                     showAddCreditCardComponent.value = false; // Cierra el modal
                 }
+
+
+                const handleTypeChange = () => {
+                    console.log('Tipo seleccionado:', selectedType.value);
+                    // Aquí puedes hacer lo que necesites cuando cambie
+                }
+
+
                 return {
                     tab,
                     logout,
@@ -276,13 +287,16 @@ export const ProfilePage = defineAsyncComponent(() =>
                     showModalAddShippingAddress,
                     showModalAddBillingAddress,
                     shippingAddresses,
+                    billingAddressess,
                     typeModal,
                     typeModalBilling,
                     paymentMethods,
                     defaultPaymentMethods,
                     selectPaymentMethod,
                     showAddCreditCardComponent,
-                    handleDefaultPaymentMethod
+                    handleDefaultPaymentMethod,
+                    selectedType,
+                    handleTypeChange
                 };
             }
         }))
