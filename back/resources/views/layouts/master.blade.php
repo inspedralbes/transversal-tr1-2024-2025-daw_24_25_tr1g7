@@ -68,9 +68,9 @@
         </nav>
     @endif
 
-    @yield('content')
+@yield('content')
 
-    @yield('page-script')
+@yield('page-script')
 
 </body>
 </html>
