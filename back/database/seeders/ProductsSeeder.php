@@ -117,7 +117,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 6, // HP
-                'idSubCategory' => 36, // Impresoras
+                'idSubCategory' => 19, // Impresoras
                 'name' => 'HP LaserJet Pro',
                 'description' => 'Impresora láser rápida y eficiente.',
                 'stock' => 12,
@@ -267,7 +267,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 25, // Epson
-                'idSubCategory' => 37, // Impresoras
+                'idSubCategory' => 20, // Impresoras
                 'name' => 'Epson EcoTank ET-2720',
                 'description' => 'Impresora de tinta con sistema de tanques de tinta para bajo coste por página.',
                 'stock' => 15,
@@ -427,7 +427,7 @@ class ProductsSeeder extends Seeder
 
             [
                 'idBrand' => 28,
-                'idSubCategory' => 37, // Impresoras
+                'idSubCategory' => 20, // Impresoras
                 'name' => 'Brother MFC-J995DW',
                 'description' => 'Impresora multifunción con tecnología de tinta a bajo coste.',
                 'stock' => 10,
@@ -592,7 +592,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 33,
-                'idSubCategory' => 36, // Impresoras
+                'idSubCategory' => 19, // Impresoras
                 'name' => 'Canon PIXMA TR8620',
                 'description' => 'Impresora multifuncional con escáner y soporte para impresión inalámbrica.',
                 'stock' => 12,
@@ -757,7 +757,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 25,
-                'idSubCategory' => 37, // Impresoras
+                'idSubCategory' => 20, // Impresoras
                 'name' => 'Epson EcoTank ET-2720',
                 'description' => 'Impresora de inyección de tinta con tanque de tinta recargable para bajo coste por impresión.',
                 'stock' => 10,
@@ -911,7 +911,7 @@ class ProductsSeeder extends Seeder
             ],
             [
                 'idBrand' => 28,
-                'idSubCategory' => 36, // Impresoras
+                'idSubCategory' => 19, // Impresoras
                 'name' => 'Brother MFC-L3770CDW',
                 'description' => 'Impresora láser multifuncional color con conectividad inalámbrica.',
                 'stock' => 8,
