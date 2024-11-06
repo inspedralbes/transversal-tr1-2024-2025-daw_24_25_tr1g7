@@ -14,7 +14,7 @@ class ProductOpinionController extends Controller
         return view("ProductOpinion.opinion",compact("opinion"));
     }
 
-    // Añadir opinion 
+    // Añadir opinion
     public function store(Request $request){
         // return $request;
         $data = $request->validate([
@@ -30,13 +30,13 @@ class ProductOpinionController extends Controller
             'img.required' => 'El campo imagen es requerido',
         ]);
 
-        // Crear una nueva opinion 
+        // Crear una nueva opinion
         $opinion = new ProductOpinion();
         $opinion->idUser = Auth::user()->id;
         $opinion->idProductes = $data['idProductes'];
         $opinion->opinion_number = $data['opinion_number'];
         $opinion->opinion = $data['opinion'];
-        $opinion->image_path = $data['img'];
+        $opinion->img = $data['img'];
         $opinion->save();
 
         return response()->json([

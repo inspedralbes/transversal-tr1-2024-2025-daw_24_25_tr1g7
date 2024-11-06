@@ -1,4 +1,4 @@
-const URL = "http://localhost:8001/api"
+const URL = "http://localhost:8000/api"
 export async function insertUser(dataUser) {
     return fetch(URL+'/register', {
         method: 'POST',
@@ -488,7 +488,6 @@ export async function getOpinions(id ){
             });
 
             const data = await response.json();
-            console.log(data)
             return data;
         } catch (error) {
             console.error("Error al agregar opinion:", error);
