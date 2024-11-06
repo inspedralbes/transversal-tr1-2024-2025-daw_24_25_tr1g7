@@ -113,7 +113,7 @@ class ProductsSeeder extends Seeder
                 'stock' => 25,
                 'price' => 149.99,
                 'color' => 'Negro',
-                'image_path' => 'https://m.media-amazon.com/images/I/71cIxP7E2+L.jpg',
+                'image_path' => 'https://thumb.pccomponentes.com/w-150-150/articles/1063/10634057/1754-steelseries-arctis-7-auriculares-gaming-inalambricos.jpg',
             ],
             [
                 'idBrand' => 6, // HP
@@ -547,7 +547,7 @@ class ProductsSeeder extends Seeder
                 // Acer
             ],
             [
-                'idBrand' => 20,
+                'idBrand' => 5,
                 'idSubCategory' => 9, // Ultrabooks
                 'name' => 'Dell XPS 13',
                 'description' => 'Ultrabook premium con pantalla InfinityEdge y alto rendimiento.',
@@ -569,7 +569,7 @@ class ProductsSeeder extends Seeder
                 // Corsair
             ],
             [
-                'idBrand' => 4,
+                'idBrand' => 11,
                 'idSubCategory' => 12, // Teclados
                 'name' => 'Razer BlackWidow V3',
                 'description' => 'Teclado mecánico con retroiluminación RGB y interruptores mecánicos.',
@@ -580,7 +580,7 @@ class ProductsSeeder extends Seeder
                 // Razer
             ],
             [
-                'idBrand' => 4,
+                'idBrand' => 18,
                 'idSubCategory' => 13, // Auriculares
                 'name' => 'SteelSeries Arctis 7',
                 'description' => 'Auriculares inalámbricos con sonido envolvente y gran duración de batería.',
@@ -591,7 +591,7 @@ class ProductsSeeder extends Seeder
                 // SteelSeries
             ],
             [
-                'idBrand' => 4,
+                'idBrand' => 33,
                 'idSubCategory' => 36, // Impresoras
                 'name' => 'Canon PIXMA TR8620',
                 'description' => 'Impresora multifuncional con escáner y soporte para impresión inalámbrica.',
@@ -602,7 +602,7 @@ class ProductsSeeder extends Seeder
                 // Canon
             ],
             [
-                'idBrand' => 8,
+                'idBrand' => 20,
                 'idSubCategory' => 16, // Monitores Gaming
                 'name' => 'LG UltraGear 27GN950-B',
                 'description' => 'Monitor 4K de 27" con tasa de refresco de 144Hz, ideal para gamers.',
@@ -613,7 +613,7 @@ class ProductsSeeder extends Seeder
                 // LG
             ],
             [
-                'idBrand' => 4,
+                'idBrand' => 14,
                 'idSubCategory' => 17, // Monitores Profesionales
                 'name' => 'ASUS ProArt PA32UCX',
                 'description' => 'Monitor 4K HDR para profesionales de la creación de contenido.',
@@ -624,7 +624,7 @@ class ProductsSeeder extends Seeder
                 // ASUS
             ],
             [
-                'idBrand' => 3,
+                'idBrand' => 12,
                 'idSubCategory' => 1, // Procesadores
                 'name' => 'Intel Core i5-11600K',
                 'description' => 'Procesador de 6 núcleos ideal para gaming y tareas de productividad.',
@@ -646,7 +646,7 @@ class ProductsSeeder extends Seeder
                 // NVIDIA
             ],
             [
-                'idBrand' => 4,
+                'idBrand' => 34,
                 'idSubCategory' => 3, // Placas Base
                 'name' => 'ASRock B450M Pro4',
                 'description' => 'Placa base AM4 con soporte para procesadores Ryzen y buena conectividad.',
@@ -657,7 +657,7 @@ class ProductsSeeder extends Seeder
                 // ASRock
             ],
             [
-                'idBrand' => 9,
+                'idBrand' => 22,
                 'idSubCategory' => 4, // Memoria RAM
                 'name' => 'G.Skill Ripjaws V 16GB',
                 'description' => 'Memoria RAM DDR4 de alto rendimiento para juegos y aplicaciones exigentes.',
@@ -679,7 +679,7 @@ class ProductsSeeder extends Seeder
                 // Corsair
             ],
             [
-                'idBrand' => 7,
+                'idBrand' => 23,
                 'idSubCategory' => 6, // Refrigeración
                 'name' => 'Noctua NH-D15',
                 'description' => 'Refrigerador de aire de alto rendimiento con un diseño eficiente.',
@@ -690,7 +690,7 @@ class ProductsSeeder extends Seeder
                 // Noctua
             ],
             [
-                'idBrand' => 9,
+                'idBrand' => 16,
                 'idSubCategory' => 7, // Cajas de PC
                 'name' => 'Cooler Master MasterBox Q300L',
                 'description' => 'Caja compacta ATX con paneles laterales de acrílico y gran flujo de aire.',
@@ -701,7 +701,7 @@ class ProductsSeeder extends Seeder
                 // Cooler Master
             ],
             [
-                'idBrand' => 20,
+                'idBrand' => 13,
                 'idSubCategory' => 8, // Portátiles Gaming
                 'name' => 'MSI GF65 Thin',
                 'description' => 'Portátil gaming ligero con pantalla de 15.6" y RTX 3060.',
@@ -712,7 +712,7 @@ class ProductsSeeder extends Seeder
                 // MSI
             ],
             [
-                'idBrand' => 21,
+                'idBrand' => 6,
                 'idSubCategory' => 9, // Ultrabooks
                 'name' => 'HP Spectre x360',
                 'description' => 'Ultrabook convertible con pantalla táctil y alto rendimiento.',
@@ -723,7 +723,7 @@ class ProductsSeeder extends Seeder
                 // HP
             ],
             [
-                'idBrand' => 4,
+                'idBrand' => 11,
                 'idSubCategory' => 11, // Ratones
                 'name' => 'Razer DeathAdder V2',
                 'description' => 'Ratón gaming con sensor óptico y diseño ergonómico.',
@@ -734,7 +734,7 @@ class ProductsSeeder extends Seeder
                 // Razer
             ],
             [
-                'idBrand' => 6,
+                'idBrand' => 7,
                 'idSubCategory' => 12, // Teclados
                 'name' => 'Logitech G Pro X',
                 'description' => 'Teclado mecánico compacto con interruptores intercambiables.',
@@ -756,7 +756,7 @@ class ProductsSeeder extends Seeder
                 // HyperX
             ],
             [
-                'idBrand' => 4,
+                'idBrand' => 25,
                 'idSubCategory' => 37, // Impresoras
                 'name' => 'Epson EcoTank ET-2720',
                 'description' => 'Impresora de inyección de tinta con tanque de tinta recargable para bajo coste por impresión.',
@@ -767,7 +767,7 @@ class ProductsSeeder extends Seeder
                 // Epson
             ],
             [
-                'idBrand' => 20,
+                'idBrand' => 19,
                 'idSubCategory' => 16, // Monitores Gaming
                 'name' => 'Acer Predator XB273U',
                 'description' => 'Monitor gaming IPS 1440p de 27" con alta tasa de refresco.',
@@ -778,7 +778,7 @@ class ProductsSeeder extends Seeder
                 // Acer
             ],
             [
-                'idBrand' => 8,
+                'idBrand' => 26,
                 'idSubCategory' => 17, // Monitores Profesionales
                 'name' => 'BenQ PD3220U',
                 'description' => 'Monitor 4K de 32" para diseñadores y creadores de contenido.',
@@ -789,7 +789,7 @@ class ProductsSeeder extends Seeder
                 // BenQ
             ],
             [
-                'idBrand' => 4,
+                'idBrand' => 12,
                 'idSubCategory' => 1, // Procesadores
                 'name' => 'Intel Core i7-11700K',
                 'description' => 'Procesador de 8 núcleos con alto rendimiento para juegos y tareas multitarea.',
@@ -811,7 +811,7 @@ class ProductsSeeder extends Seeder
                 // NVIDIA
             ],
             [
-                'idBrand' => 4,
+                'idBrand' => 14,
                 'idSubCategory' => 3, // Placas Base
                 'name' => 'ASUS ROG Strix Z490-E',
                 'description' => 'Placa base Z490 con overclocking y RGB customizable.',
@@ -833,7 +833,7 @@ class ProductsSeeder extends Seeder
                 // Corsair
             ],
             [
-                'idBrand' => 9,
+                'idBrand' => 35,
                 'idSubCategory' => 5, // Fuentes de Alimentación
                 'name' => 'Seasonic Focus GX-750',
                 'description' => 'Fuente de alimentación modular de 750W con certificación 80+ Gold.',
@@ -844,7 +844,7 @@ class ProductsSeeder extends Seeder
                 // Seasonic
             ],
             [
-                'idBrand' => 9,
+                'idBrand' => 16,
                 'idSubCategory' => 6, // Refrigeración
                 'name' => 'Cooler Master Hyper 212 RGB',
                 'description' => 'Refrigerador de aire con iluminación RGB y gran rendimiento.',
@@ -855,7 +855,7 @@ class ProductsSeeder extends Seeder
                 // Cooler Master
             ],
             [
-                'idBrand' => 4,
+                'idBrand' => 17,
                 'idSubCategory' => 7, // Cajas de PC
                 'name' => 'NZXT H510',
                 'description' => 'Caja ATX moderna con panel de vidrio templado.',
@@ -866,7 +866,7 @@ class ProductsSeeder extends Seeder
                 // NZXT
             ],
             [
-                'idBrand' => 20,
+                'idBrand' => 27,
                 'idSubCategory' => 8, // Portátiles Gaming
                 'name' => 'Lenovo Legion 5',
                 'description' => 'Portátil gaming de 15.6" con RTX 3060 y teclado retroiluminado.',
@@ -877,7 +877,7 @@ class ProductsSeeder extends Seeder
                 // Lenovo
             ],
             [
-                'idBrand' => 21,
+                'idBrand' => 36,
                 'idSubCategory' => 9, // Ultrabooks
                 'name' => 'Microsoft Surface Laptop 4',
                 'description' => 'Ultrabook elegante con pantalla táctil y gran duración de batería.',
@@ -888,7 +888,7 @@ class ProductsSeeder extends Seeder
                 // Microsoft
             ],
             [
-                'idBrand' => 6,
+                'idBrand' => 7,
                 'idSubCategory' => 11, // Ratones
                 'name' => 'Logitech MX Master 3',
                 'description' => 'Ratón ergonómico para productividad con múltiples dispositivos.',
@@ -899,7 +899,7 @@ class ProductsSeeder extends Seeder
                 // Logitech
             ],
             [
-                'idBrand' => 10,
+                'idBrand' => 37,
                 'idSubCategory' => 12, // Teclados
                 'name' => 'Keychron K6',
                 'description' => 'Teclado mecánico compacto, compatible con múltiples dispositivos.',
@@ -910,7 +910,7 @@ class ProductsSeeder extends Seeder
                 // Keychron
             ],
             [
-                'idBrand' => 4,
+                'idBrand' => 28,
                 'idSubCategory' => 36, // Impresoras
                 'name' => 'Brother MFC-L3770CDW',
                 'description' => 'Impresora láser multifuncional color con conectividad inalámbrica.',
@@ -921,7 +921,7 @@ class ProductsSeeder extends Seeder
                 // Brother
             ],
             [
-                'idBrand' => 20,
+                'idBrand' => 19,
                 'idSubCategory' => 16, // Monitores Gaming
                 'name' => 'Acer Nitro VG271',
                 'description' => 'Monitor gaming IPS Full HD de 27" con tasa de refresco de 75Hz.',
@@ -932,7 +932,7 @@ class ProductsSeeder extends Seeder
                 // Acer
             ],
             [
-                'idBrand' => 21,
+                'idBrand' => 5,
                 'idSubCategory' => 17, // Monitores Profesionales
                 'name' => 'Dell UltraSharp U2720Q',
                 'description' => 'Monitor 4K de 27" con alta precisión de color para profesionales.',
