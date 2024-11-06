@@ -105,8 +105,8 @@ class BrandSeeder extends Seeder
                 'image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/EVGA_Logo.svg/320px-EVGA_Logo.svg.png',
             ],
             [
-                'name' => 'Cooler Master',
-                'slug' => 'cooler master',
+                'name' => 'CoolerMaster',
+                'slug' => 'cooler-master',
                 'url' => 'https://www.coolermaster.com/en-eu/',
                 'image' => 'https://www.coolermaster.com/icons/logo_white.svg',
             ],
@@ -141,7 +141,7 @@ class BrandSeeder extends Seeder
                 'image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Gigabyte_Technology_logo_20080107.svg/270px-Gigabyte_Technology_logo_20080107.svg.png',
             ],
             [
-                'name' => 'G.Skill',
+                'name' => 'GSkill',
                 'slug' => 'gskill',
                 'url' => 'https://www.gskill.com',
                 'image' => 'https://upload.wikimedia.org/wikipedia/en/7/78/G.Skill.gif',
@@ -153,7 +153,7 @@ class BrandSeeder extends Seeder
                 'image' => 'https://noctua.at/pub/static/version1713775090/frontend/SIT/noctua/en_US/images/logo.svg',
             ],
             [
-                'name' => 'Fractal Design',
+                'name' => 'FractalDesign',
                 'slug' => 'fractal-design',
                 'url' => 'https://www.fractal-design.com',
                 'image' => 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Fractal_Design_logo_2019.svg/220px-Fractal_Design_logo_2019.svg.png',
