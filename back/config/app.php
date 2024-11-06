@@ -15,6 +15,36 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+     /*
+    |--------------------------------------------------------------------------
+    | Autoloaded Service Providers
+    |--------------------------------------------------------------------------
+    |
+    | Aquí registramos los proveedores de servicios, incluido el de DOMPDF
+    |
+    */
+
+    'providers' => [
+        // Otros proveedores de servicios de Laravel
+
+        Barryvdh\DomPDF\ServiceProvider::class, // Proveedor de Barryvdh\DomPDF
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Class Aliases
+    |--------------------------------------------------------------------------
+    |
+    | Los alias de las clases están registrados aquí
+    |
+    */
+
+    'aliases' => [
+        // Otros alias
+
+        'PDF' => Barryvdh\DomPDF\Facade\Pdf::class, // Alias para Barryvdh\DomPDF
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

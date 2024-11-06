@@ -8,6 +8,7 @@ use App\Http\Controllers\ComandaController;
 use App\Http\Controllers\ArticuloComandaController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\AuthenticatorController;
+use App\Http\Controllers\PdfController;
 
 
 Route::get('/', [AuthenticatorController::class, 'showLoginForm'])->name('home');
@@ -44,6 +45,9 @@ Route::get('/subcategoryedit/{id}', [SubCategoriaController::class, 'edit'])->na
 Route::put('/subcategoryupdate/{id}', [SubCategoriaController::class, 'update'])->name('subcategory.update');
 
 Route::delete('/subcategorydelete/{id}', [SubCategoriaController::class,'delete'])->name('subcategory.delete');
+
+
+Route::get('/pdf', [PdfController::class, 'index'])->name('pdf.index');
 
 
 
