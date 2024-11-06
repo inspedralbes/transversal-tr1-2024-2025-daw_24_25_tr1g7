@@ -2,37 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BillingAddress;
 use Illuminate\Http\Request;
-use App\Models\Pdf;
+use PDF;
+use Illuminate\Support\Facades\Auth;
 
 class PdfController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
+        $billingAddress = BillingAddress::where('idUser', $user->id)->first(); 
+        
+        if (!$billingAddress) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Error en el usuario',
+            ], 404);
+        }
+
         $data = [
             'invoice_number' => '4112024/125304',
-            'date' => '02/11/2024',
-            'payment_method' => 'Tarjeta',
-            'order_number' => '6022024171671',
-            'delivery_note' => '4022024131231',
+            'date' => now()->format('d/m/Y'),  
+            'payment_method' => 'Tarjeta',  
+            'order_number' => '6022024171671',  
+            'delivery_note' => '4022024131231',  
             'items' => [
                 [
                     'code' => '10828143',
                     'description' => 'Razer Viper V3 Pro Ratón Gaming Inalámbrico 35000 DPI Blanco',
                     'price' => 134.70,
                     'quantity' => 1,
-                    'total' => 134.70
+                    'total' => 134.70,
                 ]
             ],
             'tax_base' => 134.70,
             'tax' => 28.29,
             'equivalent_charge' => 0,
-            'total_amount' => 162.99
+            'total_amount' => 162.99,
+            'billing_address' => $billingAddress, 
         ];
 
-        $pdf = Pdf::loadView('pdf.invoice', $data);
-
-        // Descargar el PDF
-        return $pdf->download('invoice.pdf');
+        // Generar el PDF con los datos obtenidos
+        $pdf = PDF::loadView('pdf.invoice', $data);  
+        
+        // Mostrar el PDF en el navegador
+        return $pdf->stream('invoice.pdf');
     }
 }

@@ -11,6 +11,7 @@ use App\Http\Controllers\AuthenticatorController;
 use App\Http\Controllers\PdfController;
 
 
+
 Route::get('/', [AuthenticatorController::class, 'showLoginForm'])->name('home');
 
 Route::get('/welcome', [AuthenticatorController::class, 'showWelcome'])->name('welcome');
