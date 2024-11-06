@@ -288,7 +288,12 @@ export const CartPage = defineAsyncComponent(() =>
 
 
                 const finishBuying = () => {
-                    steps.value = 'finishBuy'
+                    // steps.value = 'finishBuy'
+                    const shippingAddresSelected = billingAddressess.data.find(address => address.selected);
+                    const billingAddressSelected = shippingAddresses.data.find(address => address.selected);
+                    console.log(shippingAddresSelected)
+                    console.log(billingAddressSelected)
+                    console.log(priceTotal)
                 }
                 const goToRegister = () => {
                     emit('updatePage', 'register');

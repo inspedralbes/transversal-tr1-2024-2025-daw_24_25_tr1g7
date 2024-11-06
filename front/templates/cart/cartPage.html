@@ -208,13 +208,13 @@
             </div>
         </div>
 
-        <button @click="finishBuying" class="btn btn-primary me-2">Seguir con la compra</button>
+        <button @click="finishBuying" class="btn btn-primary me-2">Finalizar la compra</button>
         <button @click="showAddCreditCardComponent = !showAddCreditCardComponent" class="btn btn-secondary">Añadir
             tarjeta de credito
         </button>
-        <add-payment-method-component v-if="showAddCreditCardComponent"
-                                      @payment-methods="paymentMethods.data = $event"
-                                      @default-payment-method="defaultPaymentMethods.data = $event"></add-payment-method-component>
+<!--        <add-payment-method-component v-if="showAddCreditCardComponent"-->
+<!--                                      @payment-methods="paymentMethods.data = $event"-->
+<!--                                      @default-payment-method="defaultPaymentMethods.data = $event"></add-payment-method-component>-->
     </div>
 
 </div>
@@ -567,3 +567,19 @@
     </div>
 </div>
 <!--MODAL ADD BILLING ADDRESS-->
+
+<!--MODAL ADD CARDS INIT-->
+<div @click="showAddCreditCardComponent = !showAddCreditCardComponent"
+     class="w-100 position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity"
+     style="z-index: 1000;height: 100vh;"
+     v-if="showAddCreditCardComponent">
+    <div @click.stop class="w-lg-50 w-90 card border-none bg-white">
+        <add-payment-method-component
+                v-if="showAddCreditCardComponent"
+                @payment-methods="paymentMethods.data = $event"
+                @default-payment-method="defaultPaymentMethods.data = $event"
+
+        ></add-payment-method-component>
+    </div>
+</div>
+<!--MODAL ADD CARDS FINISH-->
