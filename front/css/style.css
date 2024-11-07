@@ -4033,6 +4033,7 @@ p {
 /* Contenedor de estadísticas */
 .stats-container {
     display: flex;
+    gap: 20px; /* Espaciado entre elementos */
     background-color: #f8f9fa;
     padding: 15px;
     border-radius: 10px;
@@ -4058,15 +4059,19 @@ p {
     font-weight: bold;
 }
 
-/* Desglose por estrellas */
-.star-breakdown {
-    max-width: 300px;
-    margin: auto;
+/* Contenedor del desglose de estrellas */
+.star-breakdown-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px;
 }
 
+/* Barra de desglose por estrellas */
 .star-bar {
     font-size: 0.9em;
     color: #333;
+    margin-bottom: 8px;
 }
 
 /* Barra de progreso de estrellas */

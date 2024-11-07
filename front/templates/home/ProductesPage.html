@@ -67,24 +67,22 @@
             </div>
         </div>
 
-            <div class="product-reviews-container mt-5">
-                <h3 class="reviews-header">Opiniones</h3>
-        
-                <!-- Sección de estadísticas generales de opiniones -->
-                <div class="stats-container d-flex justify-content-around mb-4">
-                    <div class="stats-box text-center">
-                        <p class="average-rating">{{ stats.average_rating.toFixed(1) }}</p>
-                        <p class="stars">⭐⭐⭐⭐⭐</p>
-                        <p class="total-opinions">{{ stats.totalOpinions }} Opiniones</p>
-                    </div>
-                    <div class="stats-box text-center">
-                        <p class="recommend-percentage">{{ stats.recommend_percentage }}%</p>
-                        <p>Recomiendan</p>
-                    </div>
+        <div class="product-reviews-container mt-5">
+            <h3 class="reviews-header">Opiniones</h3>
+    
+            <!-- Sección de estadísticas generales de opiniones -->
+            <div class="stats-container d-flex justify-content-around mb-4">
+                <div class="stats-box text-center">
+                    <p class="average-rating">{{ stats.average_rating.toFixed(1) }}</p>
+                    <p class="stars">⭐⭐⭐⭐⭐</p>
+                    <p class="total-opinions">{{ stats.totalOpinions }} Opiniones</p>
                 </div>
-        
+                <div class="stats-box text-center">
+                    <p class="recommend-percentage">{{ stats.recommend_percentage }}%</p>
+                    <p>Recomiendan</p>
+                </div>
                 <!-- Desglose por estrellas -->
-                <div class="star-breakdown">
+                <div class="star-breakdown-container">
                     <div v-for="star in [5, 4, 3, 2, 1]" :key="star" class="d-flex align-items-center star-bar">
                         <span>{{ star }} ⭐</span>
                         <div class="progress flex-grow-1 mx-2">
@@ -95,6 +93,7 @@
                         <span>{{ stats.star_counts[star] || 0 }}</span>
                     </div>
                 </div>
+            </div>
         </div>  
         <!-- Formulario para agregar una nueva opinión -->
     <h4 class="mt-4">Agregar una Opinión</h4>
