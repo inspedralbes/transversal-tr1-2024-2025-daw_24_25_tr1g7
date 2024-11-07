@@ -38,7 +38,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('delete-address/{id}', [DireccionesEnvioController::class, 'delete'])->name('addresses.delete');
         Route::post('update-address/{id}', [DireccionesEnvioController::class, 'update'])->name('addresses.update');
         Route::post('update-default-address', [DireccionesEnvioController::class, 'updateDefault'])->name('addresses.updateDefault');
-
     });
     Route::prefix('billing-addresses')->group(function () {
         Route::post('create-addresses-billing', [DireccionesFacturacionController::class, 'store'])->name('addresses.creatAddressesBilling');
@@ -46,7 +45,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('delete-address-billing/{id}', [DireccionesFacturacionController::class, 'delete'])->name('addresses.deleteBilling');
         Route::post('update-address-billing/{id}', [DireccionesFacturacionController::class, 'update'])->name('addresses.updateBilling');
         Route::post('update-default-address-billing', [DireccionesFacturacionController::class, 'updateDefault'])->name('addresses.updateDefaultBilling');
-
     });
     Route::prefix('stripe')->group(function () {
         Route::post('create-setup-intent', [StripeController::class, 'createSetupIntent'])->name('stripe.createSetupIntent');
@@ -54,6 +52,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('retrieve-payment-method', [StripeController::class, 'retrievePaymentMethod'])->name('stripe.retrievePaymentMethod');
         Route::post('set-default-payment-method', [StripeController::class, 'setDefaultPaymentMethod'])->name('stripe.setDefaultPaymentMethod');
         Route::post('purchase', [StripeController::class, 'purchase'])->name('stripe.purchase');
+    });
+
+    Route::prefix('orders')->group(function () {
+        Route::post('get-my-orders', [ComandaController::class, 'getMyOrders'])->name('orders.getMyOrders');
     });
 
     Route::get('/test-auth', function () {

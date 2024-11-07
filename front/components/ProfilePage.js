@@ -1,7 +1,7 @@
 import { defineComponent, defineAsyncComponent, reactive, ref, onMounted, computed } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 import * as comm from "../communicationManager/communicationManager.js";
 import {
-    createShippingAddress,
+    createShippingAddress, getMyOrders,
     updateDefaultShippingAddress,
     updateShippingAddress
 } from "../communicationManager/communicationManager.js";
@@ -82,11 +82,16 @@ export const ProfilePage = defineAsyncComponent(() =>
                 const shippingAddresses = reactive({data:[]});
                 const billingAddressess = reactive({data:[]});
 
+                const orders = reactive({data:[]});
+
                 onMounted(async () => {
                     shippingAddresses.data = await comm.getShippingAddresses(getToken());
                     console.log(shippingAddresses);
                     billingAddressess.data = await comm.getBillingAddresses(getToken());
                     console.log(billingAddressess);
+
+                    orders.data = await comm.getMyOrders(getToken());
+                    console.log(orders.data);
 
                     let response = await comm.retrievePaymentMethod(getToken());
                     paymentMethods.data = response.paymentMethods;
@@ -97,6 +102,8 @@ export const ProfilePage = defineAsyncComponent(() =>
                     let testauth = await comm.testAuth(getToken());
                     console.log("testAuth")
                     console.log(testauth)
+
+
                 });
 
                 const createShippingAddress = async () => {
@@ -267,6 +274,7 @@ export const ProfilePage = defineAsyncComponent(() =>
                 }
 
 
+
                 return {
                     tab,
                     logout,
@@ -296,7 +304,9 @@ export const ProfilePage = defineAsyncComponent(() =>
                     showAddCreditCardComponent,
                     handleDefaultPaymentMethod,
                     selectedType,
-                    handleTypeChange
+                    handleTypeChange,
+
+                    orders
                 };
             }
         }))

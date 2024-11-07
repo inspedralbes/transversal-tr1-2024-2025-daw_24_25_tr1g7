@@ -128,12 +128,21 @@ class StripeController extends Controller
 
         $user = Auth::user();
 
-        $stripeCharge = $user->charge($data['price'], $data['paymentMethod']['id']);
+        $priceInCents = (int) round($request->input('price') * 100);
+        $paymentMethod = $request->input('paymentMethod');
 
+        try {
+            $charge = $user->charge($priceInCents, $paymentMethod['id'], [
+                'return_url' => route('home'),
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+        }
+//        return $data['products'];
         $order = new Comanda();
         $order->idUser = $user->id;
         $order->idBillingAddress = $data['billingAddress']['id'];
-        $order->idShippingAddres = $data['shippingAddress']['id'];
+        $order->idShippingAddress = $data['shippingAddress']['id'];
         $order->status = "pending";
         $order->price = $data['price'];
         $order->save();
@@ -141,12 +150,12 @@ class StripeController extends Controller
         foreach ($data['products'] as $productInCart){
             $orderProducts = new ArticuloComanda();
             $orderProducts->idOrder = $order->id;
-            $order->idProduct = $productInCart['id'];
-            $order->num_product = $productInCart['quantity'];
+            $orderProducts->idProduct = $productInCart['id'];
+            $orderProducts->num_product = $productInCart['num_product'];
             $orderProducts->save();
 
             $product = Producte::findOrFail($productInCart['id']);
-            $product->stock = $product->stock - $productInCart['quantity'];
+            $product->stock = $product->stock - $productInCart['num_product'];
             $product->save();
         }
 
@@ -159,7 +168,7 @@ class StripeController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Payment Method purchased successfully!',
-            'charge' => $stripeCharge
+            'charge' => $charge
         ]);
 
     }

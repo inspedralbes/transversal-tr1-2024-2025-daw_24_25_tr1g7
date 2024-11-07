@@ -16,8 +16,10 @@ class AuthenticatorController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-    
+
         if (Auth::attempt($credentials)) {
+//            $request->session()->regenerate();
+            $user = Auth::user();
 
             $token = $user->createToken('auth_token')->plainTextToken;
             $cookie = cookie('auth_token', $token, 60 * 24, null, null, true, true);
@@ -25,39 +27,17 @@ class AuthenticatorController extends Controller
 //            return redirect('/category')->with('success', 'Usuario iniciado sesión exitosamente');
 
             return response()->json(['status' => 'success', 'message' => 'Credentials validated', 'token' => $token, 'user' => $user])->cookie($cookie);
-            $request->session()->regenerate();
-    
-            return redirect()->route('welcome');
         }
-    
-        return redirect()->back()->withErrors(['email' => 'Credencials incorrectes'])->withInput();
-    
+
+        return response()->json(['status' => 'error', 'message' => 'Invalid credentials']);
     }
 
-    public function showWelcome()
-    {
-        if (Auth::check()) {
-            return view('welcome'); 
-        } else {
-            return redirect()->route('login');
-        }
-    }
-    
-
-    public function showLoginForm()
-    {
-        return view('auth.login_register');
-    }
-
-    public function logout(Request $request)
+    public function logout()
     {
         Auth::logout();
-        $request->session()->invalidate(); 
-        $request->session()->regenerateToken(); 
-    
-        return redirect()->route('home'); 
+//        return redirect('/login')->with('success', 'Has cerrado sesión con éxito.');
+        return response()->json(['status' => 'success', 'message' => 'Logged out']);
     }
-    
 
     public function register(Request $request)
     {
@@ -66,20 +46,21 @@ class AuthenticatorController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ],
-        [
-            'username.required' => 'El campo nombre es obligatorio',
-            'email.required' => 'El campo email es obligatorio',
-            'email.email' => 'El campo email debe ser una dirección válida',
-            'password.required' => 'El campo password es obligatorio'
-        ]);
+            [
+                'username.required' => 'El campo nombre es obligatorio',
+                'email.required' => 'El campo email es obligatorio',
+                'email.email' => 'El campo email debe ser una dirección válida',
+                'password.required' => 'El campo password es obligatorio'
+            ]);
 
         try {
             $user = new User();
             $user->name = $data['username'];
             $user->email = $data['email'];
-            $user->password = bcrypt($data['password']);
+            $user->password = $data['password'];
             $user->save();
 
+            $token = $user->createToken('auth_token')->plainTextToken;
             Auth::login($user);
             $cookie = cookie('auth_token', $token, 60 * 24, null, null, true, true);
 
@@ -89,10 +70,9 @@ class AuthenticatorController extends Controller
 //            return redirect('/category')->with('success', 'Usuario registrado e iniciado sesión exitosamente');
             return response()->json(['status' => 'success', 'message' => 'User created', 'token' => $token, 'user' => $user])->cookie($cookie);
 
-            
-            return view('welcome'); 
         } catch (\Exception $e) {
-            return back()->withErrors(['error' => 'Hubo un problema al registrar el usuario: ' . $e->getMessage()])->withInput();
+//            return back()->withErrors(['error' => 'Hubo un problema al registrar el usuario: ' . $e->getMessage()])->withInput();
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
 }
