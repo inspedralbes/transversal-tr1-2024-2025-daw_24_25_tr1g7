@@ -22,23 +22,26 @@ class UserController extends Controller
 
 
     public function store(Request $request)
-    {
-        // Valida les dades del formulari
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required',
-        ]);
+{
+    $data = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required',
+        'role' => 'required|string', // Nuevo campo para el rol
+    ]);
 
-        // Crea un nou usuari i el desa
-        $user = new User();
-        $user->name = $data['name'];
-        $user->email = $data['email'];
-        $user->password = bcrypt($data['password']);
-        $user->save();
+    // Crea un nuevo usuario
+    $user = new User();
+    $user->name = $data['name'];
+    $user->email = $data['email'];
+    $user->password = bcrypt($data['password']);
+    $user->save();
 
-        return redirect()->route('users.index')->with('success', 'Usuari creat correctament');
-    }
+    // Asigna el rol al usuario (puedes ajustar esto según la lógica de tu aplicación)
+    $user->assignRole($data['role']);
+
+    return redirect()->route('users.index')->with('success', 'Usuario creado correctamente');
+}
 
     /**
      * Actualitza la informació d'un usuari especific.

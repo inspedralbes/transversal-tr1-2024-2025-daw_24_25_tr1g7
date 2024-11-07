@@ -2,27 +2,37 @@
 
 @section('page-style')
     <style>
-        .container{
-            padding-top:20px;
+        .container {
+            padding-top: 20px;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
         }
+
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
         }
+
         th {
             background-color: #f2f2f2;
         }
+
         .btn-edit {
-            color:white;
-            background-color:#e0a800;
+            color: white;
+            background-color: #e0a800;
         }
+
         .action-buttons {
-            display: flex; 
-            gap: 10px; 
+            display: flex;
+            gap: 10px;
+        }
+
+        .no-permission {
+            color: red;
+            font-style: italic;
         }
     </style>
 @endsection
@@ -37,7 +47,13 @@
                 <button class="btn btn-outline-secondary" type="submit">Buscar</button>
             </div>
         </form>
-        <a href="{{ route('producte.crear') }}" class="btn btn-success">Afegir Producte</a><br><br>
+
+        @if (auth()->user()->hasRole('admin'))
+            <a href="{{ route('producte.crear') }}" class="btn btn-success">Afegir Producte</a><br><br>
+        @else
+            <p class="no-permission">No tens permisos per afegir nous productes</p>
+        @endif
+
         <table>
             <thead>
                 <tr>
@@ -47,7 +63,7 @@
                     <th>Stock</th>
                     <th>Marca</th>
                     <th>Precio</th>
-                    <th>Acciones</th>
+                    <th>Accions</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,8 +77,12 @@
                         <td>{{ $producto->price }}</td>
                         <td>
                             <div class="action-buttons">
-                                <a href="{{ route('producte.edit', $producto->id) }}" class="btn btn-edit">Editar</a>
-                                <button onclick="deleteProduct({{ $producto->id }})" class="btn btn-danger">Eliminar</button>
+                                @if (auth()->user()->hasRole('admin'))
+                                    <a href="{{ route('producte.edit', $producto->id) }}" class="btn btn-edit">Editar</a>
+                                    <button onclick="deleteProduct({{ $producto->id }})" class="btn btn-danger">Eliminar</button>
+                                @else
+                                    <span class="no-permission">No tens permisos per editar o eliminar aquest producte</span>
+                                @endif
                             </div>
                         </td>
                     </tr>

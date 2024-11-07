@@ -6,26 +6,25 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;  // Asegúrate de importar el modelo Role
 
 class LoginRegisterController extends Controller
 {
-    //
     public function authenticate(Request $request)
-{
-    $credentials = $request->validate([
-        'email' => ['required', 'email'],
-        'password' => ['required'],
-    ]);
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-    if (Auth::attempt($credentials)) {
-        $request->session()->regenerate();
-        return redirect()->route('welcome');
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->route('welcome');
+        }
+
+        // Redirigir de vuelta al formulario de inicio de sesión con un mensaje de error
+        return redirect()->back()->withErrors(['email' => 'Credenciales inválidas'])->withInput();
     }
-
-    // Redirigir de vuelta al formulario de inicio de sesión con un mensaje de error
-    return redirect()->back()->withErrors(['email' => 'Credenciales inválidas'])->withInput();
-}
-
 
     public function showWelcome()
     {
@@ -72,9 +71,9 @@ class LoginRegisterController extends Controller
             $user->password = bcrypt($data['password']);
             $user->save();
 
-            // Inicia sesión automáticamente al usuario
-            Auth::login($user);
+            $user->assignRole('user'); 
 
+            Auth::login($user);
 
             return redirect()->route('welcome');
 
@@ -82,5 +81,4 @@ class LoginRegisterController extends Controller
             return back()->withErrors(['error' => 'Hubo un problema al registrar el usuario: ' . $e->getMessage()])->withInput();
         }
     }
-
 }

@@ -24,6 +24,8 @@ Route::get('/welcome', [LoginRegisterController::class, 'showWelcome'])->name('w
 
 Route::post('/logout', [LoginRegisterController::class, 'logout'])->name('logout');
 
+Route::get('/login', [LoginRegisterController::class, 'showLoginForm'])->name('login');
+
 Route::post('/login', [LoginRegisterController::class, 'authenticate'])->name('login');
 
 Route::post('/register', [LoginRegisterController::class, 'register'])->name('register');
@@ -67,8 +69,6 @@ Route::get('/producte/crear', [ProducteController::class, 'crear'])->name('produ
 Route::put('/producteupdate/{id}', [ProducteController::class, 'update'])->name('producte.update');
 
 Route::delete('/productedelete/{id}', [ProducteController::class,'delete'])->name('producte.delete');
-
-//Route::get('/productelist', [ProducteController::class,'list']);
 
 
 Route::get('/comandasindex', [ComandaController::class,'index'])->name("comanda.index");

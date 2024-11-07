@@ -33,6 +33,13 @@
             <label for="password_confirmation" class="form-label">Confirma la Contrasenya</label>
             <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
         </div>
+        <div class="mb-3">
+        <label for="role" class="form-label">Rol</label>
+        <select class="form-control" id="role" name="role">
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+        </select>
+    </div>
         <button type="submit" class="btn btn-primary">Afegir Usuari</button>
         <a href="{{ route('users.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
