@@ -42,7 +42,7 @@
         </div>
 
         <div v-if="page === 'cart'">
-            <cart-page v-bind:products-cart="productsCart.data" @update-page="changePage"></cart-page>
+            <cart-page v-bind:products-cart="productsCart.data" @update-page="changePage" @finish="finishBuy"></cart-page>
         </div>
 
         <div v-if="page === 'profile'">
@@ -129,13 +129,22 @@
                 localStorage.setItem('actualPage', newPage)
             }
 
+            const finishBuy = (status) => {
+                if (status){
+                    productsCart.data.splice(0);
+                    localStorage.removeItem('productsCart');
+                }else{
+                    console.log("no se pudo hacer la compra")
+                }
+            }
             return {
                 page,
                 productsCart,
                 addProductToCart,
                 showProduct,
                 changePage,
-                productSelected
+                productSelected,
+                finishBuy
             }
         }
     })

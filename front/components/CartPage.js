@@ -18,7 +18,7 @@ export const CartPage = defineAsyncComponent(() =>
                     default: () => [] // Cambiar a función para asegurar el valor predeterminado
                 }
             },
-            emits: ['updatePage'],
+            emits: ['updatePage', 'finish'],
             setup(props, { emit }) {
                 const getToken = () =>{
                     return localStorage.getItem('token');
@@ -59,12 +59,14 @@ export const CartPage = defineAsyncComponent(() =>
                         emit('updatePage', 'login');
                     }else{
                         steps.value = 'selectAddress';
+                        toggleLoading();
+
                         shippingAddresses.data = await comm.getShippingAddresses(getToken());
                         Object.assign(shippingAddresses.data.find(address => address.default) || {}, { selected: true });                        console.log(shippingAddresses);
                         billingAddressess.data = await comm.getBillingAddresses(getToken());
                         Object.assign(billingAddressess.data.find(address => address.default) || {}, { selected: true });                        console.log(shippingAddresses);
                         console.log(billingAddressess);
-
+                        toggleLoading();
 
                     }
                 }
@@ -277,6 +279,9 @@ export const CartPage = defineAsyncComponent(() =>
 
                 const selectAddresses = async () =>{
                     steps.value = 'selectCreditCard';
+                    toggleLoading();
+
+
                     console.log("Puedes ver tus tarjetas de credito");
                     console.log(JSON.parse(localStorage.getItem('user')));
                     console.log(localStorage.getItem('token'));
@@ -285,6 +290,9 @@ export const CartPage = defineAsyncComponent(() =>
                     defaultPaymentMethods.data = response.defaultPaymentMethod;
                     console.log(paymentMethods.data)
                     console.log(defaultPaymentMethods.data)
+                    toggleLoading();
+
+
                 }
 
 
@@ -292,17 +300,28 @@ export const CartPage = defineAsyncComponent(() =>
                     // steps.value = 'finishBuy'
                     const shippingAddresSelected = billingAddressess.data.find(address => address.selected);
                     const billingAddressSelected = shippingAddresses.data.find(address => address.selected);
+                    toggleLoading();
 
                     let response = await comm.purchase(getToken(), defaultPaymentMethods.data, parseFloat(priceTotal.value), props.productsCart, shippingAddresSelected, billingAddressSelected);
                     console.log(response);
 
                     if(response.status === 'success'){
+                        toggleLoading();
+
+                        emit('finish', true);
+                        emit('updatePage', 'home');
                         // localStorage.removeItem('productsCart')
+
                     }
                 }
                 const goToRegister = () => {
                     emit('updatePage', 'register');
                 };
+
+                const showLoadingPage = ref(false);
+                function toggleLoading() {
+                    showLoadingPage.value = !showLoadingPage.value;
+                }
 
                 return {
                     goToRegister,
@@ -341,7 +360,8 @@ export const CartPage = defineAsyncComponent(() =>
                     selectedType,
                     handleTypeChange,
 
-                    selectAddresses
+                    selectAddresses,
+                    showLoadingPage
                 };
             }
         }))
