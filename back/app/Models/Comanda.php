@@ -10,4 +10,9 @@ class Comanda extends Model
     {
         return $this->belongsTo(User::class, 'idUser');
     }
+
+    public function articulos()
+    {
+        return $this->hasMany(ArticuloComanda::class, 'id');
+    }
 }

@@ -7,10 +7,24 @@ use App\Http\Controllers\ProducteController;
 use App\Http\Controllers\ComandaController;
 use App\Http\Controllers\ArticuloComandaController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\AuthenticatorController;
+use App\Http\Controllers\PdfController;
+
+
+
+Route::get('/', [AuthenticatorController::class, 'showLoginForm'])->name('home');
+
+Route::get('/welcome', [AuthenticatorController::class, 'showWelcome'])->name('welcome');
+
+Route::post('/logout', [AuthenticatorController::class, 'logout'])->name('logout');
+
+Route::post('/login', [AuthenticatorController::class, 'authenticate'])->name('login');
+
+Route::post('/register', [AuthenticatorController::class, 'register'])->name('register');
+
 
 
 Route::get('/categoryindex', [CategoriaController::class,'index'])->name("category.index");
-
 
 Route::post('/categorystore', [CategoriaController::class,'store'])->name("category.store");
 
@@ -33,6 +47,8 @@ Route::put('/subcategoryupdate/{id}', [SubCategoriaController::class, 'update'])
 
 Route::delete('/subcategorydelete/{id}', [SubCategoriaController::class,'delete'])->name('subcategory.delete');
 
+
+Route::get('/pdf', [PdfController::class, 'index'])->name('pdf.index');
 
 
 Route::get('/productelist', [ProducteController::class,'index'])->name('producte.index');
