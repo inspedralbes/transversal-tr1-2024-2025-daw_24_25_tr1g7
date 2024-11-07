@@ -56,7 +56,6 @@ Route::get('/invoice/{order_id}', [PdfController::class, 'index'])->name('invoic
 
 
 
-
 Route::get('/productelist', [ProducteController::class,'index'])->name('producte.index');
 
 Route::post('/productestore', [ProducteController::class,'store'])->name('producte.store');
