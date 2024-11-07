@@ -9,7 +9,11 @@ use App\Http\Controllers\ArticuloComandaController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\AuthenticatorController;
 use App\Http\Controllers\LoginRegisterController;
+use App\Http\Controllers\UserController;
 
+
+
+Route::resource('users', UserController::class);
 
 
 Route::get('/', [LoginRegisterController::class, 'showLoginForm'])->name('home');
