@@ -4122,3 +4122,104 @@ Acabar de mirar sticky para filtros
         border-bottom-right-radius: .3rem;
     }
 }
+
+.star-rating {
+    font-size: 2rem;
+    color: #d3d3d3;
+    cursor: pointer;
+}
+
+.star-rating .active {
+    color: #ffc107; /* Color amarillo para estrellas activas */
+}
+
+.star-rating span {
+    transition: color 0.3s;
+}
+
+/* Contenedor general de opiniones */
+.product-reviews-container {
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Título de la sección de opiniones */
+.reviews-header {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+/* Contenedor de estadísticas */
+.stats-container {
+    display: flex;
+    gap: 20px; /* Espaciado entre elementos */
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* Caja de estadísticas individuales */
+.stats-box {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 150px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.average-rating {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.recommend-percentage {
+    font-size: 1.8em;
+    color: #28a745;
+    font-weight: bold;
+}
+
+/* Contenedor del desglose de estrellas */
+.star-breakdown-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px;
+}
+
+/* Barra de desglose por estrellas */
+.star-bar {
+    font-size: 0.9em;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Barra de progreso de estrellas */
+.progress-bar {
+    background-color: #ffc107;
+    height: 8px;
+    border-radius: 5px;
+}
+
+/* CSS para el selector de estrellas */
+.star-rating span {
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #ccc;
+}
+
+.star-rating .selected {
+    color: #ffc107;
+}
+
+/* Listado de opiniones */
+.opinion-list {
+    margin-top: 20px;
+}
+
+.opinion {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}

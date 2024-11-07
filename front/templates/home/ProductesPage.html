@@ -66,6 +66,85 @@
                 </div>
             </div>
         </div>
+
+        <div class="product-reviews-container mt-5">
+            <h3 class="reviews-header">Opiniones</h3>
+    
+            <!-- Sección de estadísticas generales de opiniones -->
+            <div class="stats-container d-flex justify-content-around mb-4">
+                <div class="stats-box text-center">
+                    <p class="average-rating">{{ stats.average_rating.toFixed(1) }}</p>
+                    <p class="stars">⭐⭐⭐⭐⭐</p>
+                    <p class="total-opinions">{{ stats.totalOpinions }} Opiniones</p>
+                </div>
+                <div class="stats-box text-center">
+                    <p class="recommend-percentage">{{ stats.recommend_percentage }}%</p>
+                    <p>Recomiendan</p>
+                </div>
+                <!-- Desglose por estrellas -->
+                <div class="star-breakdown-container">
+                    <div v-for="star in [5, 4, 3, 2, 1]" :key="star" class="d-flex align-items-center star-bar">
+                        <span>{{ star }} ⭐</span>
+                        <div class="progress flex-grow-1 mx-2">
+                            <div class="progress-bar" role="progressbar"
+                                :style="{ width: (stats.star_counts[star] / stats.totalOpinions * 100) + '%' }">
+                            </div>
+                        </div>
+                        <span>{{ stats.star_counts[star] || 0 }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>  
+        <!-- Formulario para agregar una nueva opinión -->
+    <h4 class="mt-4">Agregar una Opinión</h4>
+    <div class="card p-3">
+        <!-- Calificación de Estrellas -->
+        <div class="mb-3">
+            <label class="form-label">Valoración general:</label>
+            <div class="star-rating">
+                <span @click="setRating(1)" :class="{'active': newOpinion.opinion_number >= 1}">★</span>
+                <span @click="setRating(2)" :class="{'active': newOpinion.opinion_number >= 2}">★</span>
+                <span @click="setRating(3)" :class="{'active': newOpinion.opinion_number >= 3}">★</span>
+                <span @click="setRating(4)" :class="{'active': newOpinion.opinion_number >= 4}">★</span>
+                <span @click="setRating(5)" :class="{'active': newOpinion.opinion_number >= 5}">★</span>
+            </div>
+        </div>
+        <!-- Campo de texto para la opinión -->
+        <div class="mb-3">
+            <label class="form-label">Opinión:</label>
+            <textarea v-model="newOpinion.opinion" class="form-control" rows="3" required></textarea>
+        </div>
+    
+        <!-- Campo para la URL de la imagen -->
+        <div class="mb-3">
+            <label class="form-label">URL de la Imagen:</label>
+            <input v-model="newOpinion.img" class="form-control" required>
+        </div>
+    </div>
+        <button @click="addOpinion" type="button" class="btn btn-primary" :disabled="loading">
+            <span v-if="loading">Cargando...</span>
+            <span v-else>Enviar Opinión</span>
+        </button>
+
+<!-- Nueva sección de Opiniones del Producto -->
+<div class="container mt-5">
+    <h3>Opiniones del Producto</h3>
+
+    <!-- Mostrar opiniones existentes -->
+    <div v-if="opinions.data.length > 0">
+        <div v-for="opinion in opinions.data" :key="opinion.id" class="card my-3">
+            <div class="card-body">
+                <p class="m-0"><strong>Puntuación:</strong> {{opinion.opinion_number}} <span><i class="bi bi-star-fill text-warning"></i></span></p>
+                <p><strong>Opinión:</strong> {{opinion.opinion}}</p>
+                <img v-if="opinion.img" :src="opinion.img" alt="Imagen de la opinión" class="img-fluid mt-2">
+            </div>
+        </div>
+    </div>
+    <div v-else>
+        <p>No hay opiniones para este producto.</p>
+    </div>
+    </div>
+</div>
     </div>
 </div>
 
@@ -76,3 +155,4 @@
         </div>
     </div>
 </div>
+
