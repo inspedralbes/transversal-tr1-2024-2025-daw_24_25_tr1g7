@@ -13,21 +13,20 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
+
+        DB::table('categorias')->whereIn('name', [
+            'Software', 'Consolas', 'Tablets', 'Smartphones', 
+            'Redes', 'Accesorios', 'Almacenamiento'
+        ])->delete();
+        
         // Categorías generales de tecnología
         $categories = [
             ['name' => 'Componentes'],
             ['name' => 'Portátiles'],
             ['name' => 'Periféricos'],
             ['name' => 'Monitores'],
-            ['name' => 'Almacenamiento'],
-            ['name' => 'Accesorios'],
-            ['name' => 'Redes'],
-            ['name' => 'Smartphones'],
-            ['name' => 'Tablets'],
-            ['name' => 'Consolas'],
             ['name' => 'Impresoras'],
-            ['name' => 'Software'],
-        ];
+        ];  
 
         DB::table('categorias')->insert($categories);
     }

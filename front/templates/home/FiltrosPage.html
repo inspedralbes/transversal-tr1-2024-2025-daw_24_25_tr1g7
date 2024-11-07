@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../../css/style.css">
 <div id="app">
   <div class="container">
     <div class="row">
@@ -28,23 +28,15 @@
           <label><input type="checkbox" v-model="filters.categories.Componentes"> Componentes</label><br>
           <label><input type="checkbox" v-model="filters.categories.Portátiles"> Portátiles</label><br>
           <label><input type="checkbox" v-model="filters.categories.Periféricos"> Periféricos</label><br>
-          <label><input type="checkbox" v-model="filters.categories.Monitores"> Monitores</label><br>
-          <label><input type="checkbox" v-model="filters.categories.Almacenamiento"> Almacenamiento</label><br>
-          <label><input type="checkbox" v-model="filters.categories.Accesorios"> Accesorios</label><br>
-          <label><input type="checkbox" v-model="filters.categories.Redes"> Redes</label><br>
-          <label><input type="checkbox" v-model="filters.categories.Smartphones"> Smartphones</label><br>
-          <label><input type="checkbox" v-model="filters.categories.Tablets"> Tablets</label><br>
-          <label><input type="checkbox" v-model="filters.categories.Consolas"> Consolas</label><br>
-          <label><input type="checkbox" v-model="filters.categories.Impresoras"> Impresoras</label><br>
-          <label><input type="checkbox" v-model="filters.categories.Software"> Software</label><br>
-
+          <label><input type="checkbox" v-model="filters.categories.Monitores"> Monitores</label><br>        
+          <label><input type="checkbox" v-model="filters.categories.Impresoras"> Impresoras</label><br>  
         </div>
         <hr>
 
         <div>
             <h5>Precio</h5>
             <label>
-              <input type="range" min="0" max="1000" v-model="price.value">
+              <input type="range" min="0" max="10000" v-model="price.value">
               <br>0€ - {{ price.value }}€
             </label>
           </div>
@@ -62,6 +54,33 @@
           <label><input type="checkbox" v-model="filters.brands.Corsair"> Corsair</label><br>
           <label><input type="checkbox" v-model="filters.brands.Kingston"> Kingston</label><br>
           <label><input type="checkbox" v-model="filters.brands.Logitech"> Logitech</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Razer"> Razer</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Intel"> Intel</label><br>
+          <label><input type="checkbox" v-model="filters.brands.MSI"> MSI</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Asus"> Asus</label><br>
+          <label><input type="checkbox" v-model="filters.brands.EVGA"> EVGA</label><br>
+          <label><input type="checkbox" v-model="filters.brands.CoolerMaster"> Cooler Master</label><br>
+          <label><input type="checkbox" v-model="filters.brands.NZXT"> NZXT</label><br>
+          <label><input type="checkbox" v-model="filters.brands.SteelSeries"> SteelSeries</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Acer"> Acer</label><br>
+          <label><input type="checkbox" v-model="filters.brands.LG"> LG</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Gigabyte"> Gigabyte</label><br>
+          <label><input type="checkbox" v-model="filters.brands.GSkill"> G.Skill</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Noctua"> Noctua</label><br>
+          <label><input type="checkbox" v-model="filters.brands.FractalDesign"> Fractal Design</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Epson"> Epson</label><br>
+          <label><input type="checkbox" v-model="filters.brands.BenQ"> BenQ</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Lenovo"> Lenovo</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Brother"> Brother</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Sapphire"> Sapphire</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Thermaltake"> Thermaltake</label><br>
+          <label><input type="checkbox" v-model="filters.brands.BeQuiet"> BeQuiet!</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Phanteks"> Phanteks</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Canon"> Canon</label><br>
+          <label><input type="checkbox" v-model="filters.brands.ASRock"> ASRock</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Seasonic"> Seasonic</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Microsoft"> Microsoft</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Keychron"> Keychron</label><br>
         </div>
         <hr>
 

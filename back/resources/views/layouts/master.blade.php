@@ -48,6 +48,9 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('users.index') }}">Usuaris</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('producte.index') }}">Productes</a>
                         </li>
                         <li class="nav-item">
@@ -68,9 +71,9 @@
         </nav>
     @endif
 
-    @yield('content')
+@yield('content')
 
-    @yield('page-script')
+@yield('page-script')
 
 </body>
 </html>

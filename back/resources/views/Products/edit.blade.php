@@ -86,6 +86,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">Actualizar Producto</button>
+        <a href="{{ route('producte.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
 @endsection

@@ -10,18 +10,23 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\AuthenticatorController;
 use App\Http\Controllers\PdfController;
 
+use App\Http\Controllers\LoginRegisterController;
+use App\Http\Controllers\UserController;
 
 
-Route::get('/', [AuthenticatorController::class, 'showLoginForm'])->name('home');
 
-Route::get('/welcome', [AuthenticatorController::class, 'showWelcome'])->name('welcome');
+Route::resource('users', UserController::class);
 
-Route::post('/logout', [AuthenticatorController::class, 'logout'])->name('logout');
 
-Route::post('/login', [AuthenticatorController::class, 'authenticate'])->name('login');
+Route::get('/', [LoginRegisterController::class, 'showLoginForm'])->name('home');
 
-Route::post('/register', [AuthenticatorController::class, 'register'])->name('register');
+Route::get('/welcome', [LoginRegisterController::class, 'showWelcome'])->name('welcome');
 
+Route::post('/logout', [LoginRegisterController::class, 'logout'])->name('logout');
+
+Route::post('/login', [LoginRegisterController::class, 'authenticate'])->name('login');
+
+Route::post('/register', [LoginRegisterController::class, 'register'])->name('register');
 
 
 Route::get('/categoryindex', [CategoriaController::class,'index'])->name("category.index");
