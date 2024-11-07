@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comanda;
+use Illuminate\Support\Facades\Auth;
 
 class ComandaController extends Controller
-{   
+{
 
     public function index(Request $request)
 {
@@ -46,7 +47,7 @@ class ComandaController extends Controller
             'status.required' => 'The status filed is required',
             'price.required' => 'The price filed is required'
         ]);
-        
+
         $comanda = new Comanda ();
         $comanda->idUser = $data['idUser'];
         $comanda->status = $data['status'];
@@ -94,13 +95,13 @@ class ComandaController extends Controller
         $comanda = Comanda::findOrFail($id);
         $comanda->status = $data['status'];
         $comanda->save();
-        
+
         return redirect()->route('comanda.index')->with('success', 'Estado de la comanda actualizado correctamente.');
     }
 
     public function edit($id){
 
-    $comanda = Comanda::findOrFail($id); 
+    $comanda = Comanda::findOrFail($id);
     return view('Comandes.edit', compact('comanda'));
 
     }
@@ -123,7 +124,7 @@ class ComandaController extends Controller
         $comanda->status = $data['status'];
         $comanda->price = $data['price'];
         $comanda->save();
-        
+
         return response()->json([
             'status'=> 'successful',
             'message'=> 'Comanda modificada'
@@ -140,5 +141,14 @@ class ComandaController extends Controller
             'status'=> 'successful',
             'message'=> 'Comanda llistada'
         ]);
+    }
+
+    public function getMyOrders()
+    {
+        $orders = Comanda::where('idUser', Auth::user()->id)
+            ->with(['products', 'shippingAddress', 'billingAddress'])
+            ->get();
+
+        return response()->json($orders);
     }
 }

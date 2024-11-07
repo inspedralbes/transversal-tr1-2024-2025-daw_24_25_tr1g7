@@ -292,12 +292,13 @@ export const CartPage = defineAsyncComponent(() =>
                     // steps.value = 'finishBuy'
                     const shippingAddresSelected = billingAddressess.data.find(address => address.selected);
                     const billingAddressSelected = shippingAddresses.data.find(address => address.selected);
-                    console.log(shippingAddresSelected)
-                    console.log(billingAddressSelected)
-                    console.log(priceTotal)
 
-                    let response = await comm.purchase(getToken(), defaultPaymentMethods.data, priceTotal.value, props.productsCart, shippingAddresSelected.value, billingAddressSelected.value);
+                    let response = await comm.purchase(getToken(), defaultPaymentMethods.data, parseFloat(priceTotal.value), props.productsCart, shippingAddresSelected, billingAddressSelected);
                     console.log(response);
+
+                    if(response.status === 'success'){
+                        // localStorage.removeItem('productsCart')
+                    }
                 }
                 const goToRegister = () => {
                     emit('updatePage', 'register');

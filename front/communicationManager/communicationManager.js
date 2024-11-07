@@ -87,13 +87,6 @@ export async function addPaymentMethod(token, paymentMethod) {
 }
 
 export async function purchase(token, paymentMethod, price, products, shippingAddress, billingAddress) {
-    console.log(JSON.stringify({
-        'paymentMethod': paymentMethod,
-        'price': price,
-        'products': products,
-        'shippingAddress': shippingAddress,
-        'billingAddress': billingAddress
-    }))
     try {
         const response = await fetch(URL + '/stripe/purchase', {
             method: 'POST',
@@ -476,6 +469,30 @@ export async function updateDefaultBillingAddress(token, billingAddress){
         console.error('Error:', error);
         throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
     }
+}
+
+export async function getMyOrders(token){
+    try {
+        const response = await fetch(URL + '/orders/get-my-orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: null
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
+    }
+
 }
 
 export async function testAuth(token) {
