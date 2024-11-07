@@ -14,13 +14,6 @@ class PdfController extends Controller
         $user = Auth::user();
         $billingAddress = BillingAddress::where('idUser', $user->id)->first(); 
         
-        if (!$billingAddress) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Error en el usuario',
-            ], 404);
-        }
-
         $data = [
             'invoice_number' => '4112024/125304',
             'date' => now()->format('d/m/Y'),  

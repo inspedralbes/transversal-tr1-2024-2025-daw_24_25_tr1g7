@@ -51,7 +51,6 @@ Route::delete('/subcategorydelete/{id}', [SubCategoriaController::class,'delete'
 Route::get('/pdf', [PdfController::class, 'index'])->name('pdf.index');
 
 
-
 Route::get('/productelist', [ProducteController::class,'index'])->name('producte.index');
 
 Route::post('/productestore', [ProducteController::class,'store'])->name('producte.store');
