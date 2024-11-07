@@ -56,4 +56,48 @@ class ProductOpinionController extends Controller
         ]);
     }
 
+    public function getProductOpinionsStats($productId){
+
+        $opinions = ProductOpinion::where('idProductes', $productId)->get();
+    
+        $totalOpinions = $opinions->count();
+        if ($totalOpinions === 0) {
+            return response()->json([
+                'average_rating' => 0,
+                'recommend_percentage' => 0,
+                'star_counts' => [
+                    '5' => 0,
+                    '4' => 0,
+                    '3' => 0,
+                    '2' => 0,
+                    '1' => 0,
+                ],
+                'totalOpinions' => 0,
+            ]);
+        }
+
+        // Calcular promedio de puntuación
+        $averageRating = round($opinions->avg('opinion_number'), 1);
+
+        // Calcular porcentaje de recomendaciones (opiniones con 4 o 5 estrellas)
+        $recommendedCount = $opinions->where('opinion_number', '>=', 4)->count();
+        $recommendPercentage = round(($recommendedCount / $totalOpinions) * 100);
+
+        // Contar las opiniones por cada nivel de estrella
+        $starCounts = [
+            '5' => $opinions->where('opinion_number', 5)->count(),
+            '4' => $opinions->where('opinion_number', 4)->count(),
+            '3' => $opinions->where('opinion_number', 3)->count(),
+            '2' => $opinions->where('opinion_number', 2)->count(),
+            '1' => $opinions->where('opinion_number', 1)->count(),
+        ];
+
+        return response()->json([
+            'average_rating' => $averageRating,
+            'recommend_percentage' => $recommendPercentage,
+            'star_counts' => $starCounts,
+            'totalOpinions' => $totalOpinions,
+        ]);
+    }
+
 }

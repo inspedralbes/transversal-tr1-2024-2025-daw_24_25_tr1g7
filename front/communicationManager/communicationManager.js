@@ -462,9 +462,9 @@ export async function testAuth(token) {
     }
 }
 
-export async function getOpinions(id ){
+export async function getOpinions(productId){
         try {
-            const response = await fetch(URL + `/product/${id}/opinions`);
+            const response = await fetch(URL + `/product/${productId}/opinions`);
             
             const data = await response.json();
             return data;
@@ -493,3 +493,15 @@ export async function getOpinions(id ){
             console.error("Error al agregar opinion:", error);
         }
     }
+
+export async function getOpinionsStats(id) {
+    try {
+        const response = await fetch(`${URL}/product/${id}/opinions/stats`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+}
+    

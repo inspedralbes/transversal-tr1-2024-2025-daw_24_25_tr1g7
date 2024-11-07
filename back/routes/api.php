@@ -32,6 +32,8 @@ Route::prefix('home')->group(function () {
 Route::get('/get-products', [ApiProductsController::class, 'getProducts'])->name('getProducts');
 Route::prefix('product')->group(function () {
     Route::get('/{productId}/opinions', [ProductOpinionController::class, 'getProductOpinions']);
+    Route::get('/{productId}/opinions/stats', [ProductOpinionController::class, 'getProductOpinionsStats']);
+
 });
 
 Route::middleware('auth:sanctum')->group(function () {
