@@ -180,7 +180,7 @@
             <div
                     v-for="(creditCard, index) in paymentMethods.data"
                     :key="index"
-                    @click="selectPaymentMethod(creditCard.id)"
+                    @click="selectPaymentMethod(creditCard)"
                     class="card mb-2"
                     :class="{ 'bg-primary-opacity text-white': creditCard.id === (defaultPaymentMethods.data?.id || '') }"
                     style="cursor: pointer;"

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\ArticuloComanda;
+use App\Models\Comanda;
+use App\Models\Invoice;
+use App\Models\Producte;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -109,16 +113,48 @@ class StripeController extends Controller
     {
         $data = $request->validate([
             'paymentMethod' => 'required',
-            'price'=>'required'
+            'price'=>'required',
+            'products' => 'required',
+            'shippingAddress' => 'required',
+            'billingAddress' => 'required'
         ],
         [
             'paymentMethod.required'=>'Payment Method is required.',
-            'price.required'=>'Price is required.'
+            'price.required'=>'Price is required.',
+            'products.required'=>'Products is required.',
+            'shippingAddress.required'=>'Shipping Address is required.',
+            'billingAddress.required'=>'Billing Address is required.'
         ]);
 
         $user = Auth::user();
 
         $stripeCharge = $user->charge($data['price'], $data['paymentMethod']['id']);
+
+        $order = new Comanda();
+        $order->idUser = $user->id;
+        $order->idBillingAddress = $data['billingAddress']['id'];
+        $order->idShippingAddres = $data['shippingAddress']['id'];
+        $order->status = "pending";
+        $order->price = $data['price'];
+        $order->save();
+
+        foreach ($data['products'] as $productInCart){
+            $orderProducts = new ArticuloComanda();
+            $orderProducts->idOrder = $order->id;
+            $order->idProduct = $productInCart['id'];
+            $order->num_product = $productInCart['quantity'];
+            $orderProducts->save();
+
+            $product = Producte::findOrFail($productInCart['id']);
+            $product->stock = $product->stock - $productInCart['quantity'];
+            $product->save();
+        }
+
+        $invoice = new Invoice();
+        $invoice->idOrder = $order->id;
+        $invoice->idUser = $user->id;
+        $invoice->price = $data['price'];
+        $invoice->save();
 
         return response()->json([
             'status' => 'success',

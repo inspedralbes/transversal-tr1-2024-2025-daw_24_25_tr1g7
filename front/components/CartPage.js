@@ -2,6 +2,7 @@ import { defineComponent, defineAsyncComponent, ref, onMounted, computed, reacti
 import * as comm from "../communicationManager/communicationManager.js";
 
 import {AddPaymentMethodComponent} from "./AddPaymentMethodComponent.js";
+import {purchase} from "../communicationManager/communicationManager.js";
 
 export const CartPage = defineAsyncComponent(() =>
     Promise.all([
@@ -39,12 +40,12 @@ export const CartPage = defineAsyncComponent(() =>
                     return (basePrice + (basePrice * 0.21)).toFixed(2);
                 });
 
-                const selectPaymentMethod = async (paymentMethodId) =>{
-                    console.log(paymentMethodId)
-                    let response = await comm.setDefaultPaymentMethod(localStorage.getItem('token'), paymentMethodId);
-                    paymentMethods.data = response.paymentMethods;
-                    defaultPaymentMethods.data = response.defaultPaymentMethod;
-                    console.log(response)
+                const selectPaymentMethod = async (paymentMethod) =>{
+                    // console.log(paymentMethodId)
+                    // let response = await comm.setDefaultPaymentMethod(localStorage.getItem('token'), paymentMethodId);
+                    // paymentMethods.data = response.paymentMethods;
+                    defaultPaymentMethods.data = paymentMethod;
+                    // console.log(response)
                 }
 
                 const deletePaymentMethod = (paymentMethodId) => {
@@ -287,13 +288,16 @@ export const CartPage = defineAsyncComponent(() =>
                 }
 
 
-                const finishBuying = () => {
+                const finishBuying = async() => {
                     // steps.value = 'finishBuy'
                     const shippingAddresSelected = billingAddressess.data.find(address => address.selected);
                     const billingAddressSelected = shippingAddresses.data.find(address => address.selected);
                     console.log(shippingAddresSelected)
                     console.log(billingAddressSelected)
                     console.log(priceTotal)
+
+                    let response = await comm.purchase(getToken(), defaultPaymentMethods.data, priceTotal.value, props.productsCart, shippingAddresSelected.value, billingAddressSelected.value);
+                    console.log(response);
                 }
                 const goToRegister = () => {
                     emit('updatePage', 'register');

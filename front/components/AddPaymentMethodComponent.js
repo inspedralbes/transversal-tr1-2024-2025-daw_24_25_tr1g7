@@ -64,6 +64,7 @@ export const AddPaymentMethodComponent = defineAsyncComponent(() =>
                             console.log('Card verified successfully');
                             let paymentMethodResponse = await comm.addPaymentMethod(getToken(), setupIntent.payment_method)
                             console.log(paymentMethodResponse);
+
                             emit('paymentMethods', paymentMethodResponse.paymentMethods);
                             emit('defaultPaymentMethod', paymentMethodResponse.defaultPaymentMethod);
                             // Manejo de verificación exitosa
