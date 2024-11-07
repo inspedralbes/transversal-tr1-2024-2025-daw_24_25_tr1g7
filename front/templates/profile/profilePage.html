@@ -90,14 +90,14 @@
                         </div>
                     </div>
 
-                    <div class="card mb-2" v-for="(order, index) in orders.data" :key="index">
+                    <div :key="index" class="card mb-2" v-for="(order, index) in orders.data">
                         <div class="card-body">
                             <div class="border-bottom row pb-3">
                                 <div class="col-lg-12 col-12 d-flex justify-content-between">
                                     <div class="d-flex ">
                                         <div class="me-4">
                                             <p class="m-0 fw-bold fs-7">Pedido</p>
-                                            <p class="m-0 fs-7">01/11/2024</p>
+                                            <p class="m-0 fs-7">{{formatDate(order.created_at)}}</p>
                                         </div>
                                         <div class="me-4">
                                             <p class="m-0 fw-bold fs-7">Vendido por</p>
@@ -105,49 +105,53 @@
                                         </div>
                                         <div class="me-4">
                                             <p class="m-0 fw-bold fs-7">Nº pedido</p>
-                                            <p class="m-0 fs-7">6022024171671</p>
+                                            <p class="m-0 fs-7">{{order.id}}</p>
                                         </div>
                                     </div>
                                     <div>
-                                        <button @click="" class="btn border-1">Ver detalles y seguimiento<i
+                                        <button @click="seeDetails(order)" class="btn border-1" v-if="!order.details">
+                                            Ver detalles y seguimiento<i
                                                 class="bi bi-caret-down-fill ms-2"></i></button>
-                                        <button class="btn border-1 d-none">Ocultar detalles y seguimiento<i
+                                        <button @click="hideDetails(order)" class="btn border-1" v-if="order.details">
+                                            Ocultar detalles y seguimiento<i
                                                 class="bi bi-caret-up-fill ms-2"></i></button>
                                     </div>
                                 </div>
-                                <div class="col-lg-12 col-12">
-                                    <button class="btn border-1 me-2">Facturas</button>
-                                    <button class="btn border-1">Detalles del pedido</button>
+                                <div class="col-lg-12 col-12" v-if="order.details">
+                                    <button class="btn border-1 me-2">Factura</button>
+                                    <button @click="lookDetailOrder(order)" class="btn border-1">Detalles del pedido</button>
                                 </div>
                             </div>
 
-
-                            <div class="border-bottom d-flex align-items-center mb-3 py-2 py-lg-2">
+                            <div class="border-bottom d-flex align-items-center mb-3 py-2 py-lg-2" v-if="order.details">
                                 <div class="me-4">
-                                    <p class="m-0 fs-6 fw-bold text-primary">Entregado</p>
-                                    <p class="m-0 fs-7">el 4 de noviembre de 2024</p>
+                                    <p class="m-0 fs-6 fw-bold text-primary">{{statusFormater(order.status)}}</p>
+                                    <p class="m-0 fs-7">{{formatDateExtends(order.updated_at)}}</p>
                                 </div>
                                 <div>
                                     <button class="btn border-1">Seguimiento del pedido</button>
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row py-2">
                                 <div class="col-lg-12 col-12 d-flex justify-content-between">
-                                    <div class="d-flex ">
-                                        <div class="me-4 container-img" style="height: 100px">
-                                            <img src="https://m.media-amazon.com/images/I/81b75EQJrgL.jpg" class="img-fluid"/>
-                                        </div>
-                                        <div class="me-4">
-                                            <p class="m-0 fs-6">Nombre del producto</p>
-                                            <p class="m-0 fw-bold fs-6">162.99€</p>
-                                            <p class="m-0 fs-6">X1 Unidad/es</p>
+                                    <div>
+                                        <div class="d-flex mt-4" v-for="(product, index) in order.products" :key="index">
+                                            <div class="me-4 container-img" style="height: 100px">
+                                                <img class="img-fluid"
+                                                     :src="product.producto.image_path"/>
+                                            </div>
+                                            <div class="me-4">
+                                                <p class="m-0 fs-6">{{product.producto.name}}</p>
+                                                <p class="m-0 fw-bold fs-6">{{(product.producto.price)*(product.num_product)}}€</p>
+                                                <p class="m-0 fs-6">x{{product.num_product}} Unidad/es</p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="d-flex flex-column">
+                                    <div class="d-flex flex-column" v-if="order.details">
                                         <button class="btn border-1 mb-2">Valorar producto</button>
-<!--                                        <button class="btn border-1 mb-2">Devolver</button>-->
-<!--                                        <button class="btn border-1 mb-2">Tramitar garantia</button>-->
+                                        <!--                                        <button class="btn border-1 mb-2">Devolver</button>-->
+                                        <!--                                        <button class="btn border-1 mb-2">Tramitar garantia</button>-->
                                         <button class="btn border-1 btn-primary mb-2">Comprar de nuevo</button>
                                     </div>
                                 </div>
@@ -674,3 +678,72 @@
     </div>
 </div>
 <!--MODAL ADD CARDS FINISH-->
+
+
+<!--MODAL SHOW DETAILS PEDIDO-->
+<div @click="showModalDetailsOrder = !showModalDetailsOrder"
+     class="w-100 position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity"
+     style="z-index: 1000;height: 100vh;"
+     v-if="showModalDetailsOrder">
+    <div @click.stop class="w-lg-25 w-90 card bg-white">
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <div>
+                    <p class="m-0 fs-4 fw-bold">Detalles pedido</p>
+                </div>
+                <div>
+                    <button @click="showModalDetailsOrder = !showModalDetailsOrder" class="btn btn-sm">
+                        <i
+                                class="bi bi-x fs-5"></i></button>
+                </div>
+            </div>
+
+            <div>
+                <div class="d-flex mb-4">
+                    <span><i class="bi bi-shop fs-4 me-3"></i></span>
+                    <div class="fs-6">
+                        <p class="m-0 fw-bold">Dirección de envio</p>
+                        <p class="m-0">{{formDataOrder.shippingAddress.street}},
+                            {{formDataOrder.shippingAddress.door}}-{{formDataOrder.shippingAddress.floor}}
+                            {{formDataOrder.shippingAddress.zip_code}} {{formDataOrder.shippingAddress.city}}, {{formDataOrder.shippingAddress.population}}</p>
+                    </div>
+                </div>
+
+                <div class="d-flex mb-4">
+                    <span><i class="bi bi-receipt fs-4 me-3"></i></span>
+                    <div class="fs-6">
+                        <p class="m-0 fw-bold">Dirección de facturación</p>
+                        <p class="m-0">
+                            {{formDataOrder.billingAddress.name}} {{formDataOrder.billingAddress.last_name}} ,
+
+                            {{formDataOrder.billingAddress.street}},
+                            {{formDataOrder.billingAddress.door}}-{{formDataOrder.billingAddress.floor}}
+                            {{formDataOrder.billingAddress.zip_code}} {{formDataOrder.billingAddress.city}}, {{formDataOrder.billingAddress.population}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="d-flex mb-4">
+                    <span><i class="bi bi-credit-card fs-4 me-3"></i></span>
+                    <div class="fs-6">
+                        <p class="m-0 fw-bold">Método de pago</p>
+                        <p class="m-0">Tarjeta de crédito</p>
+                    </div>
+                </div>
+
+                <div class="d-flex mb-4">
+                    <span><i class="bi bi-hdd-rack fs-4 me-3"></i></span>
+                    <div class="fs-6">
+                        <p class="m-0 fw-bold text-center">Resumen</p>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mb-4 px-4">
+                    <p class="m-0">Total: </p>
+                    <p class="m-0 fw-bold">{{formDataOrder.total}}€ </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--MODAL SHOW DETAILS PEDIDO-->

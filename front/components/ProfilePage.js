@@ -82,26 +82,30 @@ export const ProfilePage = defineAsyncComponent(() =>
                 const shippingAddresses = reactive({data:[]});
                 const billingAddressess = reactive({data:[]});
 
-                const orders = reactive({data:[]});
 
                 onMounted(async () => {
                     shippingAddresses.data = await comm.getShippingAddresses(getToken());
-                    console.log(shippingAddresses);
+                    // console.log(shippingAddresses);
                     billingAddressess.data = await comm.getBillingAddresses(getToken());
-                    console.log(billingAddressess);
+                    // console.log(billingAddressess);
 
-                    orders.data = await comm.getMyOrders(getToken());
+                    let responseOrders = await comm.getMyOrders(getToken());
+                    console.log(responseOrders)
+                    responseOrders.forEach((order)=>{
+                        order.details = false;
+                    })
+                    orders.data = responseOrders;
                     console.log(orders.data);
 
                     let response = await comm.retrievePaymentMethod(getToken());
                     paymentMethods.data = response.paymentMethods;
                     defaultPaymentMethods.data = response.defaultPaymentMethod;
-                    console.log(paymentMethods.data)
-                    console.log(defaultPaymentMethods.data)
+                    // console.log(paymentMethods.data)
+                    // console.log(defaultPaymentMethods.data)
 
                     let testauth = await comm.testAuth(getToken());
-                    console.log("testAuth")
-                    console.log(testauth)
+                    // console.log("testAuth")
+                    // console.log(testauth)
 
 
                 });
@@ -274,6 +278,55 @@ export const ProfilePage = defineAsyncComponent(() =>
                 }
 
 
+                //MYORDERS
+                const orders = reactive({data:[]});
+                const formDataOrder = reactive({
+                    'shippingAddress': '',
+                    'billingAddress': '',
+                    'total': null
+                });
+                const seeDetails = (order) =>{
+                    order.details = true;
+                }
+                const hideDetails = (order)=>{
+                    order.details = false;
+                }
+                const formatDate = (dateString) => {
+                    const date = new Date(dateString);
+                    return date.toLocaleDateString('es-ES'); // Esto mostrará el formato dd/mm/yyyy
+                }
+                const statusFormater = (status) => {
+                    const statusMap = {
+                        pending: "Pendent",
+                        in_progress: "Enviat",
+                        complete: "Entregat",
+                        cancelled: "Cancelado"
+                    };
+
+                    return statusMap[status] || status; // Retorna el estado traducido o el original si no hay coincidencia
+                };
+                const lookDetailOrder = (order)=>{
+                    showModalDetailsOrder.value = !showModalDetailsOrder.value;
+                    console.log(order)
+                    formDataOrder.shippingAddress = order.shipping_address;
+                    formDataOrder.billingAddress = order.billing_address;
+                    formDataOrder.total = order.price;
+                    console.log(formDataOrder)
+                }
+                // Formateador de fecha
+                const formatDateExtends = (dateString) => {
+                    const date = new Date(dateString);
+                    const day = date.getDate();
+                    const monthNames = [
+                        "enero", "febrero", "marzo", "abril", "mayo", "junio",
+                        "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+                    ];
+                    const month = monthNames[date.getMonth()];
+                    const year = date.getFullYear();
+
+                    return `desde el ${day} de ${month} de ${year}`;
+                };
+                const showModalDetailsOrder = ref(false);
 
                 return {
                     tab,
@@ -306,7 +359,15 @@ export const ProfilePage = defineAsyncComponent(() =>
                     selectedType,
                     handleTypeChange,
 
-                    orders
+                    orders,
+                    seeDetails,
+                    hideDetails,
+                    formatDate,
+                    statusFormater,
+                    formatDateExtends,
+                    showModalDetailsOrder,
+                    formDataOrder,
+                    lookDetailOrder
                 };
             }
         }))

@@ -146,7 +146,7 @@ class ComandaController extends Controller
     public function getMyOrders()
     {
         $orders = Comanda::where('idUser', Auth::user()->id)
-            ->with(['products', 'shippingAddress', 'billingAddress'])
+            ->with(['products.producto', 'shippingAddress', 'billingAddress'])
             ->get();
 
         return response()->json($orders);
