@@ -2,44 +2,68 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BillingAddress;
 use Illuminate\Http\Request;
+use App\Models\Invoice;
+use App\Models\Comanda;
+use App\Models\BillingAddress;
 use PDF;
-use Illuminate\Support\Facades\Auth;
 
 class PdfController extends Controller
 {
-    public function index()
+   
+    public function index($order_id)
     {
-        $user = Auth::user();
-        $billingAddress = BillingAddress::where('idUser', $user->id)->first(); 
-        
+        // Obtener la factura por el idOrder
+        $invoice = Invoice::where('idOrder', $order_id)->first();  
+    
+        if (!$invoice) {
+            return abort(404, 'Factura no encontrada');
+        }
+    
+        // Obtener la comanda asociada a la factura
+        $comanda = $invoice->order;
+    
+        // Obtener la dirección de facturación
+        $billingAddress = BillingAddress::where('idUser', $comanda->idUser)->first();
+    
+        // Obtener los artículos de la comanda
+        $items = $comanda->articulos->map(function ($item) {
+    
+            $producto = $item->producto;
+    
+            return [
+                'product_id' => $item->idProduct,     
+                'quantity' => $item->num_product,      
+                'description' => $producto->description, 
+                'price' => $producto->price,         
+                'total' => $producto->price * $item->num_product,  
+            ];
+        });
+    
+        // Calcular impuestos y total
+        $tax_base = $items->sum('total');
+        $tax = $tax_base * 0.21; 
+        $total_amount = $tax_base + $tax;
+    
+        // Preparar los datos para la vista
         $data = [
-            'invoice_number' => '4112024/125304',
-            'date' => now()->format('d/m/Y'),  
-            'payment_method' => 'Tarjeta',  
-            'order_number' => '6022024171671',  
-            'delivery_note' => '4022024131231',  
-            'items' => [
-                [
-                    'code' => '10828143',
-                    'description' => 'Razer Viper V3 Pro Ratón Gaming Inalámbrico 35000 DPI Blanco',
-                    'price' => 134.70,
-                    'quantity' => 1,
-                    'total' => 134.70,
-                ]
-            ],
-            'tax_base' => 134.70,
-            'tax' => 28.29,
-            'equivalent_charge' => 0,
-            'total_amount' => 162.99,
-            'billing_address' => $billingAddress, 
+            'invoice_number' => $invoice->id,
+            'date' => $invoice->created_at->format('d/m/Y'),
+            'payment_method' => $invoice->payment_method,
+            'order_number' => $comanda->id,
+            'delivery_note' => $comanda->delivery_note,
+            'items' => $items,
+            'tax_base' => number_format($tax_base, 2),
+            'tax' => number_format($tax, 2),
+            'total_amount' => number_format($total_amount, 2),
+            'billing_address' => $billingAddress,
         ];
-
-        // Generar el PDF con los datos obtenidos
-        $pdf = PDF::loadView('pdf.invoice', $data);  
+    
+        // Generar el PDF con los datos recopilados
+        $pdf = PDF::loadView('pdf.invoice', $data);
         
-        // Mostrar el PDF en el navegador
         return $pdf->stream('invoice.pdf');
     }
+    
+
 }

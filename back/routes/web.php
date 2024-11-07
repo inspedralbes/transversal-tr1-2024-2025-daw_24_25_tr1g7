@@ -9,7 +9,6 @@ use App\Http\Controllers\ArticuloComandaController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\AuthenticatorController;
 use App\Http\Controllers\PdfController;
-
 use App\Http\Controllers\LoginRegisterController;
 use App\Http\Controllers\UserController;
 
@@ -53,7 +52,9 @@ Route::put('/subcategoryupdate/{id}', [SubCategoriaController::class, 'update'])
 Route::delete('/subcategorydelete/{id}', [SubCategoriaController::class,'delete'])->name('subcategory.delete');
 
 
-Route::get('/pdf', [PdfController::class, 'index'])->name('pdf.index');
+Route::get('/invoice/{order_id}', [PdfController::class, 'index'])->name('invoice.index');
+
+
 
 
 Route::get('/productelist', [ProducteController::class,'index'])->name('producte.index');
