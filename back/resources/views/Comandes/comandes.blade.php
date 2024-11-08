@@ -103,16 +103,21 @@
                     <td>${{ number_format($item->price, 2) }}</td>
                     <td>{{ ucfirst($item->status) }}</td>
                     <td>
-                        <form action="{{ route('comanda.update', $item->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('PUT')
-                            <select name="status" class="form-select" onchange="this.form.submit()">
-                                <option value="pending" {{ $item->status == 'pending' ? 'selected' : '' }}>Pendiente</option>
-                                <option value="in_progress" {{ $item->status == 'in_progress' ? 'selected' : '' }}>En Progreso</option>
-                                <option value="complete" {{ $item->status == 'complete' ? 'selected' : '' }}>Completo</option>
-                                <option value="cancelled" {{ $item->status == 'cancelled' ? 'selected' : '' }}>Cancelado</option>
-                            </select>
-                        </form>
+                        <!-- Verificar si el usuario tiene rol de admin para permitir edición -->
+                        @if (auth()->user()->hasRole('admin'))
+                            <form action="{{ route('comanda.update', $item->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('PUT')
+                                <select name="status" class="form-select" onchange="this.form.submit()">
+                                    <option value="pending" {{ $item->status == 'pending' ? 'selected' : '' }}>Pendiente</option>
+                                    <option value="in_progress" {{ $item->status == 'in_progress' ? 'selected' : '' }}>En Progreso</option>
+                                    <option value="complete" {{ $item->status == 'complete' ? 'selected' : '' }}>Completo</option>
+                                    <option value="cancelled" {{ $item->status == 'cancelled' ? 'selected' : '' }}>Cancelado</option>
+                                </select>
+                            </form>
+                        @else
+                            <p class="no-permission">No tienes permisos para editar esta comanda.</p>
+                        @endif
                     </td>
                 </tr>
             @endforeach
