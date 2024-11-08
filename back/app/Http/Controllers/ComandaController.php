@@ -6,6 +6,8 @@ use App\Models\Invoice;
 use Illuminate\Http\Request;
 use App\Models\Comanda;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail; 
+use App\Mail\ConfirmStatusMailMailer; 
 
 class ComandaController extends Controller
 {
@@ -97,7 +99,7 @@ class ComandaController extends Controller
         $comanda->status = $data['status'];
         $comanda->save();
 
-        Mail::to($user->email)->send(new ConfirmStatusMailMailer($user,route("comanda.update",['id'=>$comanda->id])));
+        // Mail::to($user->email)->send(new ConfirmStatusMailMailer($user,route("comanda.update",['id'=>$comanda->id])));
         return redirect()->route('comanda.index')->with('success', 'Estado de la comanda actualizado correctamente.');
     }
 
