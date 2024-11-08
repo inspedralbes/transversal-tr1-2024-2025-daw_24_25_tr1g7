@@ -22,17 +22,17 @@
         <ul class="list-group">
             @foreach ($categories as $category)
                 <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <!-- Formulario para editar categoría -->
                     <form method="POST" action="{{ route('category.update', $category->id) }}" class="d-flex align-items-center">
                         @csrf
-                        @method('POST')
+                        @method('PUT') 
                         <input type="text" name="name" value="{{ $category->name }}" class="form-control me-2">
-                        <button type="submit" class="btn btn-warning btn-sm me-2">Editar</button>
+                        <button type="submit" class="btn btn-warning btn-sm me-2">Guardar</button>
                     </form>
 
-                    <!-- Botón para eliminar -->
-                    <form method="GET" action="{{ route('category.delete', $category->id) }}">
+                    <form method="POST" action="{{ route('category.delete', $category->id) }}">
                         @csrf
-                        @method('DELETE')
+                        @method('DELETE') 
                         <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                     </form>
                 </li>

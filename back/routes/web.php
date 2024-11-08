@@ -33,15 +33,15 @@ Route::post('/login', [LoginRegisterController::class, 'authenticate'])->name('l
 Route::post('/register', [LoginRegisterController::class, 'register'])->name('register');
 
 
-Route::get('/categoryindex', [CategoriaController::class,'index'])->name("category.index");
+Route::get('/categoryindex', [CategoriaController::class, 'index'])->name("category.index");
 
-Route::post('/categorystore', [CategoriaController::class,'store'])->name("category.store");
+Route::post('/categorystore', [CategoriaController::class, 'store'])->name("category.store");
 
-Route::get('/categorydelete/{id}', [CategoriaController::class,'delete'])->name("category.delete");
+Route::delete('/categorydelete/{id}', [CategoriaController::class, 'delete'])->name("category.delete");
 
-Route::post('/categoryupdate/{id}', [CategoriaController::class,'update'])->name("category.update");
+Route::put('/categoryupdate/{id}', [CategoriaController::class, 'update'])->name("category.update");
 
-Route::get('/categorylist', [CategoriaController::class,'list'])->name("category.list");
+Route::get('/categorylist', [CategoriaController::class, 'list'])->name("category.list");
 
 
 Route::get('/subcategoryindex', [SubCategoriaController::class,'index'])->name('subcategory.index');
