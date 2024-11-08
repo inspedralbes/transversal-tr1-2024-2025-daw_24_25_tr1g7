@@ -23,6 +23,6 @@ class Comanda extends Model
 
     public function products()
     {
-        return $this->hasMany(ArticuloComanda::class, 'id');
+        return $this->hasMany(ArticuloComanda::class, 'idOrder');
     }
 }
