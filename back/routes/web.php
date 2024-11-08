@@ -17,6 +17,9 @@ use App\Http\Controllers\UserController;
 
 Route::resource('users', UserController::class);
 
+Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+
+
 
 Route::get('/', [LoginRegisterController::class, 'showLoginForm'])->name('home');
 

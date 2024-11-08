@@ -42,6 +42,7 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->getRoleNames()->join(', ') }}</td>
+                    <td>{{ $user->role }}</td>
 
                     <td>
                         
@@ -80,18 +81,13 @@
                                         <label for="email" class="form-label">Email</label>
                                         <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
                                     </div>
-                                    
-                                    @if (auth()->user()->hasRole('admin'))
-                                        <div class="mb-3">
-                                            <label for="role" class="form-label">Rol</label>
-                                            <select class="form-control" id="role" name="role">
-                                                <option value="admin" {{ $user->hasRole('admin') ? 'selected' : '' }}>Admin</option>
-                                                <option value="user" {{ $user->hasRole('user') ? 'selected' : '' }}>User</option>
-                                            </select>
-                                        </div>
-                                    @else
-                                        <input type="hidden" name="role" value="{{ $user->getRoleNames()->first() }}"> 
-                                    @endif
+                                    <div class="mb-3">
+                                        <label for="role" class="form-label">Rol</label>
+                                        <select class="form-control" id="role" name="role">
+                                            <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                                            <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tancar</button>
@@ -101,6 +97,7 @@
                         </div>
                     </div>
                 </div>
+
             @endforeach
         </tbody>
     </table>

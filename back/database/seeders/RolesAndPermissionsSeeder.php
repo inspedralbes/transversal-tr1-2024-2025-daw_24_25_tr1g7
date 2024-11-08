@@ -20,7 +20,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $userRole = Role::create(['name' => 'user']);
 
         $adminRole->givePermissionTo($editArticles, $deleteArticles);
-        $userRole->givePermissionTo($editArticles);
+        $userRole->givePermissionTo($editArticles); 
         
 
     }
