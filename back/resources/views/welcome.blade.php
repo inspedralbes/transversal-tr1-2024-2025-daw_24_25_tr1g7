@@ -15,6 +15,9 @@
         <a href="{{ route('subcategory.index') }}" class="btn btn-primary btn-lg mt-4" style="background-color: #16cfe5; border-color: #16cfe5;">
             Panell de Subcategoria
         </a>
+        <a href="{{ route('users.index') }}" class="btn btn-primary btn-lg mt-4" style="background-color: #16cfe5; border-color: #16cfe5;">
+            Panell d'Usuaris
+        </a>
     </div>
 </div>
 @endsection

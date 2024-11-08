@@ -78,6 +78,11 @@ tr:hover {
     background-color: #d4edda;
     color: #155724;
 }
+
+.no-permission {
+    color: red;
+    font-style: italic;
+}
 </style>
 @endsection
 
@@ -90,14 +95,18 @@ tr:hover {
         {{ session('status') }}
     </div>
     @endif
-
+    @if(auth()->user()->hasRole('admin'))
+        <a href="{{ route('subcategory.create') }}" class="btn btn-success">Crear nueva subcategoría</a>
+    @else
+        <span class="no-permission">No tens permisos per crear subcategories</span>
+    @endif
     <table>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>ID Categoría</th>
-                <th>Acciones</th>
+                <th>Accions</th>
             </tr>
         </thead>
         <tbody>
@@ -107,30 +116,27 @@ tr:hover {
                 <td>{{ $sub->name }}</td>
                 <td>{{ $sub->idCategory }}</td>
                 <td>
-                    <!-- Formulario para eliminar -->
-                    <form action="{{ route('subcategory.delete', $sub->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger"
-                            onclick="return confirm('¿Estás seguro de eliminar esta subcategoría?')">Eliminar</button>
-                    </form>
+                    @if(auth()->user()->hasRole('admin'))
+                        <form action="{{ route('subcategory.delete', $sub->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('¿Estás seguro de eliminar esta subcategoría?')">Eliminar</button>
+                        </form>
 
-                    <!-- Link para editar -->
-                    <form action="{{ route('subcategory.update', $sub->id) }}" method="PUT" style="display:inline;">
-                        @csrf
-                        @method('PUT')
-                        <a href="{{ route('subcategory.edit', $sub->id) }}" class="btn btn-success">Editar</a>
-                    </form>
-
-
+                        <form action="{{ route('subcategory.update', $sub->id) }}" method="PUT" style="display:inline;">
+                            @csrf
+                            @method('PUT')
+                            <a href="{{ route('subcategory.edit', $sub->id) }}" class="btn btn-success">Editar</a>
+                        </form>
+                    @else
+                        <span class="no-permission">No tens permisos per editar o eliminar</span>
+                    @endif
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-
-    <!-- Enlace para crear nueva subcategoría -->
-    <a href="{{ route('subcategory.create') }}" class="btn btn-success">Crear nueva subcategoría</a>
 </div>
 @endsection
 

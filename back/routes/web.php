@@ -16,12 +16,17 @@ use App\Http\Controllers\UserController;
 
 Route::resource('users', UserController::class);
 
+Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+
+
 
 Route::get('/', [LoginRegisterController::class, 'showLoginForm'])->name('home');
 
 Route::get('/welcome', [LoginRegisterController::class, 'showWelcome'])->name('welcome');
 
 Route::post('/logout', [LoginRegisterController::class, 'logout'])->name('logout');
+
+Route::get('/login', [LoginRegisterController::class, 'showLoginForm'])->name('login');
 
 Route::post('/login', [LoginRegisterController::class, 'authenticate'])->name('login');
 
@@ -67,8 +72,6 @@ Route::get('/producte/crear', [ProducteController::class, 'crear'])->name('produ
 Route::put('/producteupdate/{id}', [ProducteController::class, 'update'])->name('producte.update');
 
 Route::delete('/productedelete/{id}', [ProducteController::class,'delete'])->name('producte.delete');
-
-//Route::get('/productelist', [ProducteController::class,'list']);
 
 
 Route::get('/comandasindex', [ComandaController::class,'index'])->name("comanda.index");
