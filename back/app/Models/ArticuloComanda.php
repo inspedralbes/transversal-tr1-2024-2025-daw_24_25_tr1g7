@@ -10,5 +10,4 @@ class ArticuloComanda extends Model
     {
         return $this->belongsTo(Producte::class, 'idProduct'); 
     }
-
 }

@@ -27,7 +27,7 @@ class PdfController extends Controller
         $billingAddress = BillingAddress::where('idUser', $comanda->idUser)->first();
     
         // Obtener los artículos de la comanda
-        $items = $comanda->articulos->map(function ($item) {
+        $items = $comanda->products->map(function ($item) {
     
             $producto = $item->producto;
     
