@@ -39,8 +39,10 @@ class ProductOpinionController extends Controller
         $opinion->img = $data['img'];
         $opinion->save();
 
+        $opinionResult = ProductOpinion::with('user')->findOrFail($opinion->id);
+
         return response()->json([
-            'opinion' => $opinion,
+            'opinion' => $opinionResult,
             'status'=> 'successful',
             'message'=> 'Opinion añadida'
         ]);
@@ -48,7 +50,9 @@ class ProductOpinionController extends Controller
 
     public function getProductOpinions($productId){
 
-        $opinions = ProductOpinion::where('idProductes', $productId)->get();
+        $opinions = ProductOpinion::where('idProductes', $productId)
+        ->with(['user'])
+        ->get();
         return response()->json([
             'opinions' => $opinions,
             'status'=> 'successful',
@@ -58,7 +62,9 @@ class ProductOpinionController extends Controller
 
     public function getProductOpinionsStats($productId){
 
-        $opinions = ProductOpinion::where('idProductes', $productId)->get();
+        $opinions = ProductOpinion::where('idProductes', $productId)
+        ->with(['user'])
+        ->get();
     
         $totalOpinions = $opinions->count();
         if ($totalOpinions === 0) {
