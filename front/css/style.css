@@ -4022,62 +4022,97 @@ p {
 .product-reviews-container {
     font-family: Arial, sans-serif;
     color: #333;
+    
 }
 
 /* Título de la sección de opiniones */
 .reviews-header {
     font-size: 1.8em;
     font-weight: bold;
+    margin-bottom: 20px;
 }
 
 /* Contenedor de estadísticas */
 .stats-container {
     display: flex;
-    gap: 20px; /* Espaciado entre elementos */
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 10px;
+    gap: 20px;
+    max-width: 900px;
 }
 
 /* Caja de estadísticas individuales */
 .stats-box {
-    background-color: #ffffff;
-    border-radius: 8px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
     padding: 20px;
-    width: 150px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    width: 180px;
+    text-align: center;
+}
+
+.average-rating-box {
+    flex-direction: column;
+}
+
+.recommend-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .average-rating {
-    font-size: 2em;
+    font-size: 2.5em;
     font-weight: bold;
 }
 
+.stars {
+    color: #ffc107;
+    font-size: 1.5em;
+}
+
 .recommend-percentage {
-    font-size: 1.8em;
+    font-size: 2em;
     color: #28a745;
     font-weight: bold;
 }
 
-/* Contenedor del desglose de estrellas */
-.star-breakdown-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 200px;
+.total-opinions, .total-recommendations {
+    color: #666;
 }
 
-/* Barra de desglose por estrellas */
+/* Estilo para el desglose de estrellas */
+.star-breakdown {
+    width: 180px;
+    text-align: center;
+}
+
 .star-bar {
-    font-size: 0.9em;
-    color: #333;
+    display: flex;
+    align-items: center;
     margin-bottom: 8px;
+    font-size: 0.9em;
+}
+
+.star-label {
+    width: 30px;
+    font-weight: bold;
+}
+
+.star-count {
+    font-weight: bold;
+    color: #333;
 }
 
 /* Barra de progreso de estrellas */
+.progress {
+    height: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    width: 100%;
+}
+
 .progress-bar {
     background-color: #ffc107;
-    height: 8px;
+    height: 10px;
     border-radius: 5px;
 }
 
