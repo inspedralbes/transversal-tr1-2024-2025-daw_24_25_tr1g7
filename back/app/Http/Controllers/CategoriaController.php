@@ -98,25 +98,28 @@ class CategoriaController extends Controller
     }
 
     //Modificar categoria
-    public function update($id, Request $request){
-        $data = $request-> validate([
-            'name' => 'required'
-        ],
-        [
-            'name.required' => 'The name filed is required'
+    public function update($id, Request $request)
+    {
+        // Validación de los datos
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+        ], [
+            'name.required' => 'El nombre de la categoría es obligatorio',
+            'name.max' => 'El nombre de la categoría no puede superar los 255 caracteres',
         ]);
-    try{
-        $category = Categoria::findOrFail($id);
-        $category->name = $data['name'];
-        $category->save();
 
-        return redirect()->route('category.index')->with('status', 'Categoría modificada con éxito');
-    } catch (\Illuminate\Database\QueryException $e) {
-        if($e->getCode() == 23000){  
-            return redirect()->route('category.index')->withErrors(['name' => 'El nombre de la categoría ya existe']);
+        try {
+            $category = Categoria::findOrFail($id);
+
+            $category->name = $data['name'];
+            $category->save();
+            return redirect()->route('category.index')->with('status', 'Categoría modificada con éxito');
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() == 23000) {
+                return redirect()->route('category.index')->withErrors(['name' => 'El nombre de la categoría ya existe']);
+            }
+            return redirect()->route('category.index')->withErrors(['error' => 'Ocurrió un error inesperado al modificar la categoría']);
         }
-        return redirect()->route('category.index')->withErrors(['error' => 'Ocurrió un error inesperado al crear la categoría']);
-    }
     }
 
     public function update_js($id, Request $request){

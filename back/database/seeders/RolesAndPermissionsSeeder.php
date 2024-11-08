@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 
 class RolesAndPermissionsSeeder extends Seeder
 {
@@ -21,8 +24,15 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $adminRole->givePermissionTo($editArticles, $deleteArticles);
         $userRole->givePermissionTo($editArticles); 
-        
 
+        $rootUser = User::create([
+            'name' => 'root',
+            'email' => 'root@gmail.com',
+            'password' => Hash::make('root'),
+        ]);
+
+        $rootUser->assignRole('admin');
+        
     }
 }
 
