@@ -12,12 +12,16 @@
         <a href="{{ route('category.index') }}" class="btn btn-primary btn-lg mt-4" style="background-color: #16cfe5; border-color: #16cfe5;">
             Panell de Categoria
         </a>
-        <a href="{{ route('subcategory.index') }}" class="btn btn-primary btn-lg mt-4" style="background-color: #16cfe5; border-color: #16cfe5;">
-            Panell de Subcategoria
+        <a href="{{ route('comanda.index') }}" class="btn btn-primary btn-lg mt-4" style="background-color: #16cfe5; border-color: #16cfe5;">
+            Panell de Comandes
         </a>
         <a href="{{ route('users.index') }}" class="btn btn-primary btn-lg mt-4" style="background-color: #16cfe5; border-color: #16cfe5;">
             Panell d'Usuaris
         </a>
+        <a href="{{ route('subcategory.index') }}" class="btn btn-primary btn-lg mt-4" style="background-color: #16cfe5; border-color: #16cfe5;">
+            Panell de Subcategoria
+        </a>
+        
     </div>
 </div>
 @endsection
