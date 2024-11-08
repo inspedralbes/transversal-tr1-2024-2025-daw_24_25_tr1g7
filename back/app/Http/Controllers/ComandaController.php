@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 use App\Models\Comanda;
 use Illuminate\Support\Facades\Auth;
@@ -150,5 +151,18 @@ class ComandaController extends Controller
             ->get();
 
         return response()->json($orders);
+    }
+
+    public function getMyInvoices()
+    {
+        $invoices = Invoice::where('idUser', Auth::user()->id)
+            ->with([
+                'order.products.producto',
+                'order.shippingAddress',
+                'order.billingAddress'
+            ])
+            ->get();
+
+        return response()->json($invoices);
     }
 }

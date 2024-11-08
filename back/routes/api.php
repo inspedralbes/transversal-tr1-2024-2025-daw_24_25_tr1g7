@@ -3,6 +3,7 @@
 use App\Http\Controllers\ApiProductsController;
 use App\Http\Controllers\AuthenticatorController;
 use App\Http\Controllers\DireccionesEnvioController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\StripeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -64,6 +65,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('orders')->group(function () {
         Route::post('get-my-orders', [ComandaController::class, 'getMyOrders'])->name('orders.getMyOrders');
+        Route::post('get-my-invoices', [ComandaController::class, 'getMyInvoices'])->name('orders.getMyInvoices');
+        Route::post('/invoice/{order_id}', [PdfController::class, 'generatePDF'])->name('invoice.index');
     });
 
     Route::get('/test-auth', function () {

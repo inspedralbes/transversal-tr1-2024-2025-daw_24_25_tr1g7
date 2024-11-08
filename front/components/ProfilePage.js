@@ -1,7 +1,7 @@
 import { defineComponent, defineAsyncComponent, reactive, ref, onMounted, computed } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 import * as comm from "../communicationManager/communicationManager.js";
 import {
-    createShippingAddress, getMyOrders,
+    createShippingAddress, downloadInvoice, getMyOrders,
     updateDefaultShippingAddress,
     updateShippingAddress
 } from "../communicationManager/communicationManager.js";
@@ -84,6 +84,8 @@ export const ProfilePage = defineAsyncComponent(() =>
 
 
                 onMounted(async () => {
+                    toggleLoading();
+
                     shippingAddresses.data = await comm.getShippingAddresses(getToken());
                     // console.log(shippingAddresses);
                     billingAddressess.data = await comm.getBillingAddresses(getToken());
@@ -97,6 +99,9 @@ export const ProfilePage = defineAsyncComponent(() =>
                     orders.data = responseOrders;
                     console.log(orders.data);
 
+                    invoices.data = await comm.getMyInvoices(getToken());
+                    console.log(invoices.data);
+
                     let response = await comm.retrievePaymentMethod(getToken());
                     paymentMethods.data = response.paymentMethods;
                     defaultPaymentMethods.data = response.defaultPaymentMethod;
@@ -106,6 +111,7 @@ export const ProfilePage = defineAsyncComponent(() =>
                     let testauth = await comm.testAuth(getToken());
                     // console.log("testAuth")
                     // console.log(testauth)
+                    toggleLoading();
 
 
                 });
@@ -328,6 +334,52 @@ export const ProfilePage = defineAsyncComponent(() =>
                 };
                 const showModalDetailsOrder = ref(false);
 
+
+                //INVOICES
+                const invoices = reactive({data:[]});
+
+                const downloadInvoice = async(invoice)=>{
+                    toggleLoading();
+                    let data = await comm.downloadInvoice(getToken(), invoice.idOrder);
+                    console.log(data);
+                    if (data.status === 'success') {
+                        // Convertir base64 a Blob
+                        const binaryString = window.atob(data.content);
+                        const bytes = new Uint8Array(binaryString.length);
+
+                        for (let i = 0; i < binaryString.length; i++) {
+                            bytes[i] = binaryString.charCodeAt(i);
+                        }
+
+                        const blob = new Blob([bytes.buffer], { type: 'application/pdf' });
+
+                        // Crear URL temporal para la descarga
+                        const url = window.URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = `factura_${invoice.idOrder}.pdf`;
+
+                        // Simular click para descargar
+                        document.body.appendChild(link);
+                        link.click();
+
+                        // Limpiar
+                        document.body.removeChild(link);
+                        window.URL.revokeObjectURL(url);
+                    } else {
+                        console.error('Error al descargar la factura');
+                    }
+                    toggleLoading();
+
+                }
+
+                const showLoadingPage = ref(false);
+
+                function toggleLoading() {
+                    showLoadingPage.value = !showLoadingPage.value;
+                }
+
+
                 return {
                     tab,
                     logout,
@@ -367,7 +419,12 @@ export const ProfilePage = defineAsyncComponent(() =>
                     formatDateExtends,
                     showModalDetailsOrder,
                     formDataOrder,
-                    lookDetailOrder
+                    lookDetailOrder,
+
+                    invoices,
+                    downloadInvoice,
+
+                    showLoadingPage
                 };
             }
         }))

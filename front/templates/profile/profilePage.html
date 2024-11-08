@@ -19,8 +19,6 @@
                     </button>
                     <div class="">
                         <button @click="tab = 'myOrders'" class="m-0 fs-6 btn w-100 text-start">Mis Pedidos</button>
-                        <button @click="tab = 'myReturns'" class="m-0 fs-6 btn w-100 text-start">Mis Devoluciones
-                        </button>
                         <button @click="tab = 'myInvoices'" class="m-0 fs-6 btn w-100 text-start">Mis Facturas</button>
                     </div>
 
@@ -42,7 +40,16 @@
                 <!--                taps-->
                 <!--TAB: mis datos:init-->
                 <div class="" v-if="tab === 'myData'">
-                    <h2 class="">Mis Datos</h2>
+                    <h2 class="mb-4">Mis Datos</h2>
+
+                    <div class="card border-none" style="background-color: #F2F2F2">
+                        <div class="card-body">
+
+                        </div>
+                    </div>
+                    <div>
+                        <p class="m-0 fs-4 fw-bold">Datos de mi cuenta</p>
+                    </div>
                 </div>
                 <!--TAB: mis datos:finish-->
 
@@ -153,6 +160,96 @@
                                         <!--                                        <button class="btn border-1 mb-2">Devolver</button>-->
                                         <!--                                        <button class="btn border-1 mb-2">Tramitar garantia</button>-->
                                         <button class="btn border-1 btn-primary mb-2">Comprar de nuevo</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--TAB: mis pedidos:finish-->
+
+                <!--TAB: mis facturas:init-->
+                <div class="" v-if="tab === 'myInvoices'">
+                    <h2 class="mb-4">Mis Facturas</h2>
+
+                    <div class="d-flex mb-5">
+                        <div class="me-2">
+                            <select class="form-select" style="height: 55px">
+                                <option selected>Selecciona una opció</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                            </select>
+                        </div>
+                        <div class="me-2">
+                            <select class="form-select" style="height: 55px">
+                                <option selected>Selecciona un mes</option>
+                                <option value="1">Enero</option>
+                                <option value="2">Febrero</option>
+                                <option value="3">Marzo</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Mayo</option>
+                                <option value="6">Junio</option>
+                                <option value="7">Julio</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Septiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Diciembre</option>
+                            </select>
+                        </div>
+                        <div class="me-2">
+                            <div class="row">
+                                <div class="col-lg-12 col-12">
+                                    <div class="form-floating ">
+                                        <input class="form-control w-lg-96" id="buscar" placeholder="Buscar" style=""
+                                               type="text">
+                                        <label for="buscar">City</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div :key="index" class="card mb-2" v-for="(invoice, index) in invoices.data">
+                        <div class="card-body">
+                            <div class="border-bottom row pb-3">
+                                <div class="col-lg-12 col-12 d-flex justify-content-between">
+                                    <div class="d-flex ">
+                                        <div class="me-4">
+                                            <p class="m-0 fw-bold fs-7">Pedido</p>
+                                            <p class="m-0 fs-7">{{formatDate(invoice.order.created_at)}}</p>
+                                        </div>
+                                        <div class="me-4">
+                                            <p class="m-0 fw-bold fs-7">Vendido por</p>
+                                            <p class="m-0 fs-7">NetCore</p>
+                                        </div>
+                                        <div class="me-4">
+                                            <p class="m-0 fw-bold fs-7">Nº pedido</p>
+                                            <p class="m-0 fs-7">{{invoice.order.id}}</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button @click="downloadInvoice(invoice)" class="btn border-1">Factura</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row py-2">
+                                <div class="col-lg-12 col-12 d-flex justify-content-between">
+                                    <div>
+                                        <div class="d-flex mt-4" v-for="(product, index) in invoice.order.products" :key="index">
+                                            <div class="me-4 container-img" style="height: 100px">
+                                                <img class="img-fluid"
+                                                     :src="product.producto.image_path"/>
+                                            </div>
+                                            <div class="me-4">
+                                                <p class="m-0 fs-6">{{product.producto.name}}</p>
+                                                <p class="m-0 fw-bold fs-6">{{(product.producto.price)*(product.num_product)}}€</p>
+                                                <p class="m-0 fs-6">x{{product.num_product}} Unidad/es</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -747,3 +844,12 @@
     </div>
 </div>
 <!--MODAL SHOW DETAILS PEDIDO-->
+
+<div
+        class="loading-overlay position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity"
+        v-if="showLoadingPage">
+    <div class="text-center position-relative">
+        <img src="./img/logo.png" alt="Logo" class="logo-image">
+        <div class="spinner-border spinner-border-custom position-absolute"></div>
+    </div>
+</div>

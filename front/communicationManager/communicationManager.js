@@ -495,6 +495,54 @@ export async function getMyOrders(token){
 
 }
 
+export async function getMyInvoices(token){
+    try {
+        const response = await fetch(URL + '/orders/get-my-invoices', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: null
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
+    }
+
+}
+
+export async function downloadInvoice(token, orderId){
+    try {
+        const response = await fetch(URL + '/orders/invoice/' + orderId, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: null
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
+    }
+
+}
+
 export async function testAuth(token) {
     try {
         const response = await fetch(URL + '/test-auth', {
