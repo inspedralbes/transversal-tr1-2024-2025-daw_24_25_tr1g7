@@ -97,6 +97,7 @@ class ComandaController extends Controller
         $comanda->status = $data['status'];
         $comanda->save();
 
+        Mail::to($user->email)->send(new ConfirmStatusMailMailer($user,route("comanda.update",['id'=>$comanda->id])));
         return redirect()->route('comanda.index')->with('success', 'Estado de la comanda actualizado correctamente.');
     }
 

@@ -9,6 +9,8 @@ use App\Models\Invoice;
 use App\Models\Producte;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail; // Asegúrate de importar el facade Mail
+use App\Mail\FinishBuyMailMailer;
 
 class StripeController extends Controller
 {
@@ -164,6 +166,9 @@ class StripeController extends Controller
         $invoice->idUser = $user->id;
         $invoice->price = $data['price'];
         $invoice->save();
+
+
+        Mail::to($user->email)->send(new FinishBuyMailMailer($user, route('invoice.index', ['order_id'=>$order->id])));
 
         return response()->json([
             'status' => 'success',

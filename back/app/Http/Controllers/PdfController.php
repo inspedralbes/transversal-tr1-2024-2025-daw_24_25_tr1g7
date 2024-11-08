@@ -61,8 +61,7 @@ class PdfController extends Controller
 
         // Generar el PDF con los datos recopilados
         $pdf = PDF::loadView('pdf.invoice', $data);
-
-        return $pdf->stream('invoice.pdf');
+        return $pdf->download('invoice.pdf');
     }
 
     public function generatePDF($order_id)
