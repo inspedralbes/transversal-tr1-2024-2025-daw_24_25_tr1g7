@@ -1,4 +1,4 @@
-const URL = "http://localhost:8000/api"
+const URL = "http://localhost:8001/api"
 export async function insertUser(dataUser) {
     return fetch(URL+'/register', {
         method: 'POST',

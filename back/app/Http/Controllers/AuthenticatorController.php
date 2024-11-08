@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail; 
+use App\Mail\ConfirmRegisterMailMailer; 
 
 class AuthenticatorController extends Controller
 {
@@ -26,6 +28,7 @@ class AuthenticatorController extends Controller
 //            session(['auth_token' => $token]);
 //            return redirect('/category')->with('success', 'Usuario iniciado sesión exitosamente');
 
+            Mail::to($user->email)->send(new ConfirmRegisterMailMailer($user));
             return response()->json(['status' => 'success', 'message' => 'Credentials validated', 'token' => $token, 'user' => $user]);
         }
 
@@ -68,6 +71,7 @@ class AuthenticatorController extends Controller
 //            Mail::to($user->email)->send(new RegisterNewUserMail($user));
 
 //            return redirect('/category')->with('success', 'Usuario registrado e iniciado sesión exitosamente');
+            Mail::to($user->email)->send(new ConfirmRegisterMailMailer($user));
             return response()->json(['status' => 'success', 'message' => 'User created', 'token' => $token, 'user' => $user]);
 
         } catch (\Exception $e) {
