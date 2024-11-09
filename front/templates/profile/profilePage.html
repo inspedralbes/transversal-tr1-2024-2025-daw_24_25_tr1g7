@@ -1,7 +1,7 @@
 <div class="w-100 py-3">
     <div class="section">
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-3 d-lg-block d-none">
                 <div class="w-100">
                     <button class="m-0 fs-6 btn w-100 text-start fw-bold">
                         <div><i class="bi bi-person-fill me-2"></i>Mi cuenta</div>
@@ -36,19 +36,115 @@
                 </div>
 
             </div>
-            <div class="col-lg-9">
+            <div class="col-lg-9 col-12">
                 <!--                taps-->
                 <!--TAB: mis datos:init-->
                 <div class="" v-if="tab === 'myData'">
                     <h2 class="mb-4">Mis Datos</h2>
 
-                    <div class="card border-none" style="background-color: #F2F2F2">
+                    <div class="card border-none mb-4" style="background-color: #F2F2F2">
                         <div class="card-body">
-
+                            <div class="row">
+                                <div class="col-lg-6 col-12 card border-none">
+                                    <div class="card-body text-center">
+                                        <p class="m-0 fs-2 fw-bold mb-2">{{orders.data.length}}</p>
+                                        <p class="m-0 fs-6 mb-2">pedidos</p>
+                                        <button @click="tab = 'myOrders'" class="btn border-1 mb-2">Ver pedidos</button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-12 card border-none">
+                                    <div class="card-body text-center">
+                                        <p class="m-0 fs-2 fw-bold mb-2">{{invoices.data.length}}</p>
+                                        <p class="m-0 fs-6 mb-2">facturas</p>
+                                        <button @click="tab = 'myInvoices'" class="btn border-1 mb-2">Ver facturas
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div>
-                        <p class="m-0 fs-4 fw-bold">Datos de mi cuenta</p>
+                        <p class="m-0 fs-4 fw-bold mb-3">Datos de mi cuenta</p>
+
+                        <div class="mb-3">
+                            <p class="m-0 mb-2 fs-5 fw-semibold">Nick</p>
+                            <p class="m-0 mb-2 fs-6">Esté será el nombre que utilizaremos en todas tus publicaciones en
+                                NetCore.</p>
+                            <div class="row mb-4">
+                                <div class="col-lg-4 col-12">
+                                    <div class="form-floating  w-100">
+                                        <input class="form-control  w-100" id="nick" placeholder="Pepe" style=""
+                                               v-model="formDataUserData.nick"
+                                               type="text">
+                                        <label for="nick">Nick</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button @click="saveNewNickName" class="btn btn-primary">Guardar</button>
+                        </div>
+
+                        <div class="mb-3">
+                            <p class="m-0 mb-2 fs-5 fw-semibold">Email</p>
+                            <p class="m-0 mb-2 fs-6">Esté será el email que utilizaremos en NetCore para notificarte.</p>
+                            <div class="row mb-4">
+                                <div class="col-lg-4 col-12">
+                                    <div class="form-floating  w-100">
+                                        <input class="form-control  w-100" id="email"
+                                               placeholder="email@gmail.com" style=""
+                                               v-model="formDataUserData.email"
+                                               @blur="validateEmail"
+                                               type="text">
+                                        <label for="email">Email</label>
+                                    </div>
+                                    <p class="text-danger fs-7" id="validator-email">{{ errors.email }}</p>
+                                </div>
+                            </div>
+                            <button @click="saveNewEmail" class="btn btn-primary">Guardar</button>
+
+                        </div>
+
+                        <div class="mb-3">
+                            <p class="m-0 mb-2 fs-5 fw-semibold">Contraseña</p>
+                            <div class="row mb-4">
+                                <div class="col-lg-4 col-12">
+                                    <div class="form-floating  d-flex position-relative w-100">
+                                        <input class="form-control  w-100" id="lastPassword" placeholder="****" style=""
+                                               v-model="formDataUserData.lastPassword"
+                                               type="password">
+                                        <label for="lastPassword">Contrasenya antiga</label>
+                                        <i class="bi bi-eye-slash position-absolute end-0 top-50 translate-middle-y me-3"
+                                           id="toggle-last-password" style="cursor: pointer;"></i>
+                                    </div>
+                                    <!--                                    <p class="text-danger fs-7" id="validator-password">{{ errors.password }}</p>-->
+                                </div>
+                                <div class="col-lg-4 col-12">
+                                    <div class="form-floating d-flex position-relative w-100">
+                                        <input class="form-control w-100" id="newPassword" placeholder="****" style=""
+                                               v-model="formDataUserData.password" @blur="validatePassword"
+                                               type="password">
+                                        <label for="newPassword">Nova contrasenya</label>
+                                        <i class="bi bi-eye-slash position-absolute end-0 top-50 translate-middle-y me-3"
+                                           id="toggle-new-password" style="cursor: pointer;"></i>
+                                    </div>
+                                    <p class="text-danger fs-7" id="validator-password">{{ errors.password }}</p>
+                                </div>
+                                <div class="col-lg-4 col-12">
+                                    <div class="form-floating d-flex position-relative w-100">
+                                        <input class="form-control  w-100" id="newPasswordRepeat" placeholder="****"
+                                               v-model="formDataUserData.passwordRepeat" @blur="validatePasswordRepeat"
+                                               style=""
+                                               type="password">
+                                        <label for="newPasswordRepeat">Repteix contrasenya</label>
+                                        <i class="bi bi-eye-slash position-absolute end-0 top-50 translate-middle-y me-3"
+                                           id="toggle-new-password-repeat" style="cursor: pointer;"></i>
+                                    </div>
+                                    <p class="text-danger fs-7" id="validator-password-repeat">{{ errors.passwordRepeat }}</p>
+                                </div>
+                            </div>
+                            <button @click="saveNewPassword" class="btn btn-primary">Guardar</button>
+
+                        </div>
                     </div>
                 </div>
                 <!--TAB: mis datos:finish-->
@@ -125,8 +221,9 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-12" v-if="order.details">
-<!--                                    <button class="btn border-1 me-2">Factura</button>-->
-                                    <button @click="lookDetailOrder(order)" class="btn border-1">Detalles del pedido</button>
+                                    <!--                                    <button class="btn border-1 me-2">Factura</button>-->
+                                    <button @click="lookDetailOrder(order)" class="btn border-1">Detalles del pedido
+                                    </button>
                                 </div>
                             </div>
 
@@ -143,14 +240,16 @@
                             <div class="row py-2">
                                 <div class="col-lg-12 col-12 d-flex justify-content-between">
                                     <div>
-                                        <div class="d-flex mt-4" v-for="(product, index) in order.products" :key="index">
+                                        <div :key="index" class="d-flex mt-4"
+                                             v-for="(product, index) in order.products">
                                             <div class="me-4 container-img" style="height: 100px">
-                                                <img class="img-fluid"
-                                                     :src="product.producto.image_path"/>
+                                                <img :src="product.producto.image_path"
+                                                     class="img-fluid"/>
                                             </div>
                                             <div class="me-4">
                                                 <p class="m-0 fs-6">{{product.producto.name}}</p>
-                                                <p class="m-0 fw-bold fs-6">{{(product.producto.price)*(product.num_product)}}€</p>
+                                                <p class="m-0 fw-bold fs-6">
+                                                    {{(product.producto.price)*(product.num_product)}}€</p>
                                                 <p class="m-0 fs-6">x{{product.num_product}} Unidad/es</p>
                                             </div>
                                         </div>
@@ -204,7 +303,7 @@
                                     <div class="form-floating ">
                                         <input class="form-control w-lg-96" id="buscar" placeholder="Buscar" style=""
                                                type="text">
-                                        <label for="buscar">City</label>
+                                        <label for="buscar">Buscar</label>
                                     </div>
 
                                 </div>
@@ -239,14 +338,16 @@
                             <div class="row py-2">
                                 <div class="col-lg-12 col-12 d-flex justify-content-between">
                                     <div>
-                                        <div class="d-flex mt-4" v-for="(product, index) in invoice.order.products" :key="index">
+                                        <div :key="index" class="d-flex mt-4"
+                                             v-for="(product, index) in invoice.order.products">
                                             <div class="me-4 container-img" style="height: 100px">
-                                                <img class="img-fluid"
-                                                     :src="product.producto.image_path"/>
+                                                <img :src="product.producto.image_path"
+                                                     class="img-fluid"/>
                                             </div>
                                             <div class="me-4">
                                                 <p class="m-0 fs-6">{{product.producto.name}}</p>
-                                                <p class="m-0 fw-bold fs-6">{{(product.producto.price)*(product.num_product)}}€</p>
+                                                <p class="m-0 fw-bold fs-6">
+                                                    {{(product.producto.price)*(product.num_product)}}€</p>
                                                 <p class="m-0 fs-6">x{{product.num_product}} Unidad/es</p>
                                             </div>
                                         </div>
@@ -802,7 +903,8 @@
                         <p class="m-0 fw-bold">Dirección de envio</p>
                         <p class="m-0">{{formDataOrder.shippingAddress.street}},
                             {{formDataOrder.shippingAddress.door}}-{{formDataOrder.shippingAddress.floor}}
-                            {{formDataOrder.shippingAddress.zip_code}} {{formDataOrder.shippingAddress.city}}, {{formDataOrder.shippingAddress.population}}</p>
+                            {{formDataOrder.shippingAddress.zip_code}} {{formDataOrder.shippingAddress.city}},
+                            {{formDataOrder.shippingAddress.population}}</p>
                     </div>
                 </div>
 
@@ -815,7 +917,8 @@
 
                             {{formDataOrder.billingAddress.street}},
                             {{formDataOrder.billingAddress.door}}-{{formDataOrder.billingAddress.floor}}
-                            {{formDataOrder.billingAddress.zip_code}} {{formDataOrder.billingAddress.city}}, {{formDataOrder.billingAddress.population}}
+                            {{formDataOrder.billingAddress.zip_code}} {{formDataOrder.billingAddress.city}},
+                            {{formDataOrder.billingAddress.population}}
                         </p>
                     </div>
                 </div>
@@ -849,7 +952,7 @@
         class="loading-overlay position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity"
         v-if="showLoadingPage">
     <div class="text-center position-relative">
-        <img src="./img/logo.png" alt="Logo" class="logo-image">
+        <img alt="Logo" class="logo-image" src="./img/logo.png">
         <div class="spinner-border spinner-border-custom position-absolute"></div>
     </div>
 </div>

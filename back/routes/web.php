@@ -16,7 +16,7 @@ use App\Http\Controllers\UserController;
 
 Route::resource('users', UserController::class);
 
-Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+//Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
 
 
 
@@ -26,7 +26,7 @@ Route::get('/welcome', [LoginRegisterController::class, 'showWelcome'])->name('w
 
 Route::post('/logout', [LoginRegisterController::class, 'logout'])->name('logout');
 
-Route::get('/login', [LoginRegisterController::class, 'showLoginForm'])->name('login');
+Route::get('/login', [LoginRegisterController::class, 'showLoginForm'])->name('login.showForm');
 
 Route::post('/login', [LoginRegisterController::class, 'authenticate'])->name('login');
 

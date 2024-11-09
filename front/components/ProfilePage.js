@@ -2,7 +2,7 @@ import { defineComponent, defineAsyncComponent, reactive, ref, onMounted, comput
 import * as comm from "../communicationManager/communicationManager.js";
 import {
     createShippingAddress, downloadInvoice, getMyOrders,
-    updateDefaultShippingAddress,
+    updateDefaultShippingAddress, updateEmailUser,
     updateShippingAddress
 } from "../communicationManager/communicationManager.js";
 import {AddPaymentMethodComponent} from "./AddPaymentMethodComponent.js";
@@ -15,9 +15,15 @@ export const ProfilePage = defineAsyncComponent(() =>
             components:{
                 AddPaymentMethodComponent
             },
+            props: {
+                tab: {
+                    type: String,
+                    default: ''
+                }
+            },
             emits: ['updatePage'],
             setup(props, { emit }) {
-
+                const tab = ref(props.tab || 'myData');
                 const getToken = () =>{
                     return localStorage.getItem('token');
                 }
@@ -57,7 +63,7 @@ export const ProfilePage = defineAsyncComponent(() =>
                     'floor':'',
                     'door':''
                 });
-                const tab = ref('myData');
+
                 const showModalAddShippingAddress = ref(false)
                 const showModalAddBillingAddress = ref(false)
                 const typeModal = ref('')
@@ -380,6 +386,66 @@ export const ProfilePage = defineAsyncComponent(() =>
                 }
 
 
+                //profile my data gestor nick, email, password
+                const formDataUserData = reactive({
+                    nick: '',
+                    email: '',
+                    lastPassword: '',
+                    password: '',
+                    passwordRepeat: ''
+                })
+
+                const errors = reactive({
+                    username: '',
+                    email: '',
+                    password: '',
+                    passwordRepeat: ''
+                });
+
+                const validatePassword = () => {
+                    errors.password = formDataUserData.password.length < 4 ? 'La contrasenya ha de tenir minim 4 caracters' : '';
+                };
+
+                const validatePasswordRepeat = () => {
+                    errors.passwordRepeat = formDataUserData.password !== formDataUserData.passwordRepeat ? 'Les contrasenyes no coicideixen' : '';
+                };
+
+                const validateEmail = () => {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    errors.email = !emailRegex.test(formDataUserData.email) ? 'Si us plau introdueix un email correcte' : '';
+                };
+
+                const saveNewNickName = async()=>{
+                    console.log(formDataUserData.nick)
+                    if(formDataUserData.nick !== ''){
+                        let response = await comm.updateNickUser(getToken(), formDataUserData);
+                        console.log(response)
+                        localStorage.setItem('user', JSON.stringify(response.user))
+                    }else{
+
+                    }
+                }
+
+                const saveNewEmail = async()=>{
+                    console.log(formDataUserData.email)
+                    if(formDataUserData.email !== ''){
+                        let response = await comm.updateEmailUser(getToken(), formDataUserData);
+                        console.log(response)
+                        localStorage.setItem('user', JSON.stringify(response.user))
+                    }else{
+
+                    }
+
+                }
+
+                const saveNewPassword = ()=>{
+                    console.log(formDataUserData.password)
+                    if(formDataUserData.password.length >= 4 &&
+                        formDataUserData.password === formDataUserData.passwordRepeat){
+                        console.log("save new password")
+                    }
+                }
+
                 return {
                     tab,
                     logout,
@@ -424,7 +490,16 @@ export const ProfilePage = defineAsyncComponent(() =>
                     invoices,
                     downloadInvoice,
 
-                    showLoadingPage
+                    showLoadingPage,
+
+                    formDataUserData,
+                    errors,
+                    validatePassword,
+                    validatePasswordRepeat,
+                    validateEmail,
+                    saveNewNickName,
+                    saveNewEmail,
+                    saveNewPassword
                 };
             }
         }))

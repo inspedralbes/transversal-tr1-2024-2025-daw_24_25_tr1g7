@@ -31,7 +31,7 @@
     </div>
 
     <div v-if="page !== 'login' && page !== 'register'">
-        <nav-bar-component v-bind:products-cart="productsCart.data" @update-page="changePage"></nav-bar-component>
+        <nav-bar-component v-bind:products-cart="productsCart.data" @update-page="changePage" @profile-page-tab="tabProfilePage = $event"></nav-bar-component>
         <div style="margin-top: 90px"></div>
         <div v-if="page === 'home'">
             <home-page @add-product-to-cart="addProductToCart"  @show-product="showProduct" @update-page="changePage"></home-page>
@@ -46,7 +46,7 @@
         </div>
 
         <div v-if="page === 'profile'">
-            <profile-page @update-page="changePage"></profile-page>
+            <profile-page @update-page="changePage" v-bind:tab="tabProfilePage"></profile-page>
         </div>
         
         <div v-if="page === 'filtro'">
@@ -96,6 +96,7 @@
             let productSelected = reactive({
                 data:JSON.parse(localStorage.getItem('productSelected')) || {}
             })
+            let tabProfilePage = ref('');
             const addProductToCart = (product) => {
                 // Buscar si el producto ya está en el carrito
                 let found = false;
@@ -144,7 +145,8 @@
                 showProduct,
                 changePage,
                 productSelected,
-                finishBuy
+                finishBuy,
+                tabProfilePage
             }
         }
     })

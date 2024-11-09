@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -11,7 +12,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::all(); 
+        $users = User::all();
         return view('Users.users', compact('users')); // Indica la carpeta i la vista
     }
 
@@ -63,9 +64,9 @@ class UserController extends Controller
         }
 
         // Actualizar el rol del usuario
-        $user->syncRoles([$validated['role']]);  
+        $user->syncRoles([$validated['role']]);
         $user->role = $validated['role'];
-        
+
 
         $user->save();
 
@@ -78,7 +79,45 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete(); 
+        $user->delete();
         return redirect()->route('users.index')->with('success', 'Usuari eliminat amb èxit');
+    }
+
+    public function updateNickname(Request $request)
+    {
+        $data = $request->validate([
+            'nick' => 'required'
+        ],
+        [
+            'nick.required'=>'Este campo es necesario'
+        ]);
+
+        Auth::user()->name = $data['nick'];
+        Auth::user()->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Nickname editado correctamente',
+            'user' => Auth::user()
+        ]);
+    }
+
+    public function updateEmail(Request $request)
+    {
+        $data = $request->validate([
+            'email' => 'required'
+        ],
+        [
+            'email.required'=>'Este campo es necesario'
+        ]);
+
+        Auth::user()->email = $data['email'];
+        Auth::user()->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Email editado correctamente',
+            'user' => Auth::user()
+        ]);
     }
 }

@@ -1,4 +1,4 @@
-const URL = "http://localhost:8001/api"
+const URL = "http://localhost:8000/api"
 export async function insertUser(dataUser) {
     return fetch(URL+'/register', {
         method: 'POST',
@@ -457,6 +457,52 @@ export async function updateDefaultBillingAddress(token, billingAddress){
                 'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(billingAddress)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
+    }
+}
+
+export async function updateNickUser(token, formDataUser){
+    try {
+        const response = await fetch(URL + '/user/update-nick-name', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(formDataUser)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
+    }
+}
+
+export async function updateEmailUser(token, formDataUser){
+    try {
+        const response = await fetch(URL + '/user/update-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(formDataUser)
         });
 
         if (!response.ok) {

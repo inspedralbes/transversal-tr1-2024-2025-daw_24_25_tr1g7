@@ -29,12 +29,12 @@ class LoginRegisterController extends Controller
     public function showWelcome()
     {
         if (Auth::check()) {
-            return view('welcome'); 
+            return view('welcome');
         } else {
-            return redirect()->route('login');
+            return redirect()->route('login.showForm');
         }
     }
-    
+
 
     public function showLoginForm()
     {
@@ -44,12 +44,12 @@ class LoginRegisterController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        $request->session()->invalidate(); 
-        $request->session()->regenerateToken(); 
-    
-        return redirect()->route('home'); 
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('home');
     }
-    
+
 
     public function register(Request $request)
 {
@@ -72,7 +72,7 @@ class LoginRegisterController extends Controller
         $user->role = 'user'; // Assignem el rol per defecte
         $user->save();
 
-        $user->assignRole('user'); 
+        $user->assignRole('user');
 
         Auth::login($user);
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthenticatorController;
 use App\Http\Controllers\DireccionesEnvioController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
@@ -21,9 +22,9 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::post('/register', [AuthenticatorController::class, 'register'])->name('register');
-Route::post('/login', [AuthenticatorController::class, 'authenticate'])->name('login');
-Route::get('/logout', [AuthenticatorController::class, 'logout'])->name('logout');
+Route::post('/register', [AuthenticatorController::class, 'register']);
+Route::post('/login', [AuthenticatorController::class, 'authenticate']);
+Route::get('/logout', [AuthenticatorController::class, 'logout']);
 
 Route::prefix('home')->group(function () {
     Route::get('get-home-data', [ApiProductsController::class, 'getHome'])->name('home.data');
@@ -66,7 +67,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('orders')->group(function () {
         Route::post('get-my-orders', [ComandaController::class, 'getMyOrders'])->name('orders.getMyOrders');
         Route::post('get-my-invoices', [ComandaController::class, 'getMyInvoices'])->name('orders.getMyInvoices');
-        Route::post('/invoice/{order_id}', [PdfController::class, 'generatePDF'])->name('invoice.index');
+        Route::post('/invoice/{order_id}', [PdfController::class, 'generatePDF']);
+    });
+
+    Route::prefix('user')->group(function () {
+        Route::post('update-nick-name', [UserController::class, 'updateNickname'])->name('users.updateNickname');
+        Route::post('update-email', [UserController::class, 'updateEmail'])->name('users.updateEmail');
     });
 
     Route::get('/test-auth', function () {
