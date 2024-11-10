@@ -13,7 +13,7 @@ export const NavBarComponent = defineAsyncComponent(() =>
                     default: () => [] // Cambiar a función para asegurar el valor predeterminado
                 }
             },
-            emits: ['updatePage', 'profilePageTab'],
+            emits: ['updatePage', 'profilePageTab', 'deleteProductCart'],
             setup(props, { emit }) {
 
                 const userData = ref(JSON.parse(localStorage.getItem('user') || '{}'));
@@ -42,8 +42,9 @@ export const NavBarComponent = defineAsyncComponent(() =>
                 };
                 const goToProfilePage = (type) => {
                     console.log(type)
-                    emit('updatePage', 'profile');
                     emit('profilePageTab', type);
+
+                    emit('updatePage', 'profile');
                     profileMenu.value = false;
                 };
 
@@ -55,12 +56,19 @@ export const NavBarComponent = defineAsyncComponent(() =>
                         localStorage.removeItem('token');
                         emit('updatePage', 'home');
                         profileMenu.value = false;
+                        window.location.reload();  // Recarga la página completamente
                     }
 
                 }
 
                 const goToFilter = (filterName) => {
                     emit('updatePage', 'filtro');
+                    categoryMenu.value = false;
+                }
+
+                const deleteProduct = (product) =>{
+                    console.log("eliminando")
+                    emit('deleteProductCart', product);
                 }
 
                 onMounted(async () => {
@@ -81,6 +89,7 @@ export const NavBarComponent = defineAsyncComponent(() =>
                     isLogin,
                     userData,
                     menuCategories,
+                    deleteProduct,
 
                     logout
                 };

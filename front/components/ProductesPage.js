@@ -58,6 +58,11 @@ export const ProductesPage = defineAsyncComponent(() =>
                     return localStorage.getItem('token');
                 }
 
+                const formatDate = (dateString) => {
+                    const date = new Date(dateString);
+                    return date.toLocaleDateString('es-ES'); // Esto mostrará el formato dd/mm/yyyy
+                }
+
                 const addOpinion = async() => {
                     let opinion = await comm.storeOpinion(getToken(),newOpinion);
                     console.log(opinion)
@@ -89,7 +94,9 @@ export const ProductesPage = defineAsyncComponent(() =>
                     stats,
                     opinions,
                     setRating, 
-                    addToCart
+                    addToCart,
+
+                    formatDate
                 };
             }
         }))

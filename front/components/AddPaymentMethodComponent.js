@@ -34,11 +34,18 @@ export const AddPaymentMethodComponent = defineAsyncComponent(() =>
                     cardElement.value.mount('#card-element');
                 });
 
+                const showLoadingPage = ref(false);
+
+                function toggleLoading() {
+                    showLoadingPage.value = !showLoadingPage.value;
+                }
+
                 const goToRegister = () => {
                     emit('updatePage', 'register');
                 };
 
                 const updatePaymentMethod = async () => {
+                    toggleLoading();
                     try {
                         // Realizas la llamada a tu API para crear el SetupIntent y obtener el client_secret
                         const response = await comm.createSetUpIntent(getToken());
@@ -72,12 +79,15 @@ export const AddPaymentMethodComponent = defineAsyncComponent(() =>
                     } catch (error) {
                         console.error('Error creating SetupIntent:', error);
                     }
+                    toggleLoading();
                 };
 
                 return {
                     goToRegister,
                     cardHolderName,
-                    updatePaymentMethod
+                    updatePaymentMethod,
+
+                    showLoadingPage
                 };
             }
         }))

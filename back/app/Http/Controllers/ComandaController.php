@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ConfirmStatusMailMailer;
 use App\Models\Invoice;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Comanda;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail; // Asegúrate de importar el facade Mail
+
 
 class ComandaController extends Controller
 {
@@ -97,7 +101,9 @@ class ComandaController extends Controller
         $comanda->status = $data['status'];
         $comanda->save();
 
-        Mail::to($user->email)->send(new ConfirmStatusMailMailer($user,route("comanda.update",['id'=>$comanda->id])));
+        $user = User::findOrFail($comanda->idUser);
+
+        Mail::to($user->email)->send(new ConfirmStatusMailMailer($user,$comanda->status));
         return redirect()->route('comanda.index')->with('success', 'Estado de la comanda actualizado correctamente.');
     }
 

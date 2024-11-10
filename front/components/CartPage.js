@@ -3,6 +3,7 @@ import * as comm from "../communicationManager/communicationManager.js";
 
 import {AddPaymentMethodComponent} from "./AddPaymentMethodComponent.js";
 import {purchase} from "../communicationManager/communicationManager.js";
+import {ToastNotificationComponent} from "./ToastNotificationComponent.js";
 
 export const CartPage = defineAsyncComponent(() =>
     Promise.all([
@@ -10,7 +11,8 @@ export const CartPage = defineAsyncComponent(() =>
         Promise.resolve(defineComponent({
             name: 'CartPage',
             components:{
-                AddPaymentMethodComponent
+                AddPaymentMethodComponent,
+                ToastNotificationComponent
             },
             props: {
                 productsCart: {
@@ -18,11 +20,22 @@ export const CartPage = defineAsyncComponent(() =>
                     default: () => [] // Cambiar a función para asegurar el valor predeterminado
                 }
             },
-            emits: ['updatePage', 'finish'],
+            emits: ['updatePage', 'finish', 'deleteProductCart'],
             setup(props, { emit }) {
                 const getToken = () =>{
                     return localStorage.getItem('token');
                 }
+
+                //toast message
+                const toastMessage = ref('');
+                const toastType = ref('');
+                const showToast = ref(false);
+
+                const showToastMessage = (message, type = 'info') => {
+                    toastMessage.value = message;
+                    toastType.value = type;
+                    showToast.value = true;
+                };
 
                 const showAddCreditCardComponent = ref(false);
                 const paymentMethods = reactive({data: []})
@@ -136,6 +149,8 @@ export const CartPage = defineAsyncComponent(() =>
                         }
                     } catch (error) {
                         console.error('Error deleting shipping address:', error);
+                        showToastMessage('Esta dirección esta relacionada a un pedido', 'error')
+
                     }
                 }
 
@@ -215,6 +230,7 @@ export const CartPage = defineAsyncComponent(() =>
                         }
                     } catch (error) {
                         console.error('Error deleting shipping address:', error);
+                        showToastMessage('Esta dirección esta relacionada a un pedido', 'error')
                     }
                 }
 
@@ -278,28 +294,37 @@ export const CartPage = defineAsyncComponent(() =>
 
 
                 const selectAddresses = async () =>{
-                    steps.value = 'selectCreditCard';
-                    toggleLoading();
+                    const hasSelectedShipping = shippingAddresses.data.some(address => address.selected === true);
+                    const hasSelectedBilling = billingAddressess.data.some(address => address.selected === true);
 
+                    if (hasSelectedShipping && hasSelectedBilling) {
+                        steps.value = 'selectCreditCard';
+                        toggleLoading();
 
-                    console.log("Puedes ver tus tarjetas de credito");
-                    console.log(JSON.parse(localStorage.getItem('user')));
-                    console.log(localStorage.getItem('token'));
-                    let response = await comm.retrievePaymentMethod(localStorage.getItem('token'));
-                    paymentMethods.data = response.paymentMethods;
-                    defaultPaymentMethods.data = response.defaultPaymentMethod;
-                    console.log(paymentMethods.data)
-                    console.log(defaultPaymentMethods.data)
-                    toggleLoading();
+                        console.log("Puedes ver tus tarjetas de crédito");
+                        console.log(JSON.parse(localStorage.getItem('user')));
+                        console.log(localStorage.getItem('token'));
 
+                        let response = await comm.retrievePaymentMethod(localStorage.getItem('token'));
+                        paymentMethods.data = response.paymentMethods;
+                        defaultPaymentMethods.data = response.defaultPaymentMethod;
+
+                        console.log(paymentMethods.data);
+                        console.log(defaultPaymentMethods.data);
+
+                        toggleLoading();
+                    } else {
+                        console.log("Debe seleccionar una dirección de envío y una dirección de facturación.");
+                        showToastMessage('Debes seleccionar las direcciones', 'error')
+                    }
 
                 }
 
 
                 const finishBuying = async() => {
                     // steps.value = 'finishBuy'
-                    const shippingAddresSelected = billingAddressess.data.find(address => address.selected);
-                    const billingAddressSelected = shippingAddresses.data.find(address => address.selected);
+                    const shippingAddresSelected = shippingAddresses.data.find(address => address.selected);
+                    const billingAddressSelected = billingAddressess.data.find(address => address.selected);
                     toggleLoading();
 
                     let response = await comm.purchase(getToken(), defaultPaymentMethods.data, parseFloat(priceTotal.value), props.productsCart, shippingAddresSelected, billingAddressSelected);
@@ -309,10 +334,16 @@ export const CartPage = defineAsyncComponent(() =>
                         toggleLoading();
 
                         emit('finish', true);
-                        emit('updatePage', 'home');
+                        steps.value='finishBuy';
+                        // emit('updatePage', 'home');
                         // localStorage.removeItem('productsCart')
 
                     }
+                }
+
+                const goToHome = ()=>{
+                    emit('updatePage', 'home');
+
                 }
                 const goToRegister = () => {
                     emit('updatePage', 'register');
@@ -323,7 +354,34 @@ export const CartPage = defineAsyncComponent(() =>
                     showLoadingPage.value = !showLoadingPage.value;
                 }
 
+
+                const handleDefaultPaymentMethod = (data)=> {
+                    paymentMethods.data = data;
+                    showAddCreditCardComponent.value = false;
+
+                }
+
+                const deleteProduct = (product) =>{
+                    emit('deleteProductCart', product);
+                }
+
+                const plusProduct = (product) =>{
+                    product.num_product++;
+                }
+
+                const substractProduct = (product) =>{
+                    product.num_product--;
+                    if(product.num_product == 0){
+                        emit('deleteProductCart', product);
+
+                    }
+                }
+
                 return {
+                    toastMessage,
+                    toastType,
+                    showToast,
+
                     goToRegister,
                     productsCart: props.productsCart,
                     priceTotal,
@@ -361,7 +419,14 @@ export const CartPage = defineAsyncComponent(() =>
                     handleTypeChange,
 
                     selectAddresses,
-                    showLoadingPage
+                    showLoadingPage,
+                    handleDefaultPaymentMethod,
+
+                    deleteProduct,
+                    substractProduct,
+                    plusProduct,
+
+                    goToHome
                 };
             }
         }))

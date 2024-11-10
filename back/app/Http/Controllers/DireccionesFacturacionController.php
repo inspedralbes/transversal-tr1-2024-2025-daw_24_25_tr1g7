@@ -77,7 +77,7 @@ class DireccionesFacturacionController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'An error occurred while deleting the address',
+                'message' => $e->getMessage(),
                 'action' => 'Failed to delete the shipping address due to an unexpected error',
                 'data' => null
             ], 500);
@@ -88,7 +88,7 @@ class DireccionesFacturacionController extends Controller
     public function update($id, Request $request) {
         $data = $request->validate([
             'idUser' => 'required',
-            'phone_number' => 'required',
+            'phoneNumber' => 'required',
             'zip_code' => 'required',
             'population' => 'required',
             'city' => 'required',
@@ -97,7 +97,7 @@ class DireccionesFacturacionController extends Controller
         ],
         [
             'idUser.required' => 'The idUser field is required',
-            'phone_number.required' => 'The idUser field is required',
+            'phoneNumber.required' => 'The idUser field is required',
             'zip_code.required' => 'The zip_code field is required',
             'population.required' => 'The population field is required',
             'city.required' => 'The city field is required',
@@ -107,12 +107,12 @@ class DireccionesFacturacionController extends Controller
 
         $direccion = BillingAddress::findOrFail($id);
         $direccion->idUser = $data['idUser'];
-        $direccion->name = $data['name'];
-        $direccion->last_name = $data['last_name'];
-        $direccion->company = $data['company'];
-        $direccion->phone_number = $data['phone_number'];
-        $direccion->dni_nie = $data['dni_nie'];
-        $direccion->cif = $data['cif'];
+        $direccion->name = $request->name ?? null;
+        $direccion->last_name = $request->last_name ?? null;
+        $direccion->company = $request->company ?? null;
+        $direccion->phone_number = $data['phoneNumber'];
+        $direccion->dni_nie = $request->dni_nie ?? null;
+        $direccion->cif = $request->cif ?? null;
         $direccion->zip_code = $data['zip_code'];
         $direccion->population = $data['population'];
         $direccion->city = $data['city'];

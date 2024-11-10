@@ -178,4 +178,24 @@ class StripeController extends Controller
 
     }
 
+    public function delete(Request $request)
+    {
+        $data = $request->validate([
+            'paymentMethod' => 'required',
+        ],
+        [
+            'paymentMethod.required'=>'Payment Method is required.',
+        ]);
+
+        $user = Auth::user();
+
+        $paymentMethod = $user->findPaymentMethod($data['paymentMethod']['id']);
+        $paymentMethod->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Payment Method deleted successfully!'
+        ]);
+    }
+
 }

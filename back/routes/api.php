@@ -62,6 +62,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('retrieve-payment-method', [StripeController::class, 'retrievePaymentMethod'])->name('stripe.retrievePaymentMethod');
         Route::post('set-default-payment-method', [StripeController::class, 'setDefaultPaymentMethod'])->name('stripe.setDefaultPaymentMethod');
         Route::post('purchase', [StripeController::class, 'purchase'])->name('stripe.purchase');
+        Route::post('delete-payment-method', [StripeController::class, 'delete'])->name('stripe.delete');
     });
 
     Route::prefix('orders')->group(function () {

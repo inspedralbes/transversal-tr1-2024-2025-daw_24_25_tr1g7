@@ -86,6 +86,31 @@ export async function addPaymentMethod(token, paymentMethod) {
     }
 }
 
+export async function deletePaymentMethod(token, paymentMethod) {
+    try {
+        const response = await fetch(URL + '/stripe/delete-payment-method', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                'paymentMethod': paymentMethod
+            }) // Este `body` puede omitirse, ya que no se está enviando ningún dato en el cuerpo
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error; // Propagamos el error para que pueda ser manejado en el nivel superior
+    }
+}
+
 export async function purchase(token, paymentMethod, price, products, shippingAddress, billingAddress) {
     try {
         const response = await fetch(URL + '/stripe/purchase', {

@@ -90,6 +90,8 @@ export const ProfilePage = defineAsyncComponent(() =>
                         localStorage.removeItem('user');
                         localStorage.removeItem('token');
                         emit('updatePage', 'home');
+                        window.location.reload();  // Recarga la página completamente
+
                     }
 
                 }
@@ -288,7 +290,7 @@ export const ProfilePage = defineAsyncComponent(() =>
                         }
                     } catch (error) {
                         console.error('Error al actualizar la dirección:', error);
-                        alert('Error al actualizar la dirección');
+                        showToastMessage('Algo salió mal', 'error');
                     }
                 };
 
@@ -315,7 +317,24 @@ export const ProfilePage = defineAsyncComponent(() =>
 
                 const handleDefaultPaymentMethod = (data)=> {
                     paymentMethods.data = data;
-                    showAddCreditCardComponent.value = false; // Cierra el modal
+                    showAddCreditCardComponent.value = false;
+
+                }
+
+                const deletePaymentMethod = async(creditCard) => {
+                    toggleLoading();
+                    let response = await comm.deletePaymentMethod(getToken(), creditCard);
+                    console.log(response)
+
+                    paymentMethods.data = paymentMethods.data.filter(card => card.id !== creditCard.id);
+                    toggleLoading();
+
+                    if(response.status === 'success'){
+                        showToastMessage('Operación exitosa', 'success');
+                    }else{
+                        showToastMessage('Algo salió mal', 'error');
+                    }
+
                 }
 
 
@@ -453,8 +472,11 @@ export const ProfilePage = defineAsyncComponent(() =>
                 const saveNewNickName = async()=>{
                     console.log(formDataUserData.nick)
                     if(formDataUserData.nick !== ''){
+                        toggleLoading();
                         let response = await comm.updateNickUser(getToken(), formDataUserData);
                         console.log(response)
+                        toggleLoading();
+
                         if(response.status === 'success'){
                             localStorage.setItem('user', JSON.stringify(response.user))
                             showToastMessage('Operación exitosa', 'success');
@@ -462,23 +484,27 @@ export const ProfilePage = defineAsyncComponent(() =>
                             showToastMessage('Algo salió mal', 'error');
                         }
                     }else{
-
+                        showToastMessage('El campo no puede estar vacio', 'warning');
                     }
                 }
 
                 const saveNewEmail = async()=>{
                     console.log(formDataUserData.email)
                     if(formDataUserData.email !== ''){
+                        toggleLoading();
                         let response = await comm.updateEmailUser(getToken(), formDataUserData);
                         console.log(response)
+                        toggleLoading();
+
                         if(response.status === 'success'){
                             localStorage.setItem('user', JSON.stringify(response.user))
+                            window.location.reload();  // Recarga la página completamente
                             showToastMessage('Operación exitosa', 'success');
                         }else{
                             showToastMessage('Algo salió mal', 'error');
                         }
                     }else{
-
+                        showToastMessage('El campo no puede estar vacio', 'warning');
                     }
 
                 }
@@ -489,9 +515,11 @@ export const ProfilePage = defineAsyncComponent(() =>
                     if(formDataUserData.password.length >= 4 &&
                         formDataUserData.password === formDataUserData.passwordRepeat){
                         console.log("save new password")
-
+                        toggleLoading();
                         let response = await comm.saveNewPassword(getToken(), formDataUserData);
                         console.log(response)
+                        toggleLoading();
+
                         // showToastMessage('Algo salió mal', 'error');
 
                         if(response.status === 'success'){
@@ -502,6 +530,8 @@ export const ProfilePage = defineAsyncComponent(() =>
                             // showToastMessage('Información importante', 'info');
                         }
 
+                    }else{
+                        showToastMessage('El campo no puede estar vacio', 'warning');
                     }
                 }
 
@@ -533,6 +563,7 @@ export const ProfilePage = defineAsyncComponent(() =>
                     selectPaymentMethod,
                     showAddCreditCardComponent,
                     handleDefaultPaymentMethod,
+                    deletePaymentMethod,
                     selectedType,
                     handleTypeChange,
 

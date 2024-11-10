@@ -10,7 +10,7 @@
                         <button @click="tab = 'myData'" class="m-0 fs-6 btn w-100 text-start">Mis datos</button>
                         <button @click="tab = 'myAddresses'" class="m-0 fs-6 btn w-100 text-start">Mis direcciones
                         </button>
-                        <button @click="tab = 'messages'" class="m-0 fs-6 btn w-100 text-start">Mensajes</button>
+<!--                        <button @click="tab = 'messages'" class="m-0 fs-6 btn w-100 text-start">Mensajes</button>-->
                         <button @click="tab = 'opinions'" class="m-0 fs-6 btn w-100 text-start">Opiniones</button>
                     </div>
 
@@ -35,6 +35,18 @@
                     </button>
                 </div>
 
+            </div>
+
+            <div class="col-lg-12 col-12 d-lg-none d-block">
+                <select class="form-select" v-model="tab" style="height: 55px">
+                    <option disabled selected>Selecciona un tab</option>
+                    <option value="myData">Mis Datos</option>
+                    <option value="myAddresses">Mis direcciones</option>
+                    <option value="opinions">Opiniones</option>
+                    <option value="myOrders">Mis Pedidos</option>
+                    <option value="myInvoices">Mis Facturas</option>
+                    <option value="cards">Tarjetas vinculadas</option>
+                </select>
             </div>
             <div class="col-lg-9 col-12">
                 <!--                taps-->
@@ -153,7 +165,7 @@
                 <div class="" v-if="tab === 'myOrders'">
                     <h2 class="mb-4">Mis Pedidos</h2>
 
-                    <div class="d-flex mb-5">
+                    <div class="d-flex mb-5 d-none">
                         <div class="me-2">
                             <select class="form-select" style="height: 55px">
                                 <option selected>Selecciona una opció</option>
@@ -193,7 +205,7 @@
                         </div>
                     </div>
 
-                    <div :key="index" class="card mb-2" v-for="(order, index) in orders.data">
+                    <div v-if="orders.data.length > 0" :key="index" class="card mb-2" v-for="(order, index) in orders.data">
                         <div class="card-body">
                             <div class="border-bottom row pb-3">
                                 <div class="col-lg-12 col-12 d-flex justify-content-between">
@@ -211,7 +223,7 @@
                                             <p class="m-0 fs-7">{{order.id}}</p>
                                         </div>
                                     </div>
-                                    <div>
+                                    <div class="d-lg-block d-none">
                                         <button @click="seeDetails(order)" class="btn border-1" v-if="!order.details">
                                             Ver detalles y seguimiento<i
                                                 class="bi bi-caret-down-fill ms-2"></i></button>
@@ -219,6 +231,14 @@
                                             Ocultar detalles y seguimiento<i
                                                 class="bi bi-caret-up-fill ms-2"></i></button>
                                     </div>
+                                </div>
+                                <div class=" col-lg-12 col-12 d-lg-none d-block w-100">
+                                    <button @click="seeDetails(order)" class="btn border-1 w-100" v-if="!order.details">
+                                        Ver detalles y seguimiento<i
+                                            class="bi bi-caret-down-fill ms-2"></i></button>
+                                    <button @click="hideDetails(order)" class="btn border-1 w-100" v-if="order.details">
+                                        Ocultar detalles y seguimiento<i
+                                            class="bi bi-caret-up-fill ms-2"></i></button>
                                 </div>
                                 <div class="col-lg-12 col-12" v-if="order.details">
                                     <!--                                    <button class="btn border-1 me-2">Factura</button>-->
@@ -255,14 +275,18 @@
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column" v-if="order.details">
-                                        <button class="btn border-1 mb-2">Valorar producto</button>
+                                        <button class="btn border-1 mb-2 d-none">Valorar producto</button>
                                         <!--                                        <button class="btn border-1 mb-2">Devolver</button>-->
                                         <!--                                        <button class="btn border-1 mb-2">Tramitar garantia</button>-->
-                                        <button class="btn border-1 btn-primary mb-2">Comprar de nuevo</button>
+                                        <button class="btn border-1 btn-primary mb-2 d-none">Comprar de nuevo</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div v-else>
+                        <p class="fs-6">No tienes ningun pedido todavia</p>
                     </div>
                 </div>
                 <!--TAB: mis pedidos:finish-->
@@ -271,7 +295,7 @@
                 <div class="" v-if="tab === 'myInvoices'">
                     <h2 class="mb-4">Mis Facturas</h2>
 
-                    <div class="d-flex mb-5">
+                    <div class="d-flex mb-5 d-none">
                         <div class="me-2">
                             <select class="form-select" style="height: 55px">
                                 <option selected>Selecciona una opció</option>
@@ -311,7 +335,7 @@
                         </div>
                     </div>
 
-                    <div :key="index" class="card mb-2" v-for="(invoice, index) in invoices.data">
+                    <div v-if="invoices.data.length > 0" :key="index" class="card mb-2" v-for="(invoice, index) in invoices.data">
                         <div class="card-body">
                             <div class="border-bottom row pb-3">
                                 <div class="col-lg-12 col-12 d-flex justify-content-between">
@@ -329,9 +353,12 @@
                                             <p class="m-0 fs-7">{{invoice.order.id}}</p>
                                         </div>
                                     </div>
-                                    <div>
+                                    <div class="d-lg-block d-none">
                                         <button @click="downloadInvoice(invoice)" class="btn border-1">Factura</button>
                                     </div>
+                                </div>
+                                <div class="d-lg-none d-lg-none">
+                                    <button @click="downloadInvoice(invoice)" class="btn border-1">Factura</button>
                                 </div>
                             </div>
 
@@ -355,6 +382,10 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div v-else>
+                        <p class="fs-6">No tienes ninguna factura todavia</p>
                     </div>
                 </div>
                 <!--TAB: mis pedidos:finish-->
@@ -459,7 +490,8 @@
 
                 <!--TAB: mis opiniones:init-->
                 <div class="" v-if="tab === 'opinions'">
-                    <h2 class="">Opiniones</h2>
+                    <h2 class="mb-4">Opiniones</h2>
+                    <p class="m-0">No tienes opiniones</p>
                 </div>
                 <!--TAB: mis opiniones:finish-->
 
@@ -472,7 +504,6 @@
                             <p class="m-0 fs-7">No tienes tarjetas de credito vinculadas</p>
                         </div>
                         <div v-if="paymentMethods.data.length > 0">
-                            Tienes tarjetas de credito vinculadas
 
                             <div
                                     :class="{ 'bg-primary-opacity text-white': creditCard.id === (defaultPaymentMethods.data?.id || '') }"
@@ -507,7 +538,7 @@
                         </div>
 
                         <button @click="showAddCreditCardComponent = !showAddCreditCardComponent"
-                                class="btn btn-secondary">Añadir tarjeta de credito
+                                class="btn border-full mt-4">Añadir tarjeta de credito
                         </button>
 
 

@@ -21,13 +21,11 @@ class ProductOpinionController extends Controller
             'idProductes'=> 'required|integer',
             'opinion_number'=> 'required',
             'opinion'=> 'required|string',
-            'img'=> 'required',
         ],
         [
             'idProductes.required' => 'El campo id de producto es requerido',
             'opinion_number.required' => 'El campo puntuacion es requerido',
             'opinion.required' => 'El campo opinion es requerido',
-            'img.required' => 'El campo imagen es requerido',
         ]);
 
         // Crear una nueva opinion
@@ -36,7 +34,7 @@ class ProductOpinionController extends Controller
         $opinion->idProductes = $data['idProductes'];
         $opinion->opinion_number = $data['opinion_number'];
         $opinion->opinion = $data['opinion'];
-        $opinion->img = $data['img'];
+        $opinion->img = $request->img ?? null;
         $opinion->save();
 
         $opinionResult = ProductOpinion::with('user')->findOrFail($opinion->id);
@@ -65,7 +63,7 @@ class ProductOpinionController extends Controller
         $opinions = ProductOpinion::where('idProductes', $productId)
         ->with(['user'])
         ->get();
-    
+
         $totalOpinions = $opinions->count();
         if ($totalOpinions === 0) {
             return response()->json([

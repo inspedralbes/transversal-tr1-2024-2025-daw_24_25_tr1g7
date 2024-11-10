@@ -154,6 +154,11 @@ export const FiltrosPage = defineAsyncComponent(() =>
                     emit('showProduct', producte);
                 };
 
+                const filterModal = ref(false);
+
+                const openModalFiltros = () =>{
+                    filterModal.value = true
+                }
                 onMounted(async() => {
                     toggleLoading();
                     let response = await comm.getProducts();
@@ -171,7 +176,10 @@ export const FiltrosPage = defineAsyncComponent(() =>
                     addToCart,
                     showToProduct,
 
-                    showLoadingPage
+                    showLoadingPage,
+
+                    openModalFiltros,
+                    filterModal
                 };
             }
         }))

@@ -71,7 +71,29 @@
             <h1>¡Actualización de Estado!</h1>
             <p>Hola {{$user->name}},</p>
             <p>Tu pedido ha cambiado de estado. El nuevo estado es:</p>
-            <p class="status">{{$status}}</p>
+            <p class="status">
+                @switch($status)
+                    @case('pending')
+                        Pendiente
+                        @break
+
+                    @case('in_progress')
+                        Enviado
+                        @break
+
+                    @case('complete')
+                        Recogido
+                        @break
+
+                    @case('cancelled')
+                        Cancelado
+                        @break
+
+                    @default
+                        Estado desconocido
+                @endswitch
+            </p>
+
             <p>Para más detalles o si tienes alguna duda, no dudes en contactarnos.</p>
 
             <div class="footer">

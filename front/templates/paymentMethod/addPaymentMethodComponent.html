@@ -5,16 +5,34 @@
                 <h4 class="card-title mb-4">Añadir método de pago</h4>
                 <form>
                     <div class="mb-3">
-                        <label for="card-holder-name" class="form-label">Titular de la tarjeta</label>
-                        <input type="text" class="form-control" id="card-holder-name" v-model="cardHolderName" placeholder="Introduce el nombre del titular">
+                        <label class="form-label" for="card-holder-name">Titular de la tarjeta</label>
+                        <div class="form-floating">
+                            <input class="form-control" id="card-holder-name"
+                                   placeholder="Introduce el nombre del titular" type="text"
+                                   v-model="cardHolderName">
+                            <label for="card-holder-name">Nombre del titular</label>
+                        </div>
+
                     </div>
                     <div class="mb-4">
                         <label class="form-label">Información de la tarjeta</label>
-                        <div id="card-element" class="form-control"></div>
+                        <div class="form-control py-2 px-2 mb-0" id="card-element"></div>
                     </div>
-                    <button type="button" class="btn btn-primary w-100" @click="updatePaymentMethod">Añadir método de pago</button>
+                    <button @click="updatePaymentMethod" class="btn btn-primary w-100" type="button">Añadir método de
+                        pago
+                    </button>
                 </form>
             </div>
         </div>
+    </div>
+</div>
+
+
+<div
+        class="loading-overlay position-fixed top-0 end-0 d-flex justify-content-center align-items-center bg-opacity"
+        v-if="showLoadingPage">
+    <div class="text-center position-relative">
+        <img alt="Logo" class="logo-image" src="./img/logo.png">
+        <div class="spinner-border spinner-border-custom position-absolute"></div>
     </div>
 </div>

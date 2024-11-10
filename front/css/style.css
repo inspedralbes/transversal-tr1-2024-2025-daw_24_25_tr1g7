@@ -2323,6 +2323,10 @@ Acabar de mirar sticky para filtros
     color: #16cfe5
 }
 
+.text-secondary{
+    color: #d3d3d3;
+}
+
 .text-primary-2 {
     color: #9716e5;
 }
@@ -4212,8 +4216,8 @@ Acabar de mirar sticky para filtros
     }
 }
 
+
 .star-rating {
-    font-size: 2rem;
     color: #d3d3d3;
     cursor: pointer;
 }
@@ -4253,8 +4257,9 @@ Acabar de mirar sticky para filtros
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-    width: 180px;
+    width: 230px;
     text-align: center;
+
 }
 
 .average-rating-box {
@@ -4289,13 +4294,11 @@ Acabar de mirar sticky para filtros
 
 /* Estilo para el desglose de estrellas */
 .star-breakdown {
-    width: 180px;
     text-align: center;
 }
 
 .star-bar {
-    display: flex;
-    align-items: center;
+
     margin-bottom: 8px;
     font-size: 0.9em;
 }

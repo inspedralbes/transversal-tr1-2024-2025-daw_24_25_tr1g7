@@ -3,43 +3,43 @@
         <div class="row">
             <div class="col-lg-5 col-12">
                 <div class="w-100 container-img" style="height: 500px;">
-                    <img class="img-fluid" :src="productSelected.image_path"/>
+                    <img :src="productSelected.image_path" class="img-fluid"/>
                 </div>
-<!--                <div class="w-100">-->
-<!--                    <div class="row px-2 justify-content-center">-->
-<!--                        <div class="col-lg-3 d-flex justify-content-center">-->
-<!--                            <div class="w-100 container-img" style="height: 100px;">-->
-<!--                                <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg" class="img-fluid"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-lg-3 d-flex justify-content-center">-->
-<!--                            <div class="w-100 container-img" style="height: 100px;">-->
-<!--                                <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg" class="img-fluid"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-lg-3 d-flex justify-content-center">-->
-<!--                            <div class="w-100 container-img" style="height: 100px;">-->
-<!--                                <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg" class="img-fluid"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="col-lg-3 d-flex justify-content-center">-->
-<!--                            <div class="w-100 container-img" style="height: 100px;">-->
-<!--                                <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg" class="img-fluid"/>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
+                <!--                <div class="w-100">-->
+                <!--                    <div class="row px-2 justify-content-center">-->
+                <!--                        <div class="col-lg-3 d-flex justify-content-center">-->
+                <!--                            <div class="w-100 container-img" style="height: 100px;">-->
+                <!--                                <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg" class="img-fluid"/>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                        <div class="col-lg-3 d-flex justify-content-center">-->
+                <!--                            <div class="w-100 container-img" style="height: 100px;">-->
+                <!--                                <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg" class="img-fluid"/>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                        <div class="col-lg-3 d-flex justify-content-center">-->
+                <!--                            <div class="w-100 container-img" style="height: 100px;">-->
+                <!--                                <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg" class="img-fluid"/>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                        <div class="col-lg-3 d-flex justify-content-center">-->
+                <!--                            <div class="w-100 container-img" style="height: 100px;">-->
+                <!--                                <img src="https://thumb.pccomponentes.com/w-530-530/articles/17/179806/244-logitech-g502-hero-raton-gaming-16000dpi-caracteristicas.jpg" class="img-fluid"/>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
             </div>
-            <div class="col-lg-4 col-12" >
+            <div class="col-lg-4 col-12">
                 <div class="py-4 w-100">
                     <p class="m-0 mb-2 fs-4 fw-bold">{{productSelected.name}}</p>
-                    <p class="fs-7 m-0 mb-2 ">4,8/5 <span><i
-                            class="bi bi-star-fill text-warning"></i></span> 166 Opiniones</p>
-                    <p class="fs-7 m-0 ">Cod. Artículo: 10803904</p>
+                    <p class="fs-7 m-0 mb-2 ">{{ stats.average_rating.toFixed(1) }}/5 <span><i
+                            class="bi bi-star-fill text-warning"></i></span> {{stats.totalOpinions}} Opiniones</p>
+                    <p class="fs-7 m-0 ">Cod. Artículo: 51264262-{{productSelected.id}}</p>
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <p class="m-0 fs-6">Vendido y enviado por <span class="fw-bold">EmpresasInc</span></p>
+                        <p class="m-0 fs-6">Vendido y enviado por <span class="fw-bold">NetCore</span></p>
                     </div>
                 </div>
             </div>
@@ -48,19 +48,24 @@
                     <div class="card-body">
                         <div class="py-4 w-100">
                             <p class="m-0 fs-3">
-                                <span class="text-primary-2 fw-bold">{{productSelected.price}}<sup>99€</sup></span> <del class="fs-5">
-                                {{productSelected.price*2}}€</del>
+                                <span class="text-primary-2 fw-bold">{{productSelected.price}}<sup>99€</sup></span>
+                                <del class="fs-5">
+                                    {{productSelected.price*2}}€
+                                </del>
                             </p>
                         </div>
 
                         <div class="w-100">
                             <p class="m-0 fs-6">
-                                ¡<span class="fw-bold">Ahora</span> puede pagar con <span class="text-primary">tarjeta</span> de manera sencilla!
+                                ¡<span class="fw-bold">Ahora</span> puede pagar con <span
+                                    class="text-primary">tarjeta</span> de manera sencilla!
                             </p>
                         </div>
 
                         <div class="w-100 d-none d-lg-block pt-4">
-                            <button class="btn btn-lg btn-primary w-100" @click="addToCart(productSelected)">Añadir a la cesta</button>
+                            <button @click="addToCart(productSelected)" class="btn btn-lg btn-primary w-100">Añadir a la
+                                cesta
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -69,93 +74,162 @@
 
         <div class="product-reviews-container mt-5">
             <h3 class="reviews-header">Opiniones</h3>
-    
+
             <!-- Contenedor de estadísticas generales de opiniones -->
-            <div class="stats-container d-flex justify-content-center mb-4">
-                <div class="stats-box text-center average-rating-box">
-                    <p class="average-rating">{{ stats.average_rating.toFixed(1) }}</p>
-                    <p class="stars">⭐⭐⭐⭐⭐</p>
-                    <p class="total-opinions">{{ stats.totalOpinions }} Opiniones</p>
-                </div>
-                <div class="stats-box text-center recommend-box">
-                    <p class="recommend-percentage">{{ stats.recommend_percentage }}%</p>
-                    <p>Recomiendan</p>
-                    <p class="total-recommendations">{{ stats.totalRecommendations }} Recomendaciones</p>
-                </div>
-                <!-- Desglose por estrellas -->
-                <div class="stats-box star-breakdown">
-                    <div v-for="star in [5, 4, 3, 2, 1]" :key="star" class="d-flex align-items-center star-bar">
-                        <span class="star-label">{{ star }} ⭐</span>
-                        <div class="progress flex-grow-1 mx-2">
-                            <div class="progress-bar" role="progressbar"
-                                :style="{ width: (stats.star_counts[star] / stats.totalOpinions * 100) + '%' }">
+            <div class="d-lg-block d-none">
+                <div class="stats-container d-flex justify-content-start mb-4 ">
+                    <div class="stats-box text-center average-rating-box">
+                        <p class="average-rating">{{ stats.average_rating.toFixed(1) }}</p>
+                        <p class="stars"><i class="bi bi-star-fill text-warning"></i><i
+                                class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i></p>
+                        <p class="total-opinions">{{ stats.totalOpinions }} Opiniones</p>
+                    </div>
+                    <div class="stats-box text-center recommend-box">
+                        <p class="recommend-percentage">{{ stats.recommend_percentage }}%</p>
+                        <p>Recomiendan</p>
+                        <p class="total-recommendations">{{ stats.totalRecommendations }} Recomendaciones</p>
+                    </div>
+                    <!-- Desglose por estrellas -->
+                    <div class="stats-box star-breakdown" style="background-color: white; box-shadow: none">
+                        <div :key="star" class="d-flex align-items-center justify-content-center star-bar"
+                             v-for="star in [5, 4, 3, 2, 1]">
+                            <span class="star-label">{{ star }}<i class="bi bi-star-fill text-warning"></i></span>
+                            <div class="progress flex-grow-1 mx-2">
+                                <div :style="{ width: (stats.star_counts[star] / stats.totalOpinions * 100) + '%' }"
+                                     class="progress-bar"
+                                     role="progressbar">
+                                </div>
                             </div>
+                            <span class="star-count">{{ stats.star_counts[star] || 0 }}</span>
                         </div>
-                        <span class="star-count">{{ stats.star_counts[star] || 0 }}</span>
                     </div>
                 </div>
             </div>
-    
-        </div>  
+
+            <div class="row d-lg-none d-block">
+                <div class="col-12 mb-4">
+                    <div class="stats-box text-center average-rating-box">
+                        <p class="average-rating">{{ stats.average_rating.toFixed(1) }}</p>
+                        <p class="stars"><i class="bi bi-star-fill text-warning"></i><i
+                                class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star-fill text-warning"></i></p>
+                        <p class="total-opinions">{{ stats.totalOpinions }} Opiniones</p>
+                    </div>
+                </div>
+                <div class="col-12 mb-2">
+                    <div class="stats-box text-center recommend-box">
+                        <p class="recommend-percentage">{{ stats.recommend_percentage }}%</p>
+                        <p>Recomiendan</p>
+                        <p class="total-recommendations">{{ stats.totalRecommendations }} Recomendaciones</p>
+                    </div>
+                </div>
+                <div class="col-12 mb-2">
+                    <div class="stats-box star-breakdown" style="background-color: white; box-shadow: none">
+                        <div :key="star" class="d-flex align-items-center justify-content-center star-bar"
+                             v-for="star in [5, 4, 3, 2, 1]">
+                            <span class="star-label">{{ star }}<i class="bi bi-star-fill text-warning"></i></span>
+                            <div class="progress flex-grow-1 mx-2">
+                                <div :style="{ width: (stats.star_counts[star] / stats.totalOpinions * 100) + '%' }"
+                                     class="progress-bar"
+                                     role="progressbar">
+                                </div>
+                            </div>
+                            <span class="star-count">{{ stats.star_counts[star] || 0 }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
         <!-- Formulario para agregar una nueva opinión -->
-    <h4 class="mt-4">Agregar una Opinión</h4>
-    <div class="card p-3">
-        <!-- Calificación de Estrellas -->
-        <div class="mb-3">
-            <label class="form-label">Valoración general:</label>
-            <div class="star-rating">
-                <span @click="setRating(1)" :class="{'active': newOpinion.opinion_number >= 1}">★</span>
-                <span @click="setRating(2)" :class="{'active': newOpinion.opinion_number >= 2}">★</span>
-                <span @click="setRating(3)" :class="{'active': newOpinion.opinion_number >= 3}">★</span>
-                <span @click="setRating(4)" :class="{'active': newOpinion.opinion_number >= 4}">★</span>
-                <span @click="setRating(5)" :class="{'active': newOpinion.opinion_number >= 5}">★</span>
+        <h4 class="my-4">Agregar una Opinión</h4>
+        <div class="card ">
+            <!-- Calificación de Estrellas -->
+            <div class="card-body ">
+                <label class="form-label">Valoración general:</label>
+                <div class="star-rating mb-2">
+                    <span :class="{'active': newOpinion.opinion_number >= 1}" @click="setRating(1)"><i
+                            class="bi bi-star-fill fs-3"></i></span>
+                    <span :class="{'active': newOpinion.opinion_number >= 2}" @click="setRating(2)"><i
+                            class="bi bi-star-fill fs-3"></i></span>
+                    <span :class="{'active': newOpinion.opinion_number >= 3}" @click="setRating(3)"><i
+                            class="bi bi-star-fill fs-3"></i></span>
+                    <span :class="{'active': newOpinion.opinion_number >= 4}" @click="setRating(4)"><i
+                            class="bi bi-star-fill fs-3"></i></span>
+                    <span :class="{'active': newOpinion.opinion_number >= 5}" @click="setRating(5)"><i
+                            class="bi bi-star-fill fs-3"></i></span>
+                </div>
+
+                <!-- Campo de texto para la opinión -->
+                <div class="mb-2">
+                    <label class="text-primary">Descripción</label>
+                    <textarea class="w-100 border-full rounded-1" required rows="4"
+                              v-model="newOpinion.opinion"></textarea>
+                </div>
+
+                <!-- Campo para la URL de la imagen -->
+                <!--        <div class="mb-3">-->
+                <!--            <label class="form-label">URL de la Imagen:</label>-->
+                <!--            <input v-model="newOpinion.img" class="form-control" required>-->
+                <!--        </div>-->
+                <button :disabled="loading" @click="addOpinion" class="btn btn-primary" type="button">
+                    <span v-if="loading">Cargando...</span>
+                    <span v-else>Enviar Opinión</span>
+                </button>
             </div>
+
         </div>
-        <!-- Campo de texto para la opinión -->
-        <div class="mb-3">
-            <label class="form-label">Opinión:</label>
-            <textarea v-model="newOpinion.opinion" class="form-control" rows="3" required></textarea>
-        </div>
-    
-        <!-- Campo para la URL de la imagen -->
-        <div class="mb-3">
-            <label class="form-label">URL de la Imagen:</label>
-            <input v-model="newOpinion.img" class="form-control" required>
-        </div>
-        <button @click="addOpinion" type="button" class="btn btn-primary" :disabled="loading">
-            <span v-if="loading">Cargando...</span>
-            <span v-else>Enviar Opinión</span>
-        </button>
-    </div>
 
 
-<!-- Nueva sección de Opiniones del Producto -->
-<div class="container mt-5">
-    <h3>Opiniones del Producto</h3>
+        <!-- Nueva sección de Opiniones del Producto -->
+        <div class=" mt-5">
+            <h3 class="mb-5">Opiniones del Producto</h3>
 
-    <!-- Mostrar opiniones existentes -->
-    <div v-if="opinions.data.length > 0">
-        <div v-for="opinion in opinions.data" :key="opinion.id" class="card my-3">
-            <div class="card-body">
-                <h5 class="m-0"><strong>Usuario:</strong> {{opinion.user.name}} </h5>
-                <p class="m-0"><strong>Puntuación:</strong> {{opinion.opinion_number}} <span><i class="bi bi-star-fill text-warning"></i></span></p>
-                <p><strong>Opinión:</strong> {{opinion.opinion}}</p>
-                <img v-if="opinion.img" :src="opinion.img" alt="Imagen de la opinión" class="img-fluid mt-2">
+            <div v-if="opinions.data.length > 0" :key="opinion.id" class="row mb-2" v-for="opinion in opinions.data">
+                <div class="col-lg-12 col-12">
+                    <div class="w-100 d-flex">
+                        <div class="d-flex align-items-start  me-4">
+                            <div style="width: 40px; height: 40px; flex-shrink: 0;">
+                                <img class="img-fluid rounded"
+                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png"
+                                     alt="Profile"/>
+                            </div>
+                            <p class="ms-2 mb-0 fw-semibold">{{opinion.user.name}}</p>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="d-flex mt-2">
+                                <p class="m-0 fs-6">
+                        <span v-for="star in [1, 2, 3, 4, 5]" :key="star">
+                            <i :class="['bi', 'bi-star-fill', opinion.opinion_number >= star ? 'text-warning' : 'text-secondary']"></i>
+                        </span>
+                                    | {{formatDate(opinion.created_at)}}
+                                </p>
+                            </div>
+                            <p>
+                                {{opinion.opinion}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div v-else>
+                <p>No hay opiniones para este producto.</p>
+            </div>
+
+
         </div>
-    </div>
-    <div v-else>
-        <p>No hay opiniones para este producto.</p>
-    </div>
-    </div>
-</div>
     </div>
 </div>
 
 <div class="d-lg-none d-block">
-    <div class="card position-fixed bottom-0 w-100">
+    <div class="card rounded-0 position-fixed bottom-0 w-100">
         <div class="card-body py-3 px-2">
-            <button class="btn btn-lg btn-primary w-100" @click="addToCart(productSelected)">Añadir a la cesta</button>
+            <button @click="addToCart(productSelected)" class="btn btn-lg btn-primary w-100">Añadir a la cesta</button>
         </div>
     </div>
 </div>

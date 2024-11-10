@@ -31,31 +31,32 @@
     </div>
 
     <div v-if="page !== 'login' && page !== 'register'">
-        <nav-bar-component v-bind:products-cart="productsCart.data" @update-page="changePage" @profile-page-tab="tabProfilePage = $event"></nav-bar-component>
+        <nav-bar-component v-bind:products-cart="productsCart.data" @update-page="changePage" @profile-page-tab="tabProfilePage = $event" @delete-product-cart="deleteProductCart"></nav-bar-component>
         <div style="margin-top: 90px"></div>
-        <div v-if="page === 'home'">
+        <div v-if="page === 'home'"   style="min-height: 76vh">
             <home-page @add-product-to-cart="addProductToCart"  @show-product="showProduct" @update-page="changePage"></home-page>
         </div>
 
-        <div v-if="page === 'producte'">
+        <div v-if="page === 'producte'"   style="min-height: 76vh">
             <productes-page v-bind:product-selected="productSelected.data" @add-product-to-cart="addProductToCart"></productes-page>
         </div>
 
-        <div v-if="page === 'cart'">
-            <cart-page v-bind:products-cart="productsCart.data" @update-page="changePage" @finish="finishBuy"></cart-page>
+        <div v-if="page === 'cart'"   style="min-height: 76vh">
+            <cart-page v-bind:products-cart="productsCart.data" @update-page="changePage" @finish="finishBuy" @delete-product-cart="deleteProductCart"></cart-page>
         </div>
 
-        <div v-if="page === 'profile'">
+        <div v-if="page === 'profile'"   style="min-height: 76vh">
             <profile-page @update-page="changePage" v-bind:tab="tabProfilePage"></profile-page>
         </div>
         
-        <div v-if="page === 'filtro'">
+        <div v-if="page === 'filtro'"   style="min-height: 76vh">
             <filtros-page @add-product-to-cart="addProductToCart"  @show-product="showProduct" @update-page="changePage"></filtros-page>
         </div>
 
         <fotter-component></fotter-component>
 
     </div>
+
 
 </div>
 
@@ -138,6 +139,15 @@
                     console.log("no se pudo hacer la compra")
                 }
             }
+
+            const deleteProductCart = (product) => {
+                const index = productsCart.data.findIndex(p => p.id === product.id);
+                if (index !== -1) {
+                    productsCart.data.splice(index, 1); // Elimina un elemento en la posición encontrada
+                    localStorage.setItem('productsCart', JSON.stringify(productsCart.data)); // Actualiza localStorage
+                }
+            };
+
             return {
                 page,
                 productsCart,
@@ -146,7 +156,8 @@
                 changePage,
                 productSelected,
                 finishBuy,
-                tabProfilePage
+                tabProfilePage,
+                deleteProductCart
             }
         }
     })
