@@ -73,6 +73,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('user')->group(function () {
         Route::post('update-nick-name', [UserController::class, 'updateNickname'])->name('users.updateNickname');
         Route::post('update-email', [UserController::class, 'updateEmail'])->name('users.updateEmail');
+        Route::post('update-password', [UserController::class, 'updatePassword'])->name('users.updatePassword');
     });
 
     Route::get('/test-auth', function () {

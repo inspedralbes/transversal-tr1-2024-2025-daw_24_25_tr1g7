@@ -6,6 +6,7 @@ import {
     updateShippingAddress
 } from "../communicationManager/communicationManager.js";
 import {AddPaymentMethodComponent} from "./AddPaymentMethodComponent.js";
+import { ToastNotificationComponent } from './ToastNotificationComponent.js';
 
 export const ProfilePage = defineAsyncComponent(() =>
     Promise.all([
@@ -13,7 +14,8 @@ export const ProfilePage = defineAsyncComponent(() =>
         Promise.resolve(defineComponent({
             name: 'ProfilePage',
             components:{
-                AddPaymentMethodComponent
+                AddPaymentMethodComponent,
+                ToastNotificationComponent
             },
             props: {
                 tab: {
@@ -24,6 +26,16 @@ export const ProfilePage = defineAsyncComponent(() =>
             emits: ['updatePage'],
             setup(props, { emit }) {
                 const tab = ref(props.tab || 'myData');
+                //toast message
+                const toastMessage = ref('');
+                const toastType = ref('');
+                const showToast = ref(false);
+
+                const showToastMessage = (message, type = 'info') => {
+                    toastMessage.value = message;
+                    toastType.value = type;
+                    showToast.value = true;
+                };
                 const getToken = () =>{
                     return localStorage.getItem('token');
                 }
@@ -126,9 +138,12 @@ export const ProfilePage = defineAsyncComponent(() =>
                     try {
                         let response = await comm.createShippingAddress(getToken(), formDataShippingAdress);
                         console.log(response);
-                        if (response && response.data) {
+                        if (response && response.data && response.status === 'success') {
                             shippingAddresses.data.push(response.data);
                             showModalAddShippingAddress.value = false; // Close modal after success
+                            showToastMessage('Operación exitosa', 'success');
+                        }else{
+                            showToastMessage('Algo salió mal', 'error');
                         }
                     } catch (error) {
                         console.error('Error creating shipping address:', error);
@@ -182,6 +197,9 @@ export const ProfilePage = defineAsyncComponent(() =>
                         if (response && response.data && response.status === 'success') {
                             shippingAddresses.data[formDataShippingAdress.index] = response.data;
                             showModalAddShippingAddress.value = false; // Cerrar modal
+                            showToastMessage('Operación exitosa', 'success');
+                        }else{
+                            showToastMessage('Algo salió mal', 'error');
                         }
                     } catch (error) {
                         console.error('Error al actualizar la dirección:', error);
@@ -192,16 +210,25 @@ export const ProfilePage = defineAsyncComponent(() =>
                 const updateDefaultShippingAddress = async(shippingAddress)=>{
                     let response = await comm.updateDefaultShippingAddress(getToken(), shippingAddress);
                     console.log(response);
-                    shippingAddresses.data = response.shippingAddressess;
+                    if (response.status === 'success') {
+                        shippingAddresses.data = response.shippingAddressess;
+                        showModalAddShippingAddress.value = false; // Close modal after success
+                        showToastMessage('Operación exitosa', 'success');
+                    }else{
+                        showToastMessage('Algo salió mal', 'error');
+                    }
                 }
 
                 const createBillingAddress = async () => {
                     try {
                         let response = await comm.createBillingAddress(getToken(), formDataBillingAdress);
                         console.log(response);
-                        if (response && response.data) {
+                        if (response && response.data && response.status === 'success') {
                             billingAddressess.data.push(response.data);
                             showModalAddBillingAddress.value = false; // Close modal after success
+                            showToastMessage('Operación exitosa', 'success');
+                        }else{
+                            showToastMessage('Algo salió mal', 'error');
                         }
                     } catch (error) {
                         console.error('Error creating shipping address:', error);
@@ -255,6 +282,9 @@ export const ProfilePage = defineAsyncComponent(() =>
                         if (response && response.data && response.status === 'success') {
                             billingAddressess.data[formDataBillingAdress.index] = response.data;
                             showModalAddBillingAddress.value = false; // Cerrar modal
+                            showToastMessage('Operación exitosa', 'success');
+                        }else{
+                            showToastMessage('Algo salió mal', 'error');
                         }
                     } catch (error) {
                         console.error('Error al actualizar la dirección:', error);
@@ -265,7 +295,12 @@ export const ProfilePage = defineAsyncComponent(() =>
                 const updateDefaultBillingAddress = async(billingAddress)=>{
                     let response = await comm.updateDefaultBillingAddress(getToken(), billingAddress);
                     console.log(response);
-                    billingAddressess.data = response.billingAddressess;
+                    if(response.status === 'success'){
+                        billingAddressess.data = response.billingAddressess;
+                        showToastMessage('Operación exitosa', 'success');
+                    }else{
+                        showToastMessage('Algo salió mal', 'error');
+                    }
                 }
 
 
@@ -420,7 +455,12 @@ export const ProfilePage = defineAsyncComponent(() =>
                     if(formDataUserData.nick !== ''){
                         let response = await comm.updateNickUser(getToken(), formDataUserData);
                         console.log(response)
-                        localStorage.setItem('user', JSON.stringify(response.user))
+                        if(response.status === 'success'){
+                            localStorage.setItem('user', JSON.stringify(response.user))
+                            showToastMessage('Operación exitosa', 'success');
+                        }else{
+                            showToastMessage('Algo salió mal', 'error');
+                        }
                     }else{
 
                     }
@@ -431,18 +471,37 @@ export const ProfilePage = defineAsyncComponent(() =>
                     if(formDataUserData.email !== ''){
                         let response = await comm.updateEmailUser(getToken(), formDataUserData);
                         console.log(response)
-                        localStorage.setItem('user', JSON.stringify(response.user))
+                        if(response.status === 'success'){
+                            localStorage.setItem('user', JSON.stringify(response.user))
+                            showToastMessage('Operación exitosa', 'success');
+                        }else{
+                            showToastMessage('Algo salió mal', 'error');
+                        }
                     }else{
 
                     }
 
                 }
 
-                const saveNewPassword = ()=>{
+
+                const saveNewPassword = async()=>{
                     console.log(formDataUserData.password)
                     if(formDataUserData.password.length >= 4 &&
                         formDataUserData.password === formDataUserData.passwordRepeat){
                         console.log("save new password")
+
+                        let response = await comm.saveNewPassword(getToken(), formDataUserData);
+                        console.log(response)
+                        // showToastMessage('Algo salió mal', 'error');
+
+                        if(response.status === 'success'){
+                            showToastMessage('Operación exitosa', 'success');
+                        }else{
+                            showToastMessage('Algo salió mal', 'error');
+                            // showToastMessage('Cuidado con esto', 'warning');
+                            // showToastMessage('Información importante', 'info');
+                        }
+
                     }
                 }
 
@@ -499,7 +558,12 @@ export const ProfilePage = defineAsyncComponent(() =>
                     validateEmail,
                     saveNewNickName,
                     saveNewEmail,
-                    saveNewPassword
+                    saveNewPassword,
+
+                    toastMessage,
+                    toastType,
+                    showToast,
+
                 };
             }
         }))

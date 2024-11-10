@@ -388,10 +388,10 @@
                                         <p class="m-0 fs-7">{{shippingAddress.floor}}-{{shippingAddress.door}}</p>
                                     </div>
                                     <div class="text-lg-end col-lg-6 col-12">
-                                        <button @click="deleteShippingAddress(shippingAddress, index)"
+                                        <button @click.stop="deleteShippingAddress(shippingAddress, index)"
                                                 class="btn btn-sm me-2 border-1">Eliminar
                                         </button>
-                                        <button @click="showOpenEditShippingAddress(shippingAddress, index)"
+                                        <button @click.stop="showOpenEditShippingAddress(shippingAddress, index)"
                                                 class="btn btn-sm  border-1">Editar
                                         </button>
                                     </div>
@@ -431,10 +431,10 @@
                                         <!--                                        <p class="m-0 fs-7">{{billingAddress.floor}}-{{billingAddress.door}}</p>-->
                                     </div>
                                     <div class="text-lg-end col-lg-6 col-12">
-                                        <button @click="deleteBillingAddress(billingAddress, index)"
+                                        <button @click.stop="deleteBillingAddress(billingAddress, index)"
                                                 class="btn btn-sm me-2 border-1">Eliminar
                                         </button>
-                                        <button @click="showOpenEditBillingAddress(billingAddress, index)"
+                                        <button @click.stop="showOpenEditBillingAddress(billingAddress, index)"
                                                 class="btn btn-sm  border-1">Editar
                                         </button>
                                     </div>
@@ -612,10 +612,10 @@
                 </div>
             </div>
 
-            <button @click="createShippingAddress" class="btn btn-primary" v-if="typeModal === 'store'">Añadir
+            <button @click.stop="createShippingAddress" class="btn btn-primary" v-if="typeModal === 'store'">Añadir
                 dirección
             </button>
-            <button @click="updateShippingAddress" class="btn btn-primary" v-if="typeModal === 'edit'">Actualizar
+            <button @click.stop="updateShippingAddress" class="btn btn-primary" v-if="typeModal === 'edit'">Actualizar
                 dirección
             </button>
         </div>
@@ -956,3 +956,11 @@
         <div class="spinner-border spinner-border-custom position-absolute"></div>
     </div>
 </div>
+
+
+<ToastNotificationComponent
+        v-model:show="showToast"
+        :message="toastMessage"
+        :type="toastType"
+/>
+

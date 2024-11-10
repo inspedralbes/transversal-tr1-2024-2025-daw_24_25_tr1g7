@@ -120,4 +120,37 @@ class UserController extends Controller
             'user' => Auth::user()
         ]);
     }
+
+    public function updatePassword(Request $request)
+    {
+        $data = $request->validate([
+            'lastPassword' => 'required',
+            'password'=>'required',
+            'passwordRepeat'=>'required'
+        ],
+        [
+            'lastPassword'=>'Este campo es necesario',
+            'password.required'=>'Este campo es necesario',
+            'passwordRepeat.required'=>'Este campo es necesario',
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($data['lastPassword'], $user->password)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'La contraseña actual es incorrecta'
+            ]);
+        }
+
+        // Actualiza la contraseña
+        $user->password = Hash::make($data['password']);
+        $user->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Nueva password editado correctamente',
+            'user' => Auth::user()
+        ]);
+    }
 }

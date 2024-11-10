@@ -1,4 +1,4 @@
-import { defineComponent, defineAsyncComponent, reactive, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+import { defineComponent, defineAsyncComponent, reactive, ref, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 import * as comm from "../communicationManager/communicationManager.js";
 import {getHomeData} from "../communicationManager/communicationManager.js";
 
@@ -12,8 +12,16 @@ export const HomePage = defineAsyncComponent(() =>
                 const productes = reactive({ data: [] });
 
                 onMounted(async () => {
+                    toggleLoading();
                     productes.data = await comm.getHomeData();
+                    toggleLoading();
                 });
+
+                const showLoadingPage = ref(false);
+
+                function toggleLoading() {
+                    showLoadingPage.value = !showLoadingPage.value;
+                }
 
                 const showToProduct = (producte) => {
                     console.log("Producto seleccionado:", producte);
@@ -33,7 +41,9 @@ export const HomePage = defineAsyncComponent(() =>
                     productes,
                     addToCart, // Asegúrate de retornar ambas funciones
                     showToProduct,
-                    goToFilter
+                    goToFilter,
+
+                    showLoadingPage,
                 };
             }
         }))

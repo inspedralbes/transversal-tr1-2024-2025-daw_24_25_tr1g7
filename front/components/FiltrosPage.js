@@ -1,4 +1,4 @@
-import { defineComponent, defineAsyncComponent, reactive, computed, onMounted } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+import { defineComponent, defineAsyncComponent, reactive, computed, onMounted, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 import * as comm from "../communicationManager/communicationManager.js";
 
 export const FiltrosPage = defineAsyncComponent(() =>
@@ -12,6 +12,12 @@ export const FiltrosPage = defineAsyncComponent(() =>
                 const goToRegister = () => {
                     emit('updatePage', 'register');
                 };
+
+                const showLoadingPage = ref(false);
+
+                function toggleLoading() {
+                    showLoadingPage.value = !showLoadingPage.value;
+                }
 
                 const products = reactive({ data: [] });
                 const searchQuery = reactive({ text: '' });
@@ -80,6 +86,7 @@ export const FiltrosPage = defineAsyncComponent(() =>
                 });
 
                 const filteredProducts = computed(() => {
+                    toggleLoading();
                     let result = products.data;
 
                     // Filtro de búsqueda
@@ -131,13 +138,15 @@ export const FiltrosPage = defineAsyncComponent(() =>
                     if (filters.valoracion.fourStars) {
                         result = result.filter(product => product.valoracion >= 4); 
                     }
-
+                    toggleLoading();
                     return result;
                 });
 
                 const addToCart = (producte) => {
+                    toggleLoading();
                     console.log("Añadido al carrito:", producte);
                     emit('addProductToCart', producte);
+                    toggleLoading();
                 };
 
                 const showToProduct = (producte) => {
@@ -146,8 +155,10 @@ export const FiltrosPage = defineAsyncComponent(() =>
                 };
 
                 onMounted(async() => {
+                    toggleLoading();
                     let response = await comm.getProducts();
                     products.data = response;
+                    toggleLoading();
                 });
 
                 return {
@@ -158,7 +169,9 @@ export const FiltrosPage = defineAsyncComponent(() =>
                     filteredProducts,
                     filters,
                     addToCart,
-                    showToProduct
+                    showToProduct,
+
+                    showLoadingPage
                 };
             }
         }))
