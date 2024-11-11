@@ -1,0 +1,249 @@
+<div>
+  <div class="section py-4">
+    <div class="row">
+      <!-- Filtro Lateral -->
+      <div class="col-lg-2 d-lg-block d-none">
+        <div><br>
+            <h5>Filtros populares</h5>
+            <label><input type="checkbox" v-model="filters.popular.MSI"> MSI</label><br>
+            <label><input type="checkbox" v-model="filters.popular.Razer"> Razer</label><br>
+            <label><input type="checkbox" v-model="filters.popular.Micrófonos"> Micrófonos</label><br>
+            <label><input type="checkbox" v-model="filters.popular.Auriculares"> Auriculares</label><br>
+          </div>
+        <hr>
+
+        <div class="search-container">
+            <h5>Búsqueda de filtros</h5>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="search-input" placeholder="Buscar..." v-model="searchQuery.text" @blur="validateSearchQuery">
+              <label for="search-input">Buscar...</label>
+            </div>
+          </div>
+
+        <hr>
+
+        <div>
+          <h5>Categorías</h5>
+          <label><input type="checkbox" v-model="filters.categories.Componentes"> Componentes</label><br>
+          <label><input type="checkbox" v-model="filters.categories.Portátiles"> Portátiles</label><br>
+          <label><input type="checkbox" v-model="filters.categories.Periféricos"> Periféricos</label><br>
+          <label><input type="checkbox" v-model="filters.categories.Monitores"> Monitores</label><br>
+          <label><input type="checkbox" v-model="filters.categories.Impresoras"> Impresoras</label><br>
+        </div>
+        <hr>
+
+        <div>
+            <h5>Precio</h5>
+            <label>
+              <input type="range" min="0" max="10000" v-model="price.value">
+              <br>0€ - {{ price.value }}€
+            </label>
+          </div>
+        <hr>
+
+        <div>
+          <h5>Marcas</h5>
+          <label><input type="checkbox" v-model="filters.brands.HP"> HP</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Samsung"> Samsung</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Apple"> Apple</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Seagate"> Seagate</label><br>
+          <label><input type="checkbox" v-model="filters.brands.AMD"> AMD</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Dell"> Dell</label><br>
+          <label><input type="checkbox" v-model="filters.brands.NVIDIA"> NVIDIA</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Corsair"> Corsair</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Kingston"> Kingston</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Logitech"> Logitech</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Razer"> Razer</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Intel"> Intel</label><br>
+          <label><input type="checkbox" v-model="filters.brands.MSI"> MSI</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Asus"> Asus</label><br>
+          <label><input type="checkbox" v-model="filters.brands.EVGA"> EVGA</label><br>
+          <label><input type="checkbox" v-model="filters.brands.CoolerMaster"> Cooler Master</label><br>
+          <label><input type="checkbox" v-model="filters.brands.NZXT"> NZXT</label><br>
+          <label><input type="checkbox" v-model="filters.brands.SteelSeries"> SteelSeries</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Acer"> Acer</label><br>
+          <label><input type="checkbox" v-model="filters.brands.LG"> LG</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Gigabyte"> Gigabyte</label><br>
+          <label><input type="checkbox" v-model="filters.brands.GSkill"> G.Skill</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Noctua"> Noctua</label><br>
+          <label><input type="checkbox" v-model="filters.brands.FractalDesign"> Fractal Design</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Epson"> Epson</label><br>
+          <label><input type="checkbox" v-model="filters.brands.BenQ"> BenQ</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Lenovo"> Lenovo</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Brother"> Brother</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Sapphire"> Sapphire</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Thermaltake"> Thermaltake</label><br>
+          <label><input type="checkbox" v-model="filters.brands.BeQuiet"> BeQuiet!</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Phanteks"> Phanteks</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Canon"> Canon</label><br>
+          <label><input type="checkbox" v-model="filters.brands.ASRock"> ASRock</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Seasonic"> Seasonic</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Microsoft"> Microsoft</label><br>
+          <label><input type="checkbox" v-model="filters.brands.Keychron"> Keychron</label><br>
+        </div>
+        <hr>
+
+        <div>
+          <h5>Valoración</h5>
+          <label><input type="checkbox"> ⭐⭐⭐⭐ y más</label><br>
+          <label><input type="checkbox"> Todas las valoraciones</label><br>
+        </div>
+        <hr>
+      </div>
+
+      <!-- Productos -->
+      <div class="col-lg-10 col-12">
+          <div class="d-lg-none d-block">
+            <button @click="openModalFiltros" class="btn border-full w-100 mb-3">Filtros</button>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="search-input" placeholder="Buscar..." v-model="searchQuery.text" @blur="validateSearchQuery">
+              <label for="search-input">Buscar...</label>
+            </div>
+          </div>
+        <div class="row" v-if="filteredProducts.length > 0">
+          <div v-for="product in filteredProducts" :key="product.id" @click="showToProduct(product)" style="cursor: pointer" class="col-lg-4 col-12 mb-4">
+            <div class="card">
+              <div class="text-decoration-none" style="color: black;">
+                <div class="card-body">
+                  <div class="container-img">
+                    <img :src="product.image_path" width="200px" alt="Imagen de {{ product.name }}" />
+                  </div>
+
+                  <div class="p-2">
+                    <p class="m-0 mb-2">{{ product.name }}</p>
+                    <p class="product-description">{{ product.description || 'Sin descripción disponible' }}</p>
+                    <p class="fs-4 fw-bold text-primary">{{ product.price }}€</p>
+                    <p class="fs-7 fw-semibold">{{ product.valoraciones || 'No valoraciones' }} <i class="bi bi-star-fill text-warning"></i></p>
+                    <p v-if="product.stock > 0" class="badge badge-success">En stock</p>
+                    <p v-else class="badge badge-danger">No está en stock</p>
+
+                  </div>
+                    <button @click.stop="addToCart(product)" class="btn btn-primary ms-2">
+                        Añadir al carrito
+                        <i class="bi bi-cart-fill"></i>
+                    </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div v-else>
+          <p>No hay productos disponibles.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+        class="loading-overlay position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity"
+        v-if="showLoadingPage">
+  <div class="text-center position-relative">
+    <img alt="Logo" class="logo-image" src="./img/logo.png">
+    <div class="spinner-border spinner-border-custom position-absolute"></div>
+  </div>
+</div>
+
+
+
+<div @click="filterModal = !filterModal" v-if="filterModal"
+      class="w-100 position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity"
+     style="z-index: 1000;height: 100vh;">
+  <div @click.stop class="w-lg-25 w-100 card bg-white p-4"  style="max-height: 100vh; overflow-y: auto;">
+    <div class="w-100">
+      <div><br>
+        <div class="d-flex justify-content-between">
+        <h5>Filtros populares</h5>
+            <button @click="filterModal = !filterModal" class="btn btn-sm">
+                <i
+                        class="bi bi-x fs-5"></i></button>
+        </div>
+        <label><input type="checkbox" v-model="filters.popular.MSI"> MSI</label><br>
+        <label><input type="checkbox" v-model="filters.popular.Razer"> Razer</label><br>
+        <label><input type="checkbox" v-model="filters.popular.Micrófonos"> Micrófonos</label><br>
+        <label><input type="checkbox" v-model="filters.popular.Auriculares"> Auriculares</label><br>
+      </div>
+      <hr>
+
+      <div class="search-container">
+        <h5>Búsqueda de filtros</h5>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="search-input" placeholder="Buscar..." v-model="searchQuery.text" @blur="validateSearchQuery">
+          <label for="search-input">Buscar...</label>
+        </div>
+      </div>
+
+      <hr>
+
+      <div>
+        <h5>Categorías</h5>
+        <label><input type="checkbox" v-model="filters.categories.Componentes"> Componentes</label><br>
+        <label><input type="checkbox" v-model="filters.categories.Portátiles"> Portátiles</label><br>
+        <label><input type="checkbox" v-model="filters.categories.Periféricos"> Periféricos</label><br>
+        <label><input type="checkbox" v-model="filters.categories.Monitores"> Monitores</label><br>
+        <label><input type="checkbox" v-model="filters.categories.Impresoras"> Impresoras</label><br>
+      </div>
+      <hr>
+
+      <div>
+        <h5>Precio</h5>
+        <label>
+          <input type="range" min="0" max="10000" v-model="price.value">
+          <br>0€ - {{ price.value }}€
+        </label>
+      </div>
+      <hr>
+
+      <div>
+        <h5>Marcas</h5>
+        <label><input type="checkbox" v-model="filters.brands.HP"> HP</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Samsung"> Samsung</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Apple"> Apple</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Seagate"> Seagate</label><br>
+        <label><input type="checkbox" v-model="filters.brands.AMD"> AMD</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Dell"> Dell</label><br>
+        <label><input type="checkbox" v-model="filters.brands.NVIDIA"> NVIDIA</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Corsair"> Corsair</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Kingston"> Kingston</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Logitech"> Logitech</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Razer"> Razer</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Intel"> Intel</label><br>
+        <label><input type="checkbox" v-model="filters.brands.MSI"> MSI</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Asus"> Asus</label><br>
+        <label><input type="checkbox" v-model="filters.brands.EVGA"> EVGA</label><br>
+        <label><input type="checkbox" v-model="filters.brands.CoolerMaster"> Cooler Master</label><br>
+        <label><input type="checkbox" v-model="filters.brands.NZXT"> NZXT</label><br>
+        <label><input type="checkbox" v-model="filters.brands.SteelSeries"> SteelSeries</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Acer"> Acer</label><br>
+        <label><input type="checkbox" v-model="filters.brands.LG"> LG</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Gigabyte"> Gigabyte</label><br>
+        <label><input type="checkbox" v-model="filters.brands.GSkill"> G.Skill</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Noctua"> Noctua</label><br>
+        <label><input type="checkbox" v-model="filters.brands.FractalDesign"> Fractal Design</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Epson"> Epson</label><br>
+        <label><input type="checkbox" v-model="filters.brands.BenQ"> BenQ</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Lenovo"> Lenovo</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Brother"> Brother</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Sapphire"> Sapphire</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Thermaltake"> Thermaltake</label><br>
+        <label><input type="checkbox" v-model="filters.brands.BeQuiet"> BeQuiet!</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Phanteks"> Phanteks</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Canon"> Canon</label><br>
+        <label><input type="checkbox" v-model="filters.brands.ASRock"> ASRock</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Seasonic"> Seasonic</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Microsoft"> Microsoft</label><br>
+        <label><input type="checkbox" v-model="filters.brands.Keychron"> Keychron</label><br>
+      </div>
+      <hr>
+
+      <div>
+        <h5>Valoración</h5>
+        <label><input type="checkbox"> ⭐⭐⭐⭐ y más</label><br>
+        <label><input type="checkbox"> Todas las valoraciones</label><br>
+      </div>
+      <hr>
+    </div>
+
+  </div>
+
+</div>

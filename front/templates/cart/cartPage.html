@@ -1,0 +1,623 @@
+<div v-if="steps == 'summaryTotal'" class="w-100 py-3">
+    <div class="section">
+        <h1>Mi cesta</h1>
+        <p class="m-0 mb-2 fs-6">{{productsCart.length}} artículos</p>
+        <div class="row">
+            <div class="col-lg-9 col-12">
+                <div v-for="(product, index) in productsCart" :key="index" class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-3 col-4 container-img" style="height: 150px">
+                                <img class="img-fluid"
+                                     :src="product.image_path"/>
+                            </div>
+                            <div class="col-lg-7 col-6">
+                                <div class="row">
+                                    <div class="col-lg-12 col-12">
+                                        <p class="m-0 fs-lg-4 fs-5 fw-normal">{{product.name}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-12">
+                                        <p class="m-0 fs-lg-3 fs-4 fw-bold">{{product.price}}€</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-12">
+                                        <p class="m-0 fs-7 fw-normal">Lo recibiras lo <span
+                                                class="text-primary fw-bold">antes</span> posible</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-12 d-flex ">
+                                <div class="me-2">
+                                    <button @click="deleteProduct(product)" class="btn border-full"><i class="bi bi-trash3"></i></button>
+                                </div>
+                                <div class="d-flex align-items-center w-100" style="max-height: 40px;">
+                                    <button class="btn border-full" style="height: 100%;"
+                                            @click="plusProduct(product)">+
+                                    </button>
+                                    <input class="custom-input" type="text" :value="product.num_product"/>
+                                    <button class="btn border-full" style="height: 100%;"
+                                            @click="substractProduct(product)">-
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-3 d-lg-block d-none">
+                <div v-if="productsCart.length > 0" class="card">
+                    <div class="card-body">
+                        <p class="m-0 mb-3 fs-4">Resumen</p>
+                        <div class="d-flex border-bottom pb-4 mb-3 fs-6 justify-content-between">
+                            <p class="m-0">Subtotal artículos</p>
+                            <p class="m-0 fw-bold">{{priceTotal}}€</p>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <p class="m-0 fs-6">Total (Impuestos incluidos)</p>
+                            <p class="m-0 fw-bold fs-4">{{priceTotalWithIVA}}€</p>
+                        </div>
+
+                        <div class="w-100 ">
+                            <button class="btn btn-primary btn-lg w-100" @click="buyProducts">Realizar pedido</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div v-if="steps === 'selectAddress'" class="w-100 py-3">
+    <div class="section">
+
+        <h2 class="mb-4">Mis Direcciones</h2>
+
+        <div class="mb-3">
+            <p class="fs-5 fw-bold m-0 mb-2">Direcciones de envío</p>
+
+            <div :key="index"
+                 @click="selectShippingAddress(shippingAddress)" class="card mb-2"
+                 style="cursor: pointer;"
+                 v-for="(shippingAddress, index) in shippingAddresses.data"
+                 v-if="shippingAddresses.data.length > 0">
+                <div class="card-body py-2 px-3">
+                    <div class="mb-2"
+                         v-if="shippingAddress.selected"
+                    >
+                        <span class="badge badge-primary">Seleccionado</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-12">
+                            <p class="m-0 mb-1 fs-6 ">{{shippingAddress.street}}
+                                <span class="fs-7 "> {{shippingAddress.number}}</span>
+                                <span class="fs-7 ">, {{shippingAddress.zip_code}}, </span>
+                                <span class="fs-7 "> {{shippingAddress.population}}, </span>
+                                <span class="fs-7 "> {{shippingAddress.city}}</span>
+                            </p>
+                            <p class="m-0 fs-7">{{shippingAddress.floor}}-{{shippingAddress.door}}</p>
+                        </div>
+                        <div class="text-lg-end col-lg-6 col-12">
+                            <button @click.stop="deleteShippingAddress(shippingAddress, index)"
+                                    class="btn btn-sm me-2 border-1">Eliminar
+                            </button>
+                            <button @click.stop="showOpenEditShippingAddress(shippingAddress, index)"
+                                    class="btn btn-sm  border-1">Editar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button @click="showOpenAddShippingAddress"
+                    class="btn border-1 mb-2 mt-4"><i class="bi bi-plus me-1"></i>Añade una dirección
+            </button>
+            <!--                        <div v-if="shippingAddresses.data.length <= 0">-->
+            <!--                            <p class="m-0 fs-6">No tienes direcciones registradas.</p>-->
+            <!--                        </div>-->
+        </div>
+
+        <div class="mb-3">
+            <p class="fs-5 fw-bold m-0 mb-2">Direcciones de facturación</p>
+
+            <div :key="index"
+                 @click="selectBillingAddress(billingAddress)" class="card mb-2"
+                 style="cursor: pointer;"
+                 v-for="(billingAddress, index) in billingAddressess.data"
+                 v-if="billingAddressess.data.length > 0">
+                <div class="card-body py-2 px-3">
+                    <div class="mb-2"
+                         v-if="billingAddress.selected"
+                    >
+                        <span class="badge badge-primary">Seleccionado</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-12">
+                            <p class="m-0 mb-1 fs-6 ">{{billingAddress.street}}
+                                <span class="fs-7 "> {{billingAddress.number}}</span>
+                                <span class="fs-7 ">, {{billingAddress.zip_code}}, </span>
+                                <span class="fs-7 "> {{billingAddress.population}}, </span>
+                                <span class="fs-7 "> {{billingAddress.city}}</span>
+                            </p>
+                            <!--                                        <p class="m-0 fs-7">{{billingAddress.floor}}-{{billingAddress.door}}</p>-->
+                        </div>
+                        <div class="text-lg-end col-lg-6 col-12">
+                            <button @click.stop="deleteBillingAddress(billingAddress, index)"
+                                    class="btn btn-sm me-2 border-1">Eliminar
+                            </button>
+                            <button @click.stop="showOpenEditBillingAddress(billingAddress, index)"
+                                    class="btn btn-sm  border-1">Editar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button @click="showOpenAddBillingAddress"
+                    class="btn border-1 mb-2 mt-4"><i class="bi bi-plus me-1"></i>Añade datos de facturación
+            </button>
+            <!--                        <div v-if="billingAddressess.data.length <= 0">-->
+            <!--                            <p class="m-0 fs-6">No tienes direcciones registradas.</p>-->
+            <!--                        </div>-->
+        </div>
+
+        <div class="mb-3 d-lg-block d-none">
+            <button @click="selectAddresses" class="btn btn-primary">Seguir con la compra</button>
+        </div>
+    </div>
+</div>
+
+<div v-if="steps == 'selectCreditCard'" class="w-100 py-3">
+    <div class="section">
+        <h1>Selecciona la tarjeta de credito</h1>
+        <div v-if="paymentMethods.data.length <= 0">
+            <p class="m-0 fs-7">No tienes tarjetas de credito vinculadas</p>
+        </div>
+        <div v-if="paymentMethods.data.length > 0">
+
+            <div
+                    v-for="(creditCard, index) in paymentMethods.data"
+                    :key="index"
+                    @click="selectPaymentMethod(creditCard)"
+                    class="card mb-2"
+                    :class="{ 'bg-primary-opacity text-white': creditCard.id === (defaultPaymentMethods.data?.id || '') }"
+                    style="cursor: pointer;"
+            >
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-credit-card me-3 fs-4"></i>
+                            <div>
+                                <p class="m-0 fs-6 fw-bold">{{ creditCard.billing_details.name }}</p>
+                                <p class="m-0 fs-7">{{ creditCard.card.exp_month }}/{{ creditCard.card.exp_year }}</p>
+                                <p class="m-0 fs-8">**** {{ creditCard.card.last4 }}</p>
+                            </div>
+                        </div>
+                        <button
+                                class="btn btn-sm p-0"
+                                @click.stop="deletePaymentMethod(creditCard)"
+                                aria-label="Delete"
+                        >
+                            <i class="bi bi-trash3"
+                               :class="creditCard.id === (defaultPaymentMethods.data?.id || '') ? 'text-white' : 'text-primary'"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button @click="finishBuying" class="btn btn-primary me-2  d-lg-block d-none">Finalizar la compra</button>
+        <button @click="showAddCreditCardComponent = !showAddCreditCardComponent" class="btn border-full">Añadir
+            tarjeta de credito
+        </button>
+<!--        <add-payment-method-component v-if="showAddCreditCardComponent"-->
+<!--                                      @payment-methods="paymentMethods.data = $event"-->
+<!--                                      @default-payment-method="defaultPaymentMethods.data = $event"></add-payment-method-component>-->
+    </div>
+
+</div>
+
+<div v-if="steps == 'finishBuy'" class="w-100 py-3">
+    <div class="text-center">
+        <h2>¡Compra finalizada!</h2>
+        <p>Gracias por confiar en nosotros.</p>
+        <p>Te hemos enviado un correo de confirmación con los detalles de tu compra.</p>
+        <p>Te notificaremos sobre cualquier actualización.</p>
+        <button @click="goToHome" class="btn btn-primary mt-3">Volver a la página principal</button>
+    </div>
+</div>
+
+
+<!--MODAL ADD SHIPPING ADDRESS-->
+<div @click="showModalAddShippingAddress = !showModalAddShippingAddress"
+     class="w-100 position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity"
+     style="z-index: 1000;height: 100vh;"
+     v-if="showModalAddShippingAddress">
+    <div @click.stop class="w-lg-50 w-90 card bg-white">
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-2">
+                <div>
+                    <p class="m-0 fs-4 fw-bold">Añadir Dirección</p>
+                </div>
+                <div>
+                    <button @click="showModalAddShippingAddress = !showModalAddShippingAddress" class="btn btn-sm">
+                        <i
+                                class="bi bi-x fs-5"></i></button>
+                </div>
+            </div>
+
+            <div class="form-floating d-none">
+                <input class="form-control w-100" id="idUser" placeholder="Calle ..."
+                       type="text"
+                       v-model="formDataShippingAdress.idUser" value="">
+                <label for="idUser">Id User</label>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-lg-6 col-12">
+                    <div class="form-floating">
+                        <input class="form-control w-100" id="street" placeholder="Calle ..."
+                               type="text"
+                               v-model="formDataShippingAdress.street" value="">
+                        <label for="street">Street</label>
+                    </div>
+
+                </div>
+                <div class="col-lg-2 col-12">
+                    <div class="form-floating w-lg-75">
+                        <input class="form-control " id="number" placeholder="3r"
+                               type="text" v-model="formDataShippingAdress.number">
+                        <label for="number">Number</label>
+                    </div>
+
+                </div>
+                <div class="col-lg-2 col-12">
+                    <div class="form-floating w-lg-75">
+                        <input class="form-control " id="floor" placeholder="3r"
+                               type="text" v-model="formDataShippingAdress.floor">
+                        <label for="floor">Floor</label>
+                    </div>
+
+                </div>
+                <div class="col-lg-2 col-12">
+                    <div class="form-floating w-lg-75">
+                        <input class="form-control " id="door" placeholder="3"
+                               type="text" v-model="formDataShippingAdress.door">
+                        <label for="door">Door</label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-lg-12 col-12">
+                    <div class="form-floating w-100">
+                        <input class="form-control w-lg-96" id="population" placeholder="Terrasa" style=""
+                               type="text" v-model="formDataShippingAdress.population">
+                        <label for="population">Population</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-lg-12 col-12">
+                    <div class="form-floating ">
+                        <input class="form-control w-lg-96" id="city" placeholder="Barcelona" style=""
+                               type="text" v-model="formDataShippingAdress.city">
+                        <label for="city">City</label>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-lg-12 col-12">
+                    <div class="form-floating">
+                        <input class="form-control w-lg-96" id="zip_code" placeholder="08906" style=""
+                               type="text" v-model="formDataShippingAdress.zip_code">
+                        <label for="zip_code">Postal Code</label>
+                    </div>
+
+                </div>
+            </div>
+
+            <button @click="createShippingAddress" class="btn btn-primary" v-if="typeModal === 'store'">Añadir
+                dirección
+            </button>
+            <button @click="updateShippingAddress" class="btn btn-primary" v-if="typeModal === 'edit'">Actualizar
+                dirección
+            </button>
+        </div>
+    </div>
+</div>
+<!--MODAL ADD SHIPPING ADDRESS-->
+
+<!--MODAL ADD BILLING ADDRESS-->
+<div @click="showModalAddBillingAddress = !showModalAddBillingAddress"
+     class="w-100 position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity"
+     style="z-index: 1000;height: 100vh;"
+     v-if="showModalAddBillingAddress">
+    <div @click.stop class="w-lg-50 w-90 card bg-white">
+        <div class="card-body">
+
+            <div class="d-flex justify-content-between mb-2">
+                <div>
+                    <p class="m-0 fs-4 fw-bold">Afegir direcció de facturació</p>
+                </div>
+                <div>
+                    <button @click="showModalAddBillingAddress = !showModalAddBillingAddress" class="btn btn-sm">
+                        <i
+                                class="bi bi-x fs-5"></i></button>
+                </div>
+            </div>
+            <div class="d-flex mb-2">
+                <div class="form-check me-2">
+                    <input @change="handleTypeChange" class="form-check-input" id="flexRadio1" name="flexRadio"
+                           type="radio" v-model="selectedType" value="particular">
+                    <label class="form-check-label" for="flexRadio1">
+                        Particular
+                    </label>
+                </div>
+                <div class="form-check me-2">
+                    <input @change="handleTypeChange" class="form-check-input" id="flexRadio2" name="flexRadio"
+                           type="radio" v-model="selectedType" value="autonomo">
+                    <label class="form-check-label" for="flexRadio2">
+                        Autónomo
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input @change="handleTypeChange" class="form-check-input" id="flexRadio3" name="flexRadio"
+                           type="radio" v-model="selectedType" value="empresa">
+                    <label class="form-check-label" for="flexRadio3">
+                        Empresa
+                    </label>
+                </div>
+            </div>
+
+            <div v-if="selectedType === 'particular'">
+                <div class="row mb-2">
+                    <div class="col-lg-6 col-12">
+                        <div class="form-floating">
+                            <input class="form-control w-100" placeholder="Nom..."
+                                   type="text"
+                                   v-model="formDataBillingAdress.name" value="">
+                            <label for="nombre">Nombre</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="form-floating">
+                            <input class="form-control w-100" placeholder="Cognoms..."
+                                   type="text"
+                                   v-model="formDataBillingAdress.lastName" value="">
+                            <label for="cognoms">Cognoms</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-lg-12 col-12">
+                        <div class="form-floating">
+                            <input class="form-control w-lg-96" placeholder="Telefon ..."
+                                   type="text"
+                                   v-model="formDataBillingAdress.phoneNumber" value="">
+                            <label for="telefon">Telefon</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if="selectedType === 'autonomo'">
+
+                <div class="row mb-2">
+                    <div class="col-lg-12 col-12">
+                        <div class="form-floating">
+                            <input class="form-control w-lg-96" placeholder="NIF/NIE ..."
+                                   type="text"
+                                   v-model="formDataBillingAdress.dniNie" value="">
+                            <label for="nif-nie">NIF/NIE</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-lg-6 col-12">
+                        <div class="form-floating">
+                            <input class="form-control w-100" placeholder="Nom..."
+                                   type="text"
+                                   v-model="formDataBillingAdress.name" value="">
+                            <label for="nombre">Nombre</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="form-floating">
+                            <input class="form-control w-100" placeholder="Cognoms..."
+                                   type="text"
+                                   v-model="formDataBillingAdress.lastName" value="">
+                            <label for="cognoms">Cognoms</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-lg-12 col-12">
+                        <div class="form-floating">
+                            <input class="form-control w-lg-96" placeholder="Telefon ..."
+                                   type="text"
+                                   v-model="formDataBillingAdress.phoneNumber" value="">
+                            <label for="telefon">Telefon</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div v-if="selectedType === 'empresa'">
+                <div class="row mb-2">
+                    <div class="col-lg-12 col-12">
+                        <div class="form-floating">
+                            <input class="form-control w-lg-96" placeholder="CIF/NIF ..."
+                                   type="text"
+                                   v-model="formDataBillingAdress.cif" value="">
+                            <label for="cif-nif">CIF/NIF</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-lg-12 col-12">
+                        <div class="form-floating">
+                            <input class="form-control w-lg-96" placeholder="Nombre empresa ..."
+                                   type="text"
+                                   v-model="formDataBillingAdress.companyName" value="">
+                            <label for="companyName">Nom d'empresa</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-lg-12 col-12">
+                        <div class="form-floating">
+                            <input class="form-control w-lg-96" placeholder="Telefon ..."
+                                   type="text"
+                                   v-model="formDataBillingAdress.phoneNumber" value="">
+                            <label for="telefon">Telefon</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-floating d-none">
+                <input class="form-control w-100" placeholder="Calle ..."
+                       type="text"
+                       v-model="formDataBillingAdress.idUser" value="">
+                <label for="idUser">Id User</label>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-lg-6 col-12">
+                    <div class="form-floating">
+                        <input class="form-control w-100" placeholder="Calle ..."
+                               type="text"
+                               v-model="formDataBillingAdress.street" value="">
+                        <label for="street">Street</label>
+                    </div>
+
+                </div>
+                <div class="col-lg-2 col-12">
+                    <div class="form-floating w-lg-75">
+                        <input class="form-control " placeholder="3r"
+                               type="text" v-model="formDataBillingAdress.number">
+                        <label for="number">Number</label>
+                    </div>
+
+                </div>
+                <div class="col-lg-2 col-12">
+                    <div class="form-floating w-lg-75">
+                        <input class="form-control " placeholder="3r"
+                               type="text" v-model="formDataBillingAdress.floor">
+                        <label for="floor">Floor</label>
+                    </div>
+
+                </div>
+                <div class="col-lg-2 col-12">
+                    <div class="form-floating w-lg-75">
+                        <input class="form-control " placeholder="3"
+                               type="text" v-model="formDataBillingAdress.door">
+                        <label for="door">Door</label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-lg-12 col-12">
+                    <div class="form-floating w-100">
+                        <input class="form-control w-lg-96" placeholder="Terrasa" style=""
+                               type="text" v-model="formDataBillingAdress.population">
+                        <label for="population">Population</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-lg-12 col-12">
+                    <div class="form-floating ">
+                        <input class="form-control w-lg-96" placeholder="Barcelona" style=""
+                               type="text" v-model="formDataBillingAdress.city">
+                        <label for="city">City</label>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-lg-12 col-12">
+                    <div class="form-floating">
+                        <input class="form-control w-lg-96" placeholder="08906" style=""
+                               type="text" v-model="formDataBillingAdress.zip_code">
+                        <label for="zip_code">Postal Code</label>
+                    </div>
+
+                </div>
+            </div>
+
+            <button @click="createBillingAddress" class="btn btn-primary" v-if="typeModalBilling === 'store'">Añadir
+                dirección
+            </button>
+            <button @click="updateBillingAddress" class="btn btn-primary" v-if="typeModalBilling === 'edit'">Actualizar
+                dirección
+            </button>
+        </div>
+    </div>
+</div>
+<!--MODAL ADD BILLING ADDRESS-->
+
+<!--MODAL ADD CARDS INIT-->
+<div @click="showAddCreditCardComponent = !showAddCreditCardComponent"
+     class="w-100 position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity"
+     style="z-index: 1000;height: 100vh;"
+     v-if="showAddCreditCardComponent">
+    <div @click.stop class="w-lg-50 w-90 card border-none bg-white">
+        <add-payment-method-component
+                v-if="showAddCreditCardComponent"
+                @payment-methods="handleDefaultPaymentMethod"
+                @default-payment-method="defaultPaymentMethods.data = $event"
+
+        ></add-payment-method-component>
+    </div>
+</div>
+<!--MODAL ADD CARDS FINISH-->
+
+
+
+<!--MODAL ADD BILLING ADDRESS-->
+
+
+<div class="d-lg-none d-block " v-if="productsCart.length > 0">
+    <div class="card rounded-0 position-fixed bottom-0 w-100">
+        <div class="card-body py-3 px-2">
+            <div class="d-flex border-bottom pb-4 mb-3 fs-6 justify-content-between">
+                <p class="m-0">Subtotal artículos</p>
+                <p class="m-0 fw-bold">{{priceTotal}}€</p>
+            </div>
+            <button v-if="steps == 'summaryTotal'" class="btn btn-primary btn-lg w-100" @click="buyProducts">Realizar pedido</button>
+            <button v-if="steps === 'selectAddress'" @click="selectAddresses" class="btn btn-primary btn-lg w-100">Seguir con la compra</button>
+            <button v-if="steps == 'selectCreditCard'" @click="finishBuying" class="btn btn-primary btn-lg w-100">Finalizar la compra</button>
+
+        </div>
+    </div>
+</div>
+
+<div
+        class="loading-overlay position-fixed top-0 d-flex justify-content-center align-items-center bg-opacity"
+        v-if="showLoadingPage">
+    <div class="text-center position-relative">
+        <img src="./img/logo.png" alt="Logo" class="logo-image">
+        <div class="spinner-border spinner-border-custom position-absolute"></div>
+    </div>
+</div>
+
+<ToastNotificationComponent
+        v-model:show="showToast"
+        :message="toastMessage"
+        :type="toastType"
+/>

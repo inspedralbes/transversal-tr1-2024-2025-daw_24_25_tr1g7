@@ -1,0 +1,373 @@
+<div class="d-lg-block d-none">
+    <nav class="bg-white border-bottom navbar">
+        <div class="d-flex w-100 align-items-center" style="height: 100%">
+            <div class="w-100 mx-4 d-flex align-items-center" style="height: 100%">
+                <div class="row w-100" style="height: 80%">
+                    <div class="col-lg-1" style=" height: 65px">
+                        <div class="container-img w-100" style="height: 100%">
+                            <img @click="goToHome" class="img-fluid" src="./img/logo.png"
+                                 style="cursor: pointer;"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-11 d-flex align-items-center">
+                        <div class="d-flex justify-content-between w-100" style="">
+                            <button @click="categoryMenu = !categoryMenu" class="btn">
+                                <i class="bi bi-list  me-2 fs-5"></i>
+                                <span class=" fs-5">Categorias</span>
+                            </button>
+                            <div class="d-none" style="width: 70%;">
+                                <div class="form-floating">
+                                    <input class="form-control w-100" id="floatingInputGrid"
+                                           placeholder="name@example.com"
+                                           type="email" value="">
+                                    <label for="floatingInputGrid">Buscar</label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <button @click="goToLogin" class="btn " v-if="!isLogin">
+                                    <i class="bi bi-person-fill"></i> Mi Cuenta
+                                </button>
+                                <button @click="profileMenu = !profileMenu" class="btn " v-if="isLogin">
+                                    {{userData.email}}
+                                </button>
+                                <button @click="categoryCarrito = !categoryCarrito" class="btn "><i
+                                        class="bi bi-cart"></i>
+                                    <sup class="bg-danger text-white py-1 px-2 m-0 rounded-full">{{
+                                        productsCart.reduce((total,
+                                        product) => total + (product.num_product), 0) }}</sup>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!--lateral izquierdo-->
+    <div @click="categoryMenu = !categoryMenu" class="w-100 position-fixed top-0 start-0 bg-opacity"
+         style="z-index: 1000;height: 100vh;" v-if="categoryMenu">
+        <div @click.stop class="w-25 bg-white px-4 py-3" style="height: 100%;">
+            <div class="d-flex justify-content-between mb-4">
+                <p class="m-0 fs-4 fw-bold">Todas las categorías</p>
+                <button @click="categoryMenu = !categoryMenu" class=" btn btn-sm m-0 fs-5 "><i
+                        class="bi bi-x fw-bold"></i></button>
+            </div>
+            <div class="h-100 d-grid gap-2" style="max-height:93vh;">
+                <div :key="index"
+                     @click="goToFilter(category.name)"
+                     class="text-decoration-none text-black fs-5 d-flex justify-content-between mb-3 link-primary"
+                     style="cursor: pointer" v-for="(category, index) in menuCategories.data">
+                    <div>
+                        <i class="bi bi-cpu"></i> {{category.name}}
+                    </div>
+                    <div>
+                        <i class="bi bi-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--lateral derecho-->
+    <div @click="categoryCarrito = !categoryCarrito"
+         class="w-100 position-fixed top-0 d-flex justify-content-end bg-opacity"
+         style="z-index: 1000;height: 100vh;" v-if="categoryCarrito">
+        <div @click.stop class="bg-white px-4 py-3 d-flex flex-column justify-content-between"
+             style=" height: 100%; width: 30%;">
+            <div class="d-flex justify-content-between mb-4">
+                <p class="m-0 fs-5 fw-bold">Mi cesta</p>
+                <button @click="categoryCarrito = !categoryCarrito" class=" btn btn-sm m-0 fs-5 "><i
+                        class="bi bi-x fw-bold"></i></button>
+            </div>
+            <div class="overflow-auto h-100" style="max-height: 70vh;" v-if="productsCart.length > 0">
+                <div class="">
+                    <div :key="index" class="card border-none border-bottom mb-4"
+                         v-for="(product, index) in productsCart">
+                        <div class="card-body p-0">
+                            <div class="row">
+                                <div class="col-lg-3 container-img">
+                                    <img :src="product.image_path" class="img-fluid"/>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-12">
+                                            <p class="m-0 fs-6 fw-normal">{{product.name}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-12">
+                                            <p class="m-0 fs-5 fw-bold">{{product.price}} €</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-12">
+                                            <p class="m-0 fs-7 fw-normal">Unidades: <span class="fw-semibold">{{product.num_product}}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <button @click="deleteProduct(product)" class="btn btn-sm"><i
+                                            class="bi bi-trash3 text-danger"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overflow-auto h-100" style="max-height: 70vh;" v-if="productsCart.length == 0">
+                <p class="m-0 fs-7">No hay articulos en la cesta</p>
+            </div>
+
+            <div class="w-100 border-top pt-2" style="margin-bottom: 40px">
+                <div class="d-flex justify-content-between mb-3">
+                    <p class="m-0 fs-6">Unidades</p>
+                    <p class="fs-6 fw-bold m-0">{{ productsCart.reduce((total, product) => total +
+                        (product.num_product), 0) }}</p>
+                </div>
+
+                <div class="d-flex justify-content-between mb-3">
+                    <p class="m-0 fs-6">Total (IVA incluido)</p>
+                    <p class="fs-6 fw-bold m-0">{{ productsCart.reduce((total, product) => total + (product.price *
+                        product.num_product), 0).toFixed(2) }} €</p>
+                </div>
+                <button @click="goToCart" class="btn btn-primary w-100 btn-lg">Ver artículos en tu cesta</button>
+            </div>
+        </div>
+    </div>
+
+    <div @click="profileMenu = !profileMenu" class="w-100 position-fixed top-0 d-flex justify-content-end bg-opacity"
+         style="z-index: 1000;height: 100vh;" v-if="profileMenu">
+        <div @click.stop class="bg-white px-4 py-3"
+             style=" height: 100%; width: 30%;">
+            <div class="d-flex justify-content-between mb-4">
+                <p class="m-0 fs-5 fw-bold">Mi cuenta</p>
+                <button @click="profileMenu = !profileMenu" class=" btn btn-sm m-0 fs-5 "><i
+                        class="bi bi-x fw-bold"></i></button>
+            </div>
+
+            <div>
+                <button @click="goToProfilePage('myData')"
+                        class="m-0 fs-6 btn w-100 text-start fw-bold d-flex justify-content-between">
+                    <div><i class="bi bi-person-fill me-2"></i>Mi cuenta</div>
+                    <i class="bi bi-caret-down-fill"></i>
+                </button>
+                <div class="">
+                    <button @click="goToProfilePage('myData')" class="m-0 fs-6 btn w-100 text-start">Mis datos</button>
+                    <button @click="goToProfilePage('myAddresses')" class="m-0 fs-6 btn w-100 text-start">Mis
+                        direcciones
+                    </button>
+                    <button @click="goToProfilePage('messages')" class="m-0 fs-6 btn w-100 text-start">Mensajes</button>
+                    <button @click="goToProfilePage('opinions')" class="m-0 fs-6 btn w-100 text-start">Opiniones
+                    </button>
+                </div>
+
+                <button @click="goToProfilePage('myOrders')"
+                        class="m-0 fs-6 btn w-100 text-start fw-bold d-flex justify-content-between">
+                    <div><i class="bi bi-box-seam-fill me-2"></i>Pedidos y devoluciones</div>
+                    <i class="bi bi-caret-down-fill"></i>
+                </button>
+                <div class="">
+                    <button @click="goToProfilePage('myOrders')" class="m-0 fs-6 btn w-100 text-start">Mis Pedidos
+                    </button>
+                    <button @click="goToProfilePage('myInvoices')" class="m-0 fs-6 btn w-100 text-start">Mis facturas
+                    </button>
+                </div>
+
+                <button @click="goToProfilePage('cards')"
+                        class="m-0 fs-6 btn w-100 text-start fw-bold d-flex justify-content-between">
+                    <div><i class="bi bi-credit-card-2-back-fill me-2"></i>Pago</div>
+                    <i class="bi bi-caret-down-fill"></i>
+                </button>
+                <div class="">
+                    <button @click="goToProfilePage('cards')" class="m-0 fs-6 btn w-100 text-start">Tarjetas
+                        vinculadas
+                    </button>
+                </div>
+                <button @click="logout" class="m-0 fs-6 btn btn-outline-error w-100 text-start">
+                    <div><i class="bi bi-box-arrow-left me-2"></i>Log out</div>
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="d-block d-lg-none">
+    <nav class="bg-white border-bottom navbar ">
+        <div class="h-100 mx-2 d-flex justify-content-between">
+            <div class="h-100 d-flex">
+                <div class="h-100">
+                    <button @click="categoryMenu = !categoryMenu" class="btn">
+                        <i class="bi bi-list  me-2 fs-3"></i>
+                    </button>
+                </div>
+                <div class="container-img my-2 justify-content-start" style="height: 78%;">
+                    <img @click="goToHome" class="img-fluid" src="./img/logo.png"
+                         style="cursor: pointer;"/>
+                </div>
+            </div>
+            <div class="h-100 d-flex align-items-center justify-content-end">
+                <button @click="goToLogin" class="btn " v-if="!isLogin">
+                    <i class="bi bi-person-fill"></i> Mi Cuenta
+                </button>
+                <button @click="profileMenu = !profileMenu" class="btn " v-if="isLogin">
+                    {{userData.email}}
+                </button>
+                <button @click="categoryCarrito = !categoryCarrito" class="btn "><i class="bi bi-cart"></i>
+                    <sup class="bg-danger py-1 px-2 m-0 rounded-full">{{ productsCart.reduce((total, product) => total +
+                        (product.num_product), 0) }}</sup>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div @click="categoryMenu = !categoryMenu" class="w-100 position-fixed top-0 start-0 bg-opacity"
+         style="z-index: 1000;height: 100vh;" v-if="categoryMenu">
+        <div @click.stop class="bg-white px-4 py-3" style="height: 100%;">
+            <div class="d-flex justify-content-between mb-4">
+                <p class="m-0 fs-4 fw-bold">Todas las categorías</p>
+                <button @click="categoryMenu = !categoryMenu" class=" btn btn-sm m-0 fs-5 "><i
+                        class="bi bi-x fw-bold"></i></button>
+            </div>
+            <div class="h-100 d-grid gap-2" style="max-height:93vh;">
+                <div :key="index"
+                     @click="goToFilter(category.name)"
+                     class="text-decoration-none text-black fs-5 d-flex justify-content-between mb-3 link-primary"
+                     style="cursor: pointer" v-for="(category, index) in menuCategories.data">
+                    <div>
+                        <i class="bi bi-cpu"></i> {{category.name}}
+                    </div>
+                    <div>
+                        <i class="bi bi-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--lateral derecho-->
+    <div @click="categoryCarrito = !categoryCarrito"
+         class="w-100 position-fixed top-0 start-0 d-flex justify-content-end bg-opacity"
+         style="z-index: 1000;height: 100vh;" v-if="categoryCarrito">
+        <div @click.stop class="bg-white w-100 px-4 py-3 d-flex flex-column justify-content-between"
+             style="border: 2px solid;height: 100%;">
+            <div class="d-flex w-100 justify-content-between mb-4">
+                <p class="m-0 fs-5 fw-bold">Mi cesta</p>
+                <button @click="categoryCarrito = !categoryCarrito" class=" btn btn-sm m-0 fs-5 "><i
+                        class="bi bi-x fw-bold"></i></button>
+            </div>
+            <div class="overflow-auto h-100 w-100" style="max-height: 70vh;" v-if="productsCart.length > 0">
+                <div class=" w-100">
+                    <div :key="index" class="card border-none border-bottom mb-4 w-100"
+                         v-for="(product, index) in productsCart">
+                        <div class="card-body w-100 p-0 d-flex">
+                            <div class="w-25 container-img me-3">
+                                <img :src="product.image_path" class="img-fluid"/>
+                            </div>
+                            <div class="" style="width: 65%;">
+                                <div class="row">
+                                    <div class="col-lg-12 col-12">
+                                        <p class="m-0 fs-6 fw-normal">{{product.name}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-12">
+                                        <p class="m-0 fs-5 fw-bold">{{product.price}} €</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-12">
+                                        <p class="m-0 fs-7 fw-normal">Unidades: <span class="fw-semibold">{{product.num_product}}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width: 10%;">
+                                <button @click="deleteProduct(product)" class="btn btn-sm"><i
+                                        class="bi bi-trash3 text-danger"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overflow-auto h-100" style="max-height: 70vh;" v-if="productsCart.length == 0">
+                <p class="m-0 fs-7">No hay articulos en la cesta</p>
+            </div>
+
+            <div class="w-100 border-top pt-2" style="margin-bottom: 40px">
+                <div class="d-flex justify-content-between mb-3">
+                    <p class="m-0 fs-6">Unidades</p>
+                    <p class="fs-6 fw-bold m-0">{{ productsCart.reduce((total, product) => total +
+                        (product.num_product), 0) }}</p>
+                </div>
+
+                <div class="d-flex justify-content-between mb-3">
+                    <p class="m-0 fs-6">Total (IVA incluido)</p>
+                    <p class="fs-6 fw-bold m-0">{{ productsCart.reduce((total, product) => total + (product.price *
+                        product.num_product), 0).toFixed(2) }} €</p>
+                </div>
+                <button @click="goToCart" class="btn btn-primary w-100 btn-lg">Ver artículos en tu cesta</button>
+            </div>
+        </div>
+    </div>
+
+    <div @click="profileMenu = !profileMenu" class="w-100 position-fixed top-0 d-flex justify-content-end bg-opacity"
+         style="z-index: 1000;height: 100vh;" v-if="profileMenu">
+        <div @click.stop class="bg-white w-100 px-4 py-3"
+             style=" height: 100%;">
+            <div>
+                <div class="d-flex w-100 justify-content-between mb-4">
+                    <p class="m-0 fs-5 fw-bold">Mi perfil</p>
+                    <button @click="profileMenu = !profileMenu" class=" btn btn-sm m-0 fs-5 "><i
+                            class="bi bi-x fw-bold"></i></button>
+                </div>
+                <button @click="goToProfilePage('myData')"
+                        class="m-0 fs-6 btn w-100 text-start fw-bold d-flex justify-content-between">
+                    <div><i class="bi bi-person-fill me-2"></i>Mi cuenta</div>
+                    <i class="bi bi-caret-down-fill"></i>
+                </button>
+                <div class="">
+                    <button @click="goToProfilePage('myData')" class="m-0 fs-6 btn w-100 text-start">Mis datos</button>
+                    <button @click="goToProfilePage('myAddresses')" class="m-0 fs-6 btn w-100 text-start">Mis
+                        direcciones
+                    </button>
+                    <!--                    <button @click="goToProfilePage('messages')" class="m-0 fs-6 btn w-100 text-start">Mensajes</button>-->
+                    <button @click="goToProfilePage('opinions')" class="m-0 fs-6 btn w-100 text-start">Opiniones
+                    </button>
+                </div>
+
+                <button @click="goToProfilePage('myOrders')"
+                        class="m-0 fs-6 btn w-100 text-start fw-bold d-flex justify-content-between">
+                    <div><i class="bi bi-box-seam-fill me-2"></i>Pedidos y devoluciones</div>
+                    <i class="bi bi-caret-down-fill"></i>
+                </button>
+                <div class="">
+                    <button @click="goToProfilePage('myOrders')" class="m-0 fs-6 btn w-100 text-start">Mis Pedidos
+                    </button>
+                    <button @click="goToProfilePage('myInvoices')" class="m-0 fs-6 btn w-100 text-start">Mis facturas
+                    </button>
+                </div>
+
+                <button @click="goToProfilePage('cards')"
+                        class="m-0 fs-6 btn w-100 text-start fw-bold d-flex justify-content-between">
+                    <div><i class="bi bi-credit-card-2-back-fill me-2"></i>Pago</div>
+                    <i class="bi bi-caret-down-fill"></i>
+                </button>
+                <div class="">
+                    <button @click="goToProfilePage('cards')" class="m-0 fs-6 btn w-100 text-start">Tarjetas
+                        vinculadas
+                    </button>
+                </div>
+                <button @click="logout" class="m-0 fs-6 btn btn-outline-error w-100 text-start">
+                    <div><i class="bi bi-box-arrow-left me-2"></i>Log out</div>
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>

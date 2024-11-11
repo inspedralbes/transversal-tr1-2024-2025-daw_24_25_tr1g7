@@ -3,26 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>NetCore</title>
+
+    <link rel="icon" href="./img/logo.png" type="image/x-icon">
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">-->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="node_modules/normalize.css"> -->
     <link rel="stylesheet" href="css/style.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>-->
+
+<!--    <link-->
+<!--            rel="stylesheet"-->
+<!--            href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"-->
+<!--    >-->
 
 </head>
 <body>
 <div id="app">
 
     <div v-if="page === 'login'">
-        <login-page :page="page" @update-page="page = $event"></login-page>
+        <login-page :page="page" @update-page="changePage"></login-page>
     </div>
 
     <div v-if="page === 'register'">
-        <register-page :page="page" @update-page="page = $event"></register-page>
+        <register-page :page="page" @update-page="changePage"></register-page>
     </div>
 
+    <div v-if="page !== 'login' && page !== 'register'">
+        <nav-bar-component v-bind:products-cart="productsCart.data" @update-page="changePage" @profile-page-tab="tabProfilePage = $event" @delete-product-cart="deleteProductCart"></nav-bar-component>
+        <div style="margin-top: 90px"></div>
+        <div v-if="page === 'home'"   style="min-height: 76vh">
+            <home-page @add-product-to-cart="addProductToCart"  @show-product="showProduct" @update-page="changePage"></home-page>
+        </div>
+
+        <div v-if="page === 'producte'"   style="min-height: 76vh">
+            <productes-page v-bind:product-selected="productSelected.data" @add-product-to-cart="addProductToCart"></productes-page>
+        </div>
+
+        <div v-if="page === 'cart'"   style="min-height: 76vh">
+            <cart-page v-bind:products-cart="productsCart.data" @update-page="changePage" @finish="finishBuy" @delete-product-cart="deleteProductCart"></cart-page>
+        </div>
+
+        <div v-if="page === 'profile'"   style="min-height: 76vh">
+            <profile-page @update-page="changePage" v-bind:tab="tabProfilePage"></profile-page>
+        </div>
+        
+        <div v-if="page === 'filtro'"   style="min-height: 76vh">
+            <filtros-page @add-product-to-cart="addProductToCart"  @show-product="showProduct" @update-page="changePage"></filtros-page>
+        </div>
+
+        <fotter-component></fotter-component>
+
+    </div>
 
 
 </div>
@@ -30,18 +65,101 @@
 
 <script type="module">
     import { createApp, ref, reactive } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+
     import { LoginPage } from "./components/LoginPage.js";
     import { RegisterPage } from "./components/RegisterPage.js";
+    import { ProductesPage } from "./components/ProductesPage.js";
+    import { HomePage } from "./components/HomePage.js";
+    import { NavBarComponent} from "./components/NavBarComponent.js";
+    import { TestComponent} from "./components/TestComponent.js";
+    import { FotterComponent} from "./components/FotterComponent.js";
+    import { CartPage} from "./components/CartPage.js";
+    import { ProfilePage} from "./components/ProfilePage.js";
+    import { FiltrosPage} from "./components/FiltrosPage.js";
+
     // Crear la aplicación y registrar el componente
     createApp({
         components: {
-            LoginPage, RegisterPage
+            LoginPage,
+            RegisterPage,
+            ProductesPage,
+            HomePage,
+            NavBarComponent,
+            TestComponent,
+            FotterComponent,
+            CartPage,
+            ProfilePage,
+            FiltrosPage
         },
         setup(){
-            let page = ref("login");
+            let page = ref(localStorage.getItem('actualPage') || 'home');
+            let productsCart = reactive({
+                data: JSON.parse(localStorage.getItem('productsCart')) || []
+            });
+            let productSelected = reactive({
+                data:JSON.parse(localStorage.getItem('productSelected')) || {}
+            })
+            let tabProfilePage = ref('');
+            const addProductToCart = (product) => {
+                // Buscar si el producto ya está en el carrito
+                let found = false;
+                productsCart.data.forEach((p) => {
+                    if (product.id === p.id) {
+                        // Si el producto ya está en el carrito, incrementamos la cantidad
+                        p.num_product ? p.num_product++ : p.num_product = 1;
+                        found = true;
+                    }
+                });
+
+                // Si el producto no está en el carrito, lo añadimos con num_product = 1
+                if (!found) {
+                    product.num_product = 1;
+                    productsCart.data.push(product);
+                }
+                // Corregir el almacenamiento en localStorage
+                localStorage.setItem('productsCart', JSON.stringify(productsCart.data));
+            };
+
+            const showProduct = (product) => {
+                console.log(product);
+                productSelected.data = product; // Asigna el producto seleccionado a productSelected
+                localStorage.setItem('productSelected', JSON.stringify(product));
+                // page.value = 'producte';
+                changePage('producte')
+            }
+
+            const changePage = (newPage) => {
+                page.value = newPage;
+                localStorage.setItem('actualPage', newPage)
+            }
+
+            const finishBuy = (status) => {
+                if (status){
+                    productsCart.data.splice(0);
+                    localStorage.removeItem('productsCart');
+                }else{
+                    console.log("no se pudo hacer la compra")
+                }
+            }
+
+            const deleteProductCart = (product) => {
+                const index = productsCart.data.findIndex(p => p.id === product.id);
+                if (index !== -1) {
+                    productsCart.data.splice(index, 1); // Elimina un elemento en la posición encontrada
+                    localStorage.setItem('productsCart', JSON.stringify(productsCart.data)); // Actualiza localStorage
+                }
+            };
 
             return {
-                page
+                page,
+                productsCart,
+                addProductToCart,
+                showProduct,
+                changePage,
+                productSelected,
+                finishBuy,
+                tabProfilePage,
+                deleteProductCart
             }
         }
     })
