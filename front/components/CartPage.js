@@ -22,6 +22,14 @@ export const CartPage = defineAsyncComponent(() =>
             },
             emits: ['updatePage', 'finish', 'deleteProductCart'],
             setup(props, { emit }) {
+
+                onMounted(async () => {
+                    if(localStorage.getItem('user') === null){
+                        console.log("Tienes que registrarte")
+                        localStorage.setItem('buyProducts', 'cart');
+                        emit('updatePage', 'login');
+                    }
+                });
                 const getToken = () =>{
                     return localStorage.getItem('token');
                 }
@@ -85,10 +93,13 @@ export const CartPage = defineAsyncComponent(() =>
                 }
 
                 //INIT SHIPPING AND BILLING ADDRES
+                const user = localStorage.getItem('user');
+                const userId = user ? JSON.parse(user).id : null;
+
                 const formDataShippingAdress = reactive({
                     'index': null,
                     'id': null,
-                    'idUser': JSON.parse(localStorage.getItem('user')).id,
+                    'idUser': userId,
                     'zip_code': null,
                     'population': '',
                     'city': '',
@@ -100,7 +111,7 @@ export const CartPage = defineAsyncComponent(() =>
                 const formDataBillingAdress = reactive({
                     'index': null,
                     'id': null,
-                    'idUser': JSON.parse(localStorage.getItem('user')).id,
+                    'idUser': userId,
                     'invoiceId':null,
                     'name':'',
                     'lastName':'',
